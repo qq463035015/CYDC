@@ -4,19 +4,19 @@ var cydc;
     (function (ui) {
         var amd;
         (function (amd) {
-            var jquery = 'jquery';
-            var ko = 'ko';
-            var bootstrap = 'bootstrap';
             require.config({
                 baseUrl: '/js',
-                paths: (_a = {},
-                    _a[jquery] = 'lib/jquery',
-                    _a[ko] = 'lib/knockout',
-                    _a[bootstrap] = 'lib/bootstrap',
-                    _a
-                )
+                paths: {
+                    'jquery': 'lib/jquery',
+                    'knockout': 'lib/knockout',
+                    'require': 'lib/require',
+                    'text': 'lib/text',
+                    'durandal': 'lib/durandal',
+                    'plugins': 'lib/durandal/plugins',
+                    'transitions': 'lib/durandal/transitions'
+                }
             });
-            var _a;
         })(amd = ui.amd || (ui.amd = {}));
     })(ui = cydc.ui || (cydc.ui = {}));
 })(cydc || (cydc = {}));
+//# sourceMappingURL=amd.js.map

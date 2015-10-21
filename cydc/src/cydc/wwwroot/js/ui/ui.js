@@ -7,3 +7,4 @@ var Ui;
     })();
     Ui.Indexpage = Indexpage;
 })(Ui || (Ui = {}));
+//# sourceMappingURL=ui.js.map

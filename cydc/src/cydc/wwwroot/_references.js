@@ -30,6 +30,7 @@
 /// <reference path="js/lib/text.js" />
 /// <reference path="js/site.js" />
 /// <reference path="js/ui/amd.js" />
+/// <reference path="js/ui/main.js" />
 /// <reference path="js/ui/ui.js" />
 /// <reference path="lib/bootstrap/js/alert.js" />
 /// <reference path="lib/bootstrap/js/button.js" />

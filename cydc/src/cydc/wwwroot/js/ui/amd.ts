@@ -1,14 +1,14 @@
 ﻿namespace cydc.ui.amd {
-    const jquery = 'jquery';
-    const ko = 'ko';
-    const bootstrap = 'bootstrap';
-
     require.config({
         baseUrl: '/js',
         paths: {
-            [jquery]: 'lib/jquery', 
-            [ko]: 'lib/knockout', 
-            [bootstrap]: 'lib/bootstrap'
+            'jquery': 'lib/jquery', 
+            'knockout': 'lib/knockout', 
+            'require': 'lib/require', 
+            'text': 'lib/text', 
+            'durandal': 'lib/durandal', 
+            'plugins': 'lib/durandal/plugins', 
+            'transitions': 'lib/durandal/transitions'
         }
     });
 }
