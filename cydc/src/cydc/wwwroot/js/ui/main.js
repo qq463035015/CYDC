@@ -16,6 +16,7 @@ define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/
                 });
                 app.start().then(function () {
                     viewLocator.useConvention();
+                    app.setRoot('viewModels/shell');
                 });
             })(main = ui.main || (ui.main = {}));
         })(ui = cydc.ui || (cydc.ui = {}));

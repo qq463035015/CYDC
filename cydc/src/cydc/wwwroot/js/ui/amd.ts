@@ -1,6 +1,7 @@
 ﻿namespace cydc.ui.amd {
     require.config({
         baseUrl: '/js',
+        urlArgs: 'v=1', 
         paths: {
             'jquery': 'lib/jquery', 
             'knockout': 'lib/knockout', 
