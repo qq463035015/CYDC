@@ -7,8 +7,8 @@ define(["require", "exports", 'plugins/router', 'knockout'], function (require, 
         viewModel.prototype.activate = function () {
             router.makeRelative({ moduleId: 'viewModels' });
             router.map([
-                { route: ['', 'home/index'], moduleId: 'home/index', title: 'home', nav: true, },
-                { route: 'home/hello', moduleId: 'home/hello', title: 'hello', nav: true }
+                { route: ['', 'home/index'], moduleId: 'home/index', title: '今日菜谱', nav: true, },
+                { route: 'home/hello', moduleId: 'home/hello', title: '点餐记录', nav: true }
             ]).buildNavigationModel();
             return router.activate({ pushState: true, root: '/ui' });
         };
@@ -17,4 +17,3 @@ define(["require", "exports", 'plugins/router', 'knockout'], function (require, 
     })();
     return new viewModel();
 });
-//# sourceMappingURL=shell.js.map
