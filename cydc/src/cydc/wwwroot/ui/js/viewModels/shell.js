@@ -1,14 +1,13 @@
-define(["require", "exports", 'plugins/router', 'knockout'], function (require, exports, router, ko) {
+define(["require", "exports", 'plugins/router'], function (require, exports, router) {
     var viewModel = (function () {
         function viewModel() {
-            this.nice = ko.observable();
             this.router = router;
         }
         viewModel.prototype.activate = function () {
             router.makeRelative({ moduleId: 'viewModels' });
             router.map([
-                { route: ['', 'home/index'], moduleId: 'home/index', title: 'ΩÒ»’≤À∆◊', nav: true, },
-                { route: 'home/hello', moduleId: 'home/hello', title: 'µ„≤Õº«¬º', nav: true }
+                { route: ['', 'home/index'], moduleId: 'home/index', title: '‰ªäÊó•ËèúË∞±', nav: true, },
+                { route: 'home/hello', moduleId: 'home/hello', title: 'ÁÇπÈ§êËÆ∞ÂΩï', nav: true }
             ]).buildNavigationModel();
             return router.activate({ pushState: true, root: '/ui' });
         };
@@ -17,3 +16,4 @@ define(["require", "exports", 'plugins/router', 'knockout'], function (require, 
     })();
     return new viewModel();
 });
+//# sourceMappingURL=shell.js.map
