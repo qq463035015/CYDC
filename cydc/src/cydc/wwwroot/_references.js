@@ -30,3 +30,6 @@
 /// <reference path="lib/text.js" />
 /// <reference path="ui/js/amd.js" />
 /// <reference path="ui/js/main.js" />
+/// <reference path="ui/js/viewmodels/entry.js" />
+/// <reference path="ui/js/viewmodels/home/index.js" />
+/// <reference path="ui/js/viewmodels/shell.js" />

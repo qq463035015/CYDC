@@ -17,6 +17,6 @@ namespace cydc.ui.main {
 
     app.start().then(() => {
         viewLocator.useConvention();
-        app.setRoot('app/entry');
+        app.setRoot('viewModels/shell');
     });
 }

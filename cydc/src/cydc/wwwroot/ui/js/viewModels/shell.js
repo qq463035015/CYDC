@@ -1,4 +1,4 @@
-define(["require", "exports", 'plugins/router'], function (require, exports, router) {
+define(["require", "exports", 'plugins/router', 'knockout'], function (require, exports, router, ko) {
     var cydc;
     (function (cydc) {
         var ui;
@@ -7,18 +7,17 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
             (function (entry) {
                 var viewModel = (function () {
                     function viewModel() {
+                        this.nice = ko.observable();
+                        this.router = router;
                     }
                     viewModel.prototype.activate = function () {
                         router.makeRelative({ moduleId: 'viewModels' });
-                        router.guardRoute = function (instance, instruction) {
-                            return router.map([
-                                { route: ['', 'home/index'], moduleId: 'home/index', title: 'home', nav: true, hash: '#home/index' }
-                            ])
-                                .buildNavigationModel()
-                                .mapUnknownRoutes('notfound', 'notfound')
-                                .activate({ pushState: true, root: '/' });
-                        };
+                        router.map([
+                            { route: ['', 'home/index'], moduleId: 'home/index', title: 'home', nav: true, hash: '#home/index' }
+                        ]).buildNavigationModel();
+                        return router.activate();
                     };
+                    ;
                     return viewModel;
                 })();
                 entry.viewModel = viewModel;
