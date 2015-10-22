@@ -96,7 +96,6 @@ namespace cydc
             app.UseIISPlatformHandler();
 
             // Add static files to the request pipeline.
-            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             // Add cookie-based authentication to the request pipeline.
@@ -127,14 +126,35 @@ namespace cydc
             //});
 
             // Add MVC to the request pipeline.
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+
+            //    // Uncomment the following line to add a route for porting Web API 2 controllers.
+            //    // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            //});
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    name: "API",
+                    template: "api/{controller}/{action}");
 
-                // Uncomment the following line to add a route for porting Web API 2 controllers.
-                // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+                routes.MapRoute(
+                    name: "EmptyDefault",
+                    template: "",
+                    defaults: new { controller = "ui", action = "index" });
+
+                routes.MapRoute(
+                    name: "OnlyUI",
+                    template: "ui",
+                    defaults: new { controller = "ui", action = "index" });
+
+                routes.MapRoute(
+                    name: "Default",
+                    template: "ui/{*url}",
+                    defaults: new { controller = "ui", action = "index" });
             });
         }
     }
