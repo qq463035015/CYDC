@@ -4,11 +4,14 @@
         paths: {
             'jquery': 'lib/jquery', 
             'knockout': 'lib/knockout', 
-            'require': 'lib/require', 
             'text': 'lib/text', 
             'durandal': 'lib/durandal', 
             'plugins': 'lib/durandal/plugins', 
-            'transitions': 'lib/durandal/transitions'
+            'transitions': 'lib/durandal/transitions', 
+
+            'main': 'ui/main'
         }
     });
+
+    require(['main'], () => { });
 }

@@ -1,27 +1,21 @@
-﻿//import * as app from 'durandal/app';
-//import * as viewLocator from 'durandal/viewLocator';
-//import * as system from 'durandal/system';
+﻿import app = require('durandal/app');
+import viewLocator = require('durandal/viewLocator');
+import system = require('durandal/system');
 
 namespace cydc.ui.main {
-    //define('xx', ['durandal/app'], (app) => {
-    //    console.log(app);
-    //});
-    require(['durandal/app'], (app) => {
-        console.log(app);
+    system.debug(true);
+
+    app.title = 'cydc';
+
+    app.configurePlugins({
+        router: true,
+        dialog: true,
+        widget: {
+            kinds: ['expander']
+        }
     });
-    // system.debug(true);
 
-    //app.title = 'cydc';
-
-    //app.configurePlugins({
-    //    router: true, 
-    //    dialog: true, 
-    //    widget: {
-    //        kinds: ['expander']
-    //    }
-    //});
-
-    //app.start().then(() => {
-    //    viewLocator.useConvention();
-    //});
+    app.start().then(() => {
+        viewLocator.useConvention();
+    });
 }

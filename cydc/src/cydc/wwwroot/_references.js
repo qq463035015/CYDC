@@ -26,6 +26,7 @@
 /// <reference path="js/lib/jquery.validate.js" />
 /// <reference path="js/lib/jquery.validate.unobtrusive.min.js" />
 /// <reference path="js/lib/knockout.js" />
+/// <reference path="js/lib/q.js" />
 /// <reference path="js/lib/require.js" />
 /// <reference path="js/lib/text.js" />
 /// <reference path="js/site.js" />
