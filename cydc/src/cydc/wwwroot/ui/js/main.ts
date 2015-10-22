@@ -5,7 +5,7 @@ import system = require('durandal/system');
 namespace cydc.ui.main {
     system.debug(true);
 
-    app.title = 'cydc';
+    app.title = 'NICE';
 
     app.configurePlugins({
         router: true,
@@ -17,6 +17,6 @@ namespace cydc.ui.main {
 
     app.start().then(() => {
         viewLocator.useConvention();
-        app.setRoot('viewModels/shell');
+        app.setRoot('app/entry');
     });
 }

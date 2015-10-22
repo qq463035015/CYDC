@@ -6,7 +6,7 @@ define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/
             var main;
             (function (main) {
                 system.debug(true);
-                app.title = 'cydc';
+                app.title = 'NICE';
                 app.configurePlugins({
                     router: true,
                     dialog: true,
@@ -16,7 +16,7 @@ define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/
                 });
                 app.start().then(function () {
                     viewLocator.useConvention();
-                    app.setRoot('viewModels/shell');
+                    app.setRoot('app/entry');
                 });
             })(main = ui.main || (ui.main = {}));
         })(ui = cydc.ui || (cydc.ui = {}));
