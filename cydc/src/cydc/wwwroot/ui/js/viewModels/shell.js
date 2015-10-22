@@ -9,7 +9,7 @@ define(["require", "exports", 'plugins/router', 'knockout'], function (require, 
             router.map([
                 { route: ['', 'home/index'], moduleId: 'home/index', title: 'home', nav: true, hash: '#home/index' }
             ]).buildNavigationModel();
-            return router.activate();
+            return router.activate({ pushState: true, root: '/ui' });
         };
         ;
         return viewModel;

@@ -96,6 +96,7 @@ namespace cydc
             app.UseIISPlatformHandler();
 
             // Add static files to the request pipeline.
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             // Add cookie-based authentication to the request pipeline.
