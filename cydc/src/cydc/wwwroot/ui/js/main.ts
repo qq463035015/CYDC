@@ -2,21 +2,19 @@
 import viewLocator = require('durandal/viewLocator');
 import system = require('durandal/system');
 
-namespace cydc.ui.main {
-    system.debug(true);
+system.debug(true);
 
-    app.title = 'NICE';
+app.title = 'NICE';
 
-    app.configurePlugins({
-        router: true,
-        dialog: true,
-        widget: {
-            kinds: ['expander']
-        }
-    });
+app.configurePlugins({
+    router: true,
+    dialog: true,
+    widget: {
+        kinds: ['expander']
+    }
+});
 
-    app.start().then(() => {
-        viewLocator.useConvention();
-        app.setRoot('viewModels/shell');
-    });
-}
+app.start().then(() => {
+    viewLocator.useConvention();
+    app.setRoot('viewModels/shell');
+});
