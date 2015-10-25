@@ -2,16 +2,31 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-24">
-                <h1></h1>
-                <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
-                    <li role="presentation" data-bind="css: {active: isActive }">
-                        <a href="#nav-item-1" data-bind="attr: {href: hash}, text: console.log($data)||title"></a>
-                    </li>
-                </ul>
+                <div class="progress-bar">
+                    <div class="progress-circle"></div>
+                    <div class="progress-circle"></div>
+                    <div class="progress-circle"></div>
+                    <div class="progress-circle"></div>
+                    <div class="progress-circle"></div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24">
+                <h1>辰运点餐</h1>
+                <div class="col-xs-5"></div>
+                    <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
+                        <li class="type-t5" role="presentation" data-bind="css: {active: isActive}">
+                            <a href="#nav-item-1" data-bind="attr: {href: hash}, text:title"></a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
 </div>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-24">

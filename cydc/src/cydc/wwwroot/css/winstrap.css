@@ -8623,7 +8623,7 @@ textarea.form-control {
   border-radius: 0px;
   margin-top: 2px;
   margin-bottom: 20px;
-  max-width: 296px;
+  /*max-width: 296px;*/
   min-width: 88px;
   min-height: 36px;
   background-clip: border-box;
@@ -10352,15 +10352,11 @@ a.link-on-dark {
     transform: rotate(945deg);
     opacity: 0; } }
 
-.progress-bar {
-  position: relative;
-  width: 180px;
-  height: 4px; }
   .progress-bar .progress-circle {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 1000px;
     height: 4px;
     opacity: 0;
     -webkit-animation: progress-bar-animation 3s infinite;
@@ -10369,7 +10365,7 @@ a.link-on-dark {
     .progress-bar .progress-circle:after {
       content: "\2022";
       position: absolute;
-      font-size: 10px;
+      font-size: 20px;
       color: #0078D7; }
     .progress-bar .progress-circle:nth-child(2) {
       -webkit-animation-delay: 200ms;
