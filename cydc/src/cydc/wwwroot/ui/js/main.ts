@@ -4,7 +4,7 @@ import system = require('durandal/system');
 
 system.debug(true);
 
-app.title = 'NICE';
+app.title = '';
 
 app.configurePlugins({
     router: true,

@@ -1,6 +1,6 @@
 define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/system'], function (require, exports, app, viewLocator, system) {
     system.debug(true);
-    app.title = 'NICE';
+    app.title = '';
     app.configurePlugins({
         router: true,
         dialog: true,
