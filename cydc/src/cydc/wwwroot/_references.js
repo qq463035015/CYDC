@@ -45,6 +45,7 @@
 /// <reference path="ui/js/viewmodels/home/index.js" />
 /// <reference path="ui/js/viewmodels/home/login.js" />
 /// <reference path="ui/js/viewmodels/home/menu.js" />
+/// <reference path="ui/js/viewmodels/home/order.js" />
 /// <reference path="ui/js/viewmodels/home/record.js" />
 /// <reference path="ui/js/viewmodels/home/user.js" />
 /// <reference path="ui/js/viewModels/shell.js" />
