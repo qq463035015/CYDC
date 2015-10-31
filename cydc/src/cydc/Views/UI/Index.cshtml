@@ -18,3 +18,8 @@
     <script src="/ui/js/amd.js"></script>
 </body>
 </html>
+<script>
+    $(document).on("click", ".menuName", function () {
+        $(this).parent().find(".menuContent").slideToggle();
+    });
+</script>
