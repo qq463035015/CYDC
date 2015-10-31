@@ -1,29 +1,29 @@
-﻿<div class="page-header">
+﻿<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only"></span>
+                <i class="glyph glyph-hamburger"></i>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
+                <li>
+                    <a class="type-t6" href="#nav-item-1" data-bind="attr: {href: hash}, text:title"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="page-header">
     <div class="container">
         <div class="row">
-            <div class="col-xs-24">
-                <div class="progress-bar">
-                    <div class="progress-circle"></div>
-                    <div class="progress-circle"></div>
-                    <div class="progress-circle"></div>
-                    <div class="progress-circle"></div>
-                    <div class="progress-circle"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-24">
-                <h1></h1>
-                <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
-                    <li class="type-t5" role="presentation" data-bind="css: {active: isActive}">
-                        <a href="#nav-item-1" data-bind="attr: {href: hash}, text:title,css:{'pull-right':title=='登录'}"></a>
-                    </li>
-                </ul>
+            <div class="col-xs-24 col-sm-16">
+                <h2><span class="color-type-primary">辰运点餐</span></h2>
             </div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-xs-24">
