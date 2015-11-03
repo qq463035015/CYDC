@@ -1,12 +1,12 @@
 ﻿<div class="row">
     <div class="col-sm-24">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="type-sh2 active"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">&nbsp;</a></li>
-            <li role="presentation" class="type-sh2 active"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">菜谱管理</a></li>
-            <li role="presentation" class="type-sh2"><a href="#package" aria-controls="profile" role="tab" data-toggle="tab">菜谱套餐管理</a></li>
-            <li role="presentation" class="type-sh2"><a href="#type" aria-controls="messages" role="tab" data-toggle="tab">菜谱类型管理</a></li>
-            <li role="presentation" class="type-sh2"><a href="#address" aria-controls="settings" role="tab" data-toggle="tab">地点管理</a></li>
-            <li role="presentation" class="type-sh2"><a href="#messages" aria-controls="settings" role="tab" data-toggle="tab">通知管理</a></li>
+            <li role="presentation"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">&nbsp;</a></li>
+            <li role="presentation" class="active"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">菜谱管理</a></li>
+            <li role="presentation"><a href="#package" aria-controls="profile" role="tab" data-toggle="tab">菜谱套餐管理</a></li>
+            <li role="presentation"><a href="#type" aria-controls="messages" role="tab" data-toggle="tab">菜谱类型管理</a></li>
+            <li role="presentation"><a href="#address" aria-controls="settings" role="tab" data-toggle="tab">地点管理</a></li>
+            <li role="presentation"><a href="#messages" aria-controls="settings" role="tab" data-toggle="tab">通知管理</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="menu">
@@ -27,16 +27,16 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><h5>今日菜谱</h5></th>
-                                        <th><h5>价格</h5></th>
-                                        <th><h5>是否可用</h5></th>
-                                        <th><h5>删除</h5></th>
+                                        <th><b>今日菜谱</b></th>
+                                        <th><b>价格</b></th>
+                                        <th><b>是否可用</b></th>
+                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="type-t6">辣椒炒肉</td>
-                                        <td class="type-t6">12</td>
+                                        <td>辣椒炒肉</td>
+                                        <td>12</td>
                                         <td>
                                             <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
                                                 <div class="btn-group">
@@ -47,7 +47,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="type-t6"><a href="#" class="link">删除</a></td>
+                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -62,7 +62,7 @@
                             <input type='text' class='form-control' placeholder="请输入套餐名称" />
                         </div>
                         <div style="margin-top:-10px;">
-                            <button class="btn btn-primary type-t6">新增</button>
+                            <button class="btn btn-primary">新增</button>
                         </div>
                     </div>
                     <div class="col-sm-24">
@@ -70,14 +70,14 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><h5>套餐名称</h5></th>
-                                        <th><h5>是否可用</h5></th>
-                                        <th><h5>删除</h5></th>
+                                        <th><b>套餐名称</b></th>
+                                        <th><b>是否可用</b></th>
+                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="type-t6">辣椒炒肉</td>
+                                        <td>辣椒炒肉</td>
                                         <td>
                                             <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
                                                 <div class="btn-group">
@@ -88,7 +88,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="type-t6"><a href="#" class="link">删除</a></td>
+                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -103,7 +103,7 @@
                             <input type='text' class='form-control' placeholder="请输入类型名称" />
                         </div>
                         <div style="margin-top:-10px;">
-                            <button class="btn btn-primary type-t6">新增</button>
+                            <button class="btn btn-primary">新增</button>
                         </div>
                     </div>
                     <div class="col-sm-24">
@@ -111,14 +111,14 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><h5>类型名称</h5></th>
-                                        <th><h5>是否可用</h5></th>
-                                        <th><h5>删除</h5></th>
+                                        <th><b>类型名称</b></th>
+                                        <th><b>是否可用</b></th>
+                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="type-t6">超辣</td>
+                                        <td>超辣</td>
                                         <td>
                                             <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
                                                 <div class="btn-group">
@@ -129,7 +129,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="type-t6"><a href="#" class="link">删除</a></td>
+                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -152,14 +152,14 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><h5>地点名称</h5></th>
-                                        <th><h5>是否可用</h5></th>
-                                        <th><h5>删除</h5></th>
+                                        <th><b>地点名称</b></th>
+                                        <th><b>是否可用</b></th>
+                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="type-t6">天空之城</td>
+                                        <td>天空之城</td>
                                         <td>
                                             <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
                                                 <div class="btn-group">
@@ -170,7 +170,7 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="type-t6"><a href="#" class="link">删除</a></td>
+                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -185,22 +185,22 @@
                             <input type='text' class='form-control' placeholder="请输入通知" />
                         </div>
                         <div style="margin-top:-10px;">
-                            <button class="btn btn-primary type-t6">更新</button>
+                            <button class="btn btn-primary">更新</button>
                         </div>
                     </div>
                     <div class="col-sm-24">
-                        <div class="table-responsive">
+                        <div class="table-responsive"> 
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th><h5>通知</h5></th>
-                                        <th><h5>删除</h5></th>
+                                        <th><b>通知</b></th>
+                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="type-t6 col-lg-22">今天下午16:30，一加将在北京竞园艺术中心举办新品发布会，正式发布旗下首款小屏旗舰新机“一加手机X”。届时，IT之家将为大家带来本次发布会的全程图文直播，敬请关注.</td>
-                                        <td class="type-t6"><a href="#" class="link">删除</a></td>
+                                        <td class="col-lg-22">今天下午16:30，一加将在北京竞园艺术中心举办新品发布会，正式发布旗下首款小屏旗舰新机“一加手机X”。届时，IT之家将为大家带来本次发布会的全程图文直播，敬请关注.</td>
+                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>
