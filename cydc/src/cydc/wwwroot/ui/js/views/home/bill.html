@@ -1,17 +1,37 @@
-﻿<div class="row">
-    <div class="menuContent col-sm-24">
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-24 col-md-8">
+            <input type='text' class='form-control' placeholder="用户名称" />
+        </div>
+        <div class="col-sm-24 col-md-4">
+            <div style="margin-top:-10px;">
+                <a class="btn btn-primary theme-default">查询</a>
+            </div>
+        </div>
+        <div class="col-sm-24 col-md-12">
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <li class="pagination-prev">
+                        <a href="#" aria-label="上一页">
+                            <i aria-hidden="true" class="glyph glyph-chevron-left-2"></i>
+                        </a>
+                    <li class="pagination-next">
+                        <a href="#" aria-label="下一页">
+                            <i aria-hidden="true" class="glyph glyph-chevron-right-2"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-24">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span>全选</span>
-                                    </label>
-                                </div>
+                                <a href="#"><b>全选</b></a>
                             </th>
                             <th><b>用户</b></th>
                             <th><b>金额</b></th>
