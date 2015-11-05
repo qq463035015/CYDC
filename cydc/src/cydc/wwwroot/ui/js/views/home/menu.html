@@ -3,7 +3,6 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">&nbsp;</a></li>
             <li role="presentation" class="active"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">菜谱管理</a></li>
-            <li role="presentation"><a href="#package" aria-controls="profile" role="tab" data-toggle="tab">菜谱套餐管理</a></li>
             <li role="presentation"><a href="#type" aria-controls="messages" role="tab" data-toggle="tab">菜谱类型管理</a></li>
             <li role="presentation"><a href="#address" aria-controls="settings" role="tab" data-toggle="tab">地点管理</a></li>
             <li role="presentation"><a href="#messages" aria-controls="settings" role="tab" data-toggle="tab">通知管理</a></li>
@@ -13,13 +12,16 @@
             <div role="tabpanel" class="tab-pane active" id="menu">
                 <div class="menuContent col-sm-24">
                     <div class="col-sm-24">
-                        <div class="form-group col-sm-8">
+                        <div class="form-group col-sm-6">
                             <input type='text' class='form-control' placeholder="菜谱名称" />
                         </div>
-                        <div class="form-group col-sm-8">
+                        <div class="form-group col-sm-6">
+                            <input type='text' class='form-control' placeholder="套餐名称" />
+                        </div>
+                        <div class="form-group col-sm-6">
                             <input type='text' class='form-control' placeholder="价格" />
                         </div>
-                        <div style="margin-top:-10px;">
+                        <div class="form-group col-sm-6" style="margin-top:-10px;">
                             <button class="btn btn-primary type-t6">新增</button>
                         </div>
                     </div>
@@ -29,6 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th><b>今日菜谱</b></th>
+                                        <th><b>套餐名称</b></th>
                                         <th><b>价格</b></th>
                                         <th class="text-right"><b>是否可用</b></th>
                                         <th class="text-right"><b>删除</b></th>
@@ -37,48 +40,8 @@
                                 <tbody>
                                     <tr>
                                         <td>辣椒炒肉</td>
+                                        <td>豪华套餐</td>
                                         <td>12</td>
-                                        <td class="text-right">
-                                            <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
-                                                <div class="btn-group">
-                                                    <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">
-                                                        <span class="stateLabel stateLabel-on">可用</span>
-                                                        <span class="stateLabel stateLabel-off">不可用</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="package">
-                <div class="menuContent col-sm-24">
-                    <div class="col-sm-24">
-                        <div class="form-group col-sm-8">
-                            <input type='text' class='form-control' placeholder="套餐名称" />
-                        </div>
-                        <div style="margin-top:-10px;">
-                            <button class="btn btn-primary">新增</button>
-                        </div>
-                    </div>
-                    <div class="col-sm-24">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th><b>套餐名称</b></th>
-                                        <th class="text-right"><b>是否可用</b></th>
-                                        <th class="text-right"><b>删除</b></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>辣椒炒肉</td>
                                         <td class="text-right">
                                             <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
                                                 <div class="btn-group">
@@ -154,23 +117,12 @@
                                 <thead>
                                     <tr>
                                         <th><b>地点名称</b></th>
-                                        <th class="text-right"><b>是否可用</b></th>
                                         <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>天空之城</td>
-                                        <td class="text-right">
-                                            <div style="padding: 0em 0em 0em 0em; margin-top:-30px;">
-                                                <div class="btn-group">
-                                                    <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">
-                                                        <span class="stateLabel stateLabel-on">可用</span>
-                                                        <span class="stateLabel stateLabel-off">不可用</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
@@ -195,13 +147,11 @@
                                 <thead>
                                     <tr>
                                         <th><b>通知</b></th>
-                                        <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td class="col-lg-22">今天下午16:30，一加将在北京竞园艺术中心举办新品发布会，正式发布旗下首款小屏旗舰新机“一加手机X”。届时，IT之家将为大家带来本次发布会的全程图文直播，敬请关注.</td>
-                                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
                                     </tr>
                                 </tbody>
                             </table>

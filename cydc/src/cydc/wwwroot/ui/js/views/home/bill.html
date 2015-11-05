@@ -3,12 +3,17 @@
         <div class="col-sm-24 col-md-8">
             <input type='text' class='form-control' placeholder="用户名称" />
         </div>
-        <div class="col-sm-24 col-md-4">
+        <div class="col-sm-24 col-md-3">
             <div style="margin-top:-10px;">
                 <a class="btn btn-primary theme-default">查询</a>
             </div>
         </div>
-        <div class="col-sm-24 col-md-12">
+        <div class="col-sm-24 col-md-3">
+            <div style="margin-top:-10px;">
+                <a class="btn btn-primary theme-default" title="将所有选中用户金额重置为零">重置</a>
+            </div>
+        </div>
+        <div class="col-sm-24 col-md-10">
             <nav class="pull-right">
                 <ul class="pagination">
                     <li class="pagination-prev">
@@ -31,11 +36,17 @@
                     <thead>
                         <tr>
                             <th>
-                                <a href="#"><b>全选</b></a>
+                                <div class="checkbox" style="margin-bottom:0px;">
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <span><b>全选</b></span>
+                                    </label>
+                                </div>
                             </th>
                             <th><b>用户</b></th>
                             <th><b>金额</b></th>
-                            <th class="text-right"><b>保存</b></th>
+                            <th><b>操作时间</b></th>
+                            <th class="text-right"><b><a href="#" title="保存全部">保存全部</a></b></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +67,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-right"><span class="glyph glyph-save"></span></td>
+                            <th>2015-11-5</th>
+                            <td class="text-right"><span class="glyph glyph-save" title="保存当前"></span></td>
                         </tr>
                     </tbody>
                 </table>
