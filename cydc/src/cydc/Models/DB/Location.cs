@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class Notice
+    public class Location
     {
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(500)]
-        public string Content { get; set; }
+        [MaxLength(15)]
+        public string Name { get; set; }
     }
 }

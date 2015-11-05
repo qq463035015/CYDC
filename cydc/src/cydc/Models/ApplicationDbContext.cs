@@ -16,5 +16,21 @@ namespace cydc.Models
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<AccountDetails> AccountDetails { get; set; }
+
+        public DbSet<FoodMenu> FoodMenus { get; set; }
+
+        public DbSet<FoodOrder> FoodOrders { get; set; }
+
+        public DbSet<FoodOrderClientInfo> FoodOrderClientInfos { get; set; }
+
+        public DbSet<FoodOrderPayment> FoodOrderPayments { get; set; }
+
+        public DbSet<SiteNotice> SiteNotices { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
+
+        public DbSet<TasteType> TasteTypes { get; set; }
     }
 }

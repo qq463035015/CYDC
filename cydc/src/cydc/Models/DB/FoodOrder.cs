@@ -28,7 +28,7 @@ namespace cydc.Models
 
         public FoodMenu FoodMenu { get; set; }
 
-        public OrderLocation Location { get; set; }
+        public Location Location { get; set; }
 
         public FoodOrderPayment Payment { get; set; }
 

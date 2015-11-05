@@ -8,11 +8,12 @@ namespace cydc.Models
 {
     public class FoodOrderClientInfo
     {
+        [Key]
         public int FoodOrderId { get; set; }
 
         [MaxLength(15)]
         [Required]
-        public string IpAddress { get; set; }
+        public string IP { get; set; }
 
         [Required]
         public string UserAgent { get; set; }
