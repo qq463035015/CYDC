@@ -13,12 +13,6 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
-        public FoodOrderController(
-            ApplicationDbContext adc)
-        {
-            _adc = adc;
-        }
-
         public async Task<object> List(FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = _adc.FoodOrders;
@@ -32,5 +26,6 @@ namespace cydc.Controllers
             }
             return await data.CreatePagedList(query);
         }
+        
     }
 }
