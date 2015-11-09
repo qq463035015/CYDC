@@ -12,14 +12,11 @@ namespace cydc.Controllers
     public class FoodOrderController : Controller
     {
         private readonly ApplicationDbContext _adc;
-        private readonly UserManager<ApplicationUser> _aum;
 
         public FoodOrderController(
-            ApplicationDbContext adc, 
-            UserManager<ApplicationUser> aum)
+            ApplicationDbContext adc)
         {
             _adc = adc;
-            _aum = aum;
         }
 
         public async Task<object> List(FoodOrderQuery query)
