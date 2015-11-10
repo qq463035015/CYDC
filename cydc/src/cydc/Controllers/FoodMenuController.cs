@@ -16,7 +16,7 @@ namespace cydc.Controllers
             return await _adc.FoodMenus.CreatePagedList(query);
         }
 
-        public async Task<int> AddFoodMenu(string title, string details, decimal price)
+        public async Task<int> Add(string title, string details, decimal price)
         {
             FoodMenu foodMenu = new FoodMenu
             {
@@ -29,7 +29,7 @@ namespace cydc.Controllers
             return await _adc.SaveChangesAsync();
         }
 
-        public async Task<object> DropFoodMenu(int id)
+        public async Task<object> Delete(int id)
         {
             FoodMenu foodMenu = new FoodMenu
             {
@@ -39,7 +39,7 @@ namespace cydc.Controllers
             return await _adc.SaveChangesAsync();
         }
 
-        public async Task<object> FoodMenuEnabled(int id, bool enabled)
+        public async Task<object> Enabled(int id, bool enabled)
         {
             FoodMenu foodMenu = new FoodMenu
             {
