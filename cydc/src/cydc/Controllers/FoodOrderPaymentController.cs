@@ -21,7 +21,7 @@ namespace cydc.Controllers
             
             FoodOrderPayment foodOrserPayment = new FoodOrderPayment
             {
-                
+                PayedTime = DateTime.Now
             };
 
             _adc.Add(foodOrserPayment);

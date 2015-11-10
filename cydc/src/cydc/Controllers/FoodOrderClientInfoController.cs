@@ -15,7 +15,7 @@ namespace cydc.Controllers
         {
             FoodOrderClientInfo foodOrderClientInfo = new FoodOrderClientInfo
             {
-               
+                UserAgent = Request.Headers["User-Agent"]
             };
             _adc.Add(foodOrderClientInfo);
             return await _adc.SaveChangesAsync();
