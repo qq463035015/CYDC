@@ -8,12 +8,7 @@
                 <a class="btn btn-primary theme-default" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
-        <div class="col-sm-24 col-md-3">
-            <div style="margin-top:-10px;">
-                <a class="btn btn-primary theme-default" title="将所有选中用户金额重置为零">重置</a>
-            </div>
-        </div>
-        <div class="col-sm-24 col-md-10">
+        <div class="col-sm-24 col-md-13">
             <nav class="pull-right">
                 <ul class="pagination">
                     <li class="pagination-prev">
@@ -35,43 +30,45 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>
-                                <div class="checkbox" style="margin-bottom:0px;">
-                                    <label>
-                                        <input type="checkbox" checked>
-                                        <span><b>全选</b></span>
-                                    </label>
-                                </div>
-                            </th>
                             <th><b>用户</b></th>
                             <th><b>金额</b></th>
                             <th><b>操作时间</b></th>
-                            <th class="text-right"><b><a href="#" title="保存全部">保存全部</a></b></th>
+                            <th class="text-right"><b>添加金额</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <div class="checkbox" style="margin-top:-10px;">
-                                    <label>
-                                        <input type="checkbox" checked>
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </td>
                             <td>Gray</td>
-                            <td>
-                                <div style="padding: 0em 4em 0em 0em;">
-                                    <div class="form-group-sm">
-                                        <input type='text' />
-                                    </div>
-                                </div>
-                            </td>
+                            <td>12</td>
                             <th>2015-11-5</th>
-                            <td class="text-right"><span class="glyph glyph-save" title="保存当前"></span></td>
+                            <th class="text-right"><a href="#" data-toggle="modal" data-target="#modal-sample">添加金额</a></th>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="modal-sample"
+     tabindex="-1" role="dialog"
+     aria-labelledby="modal-sample-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="col-sm-24 col-md-24">
+                    <span>请输入添加金额</span>
+                    <input type='text' class='form-control' placeholder="金额" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info"
+                        data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary">
+                    确定
+                </button>
             </div>
         </div>
     </div>
