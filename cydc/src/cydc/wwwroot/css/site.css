@@ -15,3 +15,19 @@
     color: #000000;
       background-color: rgba(0, 0, 0, 0.05);
 }
+.money {
+    display:none;
+}
+
+.mt-7 {
+    top:-7px;
+}
+.mt-11 {
+    top:-11px;
+}
+.mt-12 {
+    top:-12px;
+}
+.mt-30 {
+    top:-30px;
+}
