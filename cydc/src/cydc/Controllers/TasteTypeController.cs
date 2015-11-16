@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class TasteTypeController
+    public class TasteTypeController : Controller
     {
         private readonly ApplicationDbContext _adc;
 
@@ -16,21 +16,21 @@ namespace cydc.Controllers
             return await _adc.TasteTypes.CreatePagedList(query);
         }
 
-        public async Task<int> AddTasteType(string name)
+        public async Task<int> Add(string name)
         {
             TasteType tasteType = new TasteType
             {
-                Name = name
+                Name=name
             };
             _adc.Add(tasteType);
             return await _adc.SaveChangesAsync();
         }
 
-        public async Task<int> DropTasteType(int id)
+        public async Task<int> Delete(int id)
         {
             TasteType tasteType = new TasteType
             {
-                Id=id
+                Id = id
             };
             _adc.Remove(tasteType);
             return await _adc.SaveChangesAsync();

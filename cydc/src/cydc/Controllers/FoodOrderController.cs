@@ -13,7 +13,7 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
-        public async Task<object> List(FoodOrderQuery query)
+        public async Task<object> HistoryList(FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = _adc.FoodOrders;
             if (query.Time != null)
@@ -26,6 +26,45 @@ namespace cydc.Controllers
             }
             return await data.CreatePagedList(query);
         }
-        
+
+        public async Task<object> List(FoodOrderQuery query)
+        {
+            IQueryable<FoodOrder> data = _adc.FoodOrders;
+            if (query.Time != null)
+            {
+                data = data.Where(x => x.OrderTime == query.Time.Value);
+            }
+            if (query.UserName != null)
+            {
+                data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserName());
+            }
+            return await data.CreatePagedList(query);
+        }
+
+        public async Task<int> Add(int foodMenuId, int tasteId, int locationId, string comment)
+        {
+            FoodOrder foodOrder = new FoodOrder
+            {
+                OrderUserId = HttpContext.User.GetUserId(),
+                OrderTime = DateTime.Now,
+                
+                FoodMenuId = foodMenuId,
+                TasteId = tasteId,
+                OrderLocationId = locationId,
+                Comment = comment
+            };
+            _adc.Add(foodOrder);
+            return await _adc.SaveChangesAsync();
+        }
+
+        public async Task<int> Delete(int id)
+        {
+            FoodOrder foodOrder = new FoodOrder
+            {
+                Id = id
+            };
+            _adc.Remove(foodOrder);
+            return await _adc.SaveChangesAsync();
+        }
     }
 }

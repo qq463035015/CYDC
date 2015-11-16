@@ -10,5 +10,7 @@ namespace cydc.Models
         public DateTime? Time { get; set; }
 
         public bool OnlyMe { get; set; }
+
+        public string UserName { get; set; }
     }
 }

@@ -3,40 +3,23 @@
         <div class="col-sm-24 col-md-8">
             <input type="date" class="form-control col-md-1" jquery-validation="true" />
         </div>
-        <div class="col-sm-24 col-md-3">
-            <div style="margin-top:-12px;">
-                <a class="btn btn-primary theme-default" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+        <div class="col-sm-24 col-md-3 mt-7">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox">
+                    <span>只显示个人</span>
+                </label>
             </div>
         </div>
-        <div class="col-sm-24 col-md-2" style="margin-top:-15px;">
-            <div class="checkbox">
+        <div class="col-sm-24 col-md-3 mt-12">
+                <a class="btn btn-primary theme-default" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+        </div>
+        <div class="col-sm-24 col-md-9 clearfix mt-15">
+            <div class="checkbox pull-right">
                 <div class="type-sh4 color-type-accent-alt">
                     余额：<span>12</span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-24 col-md-6" style="margin-top:-7px;">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox">
-                    <span>显示个人</span>
-                </label>
-            </div>
-        </div>
-        <div class="col-sm-24 col-md-5">
-            <nav class="pull-right">
-                <ul class="pagination">
-                    <li class="pagination-prev">
-                        <a href="#" aria-label="上一页">
-                            <i aria-hidden="true" class="glyph glyph-chevron-left-2"></i>
-                        </a>
-                    <li class="pagination-next">
-                        <a href="#" aria-label="下一页">
-                            <i aria-hidden="true" class="glyph glyph-chevron-right-2"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
     <div class="row">
@@ -45,6 +28,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th><b>用户名称</b></th>
                             <th><b>点餐时间</b></th>
                             <th><b>套餐</b></th>
                             <th><b>口味</b></th>
@@ -54,6 +38,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>NICE</td>
                             <td>2015-10-25</td>
                             <td>This is the amazing new Gadget Alpha.</td>
                             <td>Gadget Foxtrot</td>
@@ -62,6 +47,17 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="col-sm-24 col-md-24">
+                    <nav class="pull-right">
+                        <ul class="pagination">
+                            <li class="pagination-prev">
+                                <a href="#" aria-label="上一页"></a>
+                            <li class="pagination-next">
+                                <a href="#" aria-label="下一页"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class LocationQuery:BasePagedQuery
+    public class AccountDetailsQuery : BasePagedQuery
     {
-
+        public string UserId { get; set; }
     }
 }

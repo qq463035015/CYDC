@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class LocationController
+    public class LocationController : Controller
     {
         private readonly ApplicationDbContext _adc;
 
@@ -15,7 +16,7 @@ namespace cydc.Controllers
             return await _adc.Locations.CreatePagedList(query);
         }
 
-        public async Task<int> AddLocation(string name)
+        public async Task<int> Add(string name)
         {
             Location location = new Location
             {
@@ -25,7 +26,7 @@ namespace cydc.Controllers
             return await _adc.SaveChangesAsync();
         }
 
-        public async Task<int> DropLocation(int id)
+        public async Task<int> Delete(int id)
         {
             Location location = new Location
             {
