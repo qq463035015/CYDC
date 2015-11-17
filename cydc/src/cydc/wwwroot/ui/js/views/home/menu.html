@@ -37,11 +37,11 @@
                                         <th class="text-right"><b>删除</b></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody data-bind="foreach:foodMenu.NextPageFirstItem">
                                     <tr>
-                                        <td>辣椒炒肉</td>
-                                        <td>豪华套餐</td>
-                                        <td>12</td>
+                                        <td data-bind="text:Details"></td>
+                                        <td data-bind="text:Title"></td>
+                                        <td data-bind="text:Price"></td>
                                         <td class="text-right">
                                             <div class="btn-group mt-30">
                                                 <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">

@@ -11,6 +11,11 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
+        public LocationController(ApplicationDbContext adc)
+        {
+            _adc = adc;
+        }
+
         public async Task<object> List(LocationQuery query)
         {
             return await _adc.Locations.CreatePagedList(query);
