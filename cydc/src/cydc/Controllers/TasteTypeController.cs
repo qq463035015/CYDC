@@ -11,6 +11,11 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
+        public TasteTypeController(ApplicationDbContext adc)
+        {
+            _adc = adc;
+        }
+
         public async Task<object> List(TasteTypeQuery query)
         {
             return await _adc.TasteTypes.CreatePagedList(query);
@@ -20,7 +25,7 @@ namespace cydc.Controllers
         {
             TasteType tasteType = new TasteType
             {
-                Name=name
+                Name = name
             };
             _adc.Add(tasteType);
             return await _adc.SaveChangesAsync();

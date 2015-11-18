@@ -11,6 +11,11 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
+        public SiteNoticeController(ApplicationDbContext adc)
+        {
+            _adc = adc;
+        }
+
         public async Task<object> List(SiteNoticeQuery query)
         {
             return await _adc.SiteNotices.CreatePagedList(query);
