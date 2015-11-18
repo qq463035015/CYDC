@@ -14,7 +14,7 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
                 { route: 'home/order', moduleId: 'home/order', title: '点餐列表', nav: true },
                 { route: 'home/login', moduleId: 'home/login', title: '登录', nav: true }
             ]).buildNavigationModel();
-            return router.activate({ pushState: true, root: '/ui' });
+            return router.activate({ pushState: true, root: '/' });
         };
         ;
         return viewModel;
