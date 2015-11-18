@@ -10,7 +10,7 @@
  * @requires composition
  * @requires jquery
  */
-define(['durandal/system', 'durandal/composition', 'jquery'], function(system, composition, $) {
+define(['durandal/system', 'durandal/composition', 'jquery'], function (system, composition, $) {
     var fadeOutDuration = 100;
     var endValues = {
         left: '0px',
@@ -20,8 +20,8 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
         left: '',
         top: '',
         right: '',
-        bottom:'',
-        position:'',
+        bottom: '',
+        position: '',
         opacity: ''
     };
 
@@ -31,30 +31,30 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
         domPrefixes = 'Webkit Moz O ms Khtml'.split(' '),
         elm = document.createElement('div');
 
-    if(elm.style.animationName !== undefined) {
+    if (elm.style.animationName !== undefined) {
         animation = true;
     }
 
-    if(!animation) {
-        for(var i = 0; i < domPrefixes.length; i++) {
-            if(elm.style[domPrefixes[i] + 'AnimationName'] !== undefined) {
+    if (!animation) {
+        for (var i = 0; i < domPrefixes.length; i++) {
+            if (elm.style[domPrefixes[i] + 'AnimationName'] !== undefined) {
                 animation = true;
                 break;
             }
         }
     }
 
-    if(animation) {
-        if(isIE){
+    if (animation) {
+        if (isIE) {
             system.log('Using CSS3/jQuery mixed animations.');
-        }else{
+        } else {
             system.log('Using CSS3 animations.');
         }
     } else {
         system.log('Using jQuery animations.');
     }
 
-    function removeAnimationClasses(ele, fadeOnly){
+    function removeAnimationClasses(ele, fadeOnly) {
         ele.classList.remove(fadeOnly ? 'entrance-in-fade' : 'entrance-in');
         ele.classList.remove('entrance-out');
     }
@@ -63,8 +63,8 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
      * @class EntranceModule
      * @constructor
      */
-    var entrance = function(context) {
-        return system.defer(function(dfd) {
+    var entrance = function (context) {
+        return system.defer(function (dfd) {
             function endTransition() {
                 dfd.resolve();
             }
@@ -85,8 +85,8 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                     display: 'block',
                     opacity: 0,
                     position: 'absolute',
-                    left: fadeOnly || animation ? '0px' : '20px',
-                    right: 0,
+                    left: fadeOnly || animation ? '10px' : '0px',
+                    right: 10,
                     top: 0,
                     bottom: 0
                 };
@@ -100,7 +100,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                         context.child.classList.add(fadeOnly ? 'entrance-in-fade' : 'entrance-in');
                         setTimeout(function () {
                             removeAnimationClasses(context.child, fadeOnly);
-                            if(context.activeView){
+                            if (context.activeView) {
                                 removeAnimationClasses(context.activeView, fadeOnly);
                             }
                             $child.css(clearValues);
@@ -110,7 +110,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
                         $child.animate(endValues, {
                             duration: duration,
                             easing: 'swing',
-                            always: function() {
+                            always: function () {
                                 $child.css(clearValues);
                                 endTransition();
                             }
@@ -120,7 +120,7 @@ define(['durandal/system', 'durandal/composition', 'jquery'], function(system, c
 
                 $child.css(startValues);
 
-                if(context.activeView) {
+                if (context.activeView) {
                     if (animation && !isIE) {
                         removeAnimationClasses(context.activeView, fadeOnly);
                         context.activeView.classList.add('entrance-out');
