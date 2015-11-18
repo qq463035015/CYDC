@@ -11,12 +11,7 @@ namespace cydc.Controllers
     {
         private readonly ApplicationDbContext _adc;
 
-        public FoodMenuController(ApplicationDbContext adc)
-        {
-            _adc = adc;
-        }
-
-        public async Task<object> List(FoodOrderQuery query)
+        public async Task<object> List(FoodMenuQuery query)
         {
             return await _adc.FoodMenus.CreatePagedList(query);
         }

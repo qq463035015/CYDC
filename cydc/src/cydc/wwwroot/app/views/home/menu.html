@@ -1,0 +1,16 @@
+﻿<div class="row">
+    <div class="col-sm-24">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation">
+                <a aria-controls="home" role="tab">&nbsp;</a>
+            </li>
+            <!-- ko foreach: router.navigationModel -->
+            <li role="presentation" data-bind="css: { active: isActive }">
+                <a data-bind="attr: { href: hash }, html: title"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+        
+        <div data-bind="router: { cacheViews:true }"></div>
+    </div>
+</div>

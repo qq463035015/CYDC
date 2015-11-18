@@ -43,4 +43,4 @@ define(["require", "exports", 'knockout'], function (require, exports, ko) {
     })();
     return new viewModel();
 });
-//# sourceMappingURL=menu.js.map
+//# sourceMappingURL=bill.js.map
