@@ -1,5 +1,5 @@
 ﻿require.config({
-    baseUrl: '/ui/js/',
+    baseUrl: '/app/',
     urlArgs: 'v=' + new Date().getTime(),
     paths: {
         'jquery': '/lib/jquery',
