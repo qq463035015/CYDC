@@ -1,9 +1,10 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", 'service/pager'], function (require, exports, pager) {
     var viewModel = (function () {
         function viewModel() {
+            var p = new pager();
         }
         return viewModel;
     })();
     return new viewModel();
 });
-//# sourceMappingURL=UserManageMent.js.map
+//# sourceMappingURL=user.js.map

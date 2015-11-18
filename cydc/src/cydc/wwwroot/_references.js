@@ -7,6 +7,7 @@
 /// <reference path="../gulpfile.js" />
 /// <reference path="app/amd.js" />
 /// <reference path="app/main.js" />
+/// <reference path="app/service/pager.js" />
 /// <reference path="app/viewModels/home/bill.js" />
 /// <reference path="app/viewModels/home/index.js" />
 /// <reference path="app/viewModels/home/login.js" />
