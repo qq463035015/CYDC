@@ -24,15 +24,22 @@ namespace cydc.Models
             var result = new PagedList<T>();
             var dbQuery = query.ToDbQuery();
 
-            var allItemsPlusOne = await data.ToAsyncEnumerable()
+            var allItems = await data.ToAsyncEnumerable()
                 .Skip(dbQuery.Skip).Take(dbQuery.Take + 1)
                 .ToList();
 
-            result.NextPageFirstItem = allItemsPlusOne.Last();
-            allItemsPlusOne.RemoveAt(allItemsPlusOne.Count - 1);
-            result.Items = allItemsPlusOne;
             result.HasPrev = dbQuery.Skip > 1;
             result.HasNext = result.Items.Count > dbQuery.Take;
+            if (result.HasNext)
+            {
+                result.NextPageFirstItem = allItems.Last();
+                allItems.RemoveAt(allItems.Count - 1);
+                result.Items = allItems;
+            }
+            else
+            {
+                result.Items = allItems;
+            }
 
             return result;
         }
