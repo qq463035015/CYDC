@@ -1,11 +1,5 @@
 ﻿.page-host {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 265.5px;
-    bottom: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    position: relative;
 }
 
 ::-webkit-scrollbar {

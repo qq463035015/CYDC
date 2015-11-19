@@ -8,6 +8,7 @@ require.config({
         'durandal': '/lib/durandal',
         'plugins': '/lib/durandal/plugins',
         'transitions': '/lib/durandal/transitions',
+        'service/pager': 'service/pager',
         'main': 'main'
     }
 });
