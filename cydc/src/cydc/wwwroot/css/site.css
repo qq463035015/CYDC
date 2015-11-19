@@ -6,13 +6,13 @@
     width: 0 !important;
 }
 
-.navbar-default .navbar-nav > li > a.active {
-    color: #000000;
-    background-color: rgba(0, 0, 0, 0.05);
+.navbar-local .navbar-nav > li > a.active {
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
-#noticeText {
-    
+#info {
+    width:600px;
 }
 
 .mt-7 {
@@ -34,7 +34,9 @@
 .mt-35 {
     top: -35px;
 }
-
+.mt-40 {
+    top: -40px;
+}
 .h-0 {
     height: 0px;
 }
