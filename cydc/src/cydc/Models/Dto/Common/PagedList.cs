@@ -27,6 +27,7 @@ namespace cydc.Models
             var allItems = await data.ToAsyncEnumerable()
                 .Skip(dbQuery.Skip).Take(dbQuery.Take + 1)
                 .ToList();
+            result.Items = allItems;
 
             result.HasPrev = dbQuery.Skip > 1;
             result.HasNext = result.Items.Count > dbQuery.Take;

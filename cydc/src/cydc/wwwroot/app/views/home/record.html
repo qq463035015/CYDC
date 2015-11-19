@@ -1,9 +1,9 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="col-sm-24 col-md-8">
+        <div class="form-group col-sm-6">
             <input type="date" class="form-control col-md-1" jquery-validation="true" />
         </div>
-        <div class="col-sm-24 col-md-3 mt-7">
+        <div class="col-sm-3 mt-7">
             <div class="checkbox">
                 <label>
                     <input type="checkbox">
@@ -11,14 +11,29 @@
                 </label>
             </div>
         </div>
-        <div class="col-sm-24 col-md-3 mt-12">
-            <a class="btn btn-primary theme-default" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+        <div class="col-sm-5">
+            <div class="btn-group mt-35">
+                <a class="btn btn-block btn-primary" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+            </div>
         </div>
-        <div class="col-sm-24 col-md-9 clearfix mt-15">
+        <div class="col-sm-9 clearfix mt-15">
             <div class="checkbox pull-right">
                 <div class="type-sh4 cl-blue">
                     余额：<span>12</span>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-24">
+            <div class="form-group">
+                <span>每页</span>
+                <select size="1">
+                    <option>12</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+                <span>行</span>
             </div>
         </div>
     </div>
@@ -135,17 +150,18 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="col-sm-24 col-md-24">
-                    <nav class="pull-right">
-                        <ul class="pagination">
-                            <li class="pagination-prev">
-                                <a href="#" aria-label="上一页"></a>
-                            <li class="pagination-next">
-                                <a href="#" aria-label="下一页"></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-24">
+            <div class="pull-left paginaton">
+                当前第<span class="cl-blue">1</span>页
+                总共<span class="cl-blue">12</span>页
+            </div>
+            <div class="pull-right">
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
             </div>
         </div>
     </div>

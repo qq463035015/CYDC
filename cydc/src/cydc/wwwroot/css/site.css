@@ -5,34 +5,40 @@
 ::-webkit-scrollbar {
     width: 0 !important;
 }
-.navbar-default .navbar-nav > li > a.active{
+
+.navbar-default .navbar-nav > li > a.active {
     color: #000000;
-      background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.05);
 }
-.money {
-    display:none;
+
+#noticeText {
+    
 }
 
 .mt-7 {
-    top:-7px;
+    top: -7px;
 }
+
 .mt-11 {
-    top:-11px;
+    top: -11px;
 }
+
 .mt-12 {
-    top:-12px;
+    top: -12px;
 }
+
 .mt-30 {
-    top:-30px;
+    top: -30px;
 }
-.ml-10 {
-    margin-left:10px;
+
+.mt-35 {
+    top: -35px;
 }
 
 .h-0 {
-    height:0px;
+    height: 0px;
 }
 
 .cl-blue {
-    color:#0078D7;
+    color: #0078D7;
 }
