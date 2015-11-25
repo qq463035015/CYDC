@@ -1,18 +1,22 @@
 ﻿require.config({
     baseUrl: '/app/',
-    urlArgs: 'v=' + new Date().getTime(),
+    urlArgs: 'v=' + new Date().getTime(), 
     paths: {
-        'jquery': '/lib/jquery',
-        'knockout': '/lib/knockout',
-        'text': '/lib/text',
-        'durandal': '/lib/durandal',
-        'plugins': '/lib/durandal/plugins',
-        'transitions': '/lib/durandal/transitions',
+        jquery: '/lib/jquery',
+        knockout: '/lib/knockout',
+        bootstrap: '/lib/bootstrap',
+        text: '/lib/text',
+        durandal: '/lib/durandal',
+        plugins: '/lib/durandal/plugins',
+        transitions: '/lib/durandal/transitions',
 
-        'service/pager': 'service/pager', 
-
-        'main': 'main'
+        main: 'main'
+    }, 
+    shim: {
+        bootstrap: {
+            deps: ['jquery']
+        }
     }
 });
 
-require(['main'], () => { });
+require(['main', 'knockout', 'jquery', 'bootstrap'], () => { });

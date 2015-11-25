@@ -1,12 +1,24 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="col-sm-24 col-md-8">
-            <div class="form-group">
-                <input type='text' class='form-control' placeholder="用户名" />
+        <div class="form-group col-sm-6">
+            <input type='text' class='form-control' placeholder="用户名" />
+        </div>
+        <div class="col-sm-18">
+            <div class="btn-group mt-35">
+                <a class="btn btn-block btn-primary" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
-        <div class="col-sm-24 col-md-16 mt-12">
-            <a class="btn btn-primary theme-default" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+    </div>
+    <div class="row">
+        <div class="col-sm-24">
+            <div class="form-group">
+                <span>显示行数</span>
+                <select size="1">
+                    <option>12</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -16,19 +28,16 @@
                     <thead>
                         <tr>
                             <th><b>用户名</b></th>
-                            <th><b>密码</b></th>
-                            <th><b>是否可用</b></th>
+                            <th><b>余额</b></th>
+                            <th class="text-right"><b>是否可用</b></th>
+                            <th class="text-right"><b>添加金额</b></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Gray</td>
-                            <td>
-                                <div class="form-group-sm">
-                                    <input type='text' class='col-sm-18' />
-                                </div>
-                            </td>
-                            <td>
+                            <td>12</td>
+                            <td class="text-right">
                                 <div class="btn-group mt-30">
                                     <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">
                                         <span class="stateLabel stateLabel-on">可用</span>
@@ -36,19 +45,39 @@
                                     </button>
                                 </div>
                             </td>
+                            <th class="text-right"><a href="#" data-toggle="modal" data-target="#modal-sample">添加金额</a></th>
                         </tr>
                     </tbody>
                 </table>
-                <div class="col-sm-24 col-md-24">
-                    <nav class="pull-right">
-                        <ul class="pagination">
-                            <li class="pagination-prev">
-                                <a href="#" aria-label="上一页"></a>
-                            <li class="pagination-next">
-                                <a href="#" aria-label="下一页"></a>
-                            </li>
-                        </ul>
-                    </nav>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-24">
+            <div class="pull-left paginaton">
+                当前第<span class="cl-blue">1</span>页
+                总共<span class="cl-blue">12</span>页
+            </div>
+            <div class="pull-right">
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-24 col-md-18">
+                        <input type='text' class='form-control' placeholder="金额" />
+                    </div>
+                    <div class="col-sm-24 col-md-3 mt-11">
+                        <button type="button" class="btn btn-primary">
+                            确定
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

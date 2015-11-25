@@ -1,46 +1,17 @@
-define(["require", "exports", 'knockout'], function (require, exports, ko) {
-    var Pager = (function () {
-        function Pager() {
-            this.page = ko.observable(1);
-            this.pageSize = ko.observable(12);
-            this.orderBy = ko.observable();
-            this.asc = ko.observable(true);
-        }
-        Pager.prototype.loadData = function (url, page, pageSize, orderBy, asc) {
-            if (orderBy !== undefined)
-                this.orderBy(orderBy);
-            if (asc !== undefined)
-                this.asc(asc);
-            var searchParams = {
-                page: this.page(),
-                pageSize: this.pageSize(),
-                orderBy: this.orderBy(),
-                asc: this.asc()
-            };
-            var result;
-            $.post("/api/" + (url) + "/list", searchParams).then(function (data) { result = data; });
-            return result;
-        };
-        return Pager;
-    })();
+define(["require", "exports", 'service/api', 'knockout', 'service/utils'], function (require, exports, api, ko, utils) {
     var viewModel = (function () {
         function viewModel() {
-            this.page = new Pager();
-            this.foodMenu = ko.observableArray();
-            this.tasteType = ko.observableArray();
-            this.location = ko.observableArray();
-            this.siteNotice = ko.observableArray();
-            var url = ['foodMenu', 'tasteType', 'location', 'siteNotice'];
-            this.foodMenu(this.page.loadData(url[0]));
-            this.tasteType(this.page.loadData(url[1]));
-            this.location(this.page.loadData(url[2]));
-            this.siteNotice(this.page.loadData(url[3]));
+            var _this = this;
+            this.allLocation = ko.observableArray();
+            api.location.list().then(function (data) { return _this.allLocation(data); });
         }
-        viewModel.prototype.activate = function () {
-            return $.when();
+        viewModel.prototype.drop = function (data) {
+            utils.confirm('', '确定要删除吗？').then(function () {
+                return api.location.delete(data.id);
+            });
         };
         return viewModel;
     })();
     return new viewModel();
 });
-//# sourceMappingURL=bill.js.map
+//# sourceMappingURL=address.js.map

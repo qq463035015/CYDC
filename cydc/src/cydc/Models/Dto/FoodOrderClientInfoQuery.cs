@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class FoodOrderClientInfoQuery : BasePagedQuery
+    public class FoodOrderClientInfoQuery : BasePagedDbQuery
     {
 
     }
