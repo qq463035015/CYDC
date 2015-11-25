@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class TasteTypeQuery:BasePagedQuery
+    public class TasteTypeQuery:BasePagedDbQuery
     {
 
     }

@@ -9,16 +9,19 @@ namespace cydc.Controllers
 {
     public class LocationController : Controller
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
-        public LocationController(ApplicationDbContext adc)
+        public object List(LocationQuery query)
         {
-            _adc = adc;
-        }
+            IQueryable<Location> data = DbContext.Locations;
 
-        public async Task<object> List(LocationQuery query)
-        {
-            return await _adc.Locations.CreatePagedList(query);
+            if (query.Name != null)
+            {
+                data = data.Where(x => x.Name.Contains(query.Name));
+            }
+
+            return data.CreateList(query);
         }
 
         public async Task<int> Add(string name)
@@ -27,8 +30,8 @@ namespace cydc.Controllers
             {
                 Name = name
             };
-            _adc.Add(location);
-            return await _adc.SaveChangesAsync();
+            DbContext.Add(location);
+            return await DbContext.SaveChangesAsync();
         }
 
         public async Task<int> Delete(int id)
@@ -37,8 +40,8 @@ namespace cydc.Controllers
             {
                 Id = id
             };
-            _adc.Remove(location);
-            return await _adc.SaveChangesAsync();
+            DbContext.Remove(location);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

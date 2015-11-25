@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class SiteNoticeQuery : BasePagedQuery
+    public class SiteNoticeQuery : BasePagedDbQuery
     {
     }
 }

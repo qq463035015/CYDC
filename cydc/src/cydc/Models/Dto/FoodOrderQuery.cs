@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class FoodOrderQuery : BasePagedQuery
+    public class FoodOrderQuery : BasePagedDbQuery
     {
         public DateTime? Time { get; set; }
 
