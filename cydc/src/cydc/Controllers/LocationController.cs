@@ -40,7 +40,7 @@ namespace cydc.Controllers
             {
                 Id = id
             };
-            DbContext.Remove(location);
+            DbContext.Locations.Remove(location);
             return await DbContext.SaveChangesAsync();
         }
     }

@@ -20,10 +20,10 @@
                         <th class="text-right"><b>删除</b></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-bind="foreach: allLocation">
                     <tr>
-                        <td>天空之城</td>
-                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
+                        <td data-bind="text: name"></td>
+                        <td class="text-right"><span data-bind="click: $parent.drop" class="glyph glyph-delete"></span></td>
                     </tr>
                 </tbody>
             </table>

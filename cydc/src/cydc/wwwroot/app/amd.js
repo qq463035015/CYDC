@@ -2,14 +2,20 @@ require.config({
     baseUrl: '/app/',
     urlArgs: 'v=' + new Date().getTime(),
     paths: {
-        'jquery': '/lib/jquery',
-        'knockout': '/lib/knockout',
-        'text': '/lib/text',
-        'durandal': '/lib/durandal',
-        'plugins': '/lib/durandal/plugins',
-        'transitions': '/lib/durandal/transitions',
-        'main': 'main'
+        jquery: '/lib/jquery',
+        knockout: '/lib/knockout',
+        bootstrap: '/lib/bootstrap',
+        text: '/lib/text',
+        durandal: '/lib/durandal',
+        plugins: '/lib/durandal/plugins',
+        transitions: '/lib/durandal/transitions',
+        main: 'main'
+    },
+    shim: {
+        bootstrap: {
+            deps: ['jquery']
+        }
     }
 });
-require(['main'], function () { });
+require(['main', 'knockout', 'jquery', 'bootstrap'], function () { });
 //# sourceMappingURL=amd.js.map

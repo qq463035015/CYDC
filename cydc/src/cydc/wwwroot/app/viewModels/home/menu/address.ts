@@ -1,17 +1,25 @@
 ﻿import router = require('plugins/router');
-import business = require('service/business');
+import api = require('service/api');
+import ko = require('knockout');
+import utils = require('service/utils');
 
 class viewModel {
-    location = ko.observableArray();
+    allLocation = ko.observableArray<idName>();
 
     constructor() {
+        api.location.list().then(data => this.allLocation(data));
     }
 
-    activate() {
-        business.location.list().then(data => {
-            console.log(data);
+    drop(data: idName) {
+        utils.confirm('', '确定要删除吗？').then(() => {
+            return api.location.delete(data.id);
         });
-        return $.Deferred().resolve();
     }
 }
+
+interface idName {
+    id: number;
+    name: string;
+}
+
 export = new viewModel();
