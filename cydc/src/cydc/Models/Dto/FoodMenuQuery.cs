@@ -7,6 +7,6 @@ namespace cydc.Models
 {
     public class FoodMenuQuery : BasePagedDbQuery
     {
-        
+
     }
 }

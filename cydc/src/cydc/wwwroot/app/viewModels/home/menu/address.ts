@@ -5,7 +5,7 @@ import utils = require('service/utils');
 
 class viewModel {
     allLocation = ko.observableArray<idName>();
-
+    name = ko.observable<string>();
     constructor() {
         api.location.list().then(data => this.allLocation(data));
     }
@@ -14,6 +14,10 @@ class viewModel {
         utils.confirm('', '确定要删除吗？').then(() => {
             return api.location.delete(data.id);
         });
+    }
+
+    add() {
+        api.location.install(this.name()).then(() => { location.reload(); });
     }
 }
 

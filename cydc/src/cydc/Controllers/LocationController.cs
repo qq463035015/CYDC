@@ -24,7 +24,7 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
-        public async Task<int> Add(string name)
+        public async Task<int> Install(string name)
         {
             Location location = new Location
             {
@@ -40,7 +40,7 @@ namespace cydc.Controllers
             {
                 Id = id
             };
-            DbContext.Locations.Remove(location);
+            DbContext.Remove(location);
             return await DbContext.SaveChangesAsync();
         }
     }

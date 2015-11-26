@@ -9,16 +9,14 @@ namespace cydc.Controllers
 {
     public class SiteNoticeController : Controller
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
 
-        public SiteNoticeController(ApplicationDbContext adc)
-        {
-            _adc = adc;
-        }
+        public ApplicationDbContext DBContext { get; set; }
 
-        public async Task<object> List(SiteNoticeQuery query)
+        public object List(SiteNoticeQuery query)
         {
-            return await _adc.SiteNotices.CreatePagedList(query);
+            IQueryable<SiteNotice> data = DBContext.SiteNotices;
+            return data.CreateList(query);
         }
 
         public async Task<int> Update(int id, string content)
@@ -28,8 +26,8 @@ namespace cydc.Controllers
                 Id = id,
                 Content = content
             };
-            _adc.Update(siteNotice);
-            return await _adc.SaveChangesAsync();
+            DBContext.Update(siteNotice);
+            return await DBContext.SaveChangesAsync();
         }
     }
 }

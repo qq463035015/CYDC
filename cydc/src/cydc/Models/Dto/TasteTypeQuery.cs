@@ -7,6 +7,6 @@ namespace cydc.Models
 {
     public class TasteTypeQuery:BasePagedDbQuery
     {
-
+        public string Name { get; set; }
     }
 }

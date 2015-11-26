@@ -1,15 +1,23 @@
-define(["require", "exports", 'knockout'], function (require, exports, ko) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils'], function (require, exports, api, ko, utils) {
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
-            this.menu = ko.observableArray();
-            window['vm'] = this;
-            var params = { page: 1, pageSize: 12, asc: false, orderBy: null };
-            $.post('/api/foodMenu/list', params).then(function (data) { _this.menu(data); });
-            console.log(this.menu());
+            this.allMenu = ko.observableArray();
+            this.details = ko.observable();
+            this.title = ko.observable();
+            this.price = ko.observable();
+            api.menu.list().then(function (data) { return _this.allMenu(data); });
         }
-        viewModel.prototype.activate = function () {
-            return $.when();
+        viewModel.prototype.add = function () {
+            api.menu.Install(this.details(), this.title(), this.price()).then(function () { location.reload(); });
+        };
+        viewModel.prototype.drop = function (data) {
+            utils.confirm('', '确定要删除吗？').then(function () {
+                return api.menu.delete(data.id);
+            });
+        };
+        viewModel.prototype.update = function (data) {
+            api.menu.update(data.id, data.enable).then(function () { location.reload(); });
         };
         return viewModel;
     })();
