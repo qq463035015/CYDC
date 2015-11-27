@@ -1,4 +1,4 @@
-define(["require", "exports", 'jquery'], function (require, exports, $) {
+define(["require", "exports", 'jquery', 'plugins/http'], function (require, exports, $, http) {
     var service;
     (function (service) {
         var api = (function () {
@@ -18,7 +18,7 @@ define(["require", "exports", 'jquery'], function (require, exports, $) {
                 return $.post('/api/foodMenu/list', query);
             };
             foodMenu.prototype.Install = function (title, details, price) {
-                return $.post('/api/foodMenu/install', { details: details, title: title, price: price });
+                return http.post('/api/foodMenu/install', { details: details, title: title, price: price });
             };
             foodMenu.prototype.delete = function (id) {
                 return $.post('/api/foodMenu/delete', { id: id });

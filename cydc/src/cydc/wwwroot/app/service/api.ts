@@ -1,4 +1,5 @@
 ﻿import $ = require('jquery');
+import http = require('plugins/http');
 
 module service {
     export class api {
@@ -14,7 +15,7 @@ module service {
         }
 
         Install(title: string, details: string, price: number) {
-            return $.post('/api/foodMenu/install', { details: details, title: title, price: price });
+            return http.post('/api/foodMenu/install', { details: details, title: title, price: price });
         }
 
         delete(id: number) {

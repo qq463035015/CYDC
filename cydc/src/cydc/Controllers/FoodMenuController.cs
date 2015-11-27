@@ -15,40 +15,24 @@ namespace cydc.Controllers
         public object List(FoodMenuQuery query)
         {
             IQueryable<FoodMenu> data = DBContext.FoodMenus;
-
             return data.CreateList(query);
         }
 
-        public async Task<int> Install(string details, string title, decimal price)
+        public async Task<int> Install([FromBody]FoodMenu menu)
         {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Title = title,
-                Details = details,
-                Price = price,
-                Enabled = true
-            };
-            DBContext.Add(foodMenu);
+            menu.Enabled = true;
+            DBContext.Add(menu);
             return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<object> Delete(int id)
+        public async Task<object> Delete([FromBody]FoodMenu foodMenu)
         {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Id = id
-            };
             DBContext.Remove(foodMenu);
             return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<object> Update(int id, bool enabled)
+        public async Task<object> Update([FromBody]FoodMenu foodMenu)
         {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Id = id,
-                Enabled = enabled
-            };
             DBContext.Update(foodMenu);
             return await DBContext.SaveChangesAsync();
         }
