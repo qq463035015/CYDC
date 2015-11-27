@@ -7,7 +7,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
             api.type.list().then(function (data) { return _this.allType(data); });
         }
         viewModel.prototype.add = function () {
-            api.type.install(this.name()).then(function () { location.reload(); });
+            api.type.install(this.name()).then(function () { });
         };
         viewModel.prototype.drop = function (data) {
             utils.confirm('', '你确定要删除吗？').then(function () {

@@ -35,8 +35,9 @@
                         <td data-bind="text:title"></td>
                         <td data-bind="text:price"></td>
                         <td class="text-right">
-                            <div class="btn-group mt-30 h-0">
-                                <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">
+                            <div class="btn-group mt-30 h-0" data-bind="click:$parent.UpdateEnable">
+                                <button type="button" data-toggle="button" autocomplete="off"
+                                        data-bind="attr:{'class':enabled?'btn btn-toggle-switch active':'btn btn-toggle-switch'}">
                                     <span class="stateLabel stateLabel-on">可用</span>
                                     <span class="stateLabel stateLabel-off">不可用</span>
                                 </button>

@@ -23,23 +23,15 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
-        public async Task<int> Install(string name)
+        public async Task<int> Create([FromBody]TasteType type)
         {
-            TasteType tasteType = new TasteType
-            {
-                Name = name
-            };
-            DBContext.Add(tasteType);
+            DBContext.Add(type);
             return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(int id)
+        public async Task<int> Delete([FromBody]TasteType type)
         {
-            TasteType tasteType = new TasteType
-            {
-                Id = id
-            };
-            DBContext.Remove(tasteType);
+            DBContext.Remove(type);
             return await DBContext.SaveChangesAsync();
         }
     }

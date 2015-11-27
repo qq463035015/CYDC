@@ -12,7 +12,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
             });
         };
         viewModel.prototype.add = function () {
-            api.location.install(this.name()).then(function () { location.reload(); });
+            api.location.create(this.name()).then(function () { });
         };
         return viewModel;
     })();

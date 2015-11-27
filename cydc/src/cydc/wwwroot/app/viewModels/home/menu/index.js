@@ -9,15 +9,15 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
             api.menu.list().then(function (data) { return _this.allMenu(data); });
         }
         viewModel.prototype.add = function () {
-            api.menu.Install(this.details(), this.title(), this.price()).then(function () { location.reload(); });
+            api.menu.create(this.details(), this.title(), this.price()).then(function () { location.reload(); });
         };
         viewModel.prototype.drop = function (data) {
             utils.confirm('', '确定要删除吗？').then(function () {
                 return api.menu.delete(data.id);
             });
         };
-        viewModel.prototype.update = function (data) {
-            api.menu.update(data.id, data.enable).then(function () { location.reload(); });
+        viewModel.prototype.UpdateEnable = function (data) {
+            api.menu.update(data.id, !data.enabled).then(function () { });
         };
         return viewModel;
     })();

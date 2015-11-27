@@ -1,4 +1,4 @@
-define(["require", "exports", 'jquery', 'plugins/http'], function (require, exports, $, http) {
+define(["require", "exports", 'plugins/http'], function (require, exports, http) {
     var service;
     (function (service) {
         var api = (function () {
@@ -15,16 +15,16 @@ define(["require", "exports", 'jquery', 'plugins/http'], function (require, expo
             function foodMenu() {
             }
             foodMenu.prototype.list = function (query) {
-                return $.post('/api/foodMenu/list', query);
+                return http.post('/api/foodMenu/list', query);
             };
-            foodMenu.prototype.Install = function (title, details, price) {
-                return http.post('/api/foodMenu/install', { details: details, title: title, price: price });
+            foodMenu.prototype.create = function (title, details, price) {
+                return http.post('/api/foodMenu/create', { details: details, title: title, price: price });
             };
             foodMenu.prototype.delete = function (id) {
-                return $.post('/api/foodMenu/delete', { id: id });
+                return http.post('/api/foodMenu/delete', { id: id });
             };
-            foodMenu.prototype.update = function (id, enable) {
-                return $.post('/api/foodMenu/update', { id: id, enable: enable });
+            foodMenu.prototype.update = function (id, enabled) {
+                return http.post('/api/foodMenu/UpdateEnable', { id: id, enabled: enabled });
             };
             return foodMenu;
         })();
@@ -32,13 +32,13 @@ define(["require", "exports", 'jquery', 'plugins/http'], function (require, expo
             function tasteType() {
             }
             tasteType.prototype.list = function (query) {
-                return $.post('/api/tasteType/list', query);
+                return http.post('/api/tasteType/list', query);
             };
             tasteType.prototype.delete = function (id) {
-                return $.post('/api/tasteType/delete', { id: id });
+                return http.post('/api/tasteType/delete', { id: id });
             };
-            tasteType.prototype.install = function (name) {
-                return $.post('/api/tasteType/install', { name: name });
+            tasteType.prototype.create = function (name) {
+                return http.post('/api/tasteType/create', { name: name });
             };
             return tasteType;
         })();
@@ -46,13 +46,13 @@ define(["require", "exports", 'jquery', 'plugins/http'], function (require, expo
             function location() {
             }
             location.prototype.list = function (query) {
-                return $.post('/api/location/list', query);
+                return http.post('/api/location/list', query);
             };
             location.prototype.delete = function (id) {
-                return $.post('/api/location/delete', { id: id });
+                return http.post('/api/location/delete', { id: id });
             };
-            location.prototype.install = function (name) {
-                return $.post('/api/location/install', { name: name });
+            location.prototype.create = function (name) {
+                return http.post('/api/location/create', { name: name });
             };
             return location;
         })();
@@ -60,10 +60,10 @@ define(["require", "exports", 'jquery', 'plugins/http'], function (require, expo
             function siteNotice() {
             }
             siteNotice.prototype.list = function (query) {
-                return $.post('/api/siteNotice/list', query);
+                return http.post('/api/siteNotice/list', query);
             };
             siteNotice.prototype.update = function (id, content) {
-                return $.post('/api/siteNotice/update', { id: id, content: content });
+                return http.post('/api/siteNotice/update', { id: id, content: content });
             };
             return siteNotice;
         })();

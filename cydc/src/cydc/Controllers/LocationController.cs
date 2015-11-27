@@ -24,22 +24,14 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
-        public async Task<int> Install(string name)
+        public async Task<int> Create([FromBody] Location location)
         {
-            Location location = new Location
-            {
-                Name = name
-            };
             DbContext.Add(location);
             return await DbContext.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(int id)
+        public async Task<int> Delete([FromBody]Location location)
         {
-            Location location = new Location
-            {
-                Id = id
-            };
             DbContext.Remove(location);
             return await DbContext.SaveChangesAsync();
         }

@@ -11,7 +11,7 @@ class viewModel {
     }
 
     add() {
-        api.type.install(this.name()).then(() => { location.reload(); });
+        api.type.create(this.name()).then(() => { });
     }
 
     drop(data: idName) {

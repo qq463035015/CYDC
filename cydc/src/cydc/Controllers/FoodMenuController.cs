@@ -18,22 +18,24 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
-        public async Task<int> Install([FromBody]FoodMenu menu)
+        public async Task<int> Create([FromBody]FoodMenu menu)
         {
             menu.Enabled = true;
             DBContext.Add(menu);
             return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<object> Delete([FromBody]FoodMenu foodMenu)
+        public async Task<object> Delete([FromBody]FoodMenu menu)
         {
-            DBContext.Remove(foodMenu);
+            DBContext.Remove(menu);
             return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<object> Update([FromBody]FoodMenu foodMenu)
+        public async Task<object> UpdateEnable([FromBody]FoodMenu menu)
         {
-            DBContext.Update(foodMenu);
+            var data = DBContext.FoodMenus.Single(x => x.Id == menu.Id);
+            data.Enabled = menu.Enabled;
+            DBContext.Update(data);
             return await DBContext.SaveChangesAsync();
         }
     }

@@ -13,7 +13,7 @@ class viewModel {
     }
 
     add() {
-        api.menu.Install(this.details(), this.title(), this.price()).then(() => { location.reload(); });
+        api.menu.create(this.details(), this.title(), this.price()).then(() => { location.reload(); });
     }
 
     drop(data: idEnbale) {
@@ -22,14 +22,14 @@ class viewModel {
         });
     }
 
-    update(data: idEnbale) {
-        api.menu.update(data.id, data.enable).then(() => { location.reload(); });
+    UpdateEnable(data: idEnbale) {
+        api.menu.update(data.id, !data.enabled).then(() => { });
     }
 }
 
 interface idEnbale {
     id: number;
-    enable: boolean;
+    enabled: boolean;
 }
 
 export = new viewModel();

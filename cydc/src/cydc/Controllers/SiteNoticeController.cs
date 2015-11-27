@@ -19,14 +19,9 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
-        public async Task<int> Update(int id, string content)
+        public async Task<int> Update([FromBody]SiteNotice notice)
         {
-            SiteNotice siteNotice = new SiteNotice
-            {
-                Id = id,
-                Content = content
-            };
-            DBContext.Update(siteNotice);
+            DBContext.Update(notice);
             return await DBContext.SaveChangesAsync();
         }
     }

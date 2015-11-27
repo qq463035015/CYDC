@@ -4,18 +4,19 @@ import ko = require('knockout');
 import utils = require('service/utils');
 
 class viewModel {
-    notice = ko.observable<string>();
+    notice = ko.observableArray<idContent>();
+
     constructor() {
-        api.notice.list().then(data => this.notice(data[0].content));
+        api.notice.list().then(data=> this.notice(data));
     }
 
-    update(data: idName) {
-        api.notice.update(data.id, this.notice()).then(() => { location.reload(); });
+    update() {
+        api.notice.update(this.notice()[0].id, this.notice()[0].content).then(() => { });
     }
 }
 
-interface idName {
+interface idContent {
     id: number;
-    name: string;
+    content: string;
 }
 export = new viewModel();

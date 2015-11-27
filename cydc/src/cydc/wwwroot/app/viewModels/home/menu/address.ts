@@ -17,7 +17,7 @@ class viewModel {
     }
 
     add() {
-        api.location.install(this.name()).then(() => { location.reload(); });
+        api.location.create(this.name()).then(() => { });
     }
 }
 

@@ -1,5 +1,4 @@
-﻿import $ = require('jquery');
-import http = require('plugins/http');
+﻿import http = require('plugins/http');
 
 module service {
     export class api {
@@ -11,57 +10,57 @@ module service {
 
     class foodMenu {
         list(query?: baseQuery) {
-            return $.post('/api/foodMenu/list', query);
+            return http.post('/api/foodMenu/list', query);
         }
 
-        Install(title: string, details: string, price: number) {
-            return http.post('/api/foodMenu/install', { details: details, title: title, price: price });
+        create(title: string, details: string, price: number) {
+            return http.post('/api/foodMenu/create', { details: details, title: title, price: price });
         }
 
         delete(id: number) {
-            return $.post('/api/foodMenu/delete', { id: id });
+            return http.post('/api/foodMenu/delete', { id: id });
         }
 
-        update(id: number, enable: boolean) {
-            return $.post('/api/foodMenu/update', { id: id, enable: enable });
+        update(id: number, enabled: boolean) {
+            return http.post('/api/foodMenu/UpdateEnable', { id: id, enabled: enabled });
         }
     }
 
     class tasteType {
         list(query?: baseQuery) {
-            return $.post('/api/tasteType/list', query);
+            return http.post('/api/tasteType/list', query);
         }
 
         delete(id: number) {
-            return $.post('/api/tasteType/delete', { id: id });
+            return http.post('/api/tasteType/delete', { id: id });
         }
 
-        install(name: string) {
-            return $.post('/api/tasteType/install', { name: name });
+        create(name: string) {
+            return http.post('/api/tasteType/create', { name: name });
         }
     }
 
     class location {
         list(query?: baseQuery) {
-            return $.post('/api/location/list', query);
+            return http.post('/api/location/list', query);
         }
 
         delete(id: number) {
-            return $.post('/api/location/delete', { id: id });
+            return http.post('/api/location/delete', { id: id });
         }
 
-        install(name: string) {
-            return $.post('/api/location/install', { name: name });
+        create(name: string) {
+            return http.post('/api/location/create', { name: name });
         }
     }
 
     class siteNotice {
         list(query?: baseQuery) {
-            return $.post('/api/siteNotice/list', query);
+            return http.post('/api/siteNotice/list', query);
         }
 
         update(id: number, content: string) {
-            return $.post('/api/siteNotice/update', { id: id, content: content });
+            return http.post('/api/siteNotice/update', { id: id, content: content });
         }
 
     }
