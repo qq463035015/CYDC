@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class TasteTypeController : Controller
+    public class TasteTypeController : CydcBaseController
     {
         [FromServices]
         public ApplicationDbContext DBContext { get; set; }

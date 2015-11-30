@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class AccountDetailsController : Controller
+    public class AccountDetailsController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
         public async Task<object> List(AccountDetailsQuery query)
         {
-            IQueryable<AccountDetails> data = _adc.AccountDetails;
+            IQueryable<AccountDetails> data = DbContext.AccountDetails;
             if (query.UserId != null)
             {
                 data = data.Where(x => x.UserId == query.UserId);
@@ -29,8 +30,8 @@ namespace cydc.Controllers
                 Amount = account,
                 CreateTime = DateTime.Now
             };
-            _adc.Add(accountDetail);
-            return await _adc.SaveChangesAsync();
+            DbContext.Add(accountDetail);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

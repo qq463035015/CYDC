@@ -9,13 +9,14 @@ using Microsoft.AspNet.Identity;
 
 namespace cydc.Controllers
 {
-    public class FoodOrderController : Controller
+    public class FoodOrderController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
         public async Task<object> HistoryList(FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = _adc.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders;
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time.Value);
@@ -29,7 +30,7 @@ namespace cydc.Controllers
 
         public async Task<object> List(FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = _adc.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders;
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time.Value);
@@ -53,8 +54,8 @@ namespace cydc.Controllers
                 OrderLocationId = locationId,
                 Comment = comment
             };
-            _adc.Add(foodOrder);
-            return await _adc.SaveChangesAsync();
+            DbContext.Add(foodOrder);
+            return await DbContext.SaveChangesAsync();
         }
 
         public async Task<int> Delete(int id)
@@ -63,8 +64,8 @@ namespace cydc.Controllers
             {
                 Id = id
             };
-            _adc.Remove(foodOrder);
-            return await _adc.SaveChangesAsync();
+            DbContext.Remove(foodOrder);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

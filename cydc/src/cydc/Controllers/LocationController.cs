@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class LocationController : Controller
+    public class LocationController : CydcBaseController
     {
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
