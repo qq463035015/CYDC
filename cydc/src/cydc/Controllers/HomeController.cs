@@ -6,7 +6,7 @@ using Microsoft.AspNet.Mvc;
 
 namespace cydc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : CydcBaseController
     {
         public IActionResult Index()
         {

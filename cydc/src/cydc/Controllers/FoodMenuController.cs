@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class FoodMenuController : Controller
+    public class FoodMenuController : CydcBaseController
     {
         [FromServices]
         public ApplicationDbContext DBContext { get; set; }

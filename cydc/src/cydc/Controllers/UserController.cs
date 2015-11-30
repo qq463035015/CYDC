@@ -7,15 +7,16 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace cydc.Models
+namespace cydc.Controllers
 {
-    public class UserController: Controller
+    public class UserController: CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
         public async Task<decimal> Money()
         {
-            return await _adc.AccountDetails.ToAsyncEnumerable().Where(x => x.UserId == HttpContext.User.GetUserId()).Sum(x => x.Amount);
+            return await DbContext.AccountDetails.ToAsyncEnumerable().Where(x => x.UserId == HttpContext.User.GetUserId()).Sum(x => x.Amount);
         }
     }
 }

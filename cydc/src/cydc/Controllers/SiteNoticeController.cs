@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class SiteNoticeController : Controller
+    public class SiteNoticeController : CydcBaseController
     {
         [FromServices]
 

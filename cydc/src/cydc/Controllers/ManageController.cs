@@ -13,7 +13,7 @@ using cydc.ViewModels.Manage;
 namespace cydc.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : CydcBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

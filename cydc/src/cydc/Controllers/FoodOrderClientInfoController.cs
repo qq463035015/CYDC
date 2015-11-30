@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class FoodOrderClientInfoController : Controller
+    public class FoodOrderClientInfoController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
+
         public async Task<int> Add()
         {
             FoodOrderClientInfo foodOrderClientInfo = new FoodOrderClientInfo
             {
                 UserAgent = Request.Headers["User-Agent"]
             };
-            _adc.Add(foodOrderClientInfo);
-            return await _adc.SaveChangesAsync();
+            DbContext.Add(foodOrderClientInfo);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }
