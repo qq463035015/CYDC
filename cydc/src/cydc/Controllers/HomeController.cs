@@ -21,5 +21,10 @@ namespace cydc.Controllers
         {
             return Content(HostingEnvironment.EnvironmentName);
         }
+
+        public IActionResult Random()
+        {
+            return Content(Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
+        }
     }
 }
