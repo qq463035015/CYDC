@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class LocationQuery : BaseDbQuery
+    public class LocationQuery : BasePagedDbQuery
     {
         public string Name { get; set; }
     }

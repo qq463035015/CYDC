@@ -14,8 +14,6 @@ namespace cydc.Models
 
         public bool HasNext { get; set; }
 
-        public bool HasPrev { get; set; }
-
         private PagedList()
         {
         }
@@ -35,8 +33,7 @@ namespace cydc.Models
                 .Skip(dbQuery.Skip).Take(dbQuery.Take + 1)
                 .ToListAsync();
             result.Items = allItems;
-
-            result.HasPrev = dbQuery.Skip > 1;
+            
             result.HasNext = result.Items.Count > dbQuery.Take;
 
             if (result.HasNext)

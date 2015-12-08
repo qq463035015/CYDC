@@ -1,35 +1,69 @@
 ﻿import ko = require('knockout');
+import $ = require('jquery');
 import router = require('plugins/router');
+import http = require('plugins/http');
 
 module service {
-    export class pager {
-        pageTotal = ko.observable<number>();
-        pageNumber = ko.observable<number>();
-        previousPage = ko.observable<number>();
-        nextPage = ko.observable<number>();
-        maxPageToDisplay = ko.observable<number>();
+    export class pager<T> {
+        // global config:
+        maxPageToDisplay = 5;
+
+        // pre-config:
         dataUrl = ko.observable<string>();
 
-        pageSize = ko.observable<number>(12);
+        // backend returned fields:
+        items = ko.observableArray<T>();
+        nextPageFirstItem = ko.observable<T>();
+        hasNext = ko.observable<boolean>();
+        lastRaw: backendPagerContext<T>;
+
+        // computed by backend fields:
+        hasPrev = ko.pureComputed(() => this.pageNumber() > 1);
+
+        // front-end state
+        pageNumber = ko.observable<number>(1);
+        pageSize = ko.observable<number>(5);
         orderBy = ko.observable<string>();
         asc = ko.observable<boolean>();
+        searchParams = ko.observable<any>();
 
-        constructor() {
-
-        }
-
-        loadData(page: number, orderBy?: string, asc?: boolean) {
-            if (orderBy !== undefined) this.orderBy(orderBy);
-            if (asc !== undefined) this.asc(asc);
-            var searchParams = $.extend({}, {
-                page: page,
+        // front-end computed state
+        prevPageNumber = ko.pureComputed(() => this.pageNumber() - Number(this.hasPrev()));
+        nextPageNumber = ko.pureComputed(() => this.pageNumber() + Number(this.hasNext()));
+        searchState = ko.pureComputed(() => {
+            return $.extend({}, this.searchParams(), {
+                page: this.pageNumber(),
                 orderBy: this.orderBy(),
                 asc: this.asc(),
                 pageSize: this.pageSize()
             });
+        });
 
-            $.post(this.dataUrl(), searchParams).then(() => { });
+        constructor(dataUrl?: string) {
+            this.dataUrl(dataUrl);
         }
+
+        loadData(page = this.pageNumber()) {
+            var searchParams = this.searchState();            
+            return http.post(this.dataUrl(), searchParams).then((data: backendPagerContext<T>) => {
+                this.lastRaw = data;
+                this.onDataRecieving(data);
+                this.pageNumber(page);
+            });
+        }
+
+        onDataRecieving(data: backendPagerContext<T>) {
+            this.items(data.items);
+            this.nextPageFirstItem(data.nextPageFirstItem);
+            this.hasNext(data.hasNext);
+        }
+    }
+
+    interface backendPagerContext<T> {
+        items: T[];
+        nextPageFirstItem: T, 
+        hasNext: boolean, 
+        hasPrev: boolean
     }
 }
 

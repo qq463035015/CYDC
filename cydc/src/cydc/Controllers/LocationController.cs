@@ -12,7 +12,7 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public object List(LocationQuery query)
+        public async Task<object> List([FromBody] LocationQuery query)
         {
             IQueryable<Location> data = DbContext.Locations;
 
@@ -21,7 +21,7 @@ namespace cydc.Controllers
                 data = data.Where(x => x.Name.Contains(query.Name));
             }
 
-            return data.CreateList(query);
+            return await data.CreatePagedList(query);
         }
 
         public async Task<int> Create([FromBody] Location location)

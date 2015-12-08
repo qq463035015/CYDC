@@ -1,30 +1,52 @@
-define(["require", "exports", 'knockout'], function (require, exports, ko) {
+define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (require, exports, ko, $, http) {
     var service;
     (function (service) {
         var pager = (function () {
-            function pager() {
-                this.pageTotal = ko.observable();
-                this.pageNumber = ko.observable();
-                this.previousPage = ko.observable();
-                this.nextPage = ko.observable();
-                this.maxPageToDisplay = ko.observable();
+            function pager(dataUrl) {
+                var _this = this;
+                // global config:
+                this.maxPageToDisplay = 5;
+                // pre-config:
                 this.dataUrl = ko.observable();
-                this.pageSize = ko.observable(12);
+                // backend returned fields:
+                this.items = ko.observableArray();
+                this.nextPageFirstItem = ko.observable();
+                this.hasNext = ko.observable();
+                // computed by backend fields:
+                this.hasPrev = ko.pureComputed(function () { return _this.pageNumber() > 1; });
+                // front-end state
+                this.pageNumber = ko.observable(1);
+                this.pageSize = ko.observable(5);
                 this.orderBy = ko.observable();
                 this.asc = ko.observable();
-            }
-            pager.prototype.loadData = function (page, orderBy, asc) {
-                if (orderBy !== undefined)
-                    this.orderBy(orderBy);
-                if (asc !== undefined)
-                    this.asc(asc);
-                var searchParams = $.extend({}, {
-                    page: page,
-                    orderBy: this.orderBy(),
-                    asc: this.asc(),
-                    pageSize: this.pageSize()
+                this.searchParams = ko.observable();
+                // front-end computed state
+                this.prevPageNumber = ko.pureComputed(function () { return _this.pageNumber() - Number(_this.hasPrev()); });
+                this.nextPageNumber = ko.pureComputed(function () { return _this.pageNumber() + Number(_this.hasNext()); });
+                this.searchState = ko.pureComputed(function () {
+                    return $.extend({}, _this.searchParams(), {
+                        page: _this.pageNumber(),
+                        orderBy: _this.orderBy(),
+                        asc: _this.asc(),
+                        pageSize: _this.pageSize()
+                    });
                 });
-                $.post(this.dataUrl(), searchParams).then(function () { });
+                this.dataUrl(dataUrl);
+            }
+            pager.prototype.loadData = function (page) {
+                var _this = this;
+                if (page === void 0) { page = this.pageNumber(); }
+                var searchParams = this.searchState();
+                return http.post(this.dataUrl(), searchParams).then(function (data) {
+                    _this.lastRaw = data;
+                    _this.onDataRecieving(data);
+                    _this.pageNumber(page);
+                });
+            };
+            pager.prototype.onDataRecieving = function (data) {
+                this.items(data.items);
+                this.nextPageFirstItem(data.nextPageFirstItem);
+                this.hasNext(data.hasNext);
             };
             return pager;
         })();
