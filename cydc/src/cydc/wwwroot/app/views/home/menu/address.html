@@ -23,7 +23,7 @@
                 <tbody data-bind="foreach: allLocation">
                     <tr>
                         <td data-bind="text: name"></td>
-                        <td class="text-right"><span data-bind="click: $parent.drop" class="glyph glyph-delete"></span></td>
+                        <td class="text-right"><span data-bind="click: $parent.drop.bind($parent)" class="glyph glyph-delete"></span></td>
                     </tr>
                 </tbody>
             </table>

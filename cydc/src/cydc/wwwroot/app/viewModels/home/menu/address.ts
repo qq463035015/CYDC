@@ -7,17 +7,24 @@ class viewModel {
     allLocation = ko.observableArray<idName>();
     name = ko.observable<string>();
     constructor() {
-        api.location.list().then(data => this.allLocation(data));
+        this.loadList();
+    }
+
+    loadList() {
+        return api.location.list().then(data => this.allLocation(data));
     }
 
     drop(data: idName) {
-        utils.confirm('', '确定要删除吗？').then(() => {
+        utils.confirm('', '确定要删除吗？').then(cs => {
+            cs.close();
             return api.location.delete(data.id);
-        });
+        }).then(() => this.loadList());
     }
 
     add() {
-        api.location.create(this.name()).then(() => { });
+        this.name() && api.location.create(this.name())
+            .then(() => this.loadList())
+            .then(() => this.name(''));
     }
 }
 

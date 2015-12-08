@@ -23,7 +23,7 @@
                 <tbody data-bind="foreach:allType">
                     <tr>
                         <td data-bind="text:name"></td>
-                        <td class="text-right"><span class="glyph glyph-delete" data-bind="click:$parent.drop"></span></td>
+                        <td class="text-right"><span class="glyph glyph-delete" data-bind="click:$parent.drop.bind($parent)"></span></td>
                     </tr>
                 </tbody>
             </table>
