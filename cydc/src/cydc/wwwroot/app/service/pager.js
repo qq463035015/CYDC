@@ -16,7 +16,7 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
                 this.hasPrev = ko.pureComputed(function () { return _this.pageNumber() > 1; });
                 // front-end state
                 this.pageNumber = ko.observable(1);
-                this.pageSize = ko.observable(5);
+                this.pageSize = ko.observable(12);
                 this.orderBy = ko.observable();
                 this.asc = ko.observable();
                 this.searchParams = ko.observable();
@@ -33,15 +33,21 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
                 });
                 this.dataUrl(dataUrl);
             }
-            pager.prototype.loadData = function (page) {
+            pager.prototype.loadData = function () {
                 var _this = this;
-                if (page === void 0) { page = this.pageNumber(); }
                 var searchParams = this.searchState();
                 return http.post(this.dataUrl(), searchParams).then(function (data) {
                     _this.lastRaw = data;
                     _this.onDataRecieving(data);
-                    _this.pageNumber(page);
                 });
+            };
+            pager.prototype.loadPrevPage = function () {
+                this.pageNumber(this.prevPageNumber());
+                return this.loadData();
+            };
+            pager.prototype.loadNextPage = function () {
+                this.pageNumber(this.nextPageNumber());
+                return this.loadData();
             };
             pager.prototype.onDataRecieving = function (data) {
                 this.items(data.items);

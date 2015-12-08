@@ -22,7 +22,7 @@ module service {
 
         // front-end state
         pageNumber = ko.observable<number>(1);
-        pageSize = ko.observable<number>(5);
+        pageSize = ko.observable<number>(12);
         orderBy = ko.observable<string>();
         asc = ko.observable<boolean>();
         searchParams = ko.observable<any>();
@@ -43,13 +43,22 @@ module service {
             this.dataUrl(dataUrl);
         }
 
-        loadData(page = this.pageNumber()) {
-            var searchParams = this.searchState();            
+        loadData() {
+            var searchParams = this.searchState();
             return http.post(this.dataUrl(), searchParams).then((data: backendPagerContext<T>) => {
                 this.lastRaw = data;
                 this.onDataRecieving(data);
-                this.pageNumber(page);
             });
+        }
+
+        loadPrevPage() {
+            this.pageNumber(this.prevPageNumber());
+            return this.loadData();
+        }
+
+        loadNextPage() {
+            this.pageNumber(this.nextPageNumber());
+            return this.loadData();
         }
 
         onDataRecieving(data: backendPagerContext<T>) {
