@@ -36,14 +36,14 @@ module service {
             $html.appendTo(document.body);
             $html.modal();
 
-            var promise = $.Deferred();
+            var promise = $.Deferred<{ close(): void }>();
+            var closeService = {
+                close: () => $html.modal('hide')
+            };
 
-            $html.find('.btn-info').click(() => promise.reject());
-            $html.find('.btn-primary').click(() => promise.resolve());
-
-            promise.always(() => {
-                this.delay(1000).then(() => $html.remove());
-            });
+            $html.find('.btn-primary').click(() => promise.resolve(closeService));
+            $html.on('hide.bs.modal', () => promise.reject());
+            $html.on('hidden.bs.modal', () => $html.remove());
 
             return promise.promise();
         }

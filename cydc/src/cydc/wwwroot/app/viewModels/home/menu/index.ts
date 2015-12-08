@@ -8,18 +8,30 @@ class viewModel {
     details = ko.observable<string>();
     title = ko.observable<string>();
     price = ko.observable<number>();
+
     constructor() {
-        api.menu.list().then(data=> this.allMenu(data));
+        this.loadList();
+    }
+
+    loadList() {
+        return api.menu.list().then(data=> this.allMenu(data));
     }
 
     add() {
-        api.menu.create(this.details(), this.title(), this.price()).then(() => { location.reload(); });
+        api.menu.create(this.details(), this.title(), this.price())
+            .then(() => this.loadList())
+            .then(() => {
+                this.title(null);
+                this.price(null);
+                this.details(null);
+            });
     }
 
     drop(data: idEnbale) {
-        utils.confirm('', '确定要删除吗？').then(() => {
+        utils.confirm('', '确定要删除吗？').then(cs => {
+            cs.close();
             return api.menu.delete(data.id);
-        });
+        }).then(() => this.loadList());
     }
 
     UpdateEnable(data: idEnbale) {
