@@ -26,5 +26,10 @@ namespace cydc.Controllers
         {
             return Content(Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
         }
+
+        public string Date()
+        {
+            return "2015-12-20";
+        }
     }
 }
