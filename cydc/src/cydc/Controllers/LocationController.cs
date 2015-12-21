@@ -24,6 +24,12 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
+        public object LocationDDl(LocationQuery query)
+        {
+            IQueryable<Location> data = DbContext.Locations;
+            return data.CreateList(query);
+        }
+
         public async Task<int> Create([FromBody] Location location)
         {
             DbContext.Add(location);

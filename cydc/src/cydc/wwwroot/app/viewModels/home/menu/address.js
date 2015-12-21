@@ -10,7 +10,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             _super.call(this, '/api/location/list');
             this.allLocation = ko.observableArray();
             this.name = ko.observable();
-            console.log(this);
             this.loadData();
         }
         viewModel.prototype.drop = function (data) {

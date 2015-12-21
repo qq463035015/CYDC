@@ -9,7 +9,6 @@ class viewModel extends pager<idName> {
     name = ko.observable<string>();
     constructor() {
         super('/api/location/list');
-        console.log(this);
         this.loadData();
     }
 

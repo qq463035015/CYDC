@@ -1,22 +1,18 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="col-sm-24">
+        <div class="col-sm-24" data-bind="with:menu()[0]">
             <div class="col-sm-12">
-                <img src="../images/pay.jpg" />
+                <img src="../images/pay.jpg" width="500" height="400" />
             </div>
             <div class="col-sm-12">
                 <div class="type-sh3"><b>今日菜谱</b></div>
-                <div class="type-sh3">莴笋炒肉，腊鸡，红烧冬瓜，泡萝卜</div>
+                <div class="type-sh3" data-bind="text:details"></div>
             </div>
             <div class="col-sm-6">
                 <div class="type-sh3"><b>套餐类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>豪华套餐</option>
-                            <option>升级套餐</option>
-                            <option>普通套餐</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.type,options:$parent.allMenu,optionsValue:'id',optionsText:'title'"></select>
                     </div>
                 </div>
             </div>
@@ -24,10 +20,7 @@
                 <div class="type-sh3"><b>口味类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>清淡</option>
-                            <option>微辣</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.foodType,options:$parent.allFoodType,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
@@ -35,23 +28,14 @@
                 <div class="type-sh3"><b>点餐地点</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>一楼</option>
-                            <option>二楼</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.location,options:$parent.allLocation,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="type-sh3"><b>套餐份数</b></div>
-                <div class="form-group">
-                    <input type='text' class='form-control' />
-                </div>
-            </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <div class="type-sh3"><b>金额(元)</b></div>
                 <div class="form-group">
-                    <input type='text' class='form-control' disabled value="12" />
+                    <input type='text' class='form-control' data-bind="value:price" />
                 </div>
             </div>
             <div class="col-sm-12">

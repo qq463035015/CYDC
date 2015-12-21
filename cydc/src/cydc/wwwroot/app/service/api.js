@@ -11,6 +11,14 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             return api;
         })();
         service.api = api;
+        var menuIndex = (function () {
+            function menuIndex() {
+            }
+            menuIndex.prototype.list = function (query) {
+                return http.post('/api/foodMenu/list', query);
+            };
+            return menuIndex;
+        })();
         var foodMenu = (function () {
             function foodMenu() {
             }
@@ -34,6 +42,9 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             tasteType.prototype.list = function (query) {
                 return http.post('/api/tasteType/list', query);
             };
+            tasteType.prototype.tasteTypeDDl = function (query) {
+                return http.post('/api/tasteType/TasteTypeDDl', query);
+            };
             tasteType.prototype.delete = function (id) {
                 return http.post('/api/tasteType/delete', { id: id });
             };
@@ -47,6 +58,9 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             }
             location.prototype.list = function (query) {
                 return http.post('/api/location/list', query);
+            };
+            location.prototype.locationDDl = function (query) {
+                return http.post('/api/location/locationDDl', query);
             };
             location.prototype.delete = function (id) {
                 return http.post('/api/location/delete', { id: id });

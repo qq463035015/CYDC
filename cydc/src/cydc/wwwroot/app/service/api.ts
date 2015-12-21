@@ -8,6 +8,12 @@ module service {
         notice = new siteNotice();
     }
 
+    class menuIndex{
+        list(query?: baseQuery) {
+            return http.post('/api/foodMenu/list', query);
+        }
+    }
+
     class foodMenu {
         list(query?: baseQuery) {
             return http.post('/api/foodMenu/list', query);
@@ -31,6 +37,10 @@ module service {
             return http.post('/api/tasteType/list', query);
         }
 
+        tasteTypeDDl(query?: baseQuery) {
+            return http.post('/api/tasteType/TasteTypeDDl', query);
+        }
+
         delete(id: number) {
             return http.post('/api/tasteType/delete', { id: id });
         }
@@ -43,6 +53,10 @@ module service {
     class location {
         list(query?: baseQuery) {
             return http.post('/api/location/list', query);
+        }
+
+        locationDDl(query?: baseQuery) {
+            return http.post('/api/location/locationDDl', query);
         }
 
         delete(id: number) {

@@ -12,7 +12,7 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DBContext { get; set; }
 
-        public object List(TasteTypeQuery query)
+        public async Task<object> List([FromBody] TasteTypeQuery query)
         {
             IQueryable<TasteType> data = DBContext.TasteTypes;
             if (query.Name != null)
@@ -20,8 +20,15 @@ namespace cydc.Controllers
                 data = data.Where(x => x.Name.Contains(query.Name));
             }
 
+            return await data.CreatePagedList(query);
+        }
+
+        public object TasteTypeDDl(TasteTypeQuery query)
+        {
+            IQueryable<TasteType> data = DBContext.TasteTypes;
             return data.CreateList(query);
         }
+
 
         public async Task<int> Create([FromBody]TasteType type)
         {
