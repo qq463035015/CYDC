@@ -1,18 +1,21 @@
-define(["require", "exports", 'service/api', 'knockout', 'service/utils'], function (require, exports, api, ko, utils) {
-    var viewModel = (function () {
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager'], function (require, exports, api, ko, utils, pager) {
+    var viewModel = (function (_super) {
+        __extends(viewModel, _super);
         function viewModel() {
+            _super.call(this, '/api/tasteType/list');
             this.allType = ko.observableArray();
             this.name = ko.observable();
-            this.loadList();
+            this.loadData();
         }
-        viewModel.prototype.loadList = function () {
-            var _this = this;
-            return api.type.list().then(function (data) { return _this.allType(data); });
-        };
         viewModel.prototype.add = function () {
             var _this = this;
             this.name() && api.type.create(this.name()).then(function () {
-                return _this.loadList();
+                return _this.loadData();
             }).then(function () { return _this.name(null); });
         };
         viewModel.prototype.drop = function (data) {
@@ -20,10 +23,10 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
             return utils.confirm('', '你确定要删除吗？').then(function (cs) {
                 cs.close();
                 return api.type.delete(data.id);
-            }).then(function () { return _this.loadList(); });
+            }).then(function () { return _this.loadData(); });
         };
         return viewModel;
-    })();
+    })(pager);
     return new viewModel();
 });
 //# sourceMappingURL=type.js.map

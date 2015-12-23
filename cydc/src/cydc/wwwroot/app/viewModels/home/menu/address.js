@@ -12,18 +12,18 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.name = ko.observable();
             this.loadData();
         }
+        viewModel.prototype.add = function () {
+            var _this = this;
+            this.name() && api.location.create(this.name())
+                .then(function () { return _this.loadData(); })
+                .then(function () { return _this.name(''); });
+        };
         viewModel.prototype.drop = function (data) {
             var _this = this;
             utils.confirm('', '确定要删除吗？').then(function (cs) {
                 cs.close();
                 return api.location.delete(data.id);
             }).then(function () { return _this.loadData(); });
-        };
-        viewModel.prototype.add = function () {
-            var _this = this;
-            this.name() && api.location.create(this.name())
-                .then(function () { return _this.loadData(); })
-                .then(function () { return _this.name(''); });
         };
         return viewModel;
     })(pager);

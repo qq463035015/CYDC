@@ -2,22 +2,20 @@
 import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
+import pager = require('service/pager');
 
-class viewModel {
+class viewModel extends pager<idName> {
     allType = ko.observableArray<idName>();
     name = ko.observable<string>();
 
     constructor() {
-        this.loadList();
-    }
-
-    loadList() {
-        return api.type.list().then(data=> this.allType(data));
+        super('/api/tasteType/list')
+        this.loadData();
     }
 
     add() {
         this.name() && api.type.create(this.name()).then(() => {
-            return this.loadList();
+            return this.loadData();
         }).then(() => this.name(null));
     }
 
@@ -25,7 +23,7 @@ class viewModel {
         return utils.confirm('', '你确定要删除吗？').then(cs => {
             cs.close();
             return api.type.delete(data.id);
-        }).then(() => this.loadList());
+        }).then(() => this.loadData());
     }
 }
 

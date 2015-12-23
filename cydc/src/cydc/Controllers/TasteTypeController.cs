@@ -15,6 +15,7 @@ namespace cydc.Controllers
         public async Task<object> List([FromBody] TasteTypeQuery query)
         {
             IQueryable<TasteType> data = DBContext.TasteTypes;
+
             if (query.Name != null)
             {
                 data = data.Where(x => x.Name.Contains(query.Name));
@@ -28,8 +29,7 @@ namespace cydc.Controllers
             IQueryable<TasteType> data = DBContext.TasteTypes;
             return data.CreateList(query);
         }
-
-
+        
         public async Task<int> Create([FromBody]TasteType type)
         {
             DBContext.Add(type);
