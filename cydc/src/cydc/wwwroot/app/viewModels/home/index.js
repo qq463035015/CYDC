@@ -5,13 +5,15 @@ define(["require", "exports", 'service/api', 'knockout'], function (require, exp
             this.allMenu = ko.observableArray();
             this.allLocation = ko.observableArray();
             this.allFoodType = ko.observableArray();
-            this.location = ko.observable();
-            this.foodType = ko.observable();
-            this.type = ko.observable();
+            this.locationId = ko.observable();
+            this.foodTypeId = ko.observable();
+            this.menuTypeId = ko.observable();
+            this.comment = ko.observable();
+            this.foodOrder = new foodOrders();
             this.menu = ko.pureComputed({
                 read: function () {
                     return ko.utils.arrayFilter(_this.allMenu(), function (item) {
-                        return _this.type() == item.id;
+                        return _this.menuTypeId() == item.id;
                     });
                 }
             });
@@ -20,14 +22,39 @@ define(["require", "exports", 'service/api', 'knockout'], function (require, exp
         }
         viewModel.prototype.loadData = function () {
             var _this = this;
-            api.menu.list().then(function (data) {
+            api.menu.enableList().then(function (data) {
                 _this.allMenu(data);
-                _this.type(data[0].id);
+                _this.menuTypeId(data[0].id);
             });
             api.type.tasteTypeDDl().then(function (data) { return _this.allFoodType(data); });
             api.location.locationDDl().then(function (data) { return _this.allLocation(data); });
         };
+        viewModel.prototype.idName = function (arr, id) {
+            return ko.utils.arrayFilter(arr, function (item) {
+                if (item.id == id)
+                    return item;
+            });
+        };
+        viewModel.prototype.commit = function () {
+            this.foodOrder.details(this.menu()[0].details);
+            this.foodOrder.title(this.menu()[0].title);
+            this.foodOrder.price(this.menu()[0].price);
+            this.foodOrder.type(this.idName(this.allFoodType(), this.foodTypeId())[0].name);
+            this.foodOrder.location(this.idName(this.allLocation(), this.locationId())[0].name);
+            this.foodOrder.comment(this.comment());
+        };
         return viewModel;
+    })();
+    var foodOrders = (function () {
+        function foodOrders() {
+            this.details = ko.observable();
+            this.title = ko.observable();
+            this.type = ko.observable();
+            this.location = ko.observable();
+            this.price = ko.observable();
+            this.comment = ko.observable();
+        }
+        return foodOrders;
     })();
     return new viewModel();
 });

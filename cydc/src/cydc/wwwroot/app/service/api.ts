@@ -19,6 +19,10 @@ module service {
             return http.post('/api/foodMenu/list', query);
         }
 
+        enableList(query?: baseQuery) {
+            return http.post('/api/foodMenu/enableList', query);
+        }
+
         create(title: string, details: string, price: number) {
             return http.post('/api/foodMenu/create', { details: details, title: title, price: price });
         }

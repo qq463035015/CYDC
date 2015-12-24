@@ -12,7 +12,7 @@
                 <div class="type-sh3"><b>套餐类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.type,options:$parent.allMenu,optionsValue:'id',optionsText:'title'"></select>
+                        <select class="form-control" data-bind="value:$parent.menuTypeId,options:$parent.allMenu,optionsValue:'id',optionsText:'title'"></select>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="type-sh3"><b>口味类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.foodType,options:$parent.allFoodType,optionsValue:'id',optionsText:'name'"></select>
+                        <select class="form-control" data-bind="value:$parent.foodTypeId,options:$parent.allFoodType,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="type-sh3"><b>点餐地点</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.location,options:$parent.allLocation,optionsValue:'id',optionsText:'name'"></select>
+                        <select class="form-control" data-bind="value:$parent.locationId,options:$parent.allLocation,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
@@ -41,12 +41,12 @@
             <div class="col-sm-12">
                 <div class="type-sh3"><b>备注信息</b></div>
                 <div class="form-group">
-                    <textarea id="info" rows="2"></textarea>
+                    <textarea id="info" rows="2" data-bind="value:$parent.comment"></textarea>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="btn-group mt-40">
-                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample">提交</a>
+                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.commit.bind($parent,$data)">提交</a>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -57,7 +57,7 @@
 </div>
 
 <div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" data-bind="with:foodOrder">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modal-sample-label">
@@ -65,10 +65,12 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div><b>菜谱：</b><span>豪华套餐豪华套餐豪华套餐豪华套餐豪华套餐</span></div>
-                <div><b>套餐：</b><span>超辣</span></div>
-                <div><b>口味：</b><span>超辣</span></div>
-                <div><b>备注：</b><span>不要辣椒不要辣椒不要辣椒不要辣椒不要辣椒不要辣椒</span></div>
+                <div><b>菜谱：</b><span data-bind="text:details"></span></div>
+                <div><b>套餐：</b><span data-bind="text:title"></span></div>
+                <div><b>口味：</b><span data-bind="text:type"></span></div>
+                <div><b>地点：</b><span data-bind="text:location"></span></div>
+                <div><b>金额：</b><span data-bind="text:price"></span></div>
+                <div><b>备注：</b><span data-bind="text:comment"></span></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info"

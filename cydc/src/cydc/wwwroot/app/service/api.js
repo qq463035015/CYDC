@@ -25,6 +25,9 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             foodMenu.prototype.list = function (query) {
                 return http.post('/api/foodMenu/list', query);
             };
+            foodMenu.prototype.enableList = function (query) {
+                return http.post('/api/foodMenu/enableList', query);
+            };
             foodMenu.prototype.create = function (title, details, price) {
                 return http.post('/api/foodMenu/create', { details: details, title: title, price: price });
             };

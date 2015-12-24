@@ -12,9 +12,16 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DBContext { get; set; }
 
-        public object List(FoodMenuQuery query)
+        public async Task<object> List([FromBody] FoodMenuQuery query)
         {
             IQueryable<FoodMenu> data = DBContext.FoodMenus;
+            return await data.CreatePagedList(query);
+        }
+
+        public object EnableList(FoodMenuQuery query)
+        {
+            IQueryable<FoodMenu> data = DBContext.FoodMenus;
+            data = data.Where(x => x.Enabled == true);
             return data.CreateList(query);
         }
 
