@@ -6,6 +6,13 @@ module service {
         type = new tasteType();
         menu = new foodMenu();
         notice = new siteNotice();
+        order = new foodOrder();
+    }
+
+    class foodOrder {
+        create(menuId: Number, orderLocationId: Number, tasteId: Number) {
+            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId })
+        }
     }
 
     class menuIndex{

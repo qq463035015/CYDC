@@ -1,4 +1,4 @@
-define(["require", "exports", 'service/api', 'knockout'], function (require, exports, api, ko) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils'], function (require, exports, api, ko, utils) {
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -42,6 +42,18 @@ define(["require", "exports", 'service/api', 'knockout'], function (require, exp
             this.foodOrder.type(this.idName(this.allFoodType(), this.foodTypeId())[0].name);
             this.foodOrder.location(this.idName(this.allLocation(), this.locationId())[0].name);
             this.foodOrder.comment(this.comment());
+        };
+        viewModel.prototype.commitOrder = function () {
+            var _this = this;
+            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId()).then(function () {
+                $('#modal-sample').modal('hide');
+                utils.confirm('', '点餐成功！').then(function (cs) {
+                    cs.close();
+                }).then(function () {
+                    _this.loadData();
+                    _this.comment(null);
+                });
+            });
         };
         return viewModel;
     })();

@@ -7,10 +7,19 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
                 this.type = new tasteType();
                 this.menu = new foodMenu();
                 this.notice = new siteNotice();
+                this.order = new foodOrder();
             }
             return api;
         })();
         service.api = api;
+        var foodOrder = (function () {
+            function foodOrder() {
+            }
+            foodOrder.prototype.create = function (foodMenuId, orderLocationId, tasteId) {
+                return http.post('/api/foodOrder/create', { foodMenuId: foodMenuId, orderLocationId: orderLocationId, tasteId: tasteId });
+            };
+            return foodOrder;
+        })();
         var menuIndex = (function () {
             function menuIndex() {
             }

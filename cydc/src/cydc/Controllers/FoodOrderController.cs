@@ -28,7 +28,7 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public async Task<object> List(FoodOrderQuery query)
+        public async Task<object> List([FromBody] FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = DbContext.FoodOrders;
             if (query.Time != null)
@@ -42,29 +42,18 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Add(int foodMenuId, int tasteId, int locationId, string comment)
+        public async Task<int> Create([FromBody] FoodOrder order)
         {
-            FoodOrder foodOrder = new FoodOrder
-            {
-                OrderUserId = HttpContext.User.GetUserId(),
-                OrderTime = DateTime.Now,
-                
-                FoodMenuId = foodMenuId,
-                TasteId = tasteId,
-                OrderLocationId = locationId,
-                Comment = comment
-            };
-            DbContext.Add(foodOrder);
+            order.OrderUserId = "2";
+            order.OrderTime = DateTime.Now;
+
+            DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(int id)
+        public async Task<int> Delete([FromBody] FoodOrder order)
         {
-            FoodOrder foodOrder = new FoodOrder
-            {
-                Id = id
-            };
-            DbContext.Remove(foodOrder);
+            DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
         }
     }
