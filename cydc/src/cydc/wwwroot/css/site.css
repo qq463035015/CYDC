@@ -52,3 +52,8 @@
 .cl-blue {
     color: #0078D7;
 }
+
+#register {
+    background-color:#0078D7;
+    color:rgb(255, 255, 255);
+}

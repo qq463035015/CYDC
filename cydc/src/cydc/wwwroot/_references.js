@@ -21,6 +21,7 @@
 /// <reference path="app/viewModels/home/menu/type.js" />
 /// <reference path="app/viewModels/home/order.js" />
 /// <reference path="app/viewModels/home/record.js" />
+/// <reference path="app/viewmodels/home/register.js" />
 /// <reference path="app/viewModels/home/user.js" />
 /// <reference path="app/viewModels/shell.js" />
 /// <reference path="lib/bootstrap.js" />
