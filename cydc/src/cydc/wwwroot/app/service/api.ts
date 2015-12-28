@@ -25,6 +25,10 @@ module service {
         select(time: Date, userName: string) {
             return http.post('/api/foodOrder/list', { time: time, userName: userName });
         }
+
+        historyList(query?: baseQuery) {
+            return http.post('/api/foodOrder/historyList', query);
+        }
     }
 
     class menuIndex {

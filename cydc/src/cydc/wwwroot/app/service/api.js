@@ -27,6 +27,9 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             foodOrder.prototype.select = function (time, userName) {
                 return http.post('/api/foodOrder/list', { time: time, userName: userName });
             };
+            foodOrder.prototype.historyList = function (query) {
+                return http.post('/api/foodOrder/historyList', query);
+            };
             return foodOrder;
         })();
         var menuIndex = (function () {
