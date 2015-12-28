@@ -17,7 +17,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
                     });
                 }
             });
-            window["vm"] = this;
             this.loadData();
         }
         viewModel.prototype.loadData = function () {
@@ -45,7 +44,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
         };
         viewModel.prototype.commitOrder = function () {
             var _this = this;
-            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId()).then(function () {
+            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
                 $('#modal-sample').modal('hide');
                 utils.confirm('', '点餐成功！').then(function (cs) {
                     cs.close();

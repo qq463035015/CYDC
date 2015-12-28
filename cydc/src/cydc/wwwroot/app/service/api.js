@@ -15,8 +15,17 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
         var foodOrder = (function () {
             function foodOrder() {
             }
-            foodOrder.prototype.create = function (foodMenuId, orderLocationId, tasteId) {
-                return http.post('/api/foodOrder/create', { foodMenuId: foodMenuId, orderLocationId: orderLocationId, tasteId: tasteId });
+            foodOrder.prototype.list = function (query) {
+                return http.post('/api/foodOrder/list', query);
+            };
+            foodOrder.prototype.create = function (menuId, orderLocationId, tasteId, comment) {
+                return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment });
+            };
+            foodOrder.prototype.delete = function (id) {
+                return http.post('/api/foodOrder/delete', { id: id });
+            };
+            foodOrder.prototype.select = function (time, userName) {
+                return http.post('/api/foodOrder/list', { time: time, userName: userName });
             };
             return foodOrder;
         })();

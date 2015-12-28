@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
+using Microsoft.Data.Entity;
 
 namespace cydc.Controllers
 {
@@ -30,13 +31,14 @@ namespace cydc.Controllers
 
         public async Task<object> List([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = DbContext.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time.Value);
             }
             if (query.UserName != null)
             {
+
                 data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserName());
             }
             return await data.CreatePagedList(query);

@@ -33,7 +33,11 @@ class viewModel extends pager<idName> {
     }
 
     UpdateEnable(data: idEnbale) {
-        api.menu.update(data.id, !data.enabled).then(() => { });
+        api.menu.update(data.id, !data.enabled).then(() => {
+            utils.confirm('', '修改成功！').then(cs => {
+                cs.close();
+            }).then(() => this.loadData());
+        });
     }
 }
 

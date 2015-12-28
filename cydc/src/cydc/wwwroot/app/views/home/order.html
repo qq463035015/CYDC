@@ -1,14 +1,14 @@
 ﻿<div class="container">
     <div class="row">
         <div class="form-group col-sm-6">
-            <input type="date" class="form-control" jquery-validation="true" />
+            <input type="date" class="form-control" jquery-validation="true" data-bind="value:queryTime" />
         </div>
         <div class="form-group col-sm-6">
-            <input type='text' class='form-control' placeholder="用户名称" />
+            <input type='text' class='form-control' placeholder="用户名称" data-bind="value:userName" />
         </div>
         <div class="col-sm-12">
             <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+                <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
     </div>
@@ -16,10 +16,10 @@
         <div class="col-sm-24">
             <div class="form-group">
                 <span>显示行数</span>
-                <select size="1">
-                    <option>12</option>
-                    <option>50</option>
-                    <option>100</option>
+                <select size="1" data-bind="value:pageSize()">
+                    <option value="12">12</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
                 </select>
             </div>
         </div>
@@ -32,108 +32,22 @@
                         <tr>
                             <th><b>用户名称</b></th>
                             <th><b>点餐时间</b></th>
+                            <th><b>菜谱内容</b></th>
                             <th><b>套餐</b></th>
                             <th><b>口味</b></th>
                             <th><b>备注</b></th>
                             <th class="text-right"><b>退订</b></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-bind="foreach:items">
                         <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
-                        </tr>
-                        <tr>
-                            <td>Gray</td>
-                            <td>2015-10-31</td>
-                            <td>豪华套餐</td>
-                            <td>超辣</td>
-                            <td>不要辣椒</td>
-                            <td class="text-right"><a href="javascript:void(0)">退订</a></td>
+                            <td data-bind="text:orderUserId"></td>
+                            <td data-bind="text:orderTime"></td>
+                            <td data-bind="text:foodMenu.details"></td>
+                            <td data-bind="text:foodMenu.title"></td>
+                            <td data-bind="text:taste.name"></td>
+                            <td data-bind="text:comment"></td>
+                            <td class="text-right"><a href="javascript:void(0)" data-bind="click:$parent.drop.bind($parent,$data)">退订</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -143,12 +57,11 @@
     <div class="row">
         <div class="col-sm-24">
             <div class="pull-left paginaton">
-                当前第<span class="cl-blue">1</span>页
-                总共<span class="cl-blue">12</span>页
+                当前第<span class="cl-blue" data-bind="text:pageNumber">1</span>页
             </div>
             <div class="pull-right">
-                <a href="#">上一页</a>
-                <a href="#">下一页</a>
+                <a href="#" data-bind="click:hasPrev()&&loadPrevPage">上一页</a>
+                <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
             </div>
         </div>
     </div>

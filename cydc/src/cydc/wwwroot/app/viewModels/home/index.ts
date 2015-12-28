@@ -11,7 +11,7 @@ class viewModel {
     locationId = ko.observable<any>();
     foodTypeId = ko.observable<any>();
     menuTypeId = ko.observable<any>();
-    comment = ko.observable();
+    comment = ko.observable<any>();
 
     foodOrder = new foodOrders();
 
@@ -33,7 +33,6 @@ class viewModel {
     }
 
     constructor() {
-        window["vm"] = this;
         this.loadData();
     }
 
@@ -54,7 +53,7 @@ class viewModel {
     }
 
     commitOrder() {
-        api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId()).then(() => {
+        api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(),this.comment()).then(() => {
             $('#modal-sample').modal('hide');
             utils.confirm('', '点餐成功！').then(cs => {
                 cs.close();

@@ -10,12 +10,24 @@ module service {
     }
 
     class foodOrder {
-        create(menuId: Number, orderLocationId: Number, tasteId: Number) {
-            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId })
+        list(query?: baseQuery) {
+            return http.post('/api/foodOrder/list', query);
+        }
+
+        create(menuId: Number, orderLocationId: Number, tasteId: Number, comment: string) {
+            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment })
+        }
+
+        delete(id: number) {
+            return http.post('/api/foodOrder/delete', { id: id });
+        }
+
+        select(time: Date, userName: string) {
+            return http.post('/api/foodOrder/list', { time: time, userName: userName });
         }
     }
 
-    class menuIndex{
+    class menuIndex {
         list(query?: baseQuery) {
             return http.post('/api/foodMenu/list', query);
         }

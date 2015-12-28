@@ -32,7 +32,12 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             }).then(function () { return _this.loadData(); });
         };
         viewModel.prototype.UpdateEnable = function (data) {
-            api.menu.update(data.id, !data.enabled).then(function () { });
+            var _this = this;
+            api.menu.update(data.id, !data.enabled).then(function () {
+                utils.confirm('', '修改成功！').then(function (cs) {
+                    cs.close();
+                }).then(function () { return _this.loadData(); });
+            });
         };
         return viewModel;
     })(pager);
