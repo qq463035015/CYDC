@@ -8,6 +8,7 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
                 this.menu = new foodMenu();
                 this.notice = new siteNotice();
                 this.order = new foodOrder();
+                this.account = new account();
             }
             return api;
         })();
@@ -104,6 +105,14 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
                 return http.post('/api/siteNotice/update', { id: id, content: content });
             };
             return siteNotice;
+        })();
+        var account = (function () {
+            function account() {
+            }
+            account.prototype.login = function (userName, password) {
+                return http.post('/api/account/login', { userName: userName, password: password });
+            };
+            return account;
         })();
     })(service || (service = {}));
     return new service.api();

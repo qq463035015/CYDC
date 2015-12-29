@@ -7,6 +7,7 @@ module service {
         menu = new foodMenu();
         notice = new siteNotice();
         order = new foodOrder();
+        account = new account();
     }
 
     class foodOrder {
@@ -114,6 +115,12 @@ module service {
     interface basePagedQuery {
         page?: number;
         pageSize?: number;
+    }
+
+    class account {
+        login(userName: string, password: string) {
+            return http.post('/api/account/login', { userName: userName, password: password });
+        }
     }
 }
 
