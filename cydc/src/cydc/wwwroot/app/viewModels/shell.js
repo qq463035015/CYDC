@@ -13,7 +13,8 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
                 { route: 'home/bill', moduleId: 'home/bill', title: '账单管理', nav: true },
                 { route: 'home/order', moduleId: 'home/order', title: '点餐列表', nav: true },
                 { route: 'home/login', moduleId: 'home/login', title: '登录', nav: true },
-                { route: 'home/register', moduleId: 'home/register', title: '注册', nav: false }
+                { route: 'home/register', moduleId: 'home/register', title: '注册', nav: false },
+                { route: 'home/forgotPswd', moduleId: 'home/forgotPswd', title: '忘记密码', nav: false }
             ]).buildNavigationModel();
             return router.activate({ pushState: true, root: '/' });
         };

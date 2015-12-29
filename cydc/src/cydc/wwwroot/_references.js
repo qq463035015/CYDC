@@ -12,6 +12,7 @@
 /// <reference path="app/service/pager.js" />
 /// <reference path="app/service/utils.js" />
 /// <reference path="app/viewModels/home/bill.js" />
+/// <reference path="app/viewmodels/home/forgotpswd.js" />
 /// <reference path="app/viewModels/home/index.js" />
 /// <reference path="app/viewModels/home/login.js" />
 /// <reference path="app/viewModels/home/menu.js" />
