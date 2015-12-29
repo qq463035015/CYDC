@@ -2,49 +2,35 @@
     <div class="row">
         <div class="col-md-24">
             <h2>注册</h2>
-            <label class="type-sh2">&nbsp;创建新帐户</label>
-            <form class="form-horizontal">
+            <label class="type-sh2">创建新帐户</label>
+            <form class="form-horizontal" data-bind="submit: register">
                 <hr /><br />
-                <div class="validation-summary-valid text-danger" data-valmsg-summary="true">
-                    <ul>
-                        <li style="display:none"></li>
-                    </ul>
-                </div>
                 <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <label class="col-md-2 control-label">电子邮件</label>
+                    <label class="col-md-2 col-md-offset-2 control-label">电子邮件</label>
                     <div class="col-md-10">
-                        <input class="form-control" name="Email" placeholder="电子邮件..." />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        <input class="form-control" placeholder="电子邮件..." data-bind="value: email" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <label class="col-md-2 control-label">用户名</label>
+                    <label class="col-md-2 col-md-offset-2 control-label">用户名</label>
                     <div class="col-md-10">
-                        <input class="form-control" name="UserName" placeholder="中文姓名..." />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
+                        <input class="form-control" placeholder="中文姓名..." data-bind="value: username"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <label class="col-md-2 control-label">密码</label>
+                    <label class="col-md-2 col-md-offset-2 control-label">密码</label>
                     <div class="col-md-10">
-                        <input class="form-control" name="Password" placeholder="密码..." />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                        <input class="form-control" placeholder="密码..." data-bind="value: password"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <label class="col-md-2 control-label">确认密码</label>
+                    <label class="col-md-2 col-md-offset-2 control-label">确认密码</label>
                     <div class="col-md-10">
-                        <input class="form-control" name="ConfirmPassword" placeholder="确认密码..." />
-                        <span class="field-validation-valid text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                        <input class="form-control" placeholder="确认密码..." data-bind="value: confirmedPassword"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-offset-4 col-md-10">
                         <button type="submit" class="btn btn-primary theme-default">注册</button>
                     </div>
                 </div>

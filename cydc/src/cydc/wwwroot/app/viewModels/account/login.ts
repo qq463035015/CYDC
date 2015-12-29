@@ -12,25 +12,20 @@ class viewModel {
         required: true
     });
 
-    constructor() {
-    }
-
     login() {
-        if (this.allValid()) {
+        if (utils.checkValid(this)) {
             api.account.login(this.userName(), this.password()).then(() => {
-                router.navigate(utils.urlQuery('returnUrl') || '/');
-            }).fail((xhr: XMLHttpRequest) => {
-                if (xhr.status == 400) {
-                    alert('用户名或密码错误！');
-                }
-            });
+                utils.redirectToCallbackOrHome();
+            }).fail(xhr => this.requestFailed(xhr));
         }
     }
 
-    allValid() {
-        let errors = koval.group(this);
-        if (errors().length > 0) errors.showAllMessages();
-        return errors().length == 0;
+    requestFailed(xhr: XMLHttpRequest) {
+        if (xhr.status == 400) {
+            alert('用户名或密码错误！');
+        } else {
+            alert('炸了');
+        }
     }
 }
 

@@ -112,9 +112,16 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             account.prototype.login = function (userName, password) {
                 return http.post('/api/account/login', { userName: userName, password: password });
             };
+            account.prototype.register = function (email, username, password, confirmedPassword) {
+                return http.post('/api/account/register', {
+                    email: email,
+                    username: username,
+                    password: password,
+                    confirmedPassword: confirmedPassword
+                });
+            };
             return account;
         })();
     })(service || (service = {}));
     return new service.api();
 });
-//# sourceMappingURL=api.js.map

@@ -11,6 +11,7 @@
         plugins: '/lib/durandal/plugins',
         transitions: '/lib/durandal/transitions',
         "knockout.validation": '/lib/knockout.validation',
+        kovalcn: '/lib/knockout.validation.zh-CN',
 
         main: 'main'
     }, 
@@ -21,4 +22,6 @@
     }
 });
 
-require(['main', 'knockout', 'jquery', 'bootstrap', 'knockout.validation'], () => { });
+require(['knockout.validation', 'kovalcn', 'main', 'knockout', 'jquery', 'bootstrap', ], (koval: KnockoutValidationStatic) => {
+    koval.locale('zh-CN');
+});

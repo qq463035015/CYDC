@@ -1,4 +1,4 @@
-define(["require", "exports", 'jquery'], function (require, exports, $) {
+define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router'], function (require, exports, $, koval, router) {
     var service;
     (function (service) {
         var utils = (function () {
@@ -29,6 +29,14 @@ define(["require", "exports", 'jquery'], function (require, exports, $) {
                 var results = regex.exec(location.search);
                 var final = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
                 return final;
+            };
+            utils.prototype.checkValid = function (vm) {
+                var errors = koval.group(vm);
+                errors.showAllMessages();
+                return errors().length == 0;
+            };
+            utils.prototype.redirectToCallbackOrHome = function () {
+                router.navigate(this.urlQuery('returnUrl') || '/');
             };
             return utils;
         })();

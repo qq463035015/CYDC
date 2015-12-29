@@ -1,4 +1,6 @@
 ﻿import $ = require('jquery');
+import koval = require('knockout.validation');
+import router = require('plugins/router');
 
 module service {
     export class utils {
@@ -54,6 +56,16 @@ module service {
             let results = regex.exec(location.search);
             let final = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
             return final;
+        }
+
+        checkValid(vm: any) {
+            let errors = koval.group(vm);
+            errors.showAllMessages();
+            return errors().length == 0;
+        }
+
+        redirectToCallbackOrHome() {
+            router.navigate(this.urlQuery('returnUrl') || '/');
         }
     }
 }

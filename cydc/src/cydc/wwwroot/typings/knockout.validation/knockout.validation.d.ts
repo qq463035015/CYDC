@@ -128,6 +128,7 @@ interface KnockoutValidationStatic {
     utils: KnockoutValidationUtils;
 
     localize(msgTranslations: any): void;
+    locale(msgTranslations: any): void;
     validateObservable(observable: KnockoutObservable<any>): boolean;
 }
 

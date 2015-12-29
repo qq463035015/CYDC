@@ -121,6 +121,15 @@ module service {
         login(userName: string, password: string) {
             return http.post('/api/account/login', { userName: userName, password: password });
         }
+
+        register(email: string, username: string, password: string, confirmedPassword: string) {
+            return http.post('/api/account/register', {
+                email: email,
+                username: username,
+                password: password,
+                confirmedPassword: confirmedPassword
+            });
+        }
     }
 }
 

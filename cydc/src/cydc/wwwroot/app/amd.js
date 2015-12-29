@@ -11,6 +11,7 @@ require.config({
         plugins: '/lib/durandal/plugins',
         transitions: '/lib/durandal/transitions',
         "knockout.validation": '/lib/knockout.validation',
+        kovalcn: '/lib/knockout.validation.zh-CN',
         main: 'main'
     },
     shim: {
@@ -19,4 +20,6 @@ require.config({
         }
     }
 });
-require(['main', 'knockout', 'jquery', 'bootstrap', 'knockout.validation'], function () { });
+require(['knockout.validation', 'kovalcn', 'main', 'knockout', 'jquery', 'bootstrap',], function (koval) {
+    koval.locale('zh-CN');
+});
