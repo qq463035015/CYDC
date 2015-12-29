@@ -13,9 +13,6 @@ class viewModel {
 
     constructor() {
         console.log(this);
-        koval.init({
-            
-        });
     }
 
     login() {

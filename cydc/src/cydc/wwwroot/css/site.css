@@ -63,3 +63,7 @@
     background-color:#0078D7;
     color:rgb(255, 255, 255);
 }
+
+.validationMessage {
+    color:red;
+}

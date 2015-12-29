@@ -8,7 +8,6 @@ define(["require", "exports", 'knockout', 'knockout.validation', 'service/api', 
                 required: true
             });
             console.log(this);
-            koval.init({});
         }
         viewModel.prototype.login = function () {
             if (this.allValid()) {
