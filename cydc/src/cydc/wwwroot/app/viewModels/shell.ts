@@ -13,10 +13,10 @@ class viewModel {
             { route: 'home/menu', moduleId: 'home/menu', title: '菜谱管理', nav: true, hasChildRoutes: true },
             { route: 'home/bill', moduleId: 'home/bill', title: '账单管理', nav: true },
             { route: 'home/order', moduleId: 'home/order', title: '点餐列表', nav: true },
-            { route: 'home/login', moduleId: 'home/login', title: '登录', nav: true },
-            { route: 'home/register', moduleId: 'home/register', title: '注册', nav: false },
-            { route: 'home/forgotPswd', moduleId: 'home/forgotPswd', title: '忘记密码', nav: false }
-        ]).buildNavigationModel();
+            { route: 'account/login', moduleId: 'account/login', title: '登录', nav: true },
+            { route: 'account/register', moduleId: 'account/register', title: '注册', nav: false },
+            { route: 'account/forgotPswd', moduleId: 'account/forgotPswd', title: '忘记密码', nav: false }
+        ]).mapUnknownRoutes('error/404').buildNavigationModel();
         return router.activate({ pushState: true, root: '/'});
     };
 }
