@@ -12,7 +12,6 @@ class viewModel {
     });
 
     constructor() {
-        console.log(this);
     }
 
     login() {

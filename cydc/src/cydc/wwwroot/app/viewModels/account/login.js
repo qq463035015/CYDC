@@ -7,7 +7,6 @@ define(["require", "exports", 'knockout', 'knockout.validation', 'service/api', 
             this.password = ko.observable().extend({
                 required: true
             });
-            console.log(this);
         }
         viewModel.prototype.login = function () {
             if (this.allValid()) {

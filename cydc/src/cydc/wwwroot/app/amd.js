@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '/app/',
     //urlArgs: 'v=' + new Date().getTime(), 
-    urlArgs: 'v=2015-12-29-a',
+    urlArgs: 'v=2015-12-29-b',
     paths: {
         jquery: '/lib/jquery',
         knockout: '/lib/knockout',
@@ -16,9 +16,6 @@ require.config({
     shim: {
         bootstrap: {
             deps: ['jquery']
-        },
-        "knockout.validation": {
-            deps: ['knockout']
         }
     }
 });
