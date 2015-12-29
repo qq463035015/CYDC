@@ -23,10 +23,16 @@ define(["require", "exports", 'jquery'], function (require, exports, $) {
                 $html.on('hidden.bs.modal', function () { return $html.remove(); });
                 return promise.promise();
             };
+            utils.prototype.urlQuery = function (query) {
+                var normalizedQuery = query.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + query + "=([^&#]*)", 'i');
+                var results = regex.exec(location.search);
+                var final = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+                return final;
+            };
             return utils;
         })();
         service.utils = utils;
     })(service || (service = {}));
     return new service.utils();
 });
-//# sourceMappingURL=utils.js.map

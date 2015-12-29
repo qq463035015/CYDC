@@ -1,7 +1,7 @@
 ﻿require.config({
     baseUrl: '/app/',
-    //urlArgs: 'v=' + new Date().getTime(), 
-    urlArgs: 'v=2015-12-29-b',
+    urlArgs: 'v=' + new Date().getTime(), 
+    //urlArgs: 'v=2015-12-29-d',
     paths: {
         jquery: '/lib/jquery',
         knockout: '/lib/knockout',

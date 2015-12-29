@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using cydc.Models;
 using cydc.Services;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.Authentication.Cookies;
+using Microsoft.AspNet.Http;
 
 namespace cydc
 {
@@ -94,6 +96,11 @@ namespace cydc
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AutomaticChallenge = false
+            });
 
             // Add MVC to the request pipeline.
             //app.UseMvc(routes =>

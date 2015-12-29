@@ -10,6 +10,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using cydc.Models;
 using cydc.Services;
+using System.Net;
 
 namespace cydc.Controllers
 {
@@ -36,13 +37,20 @@ namespace cydc.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<ActionResult> Login([FromBody]string username, [FromBody]string password)
+        [AllowAnonymous]
+        public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            return HttpNotFound();
+            var user = await TryFindUserByNameOrEmail(dto.UserName);
+            if (user == null) return new HttpStatusCodeResult(401);
+
+            var passwordOk = await _userManager.CheckPasswordAsync(user, dto.Password);
+            if (!passwordOk) return new HttpStatusCodeResult((int)HttpStatusCode.Forbidden);
+
+            await _signInManager.SignInAsync(user, dto.RememberMe);
+            return Ok();
         }
 
-        private async Task<ApplicationUser> FindUserByNameOrEmail(string userNameOrEmail)
+        private async Task<ApplicationUser> TryFindUserByNameOrEmail(string userNameOrEmail)
         {
             ApplicationUser user;
 

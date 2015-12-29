@@ -47,6 +47,14 @@ module service {
 
             return promise.promise();
         }
+
+        urlQuery(query: string) {
+            let normalizedQuery = query.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            let regex = new RegExp("[\\?&]" + query + "=([^&#]*)", 'i');
+            let results = regex.exec(location.search);
+            let final = results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            return final;
+        }
     }
 }
 
