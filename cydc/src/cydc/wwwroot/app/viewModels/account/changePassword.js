@@ -18,12 +18,17 @@ define(["require", "exports", 'service/api', 'service/utils', 'knockout'], funct
             if (utils.checkValid(this)) {
                 api.account.changePassword(this.password(), this.newPassword(), this.confirmedPassword()).then(function () {
                     alert('密码修改成功。');
+                    utils.redirectToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };
         viewModel.prototype.requestFailed = function (xhr) {
-            console.log(xhr);
-            alert('失败，不知道什么原因，自己想。');
+            if (xhr.status == 401) {
+                alert('原密码错误');
+            }
+            else {
+                alert('失败，不知道什么原因，自己想。');
+            }
         };
         return viewModel;
     })();
