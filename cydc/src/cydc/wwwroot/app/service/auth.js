@@ -3,16 +3,33 @@ define(["require", "exports", 'knockout'], function (require, exports, ko) {
     (function (service) {
         var auth = (function () {
             function auth() {
-                this.userName = ko.pureComputed({
-                    read: function () { return localStorage.getItem(keys.userName); },
-                    write: function (v) { return localStorage.setItem(keys.userName, v); }
-                });
+                this.authed = ko.observable();
+                this.userName = ko.observable();
+                this.loadState();
             }
             auth.prototype.onLogin = function (ctx) {
+                this.authed(true);
                 this.userName(ctx.userName);
+                this.saveState();
             };
             auth.prototype.onLogout = function () {
+                this.authed(false);
                 this.userName(null);
+                this.saveState();
+            };
+            auth.prototype.loadState = function () {
+                var obj = JSON.parse(localStorage.getItem(keys.authObj));
+                if (obj != null) {
+                    this.userName(obj.userName);
+                    this.authed(obj.authed);
+                }
+            };
+            auth.prototype.saveState = function () {
+                var obj = {
+                    authed: this.authed(),
+                    userName: this.userName()
+                };
+                localStorage.setItem(keys.authObj, JSON.stringify(obj));
             };
             return auth;
         })();
@@ -20,7 +37,7 @@ define(["require", "exports", 'knockout'], function (require, exports, ko) {
         var keys = (function () {
             function keys() {
             }
-            keys.userName = 'auth-userName';
+            keys.authObj = 'auth-obj';
             return keys;
         })();
     })(service || (service = {}));

@@ -15,7 +15,7 @@ class viewModel {
     login() {
         if (utils.checkValid(this)) {
             api.account.login(this.userName(), this.password()).then(() => {
-                return utils.redirectToCallbackOrHome();
+                return utils.navigateToCallbackOrHome();
             }).fail(xhr => this.requestFailed(xhr));
         }
     }

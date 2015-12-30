@@ -64,8 +64,12 @@ module service {
             return errors().length == 0;
         }
 
-        redirectToCallbackOrHome() {
+        navigateToCallbackOrHome() {
             return router.navigate(this.urlQuery('returnUrl') || '/');
+        }
+
+        navigateToLogin() {
+            return router.navigate('/account/login');
         }
     }
 }

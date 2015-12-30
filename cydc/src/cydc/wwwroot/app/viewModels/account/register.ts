@@ -47,7 +47,7 @@ class viewModel {
     register() {
         if (utils.checkValid(this)) {
             return api.account.register(this.email(), this.username(), this.password(), this.confirmedPassword()).then(() => {
-                utils.redirectToCallbackOrHome();
+                utils.navigateToCallbackOrHome();
             }).fail(xhr => this.requestFailed(xhr));
         }
     }

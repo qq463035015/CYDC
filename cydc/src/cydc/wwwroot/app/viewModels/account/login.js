@@ -12,7 +12,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             var _this = this;
             if (utils.checkValid(this)) {
                 api.account.login(this.userName(), this.password()).then(function () {
-                    return utils.redirectToCallbackOrHome();
+                    return utils.navigateToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };

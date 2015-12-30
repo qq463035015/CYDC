@@ -122,6 +122,11 @@ namespace cydc.Controllers
             return Json(result == null);
         }
 
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         public ActionResult Hide()
         {
             return Content("这是一个隐藏的资源");
@@ -138,11 +143,6 @@ namespace cydc.Controllers
             if (user != null) return user;
 
             return null;
-        }
-
-        public async void ExitSign()
-        {
-            await _signInManager.SignOutAsync();
         }
     }
 }

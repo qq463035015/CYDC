@@ -35,8 +35,11 @@ define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router']
                 errors.showAllMessages();
                 return errors().length == 0;
             };
-            utils.prototype.redirectToCallbackOrHome = function () {
+            utils.prototype.navigateToCallbackOrHome = function () {
                 return router.navigate(this.urlQuery('returnUrl') || '/');
+            };
+            utils.prototype.navigateToLogin = function () {
+                return router.navigate('/account/login');
             };
             return utils;
         })();

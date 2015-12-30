@@ -19,7 +19,7 @@ class viewModel {
         if (utils.checkValid(this)) {
             api.account.changePassword(this.password(), this.newPassword(), this.confirmedPassword()).then(() => {
                 alert('密码修改成功。');
-                utils.redirectToCallbackOrHome();
+                utils.navigateToCallbackOrHome();
             }).fail(xhr => this.requestFailed(xhr));
         }
     }

@@ -129,6 +129,11 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                     confirmedPassword: confirmedPassword
                 });
             };
+            account.prototype.logout = function () {
+                return http.post('/api/account/logout', null).then(function () {
+                    auth.onLogout();
+                });
+            };
             account.prototype.checkUserName = function (userName) {
                 return http.get('/api/account/checkUserName', { username: userName });
             };

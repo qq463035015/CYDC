@@ -2,11 +2,13 @@
 import composition = require('durandal/composition');
 import ko = require('knockout');
 import auth = require('service/auth');
+import api = require('service/api');
+import utils = require('service/utils');
 
 class viewModel {
     router = router;
 
-    userName = ko.pureComputed(() => auth.userName());
+    auth = auth;
 
     activate() {
         router.makeRelative({ moduleId: 'viewModels' });
@@ -23,6 +25,12 @@ class viewModel {
         ]).mapUnknownRoutes('error/404').buildNavigationModel();
         return router.activate({ pushState: true, root: '/'});
     };
+
+    logout() {
+        api.account.logout().then(() => {
+            utils.navigateToLogin();
+        });
+    }
 }
 
 export = new viewModel();

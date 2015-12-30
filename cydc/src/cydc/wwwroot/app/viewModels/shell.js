@@ -1,8 +1,8 @@
-define(["require", "exports", 'plugins/router', 'knockout', 'service/auth'], function (require, exports, router, ko, auth) {
+define(["require", "exports", 'plugins/router', 'service/auth', 'service/api', 'service/utils'], function (require, exports, router, auth, api, utils) {
     var viewModel = (function () {
         function viewModel() {
             this.router = router;
-            this.userName = ko.pureComputed(function () { return auth.userName(); });
+            this.auth = auth;
         }
         viewModel.prototype.activate = function () {
             router.makeRelative({ moduleId: 'viewModels' });
@@ -20,6 +20,11 @@ define(["require", "exports", 'plugins/router', 'knockout', 'service/auth'], fun
             return router.activate({ pushState: true, root: '/' });
         };
         ;
+        viewModel.prototype.logout = function () {
+            api.account.logout().then(function () {
+                utils.navigateToLogin();
+            });
+        };
         return viewModel;
     })();
     return new viewModel();

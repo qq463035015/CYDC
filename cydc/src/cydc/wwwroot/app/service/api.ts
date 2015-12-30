@@ -141,7 +141,12 @@ module service {
                 confirmedPassword: confirmedPassword
             });
         }
-
+        
+        logout() {
+            return http.post('/api/account/logout', null).then(() => {
+                auth.onLogout();
+            });
+        }
 
         checkUserName(userName: string) {
             return http.get('/api/account/checkUserName', { username: userName });
