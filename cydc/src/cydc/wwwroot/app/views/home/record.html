@@ -1,11 +1,11 @@
 ﻿<div class="container">
     <div class="row">
         <div class="form-group col-sm-6">
-            <input type="date" class="form-control col-md-1" jquery-validation="true" />
+            <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
         </div>
         <div class="col-sm-8">
             <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+                <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
         <div class="col-sm-9 clearfix mt-15">
@@ -20,17 +20,17 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <span>显示行数</span>
-                <select size="1">
-                    <option>12</option>
-                    <option>50</option>
-                    <option>100</option>
+                <select size="1" data-bind="value:pageSize">
+                    <option value="12">12</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
                 </select>
             </div>
         </div>
         <div class="col-sm-21">
             <div class="checkbox mt-22">
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" data-bind="checked:onlyMe">
                     <span>只显示个人</span>
                 </label>
             </div>
@@ -50,102 +50,14 @@
                             <th><b>金额</b></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-bind="foreach:items">
                         <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
-                        </tr>
-                        <tr>
-                            <td>NICE</td>
-                            <td>2015-10-25</td>
-                            <td>This is the amazing new Gadget Alpha.</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>Gadget Foxtrot</td>
-                            <td>$0.99</td>
+                            <td data-bind="text:orderUserId"></td>
+                            <td data-bind="text:orderTime"></td>
+                            <td data-bind="text:foodMenu.title"></td>
+                            <td data-bind="text:taste.name"></td>
+                            <td data-bind="text:comment"></td>
+                            <td data-bind="text:foodMenu.price"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -155,12 +67,12 @@
     <div class="row">
         <div class="col-sm-24">
             <div class="pull-left paginaton">
-                当前第<span class="cl-blue">1</span>页
+                当前第<span class="cl-blue" data-bind="text:pageNumber"></span>页
                 总共<span class="cl-blue">12</span>页
             </div>
             <div class="pull-right">
-                <a href="#">上一页</a>
-                <a href="#">下一页</a>
+                <a href="#" data-bind="click:hasPrev()&&loadPrevPage">上一页</a>
+                <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
             </div>
         </div>
     </div>

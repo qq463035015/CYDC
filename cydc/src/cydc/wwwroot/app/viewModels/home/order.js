@@ -28,4 +28,3 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
     })(pager);
     return new viewModel();
 });
-//# sourceMappingURL=order.js.map

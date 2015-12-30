@@ -15,12 +15,12 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<object> HistoryList(FoodOrderQuery query)
+        public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = DbContext.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time.Value);
+                data = data.Where(x => FormatDateTime(x.OrderTime) == FormatDateTime(query.Time));
             }
             if (query.OnlyMe)
             {
@@ -34,11 +34,10 @@ namespace cydc.Controllers
             IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time.Value);
+                data = data.Where(x => FormatDateTime(x.OrderTime) == FormatDateTime(query.Time));
             }
             if (query.UserName != null)
             {
-
                 data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserName());
             }
             return await data.CreatePagedList(query);
@@ -47,7 +46,7 @@ namespace cydc.Controllers
         public async Task<int> Create([FromBody] FoodOrder order)
         {
             order.OrderUserId = "2";
-            order.OrderTime = DateTime.Now;
+            order.OrderTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
             DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
@@ -57,6 +56,11 @@ namespace cydc.Controllers
         {
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
+        }
+
+        public string FormatDateTime(DateTime? dt)
+        {
+            return dt?.ToString("yyyy-MM-dd");
         }
     }
 }
