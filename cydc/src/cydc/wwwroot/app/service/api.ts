@@ -130,6 +130,14 @@ module service {
                 confirmedPassword: confirmedPassword
             });
         }
+
+        checkUserName(userName: string) {
+            return http.get('/api/account/checkUserName', { username: userName });
+        }
+
+        checkEmail(email: string) {
+            return http.get('/api/account/checkEmail', { email: email });
+        }
     }
 }
 

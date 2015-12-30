@@ -15,12 +15,13 @@ class viewModel {
     login() {
         if (utils.checkValid(this)) {
             api.account.login(this.userName(), this.password()).then(() => {
-                utils.redirectToCallbackOrHome();
+                return utils.redirectToCallbackOrHome();
             }).fail(xhr => this.requestFailed(xhr));
         }
     }
 
     requestFailed(xhr: XMLHttpRequest) {
+        console.log('why', xhr);
         if (xhr.status == 400) {
             alert('用户名或密码错误！');
         } else {

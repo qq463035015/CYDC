@@ -36,7 +36,7 @@ define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router']
                 return errors().length == 0;
             };
             utils.prototype.redirectToCallbackOrHome = function () {
-                router.navigate(this.urlQuery('returnUrl') || '/');
+                return router.navigate(this.urlQuery('returnUrl') || '/');
             };
             return utils;
         })();

@@ -6,17 +6,33 @@ import utils = require('service/utils');
 class viewModel {
     email = ko.observable<string>().extend({
         email: true,
-        required: true
+        required: true,
+        validation: [
+            {
+                async: true,
+                validator: (val: string, newval: string, callback: (boolean) => void) => {
+                    return api.account.checkEmail(val)
+                        .then(result => callback(result));
+                },
+                message: '此字段有重复'
+            }
+        ]
     });
     username = ko.observable<string>().extend({
         minLength: 2,
         required: true,
         validation: [
             {
-                validator(characters: string) {
-                    return characters.split("").every(c => 19968 <= c.charCodeAt(0) && c.charCodeAt(0) <= 40908);
-                }, 
+                validator: (characters: string) => /^[\u4e00-\u9fcc]+$/g.test(characters),
                 message: '必须输入中文'
+            },
+            {
+                async: true,
+                validator: (val: string, newval: string, callback: (boolean) => void) => {
+                    return api.account.checkUserName(val)
+                        .then(result => callback(result));
+                },
+                message: '此字段有重复'
             }
         ]
     });
@@ -25,6 +41,7 @@ class viewModel {
         required: true
     });
     confirmedPassword = ko.observable<string>().extend({
+        equal: this.password
     });
 
     register() {

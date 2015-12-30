@@ -84,7 +84,6 @@ define(['jquery', 'knockout'], function ($, ko) {
                 data: this.toJSON(data),
                 type: 'PUT',
                 contentType: 'application/json',
-                dataType: 'json',
                 headers: ko.toJS(headers)
             });
         },
@@ -102,7 +101,6 @@ define(['jquery', 'knockout'], function ($, ko) {
                 data: this.toJSON(data),
                 type: 'POST',
                 contentType: 'application/json',
-                dataType: 'json',
                 headers: ko.toJS(headers)
             });
         },

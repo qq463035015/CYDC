@@ -12,11 +12,12 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             var _this = this;
             if (utils.checkValid(this)) {
                 api.account.login(this.userName(), this.password()).then(function () {
-                    utils.redirectToCallbackOrHome();
+                    return utils.redirectToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };
         viewModel.prototype.requestFailed = function (xhr) {
+            console.log('why', xhr);
             if (xhr.status == 400) {
                 alert('用户名或密码错误！');
             }

@@ -47,9 +47,19 @@ namespace cydc
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>(o =>
+            {
+                o.Password.RequireDigit = false;
+                o.Password.RequiredLength = 6;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireNonLetterOrDigit = false;
+                o.Password.RequireUppercase = false;
+
+                o.User.RequireUniqueEmail = true;
+                o.User.AllowedUserNameCharacters = null;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddMvc().AddJsonOptions(options =>
             {

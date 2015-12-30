@@ -3,17 +3,33 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
         function viewModel() {
             this.email = ko.observable().extend({
                 email: true,
-                required: true
+                required: true,
+                validation: [
+                    {
+                        async: true,
+                        validator: function (val, newval, callback) {
+                            return api.account.checkEmail(val)
+                                .then(function (result) { return callback(result); });
+                        },
+                        message: '此字段有重复'
+                    }
+                ]
             });
             this.username = ko.observable().extend({
                 minLength: 2,
                 required: true,
                 validation: [
                     {
-                        validator: function (characters) {
-                            return characters.split("").every(function (c) { return 19968 <= c.charCodeAt(0) && c.charCodeAt(0) <= 40908; });
-                        },
+                        validator: function (characters) { return /^[\u4e00-\u9fcc]+$/g.test(characters); },
                         message: '必须输入中文'
+                    },
+                    {
+                        async: true,
+                        validator: function (val, newval, callback) {
+                            return api.account.checkUserName(val)
+                                .then(function (result) { return callback(result); });
+                        },
+                        message: '此字段有重复'
                     }
                 ]
             });
@@ -21,7 +37,9 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
                 minLength: 6,
                 required: true
             });
-            this.confirmedPassword = ko.observable().extend({});
+            this.confirmedPassword = ko.observable().extend({
+                equal: this.password
+            });
         }
         viewModel.prototype.register = function () {
             var _this = this;

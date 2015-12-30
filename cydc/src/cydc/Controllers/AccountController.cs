@@ -41,13 +41,58 @@ namespace cydc.Controllers
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
             var user = await TryFindUserByNameOrEmail(dto.UserName);
-            if (user == null) return new HttpStatusCodeResult(401);
+            if (user == null) return HttpBadRequest("CANNOT_FIND_THE_USER");
 
             var passwordOk = await _userManager.CheckPasswordAsync(user, dto.Password);
-            if (!passwordOk) return new HttpStatusCodeResult((int)HttpStatusCode.Forbidden);
+            if (!passwordOk) return HttpBadRequest("PASSWORD_NOT_OK");
 
             await _signInManager.SignInAsync(user, dto.RememberMe);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> Register([FromBody] RegisterDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = dto.UserName, 
+                    Email = dto.Email
+                }, dto.Password);
+                
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return HttpBadRequest(result.Errors);
+                }
+            }
+            else
+            {
+                return HttpBadRequest(ModelState);
+            }
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> CheckUserName(string username)
+        {
+            var result = await _userManager.FindByNameAsync(username);
+            return Json(result == null);
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> CheckEmail(string email)
+        {
+            var result = await _userManager.FindByEmailAsync(email);
+            return Json(result == null);
+        }
+
+        public ActionResult Hide()
+        {
+            return Content("这是一个隐藏的资源");
         }
 
         private async Task<ApplicationUser> TryFindUserByNameOrEmail(string userNameOrEmail)

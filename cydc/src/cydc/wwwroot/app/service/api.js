@@ -120,6 +120,12 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
                     confirmedPassword: confirmedPassword
                 });
             };
+            account.prototype.checkUserName = function (userName) {
+                return http.get('/api/account/checkUserName', { username: userName });
+            };
+            account.prototype.checkEmail = function (email) {
+                return http.get('/api/account/checkEmail', { email: email });
+            };
             return account;
         })();
     })(service || (service = {}));
