@@ -49,7 +49,10 @@ namespace cydc.Controllers
                 if (!passwordOk) return HttpBadRequest("PASSWORD_NOT_OK");
 
                 await _signInManager.SignInAsync(user, dto.RememberMe);
-                return Ok();
+                return Json(new
+                {
+                    UserName = user.UserName
+                });
             }
             else
             {

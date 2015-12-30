@@ -1,4 +1,5 @@
 ﻿import http = require('plugins/http');
+import auth = require('service/auth');
 
 module service {
     export class api {
@@ -119,7 +120,9 @@ module service {
 
     class account {
         login(userName: string, password: string) {
-            return http.post('/api/account/login', { userName: userName, password: password });
+            return http.post('/api/account/login', { userName: userName, password: password }).then((ctx) => {
+                auth.onLogin(ctx);
+            });
         }
 
         register(email: string, username: string, password: string, confirmedPassword: string) {

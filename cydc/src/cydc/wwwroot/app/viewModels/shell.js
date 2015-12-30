@@ -1,7 +1,8 @@
-define(["require", "exports", 'plugins/router'], function (require, exports, router) {
+define(["require", "exports", 'plugins/router', 'knockout', 'service/auth'], function (require, exports, router, ko, auth) {
     var viewModel = (function () {
         function viewModel() {
             this.router = router;
+            this.userName = ko.pureComputed(function () { return auth.userName(); });
         }
         viewModel.prototype.activate = function () {
             router.makeRelative({ moduleId: 'viewModels' });

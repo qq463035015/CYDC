@@ -1,4 +1,4 @@
-define(["require", "exports", 'plugins/http'], function (require, exports, http) {
+define(["require", "exports", 'plugins/http', 'service/auth'], function (require, exports, http, auth) {
     var service;
     (function (service) {
         var api = (function () {
@@ -110,7 +110,9 @@ define(["require", "exports", 'plugins/http'], function (require, exports, http)
             function account() {
             }
             account.prototype.login = function (userName, password) {
-                return http.post('/api/account/login', { userName: userName, password: password });
+                return http.post('/api/account/login', { userName: userName, password: password }).then(function (ctx) {
+                    auth.onLogin(ctx);
+                });
             };
             account.prototype.register = function (email, username, password, confirmedPassword) {
                 return http.post('/api/account/register', {

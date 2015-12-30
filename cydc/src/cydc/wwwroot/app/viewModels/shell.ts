@@ -1,9 +1,13 @@
 ﻿import router = require('plugins/router');
 import composition = require('durandal/composition');
 import ko = require('knockout');
+import auth = require('service/auth');
 
 class viewModel {
     router = router;
+
+    userName = ko.pureComputed(() => auth.userName());
+
     activate() {
         router.makeRelative({ moduleId: 'viewModels' });
         router.map([

@@ -12,16 +12,27 @@
         transitions: '/lib/durandal/transitions',
         "knockout.validation": '/lib/knockout.validation',
         kovalcn: '/lib/knockout.validation.zh-CN',
+        signalr: '/lib/jquery.signalR',
 
         main: 'main'
     }, 
     shim: {
         bootstrap: {
             deps: ['jquery']
+        }, 
+        signalr: {
+            deps: ['jquery']
         }
     }
 });
 
-require(['knockout.validation', 'kovalcn', 'main', 'knockout', 'jquery', 'bootstrap', ], (koval: KnockoutValidationStatic) => {
+require([
+    'knockout.validation',
+    'kovalcn',
+    'main',
+    'knockout',
+    'jquery',
+    'bootstrap',
+    'signalr'], (koval: KnockoutValidationStatic) => {
     koval.locale('zh-CN');
 });
