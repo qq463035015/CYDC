@@ -20,7 +20,7 @@ namespace cydc.Controllers
             IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
             if (query.Time != null)
             {
-                data = data.Where(x => FormatDateTime(x.OrderTime) == FormatDateTime(query.Time));
+                data = data.Where(x => x.OrderTime == query.Time);
             }
             if (query.OnlyMe)
             {
@@ -34,7 +34,7 @@ namespace cydc.Controllers
             IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
             if (query.Time != null)
             {
-                data = data.Where(x => FormatDateTime(x.OrderTime) == FormatDateTime(query.Time));
+                data = data.Where(x => x.OrderTime == query.Time);
             }
             if (query.UserName != null)
             {
@@ -56,11 +56,6 @@ namespace cydc.Controllers
         {
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
-        }
-
-        public string FormatDateTime(DateTime? dt)
-        {
-            return dt?.ToString("yyyy-MM-dd");
         }
     }
 }
