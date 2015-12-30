@@ -131,6 +131,15 @@ module service {
             });
         }
 
+        changePassword(password: string, newPassword: string, confirmedPassword: string) {
+            return http.post('/api/account/changePassword', {
+                password: password,
+                newPassword: newPassword,
+                confirmedPassword: confirmedPassword
+            });
+        }
+
+
         checkUserName(userName: string) {
             return http.get('/api/account/checkUserName', { username: userName });
         }

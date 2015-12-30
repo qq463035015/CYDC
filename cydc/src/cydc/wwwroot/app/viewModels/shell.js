@@ -14,7 +14,7 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
                 { route: 'home/order', moduleId: 'home/order', title: '点餐列表', nav: true },
                 { route: 'account/login', moduleId: 'account/login', title: '登录', nav: true },
                 { route: 'account/register', moduleId: 'account/register', title: '注册', nav: false },
-                { route: 'account/forgotPassword', moduleId: 'account/forgotPassword', title: '忘记密码', nav: false }
+                { route: 'account/changePassword', moduleId: 'account/changePassword', title: '修改密码', nav: false }
             ]).mapUnknownRoutes('error/404').buildNavigationModel();
             return router.activate({ pushState: true, root: '/' });
         };
@@ -23,4 +23,3 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
     })();
     return new viewModel();
 });
-//# sourceMappingURL=shell.js.map

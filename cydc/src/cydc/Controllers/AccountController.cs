@@ -40,14 +40,21 @@ namespace cydc.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await TryFindUserByNameOrEmail(dto.UserName);
-            if (user == null) return HttpBadRequest("CANNOT_FIND_THE_USER");
+            if (ModelState.IsValid)
+            {
+                var user = await TryFindUserByNameOrEmail(dto.UserName);
+                if (user == null) return HttpBadRequest("CANNOT_FIND_THE_USER");
 
-            var passwordOk = await _userManager.CheckPasswordAsync(user, dto.Password);
-            if (!passwordOk) return HttpBadRequest("PASSWORD_NOT_OK");
+                var passwordOk = await _userManager.CheckPasswordAsync(user, dto.Password);
+                if (!passwordOk) return HttpBadRequest("PASSWORD_NOT_OK");
 
-            await _signInManager.SignInAsync(user, dto.RememberMe);
-            return Ok();
+                await _signInManager.SignInAsync(user, dto.RememberMe);
+                return Ok();
+            }
+            else
+            {
+                return HttpBadRequest(ModelState);
+            }
         }
 
         [AllowAnonymous]
@@ -57,10 +64,10 @@ namespace cydc.Controllers
             {
                 var result = await _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = dto.UserName, 
+                    UserName = dto.UserName,
                     Email = dto.Email
                 }, dto.Password);
-                
+
                 if (result.Succeeded)
                 {
                     return Ok();
@@ -68,6 +75,28 @@ namespace cydc.Controllers
                 else
                 {
                     return HttpBadRequest(result.Errors);
+                }
+            }
+            else
+            {
+                return HttpBadRequest(ModelState);
+            }
+        }
+
+        public async Task<ActionResult> ChangePassword([FromBody]ChangePasswordDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(User.GetUserId());
+                var ok = await _userManager.ChangePasswordAsync(user, dto.Password, dto.NewPassword);
+
+                if (ok.Succeeded)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return HttpBadRequest(ok.Errors);
                 }
             }
             else
