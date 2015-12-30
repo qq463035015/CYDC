@@ -139,5 +139,10 @@ namespace cydc.Controllers
 
             return null;
         }
+
+        public async void ExitSign()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }
