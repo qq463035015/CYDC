@@ -23,7 +23,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
             var _this = this;
             api.menu.enableList().then(function (data) {
                 _this.allMenu(data);
-                _this.menuTypeId(data[0].id);
+                _this.menuTypeId(data[0] && data[0].id);
             });
             api.type.tasteTypeDDl().then(function (data) { return _this.allFoodType(data); });
             api.location.locationDDl().then(function (data) { return _this.allLocation(data); });
@@ -69,4 +69,3 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
     })();
     return new viewModel();
 });
-//# sourceMappingURL=index.js.map
