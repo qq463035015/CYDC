@@ -22,9 +22,12 @@
                 <!-- ko if: authed -->
                 <div class="pull-right"><a class="text-warning" href="#" data-bind="click: $parent.logout.bind($parent)">退出登录</a></div>
                 <div class="pull-right">&nbsp;&nbsp;</div>
+                <div class="pull-right"><a href="/account/changePassword">修改密码</a></div>
+                <div class="pull-right">&nbsp;&nbsp;</div>
                 <div class="pull-right">你好，<span class="cl-blue" data-bind="text: userName"></span></div>
+                
+                
                 <!-- /ko -->
-
                 <!-- ko ifnot: authed -->
                 <div class="pull-right"><a class="text-warning" href="/account/login">请登录</a></div>
                 <!-- /ko -->
