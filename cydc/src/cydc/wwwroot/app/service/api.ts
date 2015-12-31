@@ -9,6 +9,13 @@ module service {
         notice = new siteNotice();
         order = new foodOrder();
         account = new account();
+        clientInfo = new foodOrderClientInfo();
+    }
+
+    class foodOrderClientInfo {
+        create() {
+            return http.post('/api/foodOrderClentInfo/create', null);
+        }
     }
 
     class foodOrder {
@@ -141,7 +148,7 @@ module service {
                 confirmedPassword: confirmedPassword
             });
         }
-        
+
         logout() {
             return http.post('/api/account/logout', null).then(() => {
                 auth.onLogout();

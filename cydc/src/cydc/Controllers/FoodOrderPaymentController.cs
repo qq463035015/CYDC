@@ -12,20 +12,15 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<object> List(FoodOrderPaymentQuery query)
+        public async Task<object> List([FromBody] FoodOrderPaymentQuery query)
         {
             return await DbContext.FoodOrderPayments.CreatePagedList(query);
         }
 
-        public async Task<object> Add()
+        public async Task<object> Create([FromBody] FoodOrderPayment payment)
         {
-            
-            FoodOrderPayment foodOrserPayment = new FoodOrderPayment
-            {
-                PayedTime = DateTime.Now
-            };
-
-            DbContext.Add(foodOrserPayment);
+            payment.PayedTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            DbContext.Add(payment);
             return await DbContext.SaveChangesAsync();
         }
     }

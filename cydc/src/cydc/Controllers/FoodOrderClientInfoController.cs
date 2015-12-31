@@ -4,6 +4,7 @@ using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace cydc.Controllers
@@ -13,14 +14,12 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<int> Add()
+        public async Task<int> Create([FromBody] FoodOrderClientInfo client)
         {
-            FoodOrderClientInfo foodOrderClientInfo = new FoodOrderClientInfo
-            {
-                UserAgent = Request.Headers["User-Agent"]
-            };
-            DbContext.Add(foodOrderClientInfo);
+            client.IP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[3].ToString();
+            client.UserAgent = Request.Headers["User-Agent"];
+            DbContext.Add(client);
             return await DbContext.SaveChangesAsync();
         }
     }
-}
+} 

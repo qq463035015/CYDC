@@ -47,7 +47,6 @@ namespace cydc.Controllers
         {
             order.OrderUserId = "2";
             order.OrderTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
             DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
         }
