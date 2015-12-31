@@ -66,8 +66,8 @@ module service {
             return http.post('/api/tasteType/list', query);
         }
 
-        tasteTypeDDl(query?: baseQuery) {
-            return http.post('/api/tasteType/TasteTypeDDl', query);
+        tasteTypeDropdownList(query?: baseQuery) {
+            return http.post('/api/tasteType/tasteTypeDropdownList', query);
         }
 
         delete(id: number) {
@@ -84,8 +84,8 @@ module service {
             return http.post('/api/location/list', query);
         }
 
-        locationDDl(query?: baseQuery) {
-            return http.post('/api/location/locationDDl', query);
+        locationDropdownList(query?: baseQuery) {
+            return http.post('/api/location/locationDropdownList', query);
         }
 
         delete(id: number) {

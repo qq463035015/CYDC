@@ -28,8 +28,8 @@ class viewModel {
             this.allMenu(data);
             this.menuTypeId(data[0] && data[0].id)
         });
-        api.type.tasteTypeDDl().then(data=> this.allFoodType(data));
-        api.location.locationDDl().then(data=> this.allLocation(data));
+        api.type.tasteTypeDropdownList().then(data=> this.allFoodType(data));
+        api.location.locationDropdownList().then(data=> this.allLocation(data));
     }
 
     constructor() {

@@ -67,8 +67,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             tasteType.prototype.list = function (query) {
                 return http.post('/api/tasteType/list', query);
             };
-            tasteType.prototype.tasteTypeDDl = function (query) {
-                return http.post('/api/tasteType/TasteTypeDDl', query);
+            tasteType.prototype.tasteTypeDropdownlist = function (query) {
+                return http.post('/api/tasteType/TasteTypeDdl', query);
             };
             tasteType.prototype.delete = function (id) {
                 return http.post('/api/tasteType/delete', { id: id });
@@ -84,8 +84,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             location.prototype.list = function (query) {
                 return http.post('/api/location/list', query);
             };
-            location.prototype.locationDDl = function (query) {
-                return http.post('/api/location/locationDDl', query);
+            location.prototype.locationDropdownlist = function (query) {
+                return http.post('/api/location/locationDdl', query);
             };
             location.prototype.delete = function (id) {
                 return http.post('/api/location/delete', { id: id });

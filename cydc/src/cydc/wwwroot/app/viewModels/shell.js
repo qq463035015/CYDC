@@ -13,7 +13,7 @@ define(["require", "exports", 'plugins/router', 'service/auth', 'service/api', '
                 { route: 'home/menu', moduleId: 'home/menu', title: '菜谱管理', nav: true, hasChildRoutes: true },
                 { route: 'home/bill', moduleId: 'home/bill', title: '账单管理', nav: true },
                 { route: 'home/order', moduleId: 'home/order', title: '点餐列表', nav: true },
-                { route: 'account/login', moduleId: 'account/login', title: '登录', nav: true },
+                { route: 'account/login', moduleId: 'account/login', title: '登录', nav: false },
                 { route: 'account/register', moduleId: 'account/register', title: '注册', nav: false },
                 { route: 'account/changePassword', moduleId: 'account/changePassword', title: '修改密码', nav: false }
             ]).mapUnknownRoutes('error/404').buildNavigationModel();

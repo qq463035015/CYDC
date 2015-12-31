@@ -25,8 +25,8 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
                 _this.allMenu(data);
                 _this.menuTypeId(data[0] && data[0].id);
             });
-            api.type.tasteTypeDDl().then(function (data) { return _this.allFoodType(data); });
-            api.location.locationDDl().then(function (data) { return _this.allLocation(data); });
+            api.type.tasteTypeDropdownList().then(function (data) { return _this.allFoodType(data); });
+            api.location.locationDropdownList().then(function (data) { return _this.allLocation(data); });
         };
         viewModel.prototype.idName = function (arr, id) {
             return ko.utils.arrayFilter(arr, function (item) {
