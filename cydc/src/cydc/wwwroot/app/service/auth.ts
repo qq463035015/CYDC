@@ -23,7 +23,7 @@ module service {
         }
 
         private loadState() {
-            let obj = <authObj>JSON.parse(localStorage.getItem(keys.authObj));
+            let obj = <authObj>JSON.parse(sessionStorage.getItem(keys.authObj));
             if (obj != null) {
                 this.userName(obj.userName);
                 this.authed(obj.authed);
@@ -35,7 +35,7 @@ module service {
                 authed: this.authed(), 
                 userName: this.userName()
             };
-            localStorage.setItem(keys.authObj, JSON.stringify(obj));
+            sessionStorage.setItem(keys.authObj, JSON.stringify(obj));
         }
     }
 

@@ -139,7 +139,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 });
             };
             account.prototype.logout = function () {
-                return http.post('/api/account/logout', null).then(function () {
+                return http.post('/api/account/logout', null).always(function () {
                     auth.onLogout();
                 });
             };
