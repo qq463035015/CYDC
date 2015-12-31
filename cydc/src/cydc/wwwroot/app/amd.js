@@ -13,6 +13,7 @@ require.config({
         "knockout.validation": '/lib/knockout.validation',
         kovalcn: '/lib/knockout.validation.zh-CN',
         signalr: '/lib/jquery.signalR',
+        moment: '/lib/moment',
         main: 'main'
     },
     shim: {

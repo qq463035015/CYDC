@@ -3,6 +3,7 @@ import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
 import pager = require('service/pager');
+import ko_bindings = require('service/ko_bindings');
 
 class viewModel extends pager<idName> {
     queryTime = ko.observable();
@@ -10,7 +11,7 @@ class viewModel extends pager<idName> {
 
     constructor() {
         super('/api/foodOrder/list');
-        window['vm'] = this;
+        ko_bindings.fuck();
         this.loadData();
     }
 

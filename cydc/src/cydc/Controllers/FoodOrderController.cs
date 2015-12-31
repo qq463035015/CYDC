@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
 
 namespace cydc.Controllers
 {
@@ -31,22 +32,26 @@ namespace cydc.Controllers
 
         public async Task<object> List([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
+            IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .Include(x => x.FoodMenu)
+                .Include(x => x.Location)
+                .Include(x => x.Taste);
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time);
             }
             if (query.UserName != null)
             {
-                data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserName());
+                data = data.Where(x => x.OrderUser.UserName == User.GetUserName());
             }
             return await data.CreatePagedList(query);
         }
 
+        [Authorize]
         public async Task<int> Create([FromBody] FoodOrder order)
         {
-            order.OrderUserId = "2";
-            order.OrderTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            order.OrderUserId = User.GetUserId();
+            order.OrderTime = DateTime.Now;
             DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
         }

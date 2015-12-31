@@ -65,6 +65,7 @@ namespace cydc
             {
                 options.SerializerSettings.ContractResolver = new
                     CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
             // Add application services.
