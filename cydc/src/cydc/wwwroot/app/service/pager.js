@@ -60,4 +60,3 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
     })(service || (service = {}));
     return service.pager;
 });
-//# sourceMappingURL=pager.js.map
