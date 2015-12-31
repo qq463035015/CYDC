@@ -143,7 +143,7 @@ module service {
         }
         
         logout() {
-            return http.post('/api/account/logout', null).then(() => {
+            return http.post('/api/account/logout', null).always(() => {
                 auth.onLogout();
             });
         }

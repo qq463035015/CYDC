@@ -18,7 +18,7 @@ define(["require", "exports", 'knockout'], function (require, exports, ko) {
                 this.saveState();
             };
             auth.prototype.loadState = function () {
-                var obj = JSON.parse(localStorage.getItem(keys.authObj));
+                var obj = JSON.parse(sessionStorage.getItem(keys.authObj));
                 if (obj != null) {
                     this.userName(obj.userName);
                     this.authed(obj.authed);
@@ -29,7 +29,7 @@ define(["require", "exports", 'knockout'], function (require, exports, ko) {
                     authed: this.authed(),
                     userName: this.userName()
                 };
-                localStorage.setItem(keys.authObj, JSON.stringify(obj));
+                sessionStorage.setItem(keys.authObj, JSON.stringify(obj));
             };
             return auth;
         })();

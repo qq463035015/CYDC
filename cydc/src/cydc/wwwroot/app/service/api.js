@@ -67,8 +67,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             tasteType.prototype.list = function (query) {
                 return http.post('/api/tasteType/list', query);
             };
-            tasteType.prototype.tasteTypeDropdownlist = function (query) {
-                return http.post('/api/tasteType/TasteTypeDdl', query);
+            tasteType.prototype.tasteTypeDropdownList = function (query) {
+                return http.post('/api/tasteType/tasteTypeDropdownList', query);
             };
             tasteType.prototype.delete = function (id) {
                 return http.post('/api/tasteType/delete', { id: id });
@@ -84,8 +84,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             location.prototype.list = function (query) {
                 return http.post('/api/location/list', query);
             };
-            location.prototype.locationDropdownlist = function (query) {
-                return http.post('/api/location/locationDdl', query);
+            location.prototype.locationDropdownList = function (query) {
+                return http.post('/api/location/locationDropdownList', query);
             };
             location.prototype.delete = function (id) {
                 return http.post('/api/location/delete', { id: id });
@@ -130,7 +130,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 });
             };
             account.prototype.logout = function () {
-                return http.post('/api/account/logout', null).then(function () {
+                return http.post('/api/account/logout', null).always(function () {
                     auth.onLogout();
                 });
             };
