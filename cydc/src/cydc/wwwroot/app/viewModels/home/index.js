@@ -1,4 +1,4 @@
-define(["require", "exports", 'service/api', 'knockout', 'service/utils'], function (require, exports, api, ko, utils) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/auth'], function (require, exports, api, ko, utils, auth) {
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -44,15 +44,21 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
         };
         viewModel.prototype.commitOrder = function () {
             var _this = this;
-            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
-                $('#modal-sample').modal('hide');
-                utils.confirm('', '点餐成功！').then(function (cs) {
-                    cs.close();
-                }).then(function () {
-                    _this.loadData();
-                    _this.comment(null);
+            if (auth.authed()) {
+                api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
+                    $('#modal-sample').modal('hide');
+                    utils.confirm('', '点餐成功！').then(function (cs) {
+                        cs.close();
+                    }).then(function () {
+                        _this.loadData();
+                        _this.comment(null);
+                    });
                 });
-            });
+            }
+            else {
+                console.log("11");
+                utils.navigateToLogin();
+            }
         };
         return viewModel;
     })();

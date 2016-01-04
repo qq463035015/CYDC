@@ -2,7 +2,7 @@
 import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
-
+import auth = require('service/auth');
 
 class viewModel {
     allMenu = ko.observableArray();
@@ -53,15 +53,21 @@ class viewModel {
     }
 
     commitOrder() {
-        api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
-            $('#modal-sample').modal('hide');
-            utils.confirm('', '点餐成功！').then(cs => {
-                cs.close();
-            }).then(() => {
-                this.loadData();
-                this.comment(null);
+        if (auth.authed()) {
+            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
+                $('#modal-sample').modal('hide');
+                utils.confirm('', '点餐成功！').then(cs => {
+                    cs.close();
+                }).then(() => {
+                    this.loadData();
+                    this.comment(null);
+                });
             });
-        });
+        }
+        else {
+            console.log("11");
+            utils.navigateToLogin();
+        }
     }
 }
 
