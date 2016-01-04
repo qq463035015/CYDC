@@ -56,7 +56,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 });
             }
             else {
-                console.log("11");
                 utils.navigateToLogin();
             }
         };

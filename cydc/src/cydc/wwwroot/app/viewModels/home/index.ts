@@ -65,7 +65,6 @@ class viewModel {
             });
         }
         else {
-            console.log("11");
             utils.navigateToLogin();
         }
     }
