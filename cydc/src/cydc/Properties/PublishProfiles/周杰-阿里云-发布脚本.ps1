@@ -28,5 +28,8 @@ dnu publish -o ../../../o
 cd ../../../o
 ls
 
-# 
-# 最后一步，让我再想想。
+# 强制关闭当前正在运行的dnx.exe，通过进程名、IIS应用程序池的身份来识别
+taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
+
+# 部署项目
+"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:contentPath="." -dest:contentPath="C:\state\web\cydc-demo"
