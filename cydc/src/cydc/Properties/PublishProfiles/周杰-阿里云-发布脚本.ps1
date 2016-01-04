@@ -32,4 +32,4 @@ ls
 taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
 
 # 部署项目
-"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:contentPath="." -dest:contentPath="C:\state\web\cydc-demo"
+&"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:contentPath="." -dest:contentPath="C:\state\web\cydc-demo"
