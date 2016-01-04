@@ -17,11 +17,10 @@ dnvm list
 dnvm use 1.0.0-rc1-update1
 
 # 更新库程序包
-ls
+cd cydc/src/cydc
 dnu restore
 
 # 发布至根目录的o文件夹
-cd cydc/src/cydc
 dnu publish -o C:\state\web\cydc-demo
 
 # 列出o文件夹的内容
