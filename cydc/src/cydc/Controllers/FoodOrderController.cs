@@ -54,17 +54,11 @@ namespace cydc.Controllers
             order.OrderUserId = User.GetUserId();
             order.OrderTime = DateTime.Now;
 
-            FoodOrderClientInfo client = new FoodOrderClientInfo
+            order.ClientInfo = new FoodOrderClientInfo
             {
-                IP = "192.168.1.86",
+                IP = Request.Headers["X-Forwarded-For"],
                 UserAgent = Request.Headers["User-Agent"]
             };
-
-            //order.ClientInfo.IP = "192.168.1.86";
-            //order.ClientInfo.UserAgent = Request.Headers["User-Agent"];
-
-            DbContext.Add(client);
-            await DbContext.SaveChangesAsync();
 
             DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
