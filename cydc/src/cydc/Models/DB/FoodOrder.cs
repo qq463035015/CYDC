@@ -35,5 +35,7 @@ namespace cydc.Models
         public TasteType Taste { get; set; }
 
         public FoodOrderClientInfo ClientInfo { get; set; }
+
+        public AccountDetails AccountDetails { get; set; }
     }
 }

@@ -52,8 +52,8 @@
                     </thead>
                     <tbody data-bind="foreach:items">
                         <tr>
-                            <td data-bind="text:orderUserId"></td>
-                            <td data-bind="text:orderTime"></td>
+                            <td data-bind="text:orderUser.userName"></td>
+                            <td data-bind="dateTimeText:orderTime"></td>
                             <td data-bind="text:foodMenu.title"></td>
                             <td data-bind="text:taste.name"></td>
                             <td data-bind="text:comment"></td>

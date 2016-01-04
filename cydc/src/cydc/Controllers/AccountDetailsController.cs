@@ -1,8 +1,10 @@
-﻿using cydc.Models;
+﻿using cydc.Migrations;
+using cydc.Models;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace cydc.Controllers
@@ -22,15 +24,14 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Add(string userId, decimal account)
+        public async Task<int> Create()
         {
-            AccountDetails accountDetail = new AccountDetails
+            AccountDetails accountDetails = new AccountDetails
             {
-                UserId = userId,
-                Amount = account,
+                UserId = User.GetUserId(),
                 CreateTime = DateTime.Now
             };
-            DbContext.Add(accountDetail);
+            DbContext.Add(accountDetails);
             return await DbContext.SaveChangesAsync();
         }
     }

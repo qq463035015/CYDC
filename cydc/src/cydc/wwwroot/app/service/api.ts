@@ -10,6 +10,19 @@ module service {
         order = new foodOrder();
         account = new account();
         clientInfo = new foodOrderClientInfo();
+        user = new user();
+    }
+
+    class user {
+        list() {
+            http.post("", null);
+        }
+    }
+
+    class AccountDetails {
+        create(amount: Number) {
+            return http.post('/api/accountDetails/create', { amount: amount });
+        }
     }
 
     class foodOrderClientInfo {
@@ -22,7 +35,7 @@ module service {
         list(query?: baseQuery) {
             return http.post('/api/foodOrder/list', query);
         }
-        f
+
         create(menuId: Number, orderLocationId: Number, tasteId: Number, comment: string) {
             return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment })
         }
