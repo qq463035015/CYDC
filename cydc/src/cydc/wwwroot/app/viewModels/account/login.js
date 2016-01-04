@@ -17,7 +17,6 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             }
         };
         viewModel.prototype.requestFailed = function (xhr) {
-            console.log('why', xhr);
             if (xhr.status == 400) {
                 alert('用户名或密码错误！');
             }

@@ -14,7 +14,7 @@ module service {
 
     class foodOrderClientInfo {
         create() {
-            return http.post('/api/foodOrderClentInfo/create', null);
+            return http.post('/api/foodOrderClientInfo/create', null);
         }
     }
 
@@ -22,7 +22,7 @@ module service {
         list(query?: baseQuery) {
             return http.post('/api/foodOrder/list', query);
         }
-
+        f
         create(menuId: Number, orderLocationId: Number, tasteId: Number, comment: string) {
             return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment })
         }

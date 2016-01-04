@@ -18,7 +18,7 @@ define(["require", "exports", 'service/api', 'service/utils', 'knockout'], funct
             if (utils.checkValid(this)) {
                 api.account.changePassword(this.password(), this.newPassword(), this.confirmedPassword()).then(function () {
                     alert('密码修改成功。');
-                    utils.redirectToCallbackOrHome();
+                    utils.navigateToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };

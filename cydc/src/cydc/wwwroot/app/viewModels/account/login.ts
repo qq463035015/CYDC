@@ -21,7 +21,6 @@ class viewModel {
     }
 
     requestFailed(xhr: XMLHttpRequest) {
-        console.log('why', xhr);
         if (xhr.status == 400) {
             alert('用户名或密码错误！');
         } else {

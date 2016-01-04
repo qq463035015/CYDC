@@ -11,8 +11,7 @@ class viewModel extends pager<idName>{
     constructor() {
         super('/api/foodOrder/historyList');
         window['vm'] = this;
-        this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
-        this.loadData();
+        this.query();
     }
 
     query() {

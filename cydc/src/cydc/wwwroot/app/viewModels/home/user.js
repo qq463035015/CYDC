@@ -7,4 +7,3 @@ define(["require", "exports", 'service/pager'], function (require, exports, page
     })();
     return new viewModel();
 });
-//# sourceMappingURL=user.js.map

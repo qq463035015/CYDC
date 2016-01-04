@@ -17,7 +17,7 @@ class bindingUtils {
         else
             return time.format("YYYY/MM/DD hh:mm:ss");
     }
-
+    
     fuck() {
     }
 }

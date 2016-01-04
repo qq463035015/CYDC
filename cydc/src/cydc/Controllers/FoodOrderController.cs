@@ -50,8 +50,22 @@ namespace cydc.Controllers
         [Authorize]
         public async Task<int> Create([FromBody] FoodOrder order)
         {
+
             order.OrderUserId = User.GetUserId();
             order.OrderTime = DateTime.Now;
+
+            FoodOrderClientInfo client = new FoodOrderClientInfo
+            {
+                IP = "192.168.1.86",
+                UserAgent = Request.Headers["User-Agent"]
+            };
+
+            //order.ClientInfo.IP = "192.168.1.86";
+            //order.ClientInfo.UserAgent = Request.Headers["User-Agent"];
+
+            DbContext.Add(client);
+            await DbContext.SaveChangesAsync();
+
             DbContext.Add(order);
             return await DbContext.SaveChangesAsync();
         }

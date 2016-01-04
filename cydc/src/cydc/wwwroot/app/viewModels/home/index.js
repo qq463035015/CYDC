@@ -53,7 +53,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils'], funct
                     _this.comment(null);
                 });
             });
-            api.clientInfo.create().then(function () { });
         };
         return viewModel;
     })();

@@ -62,7 +62,6 @@ class viewModel {
                 this.comment(null);
             });
         });
-        api.clientInfo.create().then(() => { });
     }
 }
 

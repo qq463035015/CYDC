@@ -18,7 +18,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             function foodOrderClientInfo() {
             }
             foodOrderClientInfo.prototype.create = function () {
-                return http.post('/api/foodOrderClentInfo/create', null);
+                return http.post('/api/foodOrderClientInfo/create', null);
             };
             return foodOrderClientInfo;
         })();

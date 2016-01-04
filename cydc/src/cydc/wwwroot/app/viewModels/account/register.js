@@ -45,7 +45,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             var _this = this;
             if (utils.checkValid(this)) {
                 return api.account.register(this.email(), this.username(), this.password(), this.confirmedPassword()).then(function () {
-                    utils.redirectToCallbackOrHome();
+                    utils.navigateToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };

@@ -21,7 +21,7 @@ module service {
         constructor() {
             this.loadState();
         }
-
+        
         private loadState() {
             let obj = <authObj>JSON.parse(sessionStorage.getItem(keys.authObj));
             if (obj != null) {
