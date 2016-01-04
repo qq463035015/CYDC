@@ -10,10 +10,27 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 this.order = new foodOrder();
                 this.account = new account();
                 this.clientInfo = new foodOrderClientInfo();
+                this.user = new user();
             }
             return api;
         })();
         service.api = api;
+        var user = (function () {
+            function user() {
+            }
+            user.prototype.list = function () {
+                http.post("", null);
+            };
+            return user;
+        })();
+        var AccountDetails = (function () {
+            function AccountDetails() {
+            }
+            AccountDetails.prototype.create = function (amount) {
+                return http.post('/api/accountDetails/create', { amount: amount });
+            };
+            return AccountDetails;
+        })();
         var foodOrderClientInfo = (function () {
             function foodOrderClientInfo() {
             }
@@ -28,8 +45,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.list = function (query) {
                 return http.post('/api/foodOrder/list', query);
             };
-            foodOrder.prototype.create = function (menuId, orderLocationId, tasteId, comment) {
-                return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment });
+            foodOrder.prototype.create = function (menuId, orderLocationId, tasteId, comment, price) {
+                return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment, price: price, });
             };
             foodOrder.prototype.delete = function (id) {
                 return http.post('/api/foodOrder/delete', { id: id });

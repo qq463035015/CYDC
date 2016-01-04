@@ -18,7 +18,11 @@ namespace cydc.Controllers
 
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = DbContext.FoodOrders.Include(x => x.FoodMenu).Include(x => x.Location).Include(x => x.Taste);
+            IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .Include(x => x.FoodMenu)
+                .Include(x => x.Location)
+                .Include(x => x.Taste)
+                .Include(x => x.OrderUser);
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time);
@@ -35,7 +39,8 @@ namespace cydc.Controllers
             IQueryable<FoodOrder> data = DbContext.FoodOrders
                 .Include(x => x.FoodMenu)
                 .Include(x => x.Location)
-                .Include(x => x.Taste);
+                .Include(x => x.Taste)
+                .Include(x => x.OrderUser);
             if (query.Time != null)
             {
                 data = data.Where(x => x.OrderTime == query.Time);
@@ -50,6 +55,7 @@ namespace cydc.Controllers
         [Authorize]
         public async Task<int> Create([FromBody] FoodOrder order)
         {
+            var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
 
             order.OrderUserId = User.GetUserId();
             order.OrderTime = DateTime.Now;
@@ -58,6 +64,13 @@ namespace cydc.Controllers
             {
                 IP = Request.Headers["X-Forwarded-For"],
                 UserAgent = Request.Headers["User-Agent"]
+            };
+
+            order.AccountDetails = new AccountDetails
+            {
+                UserId = User.GetUserId(),
+                CreateTime = DateTime.Now,
+                Amount = FoodMenuList[0].Price
             };
 
             DbContext.Add(order);
