@@ -1,9 +1,14 @@
 ﻿import pager = require('service/pager');
 
-class viewModel {
+class viewModel extends pager<idName> {
     constructor() {
-        var p = new pager();
+        super("");
     }
+}
+
+interface idName {
+    id: string;
+    name: string;
 }
 
 export = new viewModel();

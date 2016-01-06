@@ -14,14 +14,22 @@ module service {
     }
 
     class user {
-        list() {
+        list(query?: baseQuery) {
             http.post("", null);
         }
     }
 
     class AccountDetails {
-        create(amount: Number) {
-            return http.post('/api/accountDetails/create', { amount: amount });
+        list(query?: baseQuery) {
+            http.post("/api/accountDetails/list", query);
+        }
+
+        select(userName: string) {
+            http.post("/api/accountDetails/list", { userName: userName });
+        }
+
+        create(userId: string, amount: Number) {
+            return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
         }
     }
 

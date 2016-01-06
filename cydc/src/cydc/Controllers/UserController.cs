@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class UserController: CydcBaseController
+    public class UserController : CydcBaseController
     {
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<decimal> Money()
+        public decimal UserSumMoney()
         {
-            return await DbContext.AccountDetails.ToAsyncEnumerable().Where(x => x.UserId == HttpContext.User.GetUserId()).Sum(x => x.Amount);
+            return 1;
+            //return DbContext.AccountDetails.GroupBy(x => x.UserId).Select(y => new { y.Sum(s => s.Amount) });
         }
     }
 }

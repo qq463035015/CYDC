@@ -18,7 +18,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
         var user = (function () {
             function user() {
             }
-            user.prototype.list = function () {
+            user.prototype.list = function (query) {
                 http.post("", null);
             };
             return user;
@@ -26,8 +26,14 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
         var AccountDetails = (function () {
             function AccountDetails() {
             }
-            AccountDetails.prototype.create = function (amount) {
-                return http.post('/api/accountDetails/create', { amount: amount });
+            AccountDetails.prototype.list = function (query) {
+                http.post("/api/accountDetails/list", query);
+            };
+            AccountDetails.prototype.select = function (userName) {
+                http.post("/api/accountDetails/list", { userName: userName });
+            };
+            AccountDetails.prototype.create = function (userId, amount) {
+                return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
             };
             return AccountDetails;
         })();
@@ -45,8 +51,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.list = function (query) {
                 return http.post('/api/foodOrder/list', query);
             };
-            foodOrder.prototype.create = function (menuId, orderLocationId, tasteId, comment, price) {
-                return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment, price: price, });
+            foodOrder.prototype.create = function (menuId, orderLocationId, tasteId, comment) {
+                return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment });
             };
             foodOrder.prototype.delete = function (id) {
                 return http.post('/api/foodOrder/delete', { id: id });
