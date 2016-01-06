@@ -1,14 +1,16 @@
-﻿import pager = require('service/pager');
+﻿import ko = require('knockout');
+import api = require('service/api');
 
-class viewModel extends pager<idName> {
+class viewModel {
+    list = ko.observableArray<Object>();
+    price = ko.observable<Number>();
+
     constructor() {
-        super("");
+        api.user.list().then(data => this.list(data));
     }
-}
 
-interface idName {
-    id: string;
-    name: string;
+    addAmount() {
+    }
 }
 
 export = new viewModel();

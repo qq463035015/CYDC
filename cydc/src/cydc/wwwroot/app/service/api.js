@@ -18,8 +18,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
         var user = (function () {
             function user() {
             }
-            user.prototype.list = function (query) {
-                http.post("", null);
+            user.prototype.list = function () {
+                return http.post("/api/user/list", null);
             };
             return user;
         })();
@@ -27,10 +27,10 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             function AccountDetails() {
             }
             AccountDetails.prototype.list = function (query) {
-                http.post("/api/accountDetails/list", query);
+                return http.post("/api/accountDetails/list", query);
             };
             AccountDetails.prototype.select = function (userName) {
-                http.post("/api/accountDetails/list", { userName: userName });
+                return http.post("/api/accountDetails/list", { userName: userName });
             };
             AccountDetails.prototype.create = function (userId, amount) {
                 return http.post('/api/accountDetails/create', { userId: userId, amount: amount });

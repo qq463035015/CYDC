@@ -1,15 +1,14 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-define(["require", "exports", 'service/pager'], function (require, exports, pager) {
-    var viewModel = (function (_super) {
-        __extends(viewModel, _super);
+define(["require", "exports", 'knockout', 'service/api'], function (require, exports, ko, api) {
+    var viewModel = (function () {
         function viewModel() {
-            _super.call(this, "");
+            var _this = this;
+            this.list = ko.observableArray();
+            this.price = ko.observable();
+            api.user.list().then(function (data) { return _this.list(data); });
         }
+        viewModel.prototype.addAmount = function () {
+        };
         return viewModel;
-    })(pager);
+    })();
     return new viewModel();
 });
