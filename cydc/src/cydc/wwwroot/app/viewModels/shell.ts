@@ -13,7 +13,7 @@ class viewModel {
     activate() {
         router.makeRelative({ moduleId: 'viewModels' });
         router.map([
-            { route: ['', 'home/index'], moduleId: 'home/index', title: '首页', nav: true, }, 
+            { route: ['', 'home/index'], moduleId: 'home/index', title: '首页', nav: true, },
             { route: 'home/record', moduleId: 'home/record', title: '点餐记录', nav: true },
             { route: 'home/user', moduleId: 'home/user', title: '用户管理', nav: true },
             { route: 'home/menu', moduleId: 'home/menu', title: '菜谱管理', nav: true, hasChildRoutes: true },
@@ -23,7 +23,7 @@ class viewModel {
             { route: 'account/register', moduleId: 'account/register', title: '注册', nav: false },
             { route: 'account/changePassword', moduleId: 'account/changePassword', title: '修改密码', nav: false }
         ]).mapUnknownRoutes('error/404').buildNavigationModel();
-        return router.activate({ pushState: true, root: '/'});
+        return router.activate({ pushState: true, root: '/' });
     };
 
     logout() {

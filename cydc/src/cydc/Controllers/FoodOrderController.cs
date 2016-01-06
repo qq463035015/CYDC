@@ -19,6 +19,7 @@ namespace cydc.Controllers
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .OrderByDescending(x => x.OrderTime)
                 .Include(x => x.FoodMenu)
                 .Include(x => x.Location)
                 .Include(x => x.Taste)
@@ -37,6 +38,7 @@ namespace cydc.Controllers
         public async Task<object> List([FromBody] FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .OrderByDescending(x => x.OrderTime)
                 .Include(x => x.FoodMenu)
                 .Include(x => x.Location)
                 .Include(x => x.Taste)
@@ -70,7 +72,7 @@ namespace cydc.Controllers
             {
                 UserId = User.GetUserId(),
                 CreateTime = DateTime.Now,
-                Amount = FoodMenuList[0].Price
+                Amount = FoodMenuList[0].Price * -1
             };
 
             DbContext.Add(order);
