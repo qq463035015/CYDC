@@ -26,7 +26,7 @@ namespace cydc.Controllers
                 .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time);
+                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
             }
             if (query.OnlyMe)
             {
@@ -45,11 +45,12 @@ namespace cydc.Controllers
                 .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time);
+                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
             }
             if (query.UserName != null)
             {
-                data = data.Where(x => x.OrderUser.UserName == User.GetUserName());
+                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
+                data = data.Where(x => x.OrderUserId == userId);
             }
             return await data.CreatePagedList(query);
         }
@@ -58,9 +59,9 @@ namespace cydc.Controllers
         public async Task<int> Create([FromBody] FoodOrder order)
         {
             var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
-
+            var dateNow = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             order.OrderUserId = User.GetUserId();
-            order.OrderTime = DateTime.Now;
+            order.OrderTime = dateNow;
 
             order.ClientInfo = new FoodOrderClientInfo
             {
@@ -71,7 +72,7 @@ namespace cydc.Controllers
             order.AccountDetails = new AccountDetails
             {
                 UserId = User.GetUserId(),
-                CreateTime = DateTime.Now,
+                CreateTime = dateNow,
                 Amount = FoodMenuList[0].Price * -1
             };
 

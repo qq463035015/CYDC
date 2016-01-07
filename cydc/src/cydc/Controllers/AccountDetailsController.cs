@@ -22,14 +22,15 @@ namespace cydc.Controllers
                 .Include(x => x.User);
             if (query.UserName != null)
             {
-                data = data.Where(x => x.User.UserName == query.UserName);
+                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
+                data = data.Where(x => x.UserId == userId);
             }
             return await data.CreatePagedList(query);
         }
 
         public async Task<int> Create([FromBody] AccountDetails account)
         {
-            account.CreateTime = DateTime.Now;
+            account.CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             DbContext.Add(account);
             return await DbContext.SaveChangesAsync();
         }

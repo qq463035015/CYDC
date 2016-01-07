@@ -15,7 +15,7 @@ class bindingUtils {
         else if (diffMin < 60)
             return `${diffMin}分钟前`;
         else
-            return time.format("YYYY/MM/DD hh:mm:ss");
+            return time.format("YYYY-MM-DD hh:mm:ss");
     }
     
     fuck() {
