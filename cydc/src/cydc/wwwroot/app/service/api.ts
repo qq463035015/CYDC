@@ -123,8 +123,8 @@ module service {
     }
 
     class siteNotice {
-        list(query?: baseQuery) {
-            return http.post('/api/siteNotice/list', query);
+        getSiteNotice() {
+            return http.post('/api/siteNotice/getSiteNotice', null);
         }
 
         update(id: number, content: string) {

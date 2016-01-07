@@ -3,6 +3,7 @@ import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
 import auth = require('service/auth');
+import moment = require('moment');
 
 class viewModel {
     allMenu = ko.observableArray();
@@ -12,6 +13,7 @@ class viewModel {
     foodTypeId = ko.observable<any>();
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
+    notice = ko.observable<string>();
 
     foodOrder = new foodOrders();
 
@@ -30,6 +32,7 @@ class viewModel {
         });
         api.type.tasteTypeDropdownList().then(data=> this.allFoodType(data));
         api.location.locationDropdownList().then(data=> this.allLocation(data));
+        api.notice.getSiteNotice().then(data=> this.notice(data));
     }
 
     constructor() {
@@ -54,6 +57,13 @@ class viewModel {
 
     commitOrder() {
         if (auth.authed()) {
+            var now = moment().format('YYYY-MM-DD HH:mm:ss');
+            var time = moment().format('YYYY-MM-DD 10:30:00');
+            if (!(now < time || (time > now && now < moment().format('YYYY-MM-DD 18:00:00')))) {
+                utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
+                $('#modal-sample').modal('hide');
+                return null;
+            }
             api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
                 $('#modal-sample').modal('hide');
                 utils.confirm('', '点餐成功！').then(cs => {

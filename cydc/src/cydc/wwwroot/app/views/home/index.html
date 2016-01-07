@@ -1,8 +1,16 @@
 ﻿<div class="container">
     <div class="row">
+        <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong>Holy guacamole!</strong>
+                Best check yo self, you're not looking too good.
+            </div>
+        </div>
+
         <div class="col-sm-24" data-bind="with:menu()[0]">
             <div class="col-sm-12">
-                <img src="../images/pay.jpg" width="500" height="400" />
+                <img src="../images/pay.jpg" width="500" height="415" />
             </div>
             <div class="col-sm-12">
                 <div class="type-sh3"><b>今日菜谱</b></div>
@@ -35,7 +43,7 @@
             <div class="col-sm-6">
                 <div class="type-sh3"><b>金额(元)</b></div>
                 <div class="form-group">
-                    <input type='text' class='form-control' data-bind="value:price" />
+                    <input type='text' class='form-control' readonly data-bind="value:price" />
                 </div>
             </div>
             <div class="col-sm-12">
@@ -49,12 +57,11 @@
                     <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.commit.bind($parent,$data)">提交</a>
                 </div>
             </div>
-            <div class="col-sm-12">
-                通知:今天下午16:30，一加将在北京竞园艺术中心举办新品发布会，正式发布旗下首款小屏旗舰新机“一加手机X”。
-            </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
     <div class="modal-dialog" role="document" data-bind="with:foodOrder">
