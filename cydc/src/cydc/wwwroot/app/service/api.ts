@@ -11,11 +11,12 @@ module service {
         account = new account();
         clientInfo = new foodOrderClientInfo();
         user = new user();
+        accountDetails = new AccountDetails();
     }
 
     class user {
-        list() {
-            return http.post("/api/user/list", null);
+        list(query?: baseQuery) {
+            return http.post("/api/user/list", query);
         }
     }
 

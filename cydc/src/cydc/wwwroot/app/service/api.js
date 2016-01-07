@@ -11,6 +11,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 this.account = new account();
                 this.clientInfo = new foodOrderClientInfo();
                 this.user = new user();
+                this.accountDetails = new AccountDetails();
             }
             return api;
         })();
@@ -18,8 +19,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
         var user = (function () {
             function user() {
             }
-            user.prototype.list = function () {
-                return http.post("/api/user/list", null);
+            user.prototype.list = function (query) {
+                return http.post("/api/user/list", query);
             };
             return user;
         })();

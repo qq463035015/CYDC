@@ -16,19 +16,28 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<object> List()
+        public async Task<object> List([FromBody] AccountDetailsQuery query)
         {
-            var data = DbContext.AccountDetails
-                .GroupBy(x => x.UserId)
-                .Select(x => new
-                {
-                    UserId = x.Key,
-                    Total = x.Sum(s => s.Amount)
-                }).ToList();
-            return data;
+            IQueryable<AccountDetails> data = DbContext.AccountDetails;
+            if (query.UserName != "" && query.UserName != null)
+            {
+                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
+                data = data.Where(x => x.UserId == userId);
+            }
+
+            var result = data.GroupBy(x => x.UserId).Select(x => new
+            {
+                UserId = x.Key,
+                UserName = DbContext.Users.First(u => u.Id == x.Key).UserName,
+                Total = x.Sum(s => s.Amount)
+            });
+            return await result.CreatePagedList(query);
         }
+
         public class UserInfo
         {
+            public string UserId { get; set; }
+
             public string UserName { get; set; }
 
             public decimal Total { get; set; }

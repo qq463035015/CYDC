@@ -18,6 +18,7 @@ namespace cydc.Controllers
         public async Task<object> List([FromBody]AccountDetailsQuery query)
         {
             IQueryable<AccountDetails> data = DbContext.AccountDetails
+                .OrderByDescending(x => x.CreateTime)
                 .Include(x => x.User);
             if (query.UserName != null)
             {

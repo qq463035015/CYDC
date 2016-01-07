@@ -1,11 +1,11 @@
 ﻿<div class="container">
     <div class="row">
         <div class="form-group col-sm-6">
-            <input type='text' class='form-control' placeholder="用户名" />
+            <input type='text' class='form-control' placeholder="用户名" data-bind="value:userName" />
         </div>
         <div class="col-sm-18">
             <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="查询"><span class="glyph glyph-magnifier-3"></span></a>
+                <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
         <div class="col-sm-24">
             <div class="form-group">
                 <span>显示行数</span>
-                <select size="1">
+                <select size="1" data-bind="value:pageSize">
                     <option value="12">12</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
@@ -32,11 +32,13 @@
                             <th class="text-right"><b>添加金额</b></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody data-bind="foreach:items">
                         <tr>
-                            <td>Gray</td>
-                            <td>12</td>
-                            <th class="text-right"><a href="#" data-toggle="modal" data-target="#modal-sample">添加金额</a></th>
+                            <td data-bind="text:userName"></td>
+                            <td data-bind="text:total"></td>
+                            <td class="text-right">
+                                <a href="#" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.saveUserId.bind($parent,$data)">添加金额</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -46,31 +48,29 @@
     <div class="row">
         <div class="col-sm-24">
             <div class="pull-left paginaton">
-                当前第<span class="cl-blue">1</span>页
+                当前第<span class="cl-blue" data-bind="text:pageNumber"></span>页
                 总共<span class="cl-blue">12</span>页
             </div>
             <div class="pull-right">
-                <a href="#">上一页</a>
-                <a href="#">下一页</a>
+                <a href="#" data-bind="click:hasPrev()&&loadPrevPage">上一页</a>
+                <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample-label" aria-hidden="true">
-    <div class="modal-dialog">
+
+<div class="modal fade bs-example-modal-sm" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-24 col-md-18">
-                        <input type='number' class='form-control' placeholder="金额" />
-                    </div>
-                    <div class="col-sm-24 col-md-3 mt-11">
-                        <button type="button" class="btn btn-primary">
-                            确定
-                        </button>
-                    </div>
+            <div class="row">
+                <div class="col-sm-24 col-md-17">
+                    <input type='number' class='form-control' placeholder="金额" data-bind="value:price" />
+                </div>
+                <div class="col-sm-24 col-md-3 mt-11">
+                    <a class="btn btn-block btn-primary" data-bind="click:addAmount.bind($data)">确定</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
