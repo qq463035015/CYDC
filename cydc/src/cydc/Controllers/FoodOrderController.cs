@@ -55,7 +55,6 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        [Authorize]
         public async Task<int> Create([FromBody] FoodOrder order)
         {
             var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
@@ -82,6 +81,10 @@ namespace cydc.Controllers
 
         public async Task<int> Delete([FromBody] FoodOrder order)
         {
+            order = await DbContext.FoodOrders
+                .Include(x => x.AccountDetails)
+                .SingleAsync(x => x.Id == order.Id);
+            DbContext.Remove(order.AccountDetails);
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
         }
