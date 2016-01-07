@@ -30,9 +30,6 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             AccountDetails.prototype.list = function (query) {
                 return http.post("/api/accountDetails/list", query);
             };
-            AccountDetails.prototype.select = function (userName) {
-                return http.post("/api/accountDetails/list", { userName: userName });
-            };
             AccountDetails.prototype.create = function (userId, amount) {
                 return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
             };

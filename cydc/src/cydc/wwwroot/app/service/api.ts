@@ -25,10 +25,6 @@ module service {
             return http.post("/api/accountDetails/list", query);
         }
 
-        select(userName: string) {
-            return http.post("/api/accountDetails/list", { userName: userName });
-        }
-
         create(userId: string, amount: Number) {
             return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
         }
