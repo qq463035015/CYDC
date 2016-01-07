@@ -47,7 +47,7 @@ namespace cydc.Controllers
             {
                 data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
             }
-            if (query.UserName != null)
+            if (query.UserName != "" && query.UserName != null)
             {
                 var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
                 data = data.Where(x => x.OrderUserId == userId);

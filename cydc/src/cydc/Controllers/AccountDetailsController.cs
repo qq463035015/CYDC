@@ -20,7 +20,7 @@ namespace cydc.Controllers
             IQueryable<AccountDetails> data = DbContext.AccountDetails
                 .OrderByDescending(x => x.CreateTime)
                 .Include(x => x.User);
-            if (query.UserName != null)
+            if (query.UserName != "" && query.UserName != null)
             {
                 var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
                 data = data.Where(x => x.UserId == userId);
