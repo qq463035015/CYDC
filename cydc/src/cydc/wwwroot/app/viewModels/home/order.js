@@ -18,7 +18,12 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             utils.confirm('', '确定要退订吗？').then(function (cs) {
                 cs.close();
                 return api.order.delete(data.id);
-            }).then(function () { return _this.loadData(); });
+            }).then(function () {
+                _this.loadData();
+                utils.confirm('退订成功！', '').then(function (cs) {
+                    cs.close();
+                });
+            });
         };
         viewModel.prototype.query = function () {
             this.searchParams({ time: this.queryTime(), userName: this.userName() });

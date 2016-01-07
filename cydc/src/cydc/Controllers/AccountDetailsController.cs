@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Data.Entity;
 
 namespace cydc.Controllers
 {
@@ -14,24 +15,23 @@ namespace cydc.Controllers
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<object> List(AccountDetailsQuery query)
+        public async Task<object> List([FromBody]AccountDetailsQuery query)
         {
-            IQueryable<AccountDetails> data = DbContext.AccountDetails;
-            if (query.UserId != null)
+            IQueryable<AccountDetails> data = DbContext.AccountDetails
+                .OrderByDescending(x => x.CreateTime)
+                .Include(x => x.User);
+            if (query.UserName != null)
             {
-                data = data.Where(x => x.UserId == query.UserId);
+                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
+                data = data.Where(x => x.UserId == userId);
             }
             return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Create()
+        public async Task<int> Create([FromBody] AccountDetails account)
         {
-            AccountDetails accountDetails = new AccountDetails
-            {
-                UserId = User.GetUserId(),
-                CreateTime = DateTime.Now
-            };
-            DbContext.Add(accountDetails);
+            account.CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            DbContext.Add(account);
             return await DbContext.SaveChangesAsync();
         }
     }

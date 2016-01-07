@@ -11,17 +11,22 @@ module service {
         account = new account();
         clientInfo = new foodOrderClientInfo();
         user = new user();
+        accountDetails = new AccountDetails();
     }
 
     class user {
-        list() {
-            http.post("", null);
+        list(query?: baseQuery) {
+            return http.post("/api/user/list", query);
         }
     }
 
     class AccountDetails {
-        create(amount: Number) {
-            return http.post('/api/accountDetails/create', { amount: amount });
+        list(query?: baseQuery) {
+            return http.post("/api/accountDetails/list", query);
+        }
+
+        create(userId: string, amount: Number) {
+            return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
         }
     }
 

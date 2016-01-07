@@ -19,7 +19,12 @@ class viewModel extends pager<idName> {
         utils.confirm('', '确定要退订吗？').then(cs=> {
             cs.close();
             return api.order.delete(data.id);
-        }).then(() => this.loadData());
+        }).then(() => {
+            this.loadData();
+            utils.confirm('退订成功！', '').then(cs=> {
+                cs.close();
+            });
+        });
     }
 
     query() {

@@ -12,7 +12,7 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
             else if (diffMin < 60)
                 return diffMin + "\u5206\u949F\u524D";
             else
-                return time.format("YYYY/MM/DD hh:mm:ss");
+                return time.format("YYYY-MM-DD hh:mm:ss");
         };
         bindingUtils.prototype.fuck = function () {
         };
