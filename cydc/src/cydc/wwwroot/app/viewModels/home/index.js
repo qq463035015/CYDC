@@ -48,8 +48,9 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             var _this = this;
             if (auth.authed()) {
                 var now = moment().format('YYYY-MM-DD HH:mm:ss');
-                var time = moment().format('YYYY-MM-DD 10:30:00');
-                if (!(now < time || (time > now && now < moment().format('YYYY-MM-DD 18:00:00')))) {
+                var morning = moment().format('YYYY-MM-DD 10:30:00');
+                var afternoon = moment().format('YYYY-MM-DD 24:00:00');
+                if (!((now < morning) || (now < afternoon))) {
                     utils.confirm('', '超过点餐时间,请联系管理员！').then(function (cs) { return cs.close(); });
                     $('#modal-sample').modal('hide');
                     return null;

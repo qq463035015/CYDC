@@ -1,8 +1,6 @@
-ï»¿#
-# å‘¨æ°_é˜¿é‡Œäº‘_å‘å¸ƒè„šæœ¬.ps1
-#
+# ÖÜ½Ü_°¢ÀïÔÆ_·¢²¼½Å±¾.bat
 
-# å¦‚æœæ²¡å®‰è£…dnvmï¼Œå°±å®‰è£…dnvm
+# Install DNVM
 &{
 	$Branch='dev';
 	$wc=New-Object System.Net.WebClient;
@@ -11,21 +9,21 @@
 	Invoke-Expression ($wc.DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))
 }
 
-# åˆ—å‡ºå¹¶ä½¿ç”¨.NETç‰ˆæœ¬
-dnvm install 1.0.0-rc1-update1
-dnvm list
-dnvm use 1.0.0-rc1-update1
+# ÁĞ³ö²¢Ê¹ÓÃ.NET°æ±¾
+&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" install 1.0.0-rc1-update1
+&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" list
+&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" use 1.0.0-rc1-update1
 
-# æ›´æ–°åº“ç¨‹åºåŒ…
+# ¸üĞÂ¿â³ÌĞò°ü
 cd cydc/src/cydc
 dnu restore
 
-# å‘å¸ƒè‡³æ ¹ç›®å½•çš„oæ–‡ä»¶å¤¹
+# Ç¿ÖÆ¹Ø±Õµ±Ç°ÕıÔÚÔËĞĞµÄdnx.exe£¬Í¨¹ı½ø³ÌÃû¡¢IISÓ¦ÓÃ³ÌĞò³ØµÄÉí·İÀ´Ê¶±ğ
+taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
+
+# ·¢²¼ÖÁ¸ùÄ¿Â¼µÄoÎÄ¼ş¼Ğ
 dnu publish -o C:\state\web\cydc-demo
 
-# åˆ—å‡ºoæ–‡ä»¶å¤¹çš„å†…å®¹
+# ÁĞ³öoÎÄ¼ş¼ĞµÄÄÚÈİ
 cd C:\state\web\cydc-demo
 ls
-
-# å¼ºåˆ¶å…³é—­å½“å‰æ­£åœ¨è¿è¡Œçš„dnx.exeï¼Œé€šè¿‡è¿›ç¨‹åã€IISåº”ç”¨ç¨‹åºæ± çš„èº«ä»½æ¥è¯†åˆ«
-taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"

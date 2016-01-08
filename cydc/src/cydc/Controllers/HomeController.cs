@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Authorization;
 
 namespace cydc.Controllers
 {
@@ -12,6 +13,7 @@ namespace cydc.Controllers
         [FromServices]
         public IHostingEnvironment HostingEnvironment { get; set; }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
