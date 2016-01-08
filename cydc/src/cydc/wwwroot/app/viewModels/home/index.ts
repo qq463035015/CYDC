@@ -13,7 +13,7 @@ class viewModel {
     foodTypeId = ko.observable<any>();
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
-    notice = ko.observable<string>();
+    notices = ko.observable<string>();
 
     foodOrder = new foodOrders();
 
@@ -32,7 +32,7 @@ class viewModel {
         });
         api.type.tasteTypeDropdownList().then(data=> this.allFoodType(data));
         api.location.locationDropdownList().then(data=> this.allLocation(data));
-        api.notice.getSiteNotice().then(data=> this.notice(data));
+        api.notice.getSiteNotice().then(data=> this.notices(data));
     }
 
     constructor() {
@@ -75,7 +75,7 @@ class viewModel {
             });
         }
         else {
-            utils.navigateToLogin();
+            location.href = "account/login";
         }
     }
 }

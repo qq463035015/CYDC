@@ -7,7 +7,7 @@ class viewModel {
     notice = ko.observableArray<idContent>();
 
     constructor() {
-        api.notice.list().then(data=> this.notice(data));
+        api.notice.getSiteNotice().then(data=> this.notice(data));
     }
 
     update() {

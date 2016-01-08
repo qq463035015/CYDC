@@ -1,4 +1,4 @@
-define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/auth'], function (require, exports, api, ko, utils, auth) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/auth', 'moment'], function (require, exports, api, ko, utils, auth, moment) {
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -9,6 +9,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.foodTypeId = ko.observable();
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
+            this.notices = ko.observable();
             this.foodOrder = new foodOrders();
             this.menu = ko.pureComputed({
                 read: function () {
@@ -27,6 +28,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             });
             api.type.tasteTypeDropdownList().then(function (data) { return _this.allFoodType(data); });
             api.location.locationDropdownList().then(function (data) { return _this.allLocation(data); });
+            api.notice.getSiteNotice().then(function (data) { return _this.notices(data); });
         };
         viewModel.prototype.idName = function (arr, id) {
             return ko.utils.arrayFilter(arr, function (item) {
@@ -45,6 +47,13 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
         viewModel.prototype.commitOrder = function () {
             var _this = this;
             if (auth.authed()) {
+                var now = moment().format('YYYY-MM-DD HH:mm:ss');
+                var time = moment().format('YYYY-MM-DD 10:30:00');
+                if (!(now < time || (time > now && now < moment().format('YYYY-MM-DD 18:00:00')))) {
+                    utils.confirm('', '超过点餐时间,请联系管理员！').then(function (cs) { return cs.close(); });
+                    $('#modal-sample').modal('hide');
+                    return null;
+                }
                 api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
                     $('#modal-sample').modal('hide');
                     utils.confirm('', '点餐成功！').then(function (cs) {
@@ -56,7 +65,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 });
             }
             else {
-                utils.navigateToLogin();
+                location.href = "account/login";
             }
         };
         return viewModel;

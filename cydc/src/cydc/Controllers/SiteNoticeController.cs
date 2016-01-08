@@ -13,10 +13,10 @@ namespace cydc.Controllers
 
         public ApplicationDbContext DBContext { get; set; }
 
-        public object GetSiteNotice([FromBody]SiteNoticeQuery query)
+        public object GetSiteNotice()
         {
             IQueryable<SiteNotice> data = DBContext.SiteNotices;
-            return data.CreateList(query);
+            return data;
         }
 
         public async Task<int> Update([FromBody]SiteNotice notice)

@@ -42,7 +42,7 @@ module service {
         }
 
         create(menuId: Number, orderLocationId: Number, tasteId: Number, comment: string) {
-            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment })
+            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment });
         }
 
         delete(id: number) {
@@ -130,7 +130,6 @@ module service {
         update(id: number, content: string) {
             return http.post('/api/siteNotice/update', { id: id, content: content });
         }
-
     }
 
     interface baseQuery {

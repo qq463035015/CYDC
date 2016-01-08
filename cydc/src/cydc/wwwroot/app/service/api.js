@@ -128,7 +128,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
         var siteNotice = (function () {
             function siteNotice() {
             }
-            siteNotice.prototype.list = function () {
+            siteNotice.prototype.getSiteNotice = function () {
                 return http.post('/api/siteNotice/getSiteNotice', null);
             };
             siteNotice.prototype.update = function (id, content) {
