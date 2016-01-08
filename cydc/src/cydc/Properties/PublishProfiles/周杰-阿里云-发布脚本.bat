@@ -1,20 +1,20 @@
-ï»¿REM å‘¨æ°_é˜¿é‡Œäº‘_å‘å¸ƒè„šæœ¬.bat
+REM ÖÜ½Ü_°¢ÀïÔÆ_·¢²¼½Å±¾.bat
 
-REM åˆ—å‡ºå¹¶ä½¿ç”¨.NETç‰ˆæœ¬
+REM ÁĞ³ö²¢Ê¹ÓÃ.NET°æ±¾
 dnvm install 1.0.0-rc1-update1
 dnvm list
 dnvm use 1.0.0-rc1-update1
 
-REM æ›´æ–°åº“ç¨‹åºåŒ…
+REM ¸üĞÂ¿â³ÌĞò°ü
 cd cydc/src/cydc
 dnu restore
 
-REM å¼ºåˆ¶å…³é—­å½“å‰æ­£åœ¨è¿è¡Œçš„dnx.exeï¼Œé€šè¿‡è¿›ç¨‹åã€IISåº”ç”¨ç¨‹åºæ± çš„èº«ä»½æ¥è¯†åˆ«
+REM Ç¿ÖÆ¹Ø±Õµ±Ç°ÕıÔÚÔËĞĞµÄdnx.exe£¬Í¨¹ı½ø³ÌÃû¡¢IISÓ¦ÓÃ³ÌĞò³ØµÄÉí·İÀ´Ê¶±ğ
 taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
 
-REM å‘å¸ƒè‡³æ ¹ç›®å½•çš„oæ–‡ä»¶å¤¹
+REM ·¢²¼ÖÁ¸ùÄ¿Â¼µÄoÎÄ¼ş¼Ğ
 dnu publish -o C:\state\web\cydc-demo
 
-REM åˆ—å‡ºoæ–‡ä»¶å¤¹çš„å†…å®¹
+REM ÁĞ³öoÎÄ¼ş¼ĞµÄÄÚÈİ
 cd C:\state\web\cydc-demo
 ls
