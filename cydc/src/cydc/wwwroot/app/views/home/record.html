@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container" data-bind="if:noData">
     <div class="row">
         <div class="form-group col-sm-6">
             <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
@@ -11,7 +11,7 @@
         <div class="col-sm-9 clearfix mt-15">
             <div class="checkbox pull-right">
                 <div class="type-sh4 cl-blue">
-                    
+
                 </div>
             </div>
         </div>
@@ -74,6 +74,14 @@
                 <a href="#" data-bind="click:hasPrev()&&loadPrevPage">上一页</a>
                 <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="ifnot:noData">
+    <div class="row" data-bind="ifnot:noData">
+        <div class="col-md-24 text-center jumbotron theme-dark">
+            <h3 class="color-type-alert-alt">友情提示：您的还没有登录，无法访问此页面！</h3>
         </div>
     </div>
 </div>

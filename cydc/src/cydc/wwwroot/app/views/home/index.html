@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <div class="row">
+    <div class="row" data-bind="if:noData">
         <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js" data-bind="if:notices().length>0">
             <div class="alert alert-warning alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -7,7 +7,6 @@
                 <span data-bind="text:notices()[0].content"></span>
             </div>
         </div>
-
         <div class="col-sm-24" data-bind="with:menu()[0]">
             <div class="col-sm-12">
                 <img src="../images/pay.jpg" width="500" height="415" />
@@ -59,9 +58,12 @@
             </div>
         </div>
     </div>
+    <div class="row" data-bind="ifnot:noData">
+        <div class="col-md-24 text-center jumbotron theme-dark">
+            <h3 class="color-type-alert-alt">友情提示：您的还没有登录，无法访问此页面！</h3>
+        </div>
+    </div>
 </div>
-
-
 
 <div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
     <div class="modal-dialog" role="document" data-bind="with:foodOrder">

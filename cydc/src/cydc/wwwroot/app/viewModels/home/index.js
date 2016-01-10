@@ -10,6 +10,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
             this.notices = ko.observable();
+            this.noData = ko.observable(true);
             this.foodOrder = new foodOrders();
             this.menu = ko.pureComputed({
                 read: function () {
@@ -25,7 +26,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             api.menu.enableList().then(function (data) {
                 _this.allMenu(data);
                 _this.menuTypeId(data[0] && data[0].id);
-            });
+            }).fail(function () { return _this.noData(false); });
             api.type.tasteTypeDropdownList().then(function (data) { return _this.allFoodType(data); });
             api.location.locationDropdownList().then(function (data) { return _this.allLocation(data); });
             api.notice.getSiteNotice().then(function (data) { return _this.notices(data); });
