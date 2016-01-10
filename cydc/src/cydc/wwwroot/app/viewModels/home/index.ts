@@ -60,7 +60,7 @@ class viewModel {
             var now = moment().format('YYYY-MM-DD HH:mm:ss');
             var morning = moment().format('YYYY-MM-DD 10:30:00');
             let afternoon = moment().format('YYYY-MM-DD 24:00:00');
-            if (!((now < morning) || (now < afternoon))) {
+            if (!((now < morning) || (now > morning && now < afternoon))) {
                 utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
                 $('#modal-sample').modal('hide');
                 return null;
