@@ -65,7 +65,7 @@ module service {
         }
 
         navigateToCallbackOrHome() {
-            return router.navigate(this.urlQuery('returnUrl') || '/');
+            return router.navigate(this.urlQuery('returnUrl') || '/home/index');
         }
 
         navigateToLogin() {
