@@ -10,9 +10,9 @@
 }
 
 # 列出并使用.NET版本
-dnvm install 1.0.0-rc1-update1
+dnvm install 1.0.0-rc1-update1 -arch x64
 dnvm list
-dnvm use 1.0.0-rc1-update1
+dnvm use dnvm use 1.0.0-rc1-update1 -arch x64
 
 # 更新库程序包
 cd cydc/src/cydc
@@ -22,7 +22,7 @@ dnu restore
 taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
 
 # 发布至根目录的o文件夹
-dnu publish -o C:\state\web\cydc-demo
+dnu publish -o --runtime active C:\state\web\cydc-demo
 
 # 列出o文件夹的内容
 cd C:\state\web\cydc-demo
