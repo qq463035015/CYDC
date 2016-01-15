@@ -22,7 +22,7 @@ dnu restore
 taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
 
 # 发布至根目录的o文件夹
-dnu publish -o --runtime active C:\state\web\cydc-demo
+dnu publish --runtime active -o C:\state\web\cydc-demo
 
 # 列出o文件夹的内容
 cd C:\state\web\cydc-demo
