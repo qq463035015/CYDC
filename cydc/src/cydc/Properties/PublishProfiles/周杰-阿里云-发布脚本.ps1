@@ -10,9 +10,9 @@
 }
 
 # 列出并使用.NET版本
-&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" install 1.0.0-rc1-update1
-&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" list
-&"C:\Windows\ServiceProfiles\LocalService\.dnx\bin\dnvm.cmd" use 1.0.0-rc1-update1
+dnvm install 1.0.0-rc1-update1
+dnvm list
+dnvm use 1.0.0-rc1-update1
 
 # 更新库程序包
 cd cydc/src/cydc
