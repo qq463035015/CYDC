@@ -12,7 +12,7 @@
 # 列出并使用.NET版本
 dnvm install 1.0.0-rc1-update1 -arch x64
 dnvm list
-dnvm use dnvm use 1.0.0-rc1-update1 -arch x64
+dnvm use 1.0.0-rc1-update1 -arch x64
 
 # 更新库程序包
 cd cydc/src/cydc
