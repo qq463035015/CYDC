@@ -36,16 +36,10 @@ define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router']
                 return errors().length == 0;
             };
             utils.prototype.navigateToCallbackOrHome = function () {
-                return router.navigate(this.urlQuery('returnUrl') || '/home/index', this.durandalNavigationOptions());
+                return router.navigate(this.urlQuery('returnUrl') || '');
             };
             utils.prototype.navigateToLogin = function () {
-                return router.navigate('/account/login', this.durandalNavigationOptions());
-            };
-            utils.prototype.durandalNavigationOptions = function () {
-                return {
-                    trigger: false,
-                    replace: true
-                };
+                return router.navigate('/account/login');
             };
             return utils;
         })();

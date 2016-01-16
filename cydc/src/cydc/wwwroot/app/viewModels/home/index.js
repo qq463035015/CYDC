@@ -67,7 +67,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 });
             }
             else {
-                utils.navigateToLogin();
+                location.href = '/account/login';
             }
         };
         return viewModel;
