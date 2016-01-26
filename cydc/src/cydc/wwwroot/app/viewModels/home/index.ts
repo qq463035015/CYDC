@@ -76,7 +76,7 @@ class viewModel {
             });
         }
         else {
-            utils.navigateToLogin();
+            location.href = '/account/login';
         }
     }
 }
