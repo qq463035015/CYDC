@@ -2,11 +2,11 @@ define(["require", "exports", 'service/api', 'knockout'], function (require, exp
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
-            this.notice = ko.observableArray();
+            this.notice = ko.observable();
             api.notice.getSiteNotice().then(function (data) { return _this.notice(data); });
         }
         viewModel.prototype.update = function () {
-            api.notice.update(this.notice()[0].id, this.notice()[0].content).then(function () { });
+            api.notice.update(this.notice().content).then(function () { });
         };
         return viewModel;
     })();

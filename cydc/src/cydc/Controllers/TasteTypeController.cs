@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,13 +30,15 @@ namespace cydc.Controllers
             IQueryable<TasteType> data = DBContext.TasteTypes;
             return data.CreateList(query);
         }
-        
+
+        [Authorize(Roles = Admin)]
         public async Task<int> Create([FromBody]TasteType type)
         {
             DBContext.Add(type);
             return await DBContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<int> Delete([FromBody]TasteType type)
         {
             DBContext.Remove(type);

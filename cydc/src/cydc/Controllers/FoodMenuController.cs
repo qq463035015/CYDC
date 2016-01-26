@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace cydc.Controllers
             IQueryable<FoodMenu> data = DBContext.FoodMenus;
             return await data.CreatePagedList(query);
         }
-
+        
         public object EnableList(FoodMenuQuery query)
         {
             IQueryable<FoodMenu> data = DBContext.FoodMenus;
@@ -25,6 +26,7 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<int> Create([FromBody]FoodMenu menu)
         {
             menu.Enabled = true;
@@ -32,12 +34,14 @@ namespace cydc.Controllers
             return await DBContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<object> Delete([FromBody]FoodMenu menu)
         {
             DBContext.Remove(menu);
             return await DBContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<object> UpdateEnable([FromBody]FoodMenu menu)
         {
             var data = DBContext.FoodMenus.Single(x => x.Id == menu.Id);

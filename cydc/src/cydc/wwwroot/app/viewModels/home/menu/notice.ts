@@ -4,14 +4,14 @@ import ko = require('knockout');
 import utils = require('service/utils');
 
 class viewModel {
-    notice = ko.observableArray<idContent>();
+    notice = ko.observable<idContent>();
 
     constructor() {
         api.notice.getSiteNotice().then(data=> this.notice(data));
     }
 
     update() {
-        api.notice.update(this.notice()[0].id, this.notice()[0].content).then(() => { });
+        api.notice.update(this.notice().content).then(() => { });
     }
 }
 

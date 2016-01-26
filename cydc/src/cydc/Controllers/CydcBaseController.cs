@@ -14,5 +14,9 @@ namespace cydc.Controllers
         {
             return DateTime.Parse(dt?.ToString("yyyy-MM-dd"));
         }
+
+        public const string Admin = "Admin";
+
+        public readonly string[] AdminUsers = new[] { "周杰", "文旺", "赵铃" };
     }
 }

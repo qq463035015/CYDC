@@ -127,8 +127,8 @@ module service {
             return http.post('/api/siteNotice/getSiteNotice', null);
         }
 
-        update(id: number, content: string) {
-            return http.post('/api/siteNotice/update', { id: id, content: content });
+        update(content: string) {
+            return http.post('/api/siteNotice/update', { content: content });
         }
     }
 

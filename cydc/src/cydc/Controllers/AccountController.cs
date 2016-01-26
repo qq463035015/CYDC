@@ -11,6 +11,7 @@ using Microsoft.Data.Entity;
 using cydc.Models;
 using cydc.Services;
 using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace cydc.Controllers
 {
@@ -37,9 +38,14 @@ namespace cydc.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
+        [FromServices]
+        public RoleManager<IdentityRole> RoleManager { get; set; }
+
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
+            await PreloginCheck();
+
             if (ModelState.IsValid)
             {
                 var user = await TryFindUserByNameOrEmail(dto.UserName);
@@ -57,6 +63,27 @@ namespace cydc.Controllers
             else
             {
                 return HttpBadRequest(ModelState);
+            }
+        }
+
+        private async Task PreloginCheck()
+        {
+            var findAdmin = await RoleManager.FindByNameAsync(Admin);
+            if (findAdmin == null)
+            {
+                await RoleManager.CreateAsync(new IdentityRole
+                {
+                    Name = Admin
+                });
+            }
+
+            foreach (var username in AdminUsers)
+            {
+                var user = await _userManager.FindByNameAsync(username);
+                if (user != null)
+                {
+                    await _userManager.AddToRoleAsync(user, Admin);
+                }
             }
         }
 
