@@ -47,15 +47,15 @@ class viewModel {
     register() {
         if (utils.checkValid(this)) {
             return api.account.register(this.email(), this.username(), this.password(), this.confirmedPassword()).then(() => {
-                utils.navigateToCallbackOrHome();
+                return api.account.login(this.username(), this.password());
+            }).then(() => {
+                return utils.navigateToCallbackOrHome();
             }).fail(xhr => this.requestFailed(xhr));
         }
     }
 
     requestFailed(xhr: XMLHttpRequest) {
-        if (xhr.status == 400) {
-            alert('有问题');
-        }
+        alert(`请不要这样搞(${xhr.status})`);
     }
 }
 

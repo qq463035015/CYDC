@@ -24,7 +24,7 @@ class viewModel {
         if (xhr.status == 400) {
             alert('用户名或密码错误！');
         } else {
-            alert('炸了');
+            alert(`请不要这样搞(${xhr.status})`);
         }
     }
 }

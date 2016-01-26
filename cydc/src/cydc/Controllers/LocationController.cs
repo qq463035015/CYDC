@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,14 @@ namespace cydc.Controllers
             return data.CreateList(query);
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<int> Create([FromBody] Location location)
         {
             DbContext.Add(location);
             return await DbContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<int> Delete([FromBody]Location location)
         {
             DbContext.Remove(location);

@@ -31,7 +31,7 @@ namespace cydc.Controllers
             else
             {
                 dbNotice = notice;
-                DBContext.Entry(dbNotice).State = Microsoft.Data.Entity.EntityState.Added;
+                DBContext.Entry(dbNotice).State = EntityState.Added;
             }
             
             return await DBContext.SaveChangesAsync();

@@ -21,7 +21,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
                 alert('用户名或密码错误！');
             }
             else {
-                alert('炸了');
+                alert("\u8BF7\u4E0D\u8981\u8FD9\u6837\u641E(" + xhr.status + ")");
             }
         };
         return viewModel;

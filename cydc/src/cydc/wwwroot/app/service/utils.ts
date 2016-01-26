@@ -65,11 +65,11 @@ module service {
         }
 
         navigateToCallbackOrHome() {
-            return router.navigate(this.urlQuery('returnUrl') || '');
+            location.assign(this.urlQuery('returnUrl') || '/');
         }
 
         navigateToLogin() {
-            return router.navigate('/account/login');
+            location.assign('/account/login');
         }
     }
 }

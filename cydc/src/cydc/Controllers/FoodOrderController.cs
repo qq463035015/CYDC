@@ -35,6 +35,7 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<object> List([FromBody] FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = DbContext.FoodOrders
@@ -79,6 +80,7 @@ namespace cydc.Controllers
             return await DbContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<int> Delete([FromBody] FoodOrder order)
         {
             order = await DbContext.FoodOrders

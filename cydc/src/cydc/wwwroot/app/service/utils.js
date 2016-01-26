@@ -1,4 +1,4 @@
-define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router'], function (require, exports, $, koval, router) {
+define(["require", "exports", 'jquery', 'knockout.validation'], function (require, exports, $, koval) {
     var service;
     (function (service) {
         var utils = (function () {
@@ -36,10 +36,10 @@ define(["require", "exports", 'jquery', 'knockout.validation', 'plugins/router']
                 return errors().length == 0;
             };
             utils.prototype.navigateToCallbackOrHome = function () {
-                return router.navigate(this.urlQuery('returnUrl') || '');
+                location.assign(this.urlQuery('returnUrl') || '/');
             };
             utils.prototype.navigateToLogin = function () {
-                return router.navigate('/account/login');
+                location.assign('/account/login');
             };
             return utils;
         })();

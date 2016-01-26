@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace cydc.Controllers
             return await DbContext.FoodOrderPayments.CreatePagedList(query);
         }
 
+        [Authorize(Roles = Admin)]
         public async Task<object> Create([FromBody] FoodOrderPayment payment)
         {
             payment.PayedTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));

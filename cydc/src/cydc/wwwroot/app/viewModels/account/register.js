@@ -45,14 +45,14 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             var _this = this;
             if (utils.checkValid(this)) {
                 return api.account.register(this.email(), this.username(), this.password(), this.confirmedPassword()).then(function () {
-                    utils.navigateToCallbackOrHome();
+                    return api.account.login(_this.username(), _this.password());
+                }).then(function () {
+                    return utils.navigateToCallbackOrHome();
                 }).fail(function (xhr) { return _this.requestFailed(xhr); });
             }
         };
         viewModel.prototype.requestFailed = function (xhr) {
-            if (xhr.status == 400) {
-                alert('有问题');
-            }
+            alert("\u8BF7\u4E0D\u8981\u8FD9\u6837\u641E(" + xhr.status + ")");
         };
         return viewModel;
     })();
