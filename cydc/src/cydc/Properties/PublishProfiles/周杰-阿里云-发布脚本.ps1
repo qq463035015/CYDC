@@ -18,8 +18,9 @@ dnvm use 1.0.0-rc1-update1 -arch x64
 taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
 
 # 更新库程序包
+# 如果没什么好更新的，就可以注释这一步
 cd cydc/src/cydc
-dnu restore
+# dnu restore
 
 # 发布至根目录的o文件夹
 dnu publish --runtime active -o C:\state\web\cydc-demo
