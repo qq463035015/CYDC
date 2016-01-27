@@ -65,12 +65,10 @@ namespace cydc.Controllers
             order.OrderTime = dateNow;
 
             var connection = (IHttpConnectionFeature)HttpContext.Features[typeof(IHttpConnectionFeature)];
-            if (connection == null) return HttpBadRequest("什么鬼");
-            if (connection.RemoteIpAddress == null) return HttpBadRequest("什么什么？");
 
             order.ClientInfo = new FoodOrderClientInfo
             {
-                IP = connection.RemoteIpAddress.ToString(),
+                IP = connection?.RemoteIpAddress?.ToString() ?? "N/A",
                 UserAgent = Request.Headers["User-Agent"]
             };
 
