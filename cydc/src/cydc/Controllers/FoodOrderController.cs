@@ -8,6 +8,7 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Http.Features;
 
 namespace cydc.Controllers
 {
@@ -59,13 +60,14 @@ namespace cydc.Controllers
         public async Task<int> Create([FromBody] FoodOrder order)
         {
             var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
-            var dateNow = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            var dateNow = DateTime.Now;
             order.OrderUserId = User.GetUserId();
             order.OrderTime = dateNow;
 
+            var connection = (IHttpConnectionFeature)HttpContext.Features[typeof(IHttpConnectionFeature)];
             order.ClientInfo = new FoodOrderClientInfo
             {
-                IP = Request.Headers["X-Forwarded-For"],
+                IP = connection.RemoteIpAddress.ToString(),
                 UserAgent = Request.Headers["User-Agent"]
             };
 
