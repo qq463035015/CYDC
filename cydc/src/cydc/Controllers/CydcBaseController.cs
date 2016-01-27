@@ -17,6 +17,6 @@ namespace cydc.Controllers
 
         public const string Admin = "Admin";
 
-        public readonly string[] AdminUsers = new[] { "周杰", "文旺", "赵铃" };
+        public readonly string[] AdminUsers = new[] { "周杰", "文旺", "赵玲" };
     }
 }
