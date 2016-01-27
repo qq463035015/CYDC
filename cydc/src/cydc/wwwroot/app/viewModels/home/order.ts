@@ -31,6 +31,10 @@ class viewModel extends pager<idName> {
         this.searchParams({ time: this.queryTime(), userName: this.userName() });
         this.loadData();
     }
+    
+    exportExcel() {
+        console.log(1);
+    }
 }
 
 interface idName {

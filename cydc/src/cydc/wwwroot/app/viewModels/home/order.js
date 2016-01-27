@@ -29,6 +29,9 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.searchParams({ time: this.queryTime(), userName: this.userName() });
             this.loadData();
         };
+        viewModel.prototype.exportExcel = function () {
+            console.log(1);
+        };
         return viewModel;
     })(pager);
     return new viewModel();
