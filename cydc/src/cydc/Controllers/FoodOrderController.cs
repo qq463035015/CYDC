@@ -57,7 +57,7 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Create([FromBody] FoodOrder order)
+        public async Task<ActionResult> Create([FromBody] FoodOrder order)
         {
             var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
             var dateNow = DateTime.Now;
@@ -65,6 +65,9 @@ namespace cydc.Controllers
             order.OrderTime = dateNow;
 
             var connection = (IHttpConnectionFeature)HttpContext.Features[typeof(IHttpConnectionFeature)];
+            if (connection == null) return HttpBadRequest("什么鬼");
+            if (connection.RemoteIpAddress == null) return HttpBadRequest("什么什么？");
+
             order.ClientInfo = new FoodOrderClientInfo
             {
                 IP = connection.RemoteIpAddress.ToString(),
@@ -79,7 +82,8 @@ namespace cydc.Controllers
             };
 
             DbContext.Add(order);
-            return await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
+            return Ok();
         }
 
         [Authorize(Roles = Admin)]
