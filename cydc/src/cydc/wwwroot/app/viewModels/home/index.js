@@ -56,6 +56,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                     $('#modal-sample').modal('hide');
                     return null;
                 }
+                $('#modal-sample').modal('hide');
                 api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
                     $('#modal-sample').modal('hide');
                     utils.confirm('', '点餐成功！').then(function (cs) {
@@ -63,6 +64,10 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                     }).then(function () {
                         _this.loadData();
                         _this.comment(null);
+                    });
+                }).fail(function () {
+                    utils.confirm('', '点餐失败！').then(function (cs) {
+                        cs.close();
                     });
                 });
             }
