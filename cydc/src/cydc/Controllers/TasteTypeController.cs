@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,38 +8,41 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class TasteTypeController : Controller
+    public class TasteTypeController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DBContext { get; set; }
 
-        public TasteTypeController(ApplicationDbContext adc)
+        public async Task<object> List([FromBody] TasteTypeQuery query)
         {
-            _adc = adc;
-        }
+            IQueryable<TasteType> data = DBContext.TasteTypes;
 
-        public async Task<object> List(TasteTypeQuery query)
-        {
-            return await _adc.TasteTypes.CreatePagedList(query);
-        }
-
-        public async Task<int> Add(string name)
-        {
-            TasteType tasteType = new TasteType
+            if (query.Name != null)
             {
-                Name = name
-            };
-            _adc.Add(tasteType);
-            return await _adc.SaveChangesAsync();
+                data = data.Where(x => x.Name.Contains(query.Name));
+            }
+
+            return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Delete(int id)
+        public object TasteTypeDropdownList(TasteTypeQuery query)
         {
-            TasteType tasteType = new TasteType
-            {
-                Id = id
-            };
-            _adc.Remove(tasteType);
-            return await _adc.SaveChangesAsync();
+            IQueryable<TasteType> data = DBContext.TasteTypes;
+            return data.CreateList(query);
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Create([FromBody]TasteType type)
+        {
+            DBContext.Add(type);
+            return await DBContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Delete([FromBody]TasteType type)
+        {
+            DBContext.Remove(type);
+            return await DBContext.SaveChangesAsync();
         }
     }
 }

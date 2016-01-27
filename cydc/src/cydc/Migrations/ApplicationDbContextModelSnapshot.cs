@@ -13,87 +13,8 @@ namespace cydc.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8-15964")
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
-                {
-                    b.Property<string>("Id");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .Annotation("MaxLength", 256);
-
-                    b.Property<string>("NormalizedName")
-                        .Annotation("MaxLength", 256);
-
-                    b.HasKey("Id");
-
-                    b.Index("NormalizedName")
-                        .Annotation("Relational:Name", "RoleNameIndex");
-
-                    b.Annotation("Relational:TableName", "AspNetRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("RoleId");
-
-                    b.HasKey("Id");
-
-                    b.Annotation("Relational:TableName", "AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.Annotation("Relational:TableName", "AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("ProviderKey");
-
-                    b.Property<string>("ProviderDisplayName");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.Annotation("Relational:TableName", "AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.Annotation("Relational:TableName", "AspNetUserRoles");
-                });
+                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("cydc.Models.AccountDetails", b =>
                 {
@@ -122,7 +43,7 @@ namespace cydc.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -131,10 +52,10 @@ namespace cydc.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedUserName")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -147,17 +68,17 @@ namespace cydc.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.Index("NormalizedEmail")
-                        .Annotation("Relational:Name", "EmailIndex");
+                    b.HasIndex("NormalizedEmail")
+                        .HasAnnotation("Relational:Name", "EmailIndex");
 
-                    b.Index("NormalizedUserName")
-                        .Annotation("Relational:Name", "UserNameIndex");
+                    b.HasIndex("NormalizedUserName")
+                        .HasAnnotation("Relational:Name", "UserNameIndex");
 
-                    b.Annotation("Relational:TableName", "AspNetUsers");
+                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
             modelBuilder.Entity("cydc.Models.FoodMenu", b =>
@@ -167,7 +88,7 @@ namespace cydc.Migrations
 
                     b.Property<string>("Details")
                         .IsRequired()
-                        .Annotation("MaxLength", 50);
+                        .HasAnnotation("MaxLength", 50);
 
                     b.Property<bool>("Enabled");
 
@@ -175,7 +96,7 @@ namespace cydc.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .Annotation("MaxLength", 10);
+                        .HasAnnotation("MaxLength", 10);
 
                     b.HasKey("Id");
                 });
@@ -186,7 +107,7 @@ namespace cydc.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Comment")
-                        .Annotation("MaxLength", 100);
+                        .HasAnnotation("MaxLength", 100);
 
                     b.Property<int>("FoodMenuId");
 
@@ -210,7 +131,7 @@ namespace cydc.Migrations
 
                     b.Property<string>("IP")
                         .IsRequired()
-                        .Annotation("MaxLength", 15);
+                        .HasAnnotation("MaxLength", 15);
 
                     b.Property<string>("UserAgent")
                         .IsRequired();
@@ -234,7 +155,7 @@ namespace cydc.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .Annotation("MaxLength", 15);
+                        .HasAnnotation("MaxLength", 15);
 
                     b.HasKey("Id");
                 });
@@ -246,7 +167,7 @@ namespace cydc.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .Annotation("MaxLength", 500);
+                        .HasAnnotation("MaxLength", 500);
 
                     b.HasKey("Id");
                 });
@@ -258,85 +179,167 @@ namespace cydc.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .Annotation("MaxLength", 10);
+                        .HasAnnotation("MaxLength", 10);
 
                     b.HasKey("Id");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Name")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasAnnotation("MaxLength", 256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .HasAnnotation("Relational:Name", "RoleNameIndex");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .WithMany()
-                        .ForeignKey("RoleId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("cydc.Models.ApplicationUser")
-                        .WithMany()
-                        .ForeignKey("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("cydc.Models.ApplicationUser")
-                        .WithMany()
-                        .ForeignKey("UserId");
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<string>("UserId")
+                        .IsRequired();
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                        .WithMany()
-                        .ForeignKey("RoleId");
+                    b.Property<string>("UserId");
 
-                    b.HasOne("cydc.Models.ApplicationUser")
-                        .WithMany()
-                        .ForeignKey("UserId");
+                    b.Property<string>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
             modelBuilder.Entity("cydc.Models.AccountDetails", b =>
                 {
                     b.HasOne("cydc.Models.FoodOrder")
                         .WithMany()
-                        .ForeignKey("FoodOrderId");
+                        .HasForeignKey("FoodOrderId");
 
                     b.HasOne("cydc.Models.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("cydc.Models.FoodOrder", b =>
                 {
                     b.HasOne("cydc.Models.FoodMenu")
                         .WithMany()
-                        .ForeignKey("FoodMenuId");
+                        .HasForeignKey("FoodMenuId");
 
                     b.HasOne("cydc.Models.Location")
                         .WithMany()
-                        .ForeignKey("LocationId");
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("cydc.Models.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("OrderUserId");
+                        .HasForeignKey("OrderUserId");
 
                     b.HasOne("cydc.Models.TasteType")
                         .WithMany()
-                        .ForeignKey("TasteId");
+                        .HasForeignKey("TasteId");
                 });
 
             modelBuilder.Entity("cydc.Models.FoodOrderClientInfo", b =>
                 {
                     b.HasOne("cydc.Models.FoodOrder")
                         .WithOne()
-                        .ForeignKey("cydc.Models.FoodOrderClientInfo", "FoodOrderId");
+                        .HasForeignKey("cydc.Models.FoodOrderClientInfo", "FoodOrderId");
                 });
 
             modelBuilder.Entity("cydc.Models.FoodOrderPayment", b =>
                 {
                     b.HasOne("cydc.Models.FoodOrder")
                         .WithOne()
-                        .ForeignKey("cydc.Models.FoodOrderPayment", "FoodOrderId");
+                        .HasForeignKey("cydc.Models.FoodOrderPayment", "FoodOrderId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("cydc.Models.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("cydc.Models.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+
+                    b.HasOne("cydc.Models.ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
         }
     }

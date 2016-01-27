@@ -7,12 +7,10 @@
                     <button type="button" class="close" data-dismiss="side-navigation" aria-label="close">
                         <i class="glyph glyph-cancel"></i>
                     </button>
-                    <ul>
-                        <!-- ko foreach: router.navigationModel -->
-                        <li role="presentation" data-bind="css: { active: isActive }">
-                            <a data-bind="attr: { href: hash }, html: title"></a>
+                    <ul data-bind="foreach: router.navigationModel">
+                        <li role="presentation">
+                            <a data-bind="css: { active: isActive }, attr: { href: hash }, html: title"></a>
                         </li>
-                        <!-- /ko -->
                     </ul>
                 </nav>
             </div>

@@ -1,73 +1,72 @@
 ﻿<div class="container">
-    <div class="row">
-        <div class="col-sm-24">
+    <div class="row" data-bind="if:noData">
+        <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js" data-bind="if:notices()">
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <strong>通知信息</strong>
+                <span data-bind="text:notices().content"></span>
+            </div>
+        </div>
+        <div class="col-sm-24" data-bind="with:menu()[0]">
             <div class="col-sm-12">
-                <img src="../images/pay.jpg" />
+                <img src="../images/pay.jpg" width="500" height="415" />
             </div>
             <div class="col-sm-12">
-                <div class="type-sh3"><b>今日菜谱：</b></div>
-                <div class="type-sh3">莴笋炒肉，腊鸡，红烧冬瓜，泡萝卜</div>
+                <div class="type-sh3"><b>今日菜谱</b></div>
+                <div class="type-sh3" data-bind="text:details"></div>
             </div>
             <div class="col-sm-6">
-                <div class="type-sh3"><b>套餐类型：</b></div>
+                <div class="type-sh3"><b>套餐类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>豪华套餐</option>
-                            <option>升级套餐</option>
-                            <option>普通套餐</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.menuTypeId,options:$parent.allMenu,optionsValue:'id',optionsText:'title'"></select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="type-sh3"><b>点餐地点：</b></div>
+                <div class="type-sh3"><b>口味类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>一楼</option>
-                            <option>二楼</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.foodTypeId,options:$parent.allFoodType,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="type-sh3"><b>口味类型：</b></div>
+                <div class="type-sh3"><b>点餐地点</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control">
-                            <option>清淡</option>
-                            <option>微辣</option>
-                        </select>
+                        <select class="form-control" data-bind="value:$parent.locationId,options:$parent.allLocation,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="type-sh3"><b>套餐金额：</b></div>
+                <div class="type-sh3"><b>金额(元)</b></div>
                 <div class="form-group">
-                    <input type='text' class='form-control' value="12" disabled="disabled" />
+                    <input type='text' class='form-control' readonly data-bind="value:price" />
                 </div>
             </div>
             <div class="col-sm-12">
-                <div class="type-sh3"><b>备注信息：</b></div>
+                <div class="type-sh3"><b>备注信息</b></div>
                 <div class="form-group">
-                    <textarea id="info" rows="2"></textarea>
+                    <textarea id="info" rows="2" data-bind="value:$parent.comment"></textarea>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="btn-group mt-40">
-                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample">提交</a>
+                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.commit.bind($parent,$data)">提交</a>
                 </div>
             </div>
-            <div class="col-sm-12">
-                通知:今天下午16:30，一加将在北京竞园艺术中心举办新品发布会，正式发布旗下首款小屏旗舰新机“一加手机X”。
-            </div>
+        </div>
+    </div>
+    <div class="row" data-bind="ifnot:noData">
+        <div class="col-md-24 text-center jumbotron theme-dark">
+            <h3 class="color-type-alert-alt">您还没有登录，无法访问此页面！</h3>
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" data-bind="with:foodOrder">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modal-sample-label">
@@ -75,17 +74,19 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div><b>菜谱：</b><span>豪华套餐豪华套餐豪华套餐豪华套餐豪华套餐</span></div>
-                <div><b>套餐：</b><span>超辣</span></div>
-                <div><b>口味：</b><span>超辣</span></div>
-                <div><b>备注：</b><span>不要辣椒不要辣椒不要辣椒不要辣椒不要辣椒不要辣椒</span></div>
+                <div><b>菜谱：</b><span data-bind="text:details"></span></div>
+                <div><b>套餐：</b><span data-bind="text:title"></span></div>
+                <div><b>口味：</b><span data-bind="text:type"></span></div>
+                <div><b>地点：</b><span data-bind="text:location"></span></div>
+                <div><b>金额：</b><span data-bind="text:price"></span></div>
+                <div><b>备注：</b><span data-bind="text:comment"></span></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info"
                         data-dismiss="modal">
                     取消
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" data-bind="click:$parent.commitOrder.bind($parent)">
                     确定
                 </button>
             </div>

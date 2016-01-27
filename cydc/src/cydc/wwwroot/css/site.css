@@ -15,6 +15,10 @@
     width:600px;
 }
 
+.mt22 {
+    top: 30px;
+}
+
 .mt-7 {
     top: -7px;
 }
@@ -27,6 +31,14 @@
     top: -12px;
 }
 
+.mt-15 {
+    top: -15px;
+}
+
+.mt-22 {
+    top: -22px;
+}
+
 .mt-30 {
     top: -30px;
 }
@@ -37,10 +49,21 @@
 .mt-40 {
     top: -40px;
 }
+
+
 .h-0 {
     height: 0px;
 }
 
 .cl-blue {
     color: #0078D7;
+}
+
+#register {
+    background-color:#0078D7;
+    color:rgb(255, 255, 255);
+}
+
+.validationMessage {
+    color:red;
 }

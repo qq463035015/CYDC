@@ -1,18 +1,39 @@
 ﻿require.config({
     baseUrl: '/app/',
     urlArgs: 'v=' + new Date().getTime(), 
+    //urlArgs: 'v=2015-12-29-d',
     paths: {
-        'jquery': '/lib/jquery',
-        'knockout': '/lib/knockout',
-        'text': '/lib/text',
-        'durandal': '/lib/durandal',
-        'plugins': '/lib/durandal/plugins',
-        'transitions': '/lib/durandal/transitions',
+        jquery: '/lib/jquery',
+        knockout: '/lib/knockout',
+        bootstrap: '/lib/bootstrap',
+        text: '/lib/text',
+        durandal: '/lib/durandal',
+        plugins: '/lib/durandal/plugins',
+        transitions: '/lib/durandal/transitions',
+        "knockout.validation": '/lib/knockout.validation',
+        kovalcn: '/lib/knockout.validation.zh-CN',
+        signalr: '/lib/jquery.signalR',
+        moment: '/lib/moment',
 
-        'service/pager': 'service/pager', 
-
-        'main': 'main'
+        main: 'main'
+    }, 
+    shim: {
+        bootstrap: {
+            deps: ['jquery']
+        }, 
+        signalr: {
+            deps: ['jquery']
+        }
     }
 });
 
-require(['main'], () => { });
+require([
+    'knockout.validation',
+    'kovalcn',
+    'main',
+    'knockout',
+    'jquery',
+    'bootstrap',
+    'signalr'], (koval: KnockoutValidationStatic) => {
+    koval.locale('zh-CN');
+});

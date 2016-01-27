@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,38 +8,41 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class LocationController : Controller
+    public class LocationController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
-        public LocationController(ApplicationDbContext adc)
+        public async Task<object> List([FromBody] LocationQuery query)
         {
-            _adc = adc;
-        }
+            IQueryable<Location> data = DbContext.Locations;
 
-        public async Task<object> List(LocationQuery query)
-        {
-            return await _adc.Locations.CreatePagedList(query);
-        }
-
-        public async Task<int> Add(string name)
-        {
-            Location location = new Location
+            if (query.Name != null)
             {
-                Name = name
-            };
-            _adc.Add(location);
-            return await _adc.SaveChangesAsync();
+                data = data.Where(x => x.Name.Contains(query.Name));
+            }
+
+            return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Delete(int id)
+        public object LocationDropdownList(LocationQuery query)
         {
-            Location location = new Location
-            {
-                Id = id
-            };
-            _adc.Remove(location);
-            return await _adc.SaveChangesAsync();
+            IQueryable<Location> data = DbContext.Locations;
+            return data.CreateList(query);
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Create([FromBody] Location location)
+        {
+            DbContext.Add(location);
+            return await DbContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Delete([FromBody]Location location)
+        {
+            DbContext.Remove(location);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

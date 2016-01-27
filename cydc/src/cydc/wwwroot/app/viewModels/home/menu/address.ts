@@ -1,16 +1,34 @@
-﻿import ko = require('knockout');
-import router = require('plugins/router');
+﻿import router = require('plugins/router');
+import api = require('service/api');
+import ko = require('knockout');
+import utils = require('service/utils');
+import pager = require('service/pager');
 
-class viewModel {
-    location = ko.observableArray();
-
+class viewModel extends pager<idName> {
+    allLocation = ko.observableArray<idName>();
+    name = ko.observable<string>();
     constructor() {
-        var params = { page: 1, pageSize: 12, asc: false, orderBy: null };
-        $.post('/api/location/list', params).then(data => { this.location(data); console.log(data); });
-        console.log(this.location());
+        super('/api/location/list');
+        this.loadData();
     }
-    activate() {
-        return $.when();
+
+    add() {
+        this.name() && api.location.create(this.name())
+            .then(() => this.loadData())
+            .then(() => this.name(''));
+    }
+
+    drop(data: idName) {
+        utils.confirm('', '确定要删除吗？').then(cs => {
+            cs.close();
+            return api.location.delete(data.id);
+        }).then(() => this.loadData());
     }
 }
+
+interface idName {
+    id: number;
+    name: string;
+}
+
 export = new viewModel();

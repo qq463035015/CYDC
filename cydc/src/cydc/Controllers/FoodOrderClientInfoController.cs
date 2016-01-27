@@ -4,21 +4,14 @@ using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class FoodOrderClientInfoController : Controller
+    public class FoodOrderClientInfoController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
-        public async Task<int> Add()
-        {
-            FoodOrderClientInfo foodOrderClientInfo = new FoodOrderClientInfo
-            {
-                UserAgent = Request.Headers["User-Agent"]
-            };
-            _adc.Add(foodOrderClientInfo);
-            return await _adc.SaveChangesAsync();
-        }
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
     }
 }

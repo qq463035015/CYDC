@@ -6,19 +6,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
+using Microsoft.Data.Entity;
+using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Http.Features;
 
 namespace cydc.Controllers
 {
-    public class FoodOrderController : Controller
+    public class FoodOrderController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
 
-        public async Task<object> HistoryList(FoodOrderQuery query)
+        public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = _adc.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .OrderByDescending(x => x.OrderTime)
+                .Include(x => x.FoodMenu)
+                .Include(x => x.Location)
+                .Include(x => x.Taste)
+                .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time.Value);
+                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
             }
             if (query.OnlyMe)
             {
@@ -27,44 +36,63 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public async Task<object> List(FoodOrderQuery query)
+        [Authorize(Roles = Admin)]
+        public async Task<object> List([FromBody] FoodOrderQuery query)
         {
-            IQueryable<FoodOrder> data = _adc.FoodOrders;
+            IQueryable<FoodOrder> data = DbContext.FoodOrders
+                .OrderByDescending(x => x.OrderTime)
+                .Include(x => x.FoodMenu)
+                .Include(x => x.Location)
+                .Include(x => x.Taste)
+                .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => x.OrderTime == query.Time.Value);
+                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
             }
-            if (query.UserName != null)
+            if (query.UserName != "" && query.UserName != null)
             {
-                data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserName());
+                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
+                data = data.Where(x => x.OrderUserId == userId);
             }
             return await data.CreatePagedList(query);
         }
 
-        public async Task<int> Add(int foodMenuId, int tasteId, int locationId, string comment)
+        public async Task<ActionResult> Create([FromBody] FoodOrder order)
         {
-            FoodOrder foodOrder = new FoodOrder
+            var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
+            var dateNow = DateTime.Now;
+            order.OrderUserId = User.GetUserId();
+            order.OrderTime = dateNow;
+
+            var connection = (IHttpConnectionFeature)HttpContext.Features[typeof(IHttpConnectionFeature)];
+
+            order.ClientInfo = new FoodOrderClientInfo
             {
-                OrderUserId = HttpContext.User.GetUserId(),
-                OrderTime = DateTime.Now,
-                
-                FoodMenuId = foodMenuId,
-                TasteId = tasteId,
-                OrderLocationId = locationId,
-                Comment = comment
+                IP = connection?.RemoteIpAddress?.ToString() ?? "N/A",
+                UserAgent = Request.Headers["User-Agent"]
             };
-            _adc.Add(foodOrder);
-            return await _adc.SaveChangesAsync();
+
+            order.AccountDetails = new AccountDetails
+            {
+                UserId = User.GetUserId(),
+                CreateTime = dateNow,
+                Amount = FoodMenuList[0].Price * -1
+            };
+
+            DbContext.Add(order);
+            await DbContext.SaveChangesAsync();
+            return Ok();
         }
 
-        public async Task<int> Delete(int id)
+        [Authorize(Roles = Admin)]
+        public async Task<int> Delete([FromBody] FoodOrder order)
         {
-            FoodOrder foodOrder = new FoodOrder
-            {
-                Id = id
-            };
-            _adc.Remove(foodOrder);
-            return await _adc.SaveChangesAsync();
+            order = await DbContext.FoodOrders
+                .Include(x => x.AccountDetails)
+                .SingleAsync(x => x.Id == order.Id);
+            DbContext.Remove(order.AccountDetails);
+            DbContext.Remove(order);
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

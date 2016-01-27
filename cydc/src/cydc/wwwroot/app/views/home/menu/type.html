@@ -1,11 +1,11 @@
 ﻿<div class="row">
     <div class="col-sm-24">
         <div class="form-group col-sm-6">
-            <input type='text' class='form-control' placeholder="类型名称" />
+            <input type='text' class='form-control' placeholder="类型名称" data-bind="value:name" />
         </div>
         <div class="col-sm-18">
             <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="新增">新增</a>
+                <a class="btn btn-block btn-primary" title="新增" data-bind="click:add">新增</a>
             </div>
         </div>
     </div>
@@ -17,22 +17,13 @@
                 <thead>
                     <tr>
                         <th><b>类型名称</b></th>
-                        <th class="text-right"><b>是否可用</b></th>
                         <th class="text-right"><b>删除</b></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-bind="foreach:items">
                     <tr>
-                        <td>超辣</td>
-                        <td class="text-right">
-                            <div class="btn-group mt-30 h-0">
-                                <button type="button" data-toggle="button" class="btn btn-toggle-switch" autocomplete="off" aria-pressed="false">
-                                    <span class="stateLabel stateLabel-on">可用</span>
-                                    <span class="stateLabel stateLabel-off">不可用</span>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="text-right"><span class="glyph glyph-delete"></span></td>
+                        <td data-bind="text:name"></td>
+                        <td class="text-right"><span class="glyph glyph-delete" data-bind="click:$parent.drop.bind($parent)"></span></td>
                     </tr>
                 </tbody>
             </table>

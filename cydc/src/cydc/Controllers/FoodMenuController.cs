@@ -1,4 +1,5 @@
 ﻿using cydc.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,52 +8,46 @@ using System.Threading.Tasks;
 
 namespace cydc.Controllers
 {
-    public class FoodMenuController : Controller
+    public class FoodMenuController : CydcBaseController
     {
-        private readonly ApplicationDbContext _adc;
+        [FromServices]
+        public ApplicationDbContext DBContext { get; set; }
 
-        public FoodMenuController(ApplicationDbContext adc)
+        public async Task<object> List([FromBody] FoodMenuQuery query)
         {
-            _adc = adc;
+            IQueryable<FoodMenu> data = DBContext.FoodMenus;
+            return await data.CreatePagedList(query);
+        }
+        
+        public object EnableList(FoodMenuQuery query)
+        {
+            IQueryable<FoodMenu> data = DBContext.FoodMenus;
+            data = data.Where(x => x.Enabled == true);
+            return data.CreateList(query);
         }
 
-        public async Task<object> List(FoodMenuQuery query)
+        [Authorize(Roles = Admin)]
+        public async Task<int> Create([FromBody]FoodMenu menu)
         {
-            return await _adc.FoodMenus.CreatePagedList(query);
+            menu.Enabled = true;
+            DBContext.Add(menu);
+            return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<int> Add(string title, string details, decimal price)
+        [Authorize(Roles = Admin)]
+        public async Task<object> Delete([FromBody]FoodMenu menu)
         {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Title = title,
-                Details = details,
-                Price = price,
-                Enabled = true
-            };
-            _adc.Add(foodMenu);
-            return await _adc.SaveChangesAsync();
+            DBContext.Remove(menu);
+            return await DBContext.SaveChangesAsync();
         }
 
-        public async Task<object> Delete(int id)
+        [Authorize(Roles = Admin)]
+        public async Task<object> UpdateEnable([FromBody]FoodMenu menu)
         {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Id = id
-            };
-            _adc.Remove(foodMenu);
-            return await _adc.SaveChangesAsync();
-        }
-
-        public async Task<object> Enabled(int id, bool enabled)
-        {
-            FoodMenu foodMenu = new FoodMenu
-            {
-                Id = id,
-                Enabled = enabled
-            };
-            _adc.Update(foodMenu);
-            return await _adc.SaveChangesAsync();
+            var data = DBContext.FoodMenus.Single(x => x.Id == menu.Id);
+            data.Enabled = menu.Enabled;
+            DBContext.Update(data);
+            return await DBContext.SaveChangesAsync();
         }
     }
 }

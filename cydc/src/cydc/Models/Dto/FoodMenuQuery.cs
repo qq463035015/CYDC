@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace cydc.Models
 {
-    public class FoodMenuQuery : BasePagedQuery
+    public class FoodMenuQuery : BasePagedDbQuery
     {
-        
+        public string Details { get; set; }
     }
 }
