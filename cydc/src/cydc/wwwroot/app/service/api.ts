@@ -41,8 +41,8 @@ module service {
             return http.post('/api/foodOrder/list', query);
         }
 
-        create(menuId: Number, orderLocationId: Number, tasteId: Number, comment: string) {
-            return http.post('/api/foodOrder/create', { foodMenuId: menuId, orderLocationId: orderLocationId, tasteId: tasteId, comment: comment });
+        create(menuId: Number, locationId: Number, tasteId: Number, comment: string) {
+            return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment });
         }
 
         delete(id: number) {

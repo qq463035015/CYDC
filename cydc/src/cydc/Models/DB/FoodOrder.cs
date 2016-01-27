@@ -17,7 +17,7 @@ namespace cydc.Models
 
         public int FoodMenuId { get; set; }
 
-        public int OrderLocationId { get; set; }
+        public int LocationId { get; set; }
 
         public int TasteId { get; set; }
 
