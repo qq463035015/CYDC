@@ -18,11 +18,14 @@ dnvm use 1.0.0-rc1-update1 -arch x64
 cd cydc/src/cydc
 dnu restore
 
-# 强制关闭当前正在运行的dnx.exe，通过进程名、IIS应用程序池的身份来识别
-taskkill /f /im dnx.exe /fi "username eq cydc"
+# 关闭IIS应用程序池
+"C:\Windows\System32\inetsrv\appcmd.exe" stop apppool /apppool.name:cydc
 
 # 发布至根目录的o文件夹
 dnu publish --runtime active -o C:\state\web\cydc-demo
+
+# 重新打开应用程序池
+"C:\Windows\System32\inetsrv\appcmd.exe" start apppool /apppool.name:cydc
 
 # 列出o文件夹的内容
 cd C:\state\web\cydc-demo
