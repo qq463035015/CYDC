@@ -19,7 +19,7 @@ cd cydc/src/cydc
 dnu restore
 
 # 强制关闭当前正在运行的dnx.exe，通过进程名、IIS应用程序池的身份来识别
-taskkill /f /fi "imagename eq dnx.exe" /fi "username eq cydc"
+taskkill /f /im dnx.exe /fi "username eq cydc"
 
 # 发布至根目录的o文件夹
 dnu publish --runtime active -o C:\state\web\cydc-demo
