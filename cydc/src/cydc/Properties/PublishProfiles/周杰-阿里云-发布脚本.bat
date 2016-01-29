@@ -1,9 +1,7 @@
 REM 周杰_阿里云_发布脚本.bat
 
 REM 列出并使用.NET版本
-C:\Users\Administrator\.dnx\bin\dnvm.cmd list
-C:\Users\Administrator\.dnx\bin\dnvm.cmd use 1.0.0-rc1-update1 -arch x64
-whoami
+SET PATH=%PATH%;C:\Users\Administrator\.dnx\runtimes\dnx-clr-win-x64.1.0.0-rc1-update1\bin
 path
 
 REM 更新库程序包
