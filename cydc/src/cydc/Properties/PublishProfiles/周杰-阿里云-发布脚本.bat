@@ -7,6 +7,7 @@ REM 列出并使用.NET版本
 dnvm install 1.0.0-rc1-update1 -arch x64
 dnvm list
 dnvm use 1.0.0-rc1-update1 -arch x64
+whoami
 path
 
 REM 更新库程序包
@@ -24,4 +25,4 @@ REM 重新打开应用程序池
 
 REM 列出o文件夹的内容
 cd C:\state\web\cydc-demo
-tree
+dir
