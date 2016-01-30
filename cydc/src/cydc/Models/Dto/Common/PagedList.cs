@@ -55,6 +55,7 @@ namespace cydc.Models
     {
         public static async Task<PagedList<T>> CreatePagedList<T>(this IQueryable<T> data, BasePagedDbQuery query) where T : class
         {
+            query = query ?? new BasePagedDbQuery();
             return await PagedList<T>.Create(data, query);
         }
 

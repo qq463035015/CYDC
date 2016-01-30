@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Http.Features;
+using cydc.Models.Excel;
 
 namespace cydc.Controllers
 {
@@ -16,6 +17,9 @@ namespace cydc.Controllers
     {
         [FromServices]
         public ApplicationDbContext DbContext { get; set; }
+
+        [FromServices]
+        public ExcelManager ExcelManager { get; set; }
 
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
@@ -39,12 +43,30 @@ namespace cydc.Controllers
         [Authorize(Roles = Admin)]
         public async Task<object> List([FromBody] FoodOrderQuery query)
         {
+            IQueryable<FoodOrder> data = GetFoodOrderList(query);
+            return await data.CreatePagedList(query);
+        }
+
+        [Authorize(Roles = Admin)]
+        public FileStreamResult Export([FromBody] FoodOrderQuery query)
+        {
+            var data = GetFoodOrderList(query).ToList();
+            var list = FoodOrderExcelDto.FromEntities(data);
+            return ExcelFile(
+                ExcelManager.ExportToStream(list), 
+                $"{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx");
+        }
+
+        private IQueryable<FoodOrder> GetFoodOrderList(FoodOrderQuery query)
+        {
+            query = query ?? new FoodOrderQuery();
+
             IQueryable<FoodOrder> data = DbContext.FoodOrders
-                .OrderByDescending(x => x.OrderTime)
-                .Include(x => x.FoodMenu)
-                .Include(x => x.Location)
-                .Include(x => x.Taste)
-                .Include(x => x.OrderUser);
+                            .OrderByDescending(x => x.OrderTime)
+                            .Include(x => x.FoodMenu)
+                            .Include(x => x.Location)
+                            .Include(x => x.Taste)
+                            .Include(x => x.OrderUser);
             if (query.Time != null)
             {
                 data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
@@ -54,7 +76,8 @@ namespace cydc.Controllers
                 var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
                 data = data.Where(x => x.OrderUserId == userId);
             }
-            return await data.CreatePagedList(query);
+
+            return data;
         }
 
         public async Task<ActionResult> Create([FromBody] FoodOrder order)

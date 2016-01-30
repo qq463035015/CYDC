@@ -14,6 +14,7 @@ using cydc.Services;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.Authentication.Cookies;
 using Microsoft.AspNet.Http;
+using cydc.Models.Excel;
 
 namespace cydc
 {
@@ -71,6 +72,7 @@ namespace cydc
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddSingleton<ExcelManager>();
         }
 
         // Configure is called after ConfigureServices is called.
