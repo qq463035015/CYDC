@@ -61,6 +61,9 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.historyList = function (query) {
                 return http.post('/api/foodOrder/historyList', query);
             };
+            foodOrder.prototype.export = function (time, userName) {
+                return http.post('/api/foodOrder/export', { time: time, userName: userName });
+            };
             return foodOrder;
         })();
         var menuIndex = (function () {

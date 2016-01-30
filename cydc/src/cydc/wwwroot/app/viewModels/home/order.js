@@ -30,9 +30,52 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.loadData();
         };
         viewModel.prototype.exportExcel = function () {
-            console.log(1);
+            postForm('/api/foodOrder/export', { time: this.queryTime(), userName: this.userName() });
         };
         return viewModel;
     })(pager);
+    function postForm(url, data) {
+        var form = document.createElement('form');
+        form.action = url;
+        form.method = 'POST';
+        form.target = '_black';
+        function travelSimple(key, value) {
+            if (value !== undefined) {
+                var input = document.createElement('textarea');
+                input.name = key;
+                input.value = value;
+                form.appendChild(input);
+            }
+        }
+        function travelObject(pk, o) {
+            for (var key in o) {
+                var value = o[key];
+                var trueKey = pk ? pk + '.' + key : key;
+                travelX(trueKey, value);
+            }
+        }
+        function travelArray(pk, o) {
+            for (var i = 0; i < o.length; ++i) {
+                var key = pk + '[' + i + ']';
+                travelX(key, o[i]);
+            }
+        }
+        function travelX(pk, value) {
+            if ($.isArray(value)) {
+                travelArray(pk, value);
+            }
+            else if (typeof value == 'object') {
+                travelObject(pk, value);
+            }
+            else {
+                travelSimple(pk, value);
+            }
+        }
+        travelObject(null, data);
+        form.style.display = 'none';
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(function () { return form.parentNode.removeChild(form); }, 15);
+    }
     return new viewModel();
 });

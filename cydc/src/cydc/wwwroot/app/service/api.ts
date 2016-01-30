@@ -56,6 +56,10 @@ module service {
         historyList(query?: baseQuery) {
             return http.post('/api/foodOrder/historyList', query);
         }
+
+        export(time: Date, userName: string) {
+            return http.post('/api/foodOrder/export', { time: time, userName: userName });
+        }
     }
 
     class menuIndex {

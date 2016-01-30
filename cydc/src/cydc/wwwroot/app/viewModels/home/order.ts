@@ -31,10 +31,57 @@ class viewModel extends pager<idName> {
         this.searchParams({ time: this.queryTime(), userName: this.userName() });
         this.loadData();
     }
-    
+
     exportExcel() {
-        console.log(1);
+        postForm('/api/foodOrder/export', { time: this.queryTime(), userName: this.userName() });
     }
+}
+function postForm(url: string, data: Object) {
+    var form = document.createElement('form');
+    form.action = url;
+    form.method = 'POST';
+    form.target = '_black';
+
+    function travelSimple(key: string, value: number | string) {
+        if (value !== undefined) {
+            var input = document.createElement('textarea');
+            input.name = key;
+            input.value = <string>value;
+            form.appendChild(input);
+        }
+    }
+
+    function travelObject(pk: string, o: Object) {
+        for (var key in o) {
+            var value = o[key];
+            var trueKey = pk ? pk + '.' + key : key;
+            travelX(trueKey, value);
+        }
+    }
+
+    function travelArray(pk: string, o: Array<any>) {
+        for (var i = 0; i < o.length; ++i) {
+            var key = pk + '[' + i + ']';
+            travelX(key, o[i]);
+        }
+    }
+
+    function travelX(pk: string, value: Array<any> | Object | string | number) {
+        if ($.isArray(value)) {
+            travelArray(pk, <Array<any>>value);
+        } else if (typeof value == 'object') {
+            travelObject(pk, <Object>value);
+        } else {
+            travelSimple(pk, <string>value);
+        }
+    }
+
+    travelObject(null, data);
+
+    form.style.display = 'none';
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.parentNode.removeChild(form), 15);
 }
 
 interface idName {
