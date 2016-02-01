@@ -8,15 +8,8 @@
                 <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
             </div>
         </div>
-        <div class="col-sm-9 clearfix mt-15">
-            <div class="checkbox pull-right">
-                <div class="type-sh4 cl-blue">
-
-                </div>
-            </div>
-        </div>
     </div>
-    <div class="row" data-bind="if:console.log(items().length()>0)||items().length()>0">
+    <div class="row" data-bind="if: items().length">
         <div class="col-sm-3">
             <div class="form-group">
                 <span>显示行数</span>
