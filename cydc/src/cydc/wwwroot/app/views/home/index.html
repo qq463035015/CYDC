@@ -61,7 +61,7 @@
     <div class="row" data-bind="ifnot:auth.authed">
         <h1>请登录.</h1>
     </div>
-    <div class="row">
+    <div class="row" data-bind="visible:auth.authed">
         <div class="row" style="border:1px dashed #808080; height:300px; text-align:center;line-height:300px; color:#808080; font-size:30px;">
             免费广告位出租.
         </div>
