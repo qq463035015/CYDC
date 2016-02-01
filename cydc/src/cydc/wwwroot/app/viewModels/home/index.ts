@@ -29,8 +29,8 @@ class viewModel {
             this.allMenu(data);
             this.menuTypeId(data[0] && data[0].id)
         });
-        api.type.tasteTypeDropdownList().then(data=> this.allFoodType(data));
-        api.location.locationDropdownList().then(data=> this.allLocation(data));
+        api.type.enabledTasteTypes().then(data=> this.allFoodType(data));
+        api.location.enabledLocationList().then(data=> this.allLocation(data));
         api.notice.getSiteNotice().then(data=> this.notices(data));
     }
 
