@@ -14,7 +14,6 @@ class viewModel {
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
     notices = ko.observable<string>();
-    noData = ko.observable<boolean>(true);
     foodOrder = new foodOrders();
 
     menu = ko.pureComputed({
@@ -29,7 +28,7 @@ class viewModel {
         api.menu.enableList().then(data=> {
             this.allMenu(data);
             this.menuTypeId(data[0] && data[0].id)
-        }).fail(() => this.noData(false));
+        });
         api.type.tasteTypeDropdownList().then(data=> this.allFoodType(data));
         api.location.locationDropdownList().then(data=> this.allLocation(data));
         api.notice.getSiteNotice().then(data=> this.notices(data));
@@ -59,19 +58,16 @@ class viewModel {
         if (auth.authed()) {
             let now = moment().format('YYYY-MM-DD HH:mm:ss');
             let morning = moment().format('YYYY-MM-DD 10:30:00');
-            let afternoon = moment().format('YYYY-MM-DD 24:00:00');
+            let afternoon = moment().format('YYYY-MM-DD 17:30:00');
             if (!((now < morning) || (now > morning && now < afternoon))) {
-                utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
-                $('#modal-sample').modal('hide');
-                return null;
+                this.tips();
             }
-            $('#modal-sample').modal('hide');
             api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
                 $('#modal-sample').modal('hide');
-                localStorage.setItem('locationId', this.locationId());
-                localStorage.setItem('foodTypeId', this.foodTypeId());
+                this.setCookie();
                 this.comment(null);
-                location.href = '/home/record';
+
+                router.navigate('/home/record', { replace: true, trigger: true });
             }).fail(() => {
                 utils.confirm('', '点餐失败！').then(cs => {
                     cs.close();
@@ -79,8 +75,19 @@ class viewModel {
             });
         }
         else {
-            location.href = '/account/login';
+            router.navigate('/account/login', { replace: true, trigger: true });
         }
+    }
+
+    setCookie() {
+        localStorage.setItem('locationId', this.locationId());
+        localStorage.setItem('foodTypeId', this.foodTypeId());
+    }
+
+    tips() {
+        utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
+        $('#modal-sample').modal('hide');
+        return null;
     }
 }
 

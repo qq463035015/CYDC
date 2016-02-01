@@ -8,7 +8,6 @@ import ko_bindings = require('service/ko_bindings');
 class viewModel extends pager<idName>{
     onlyMe = ko.observable<boolean>(true);
     queryTime = ko.observable<Date>();
-    noData = ko.observable<boolean>(true);
     constructor() {
         super('/api/foodOrder/historyList');
         ko_bindings.fuck();
@@ -17,7 +16,7 @@ class viewModel extends pager<idName>{
 
     query() {
         this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
-        this.loadData().fail(() => this.noData(false));
+        this.loadData();
     }
 }
 

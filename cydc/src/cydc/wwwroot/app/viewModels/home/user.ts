@@ -13,12 +13,15 @@ class viewModel extends pager<idName>{
     }
 
     addAmount(data: any) {
-        api.accountDetails.create(this.userId(), this.price()).then(() => {
-            $('#modal-sample').modal('hide');
-            utils.confirm('', '添加成功').then(cs => cs.close());
-            this.loadData();
-            this.price(null);
-        });
+        if (this.price()) {
+            return api.accountDetails.create(this.userId(), this.price()).then(() => {
+                $('#modal-sample').modal('hide');
+                utils.confirm('', '添加成功').then(cs => cs.close());
+                this.loadData();
+                this.price(null);
+            });
+        }
+        confirm("请输入正确的金额.");
     }
 
     saveUserId(data: any) {
