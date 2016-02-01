@@ -59,14 +59,10 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 $('#modal-sample').modal('hide');
                 api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
                     $('#modal-sample').modal('hide');
-                    utils.confirm('', '点餐成功！').then(function (cs) {
-                        cs.close();
-                    }).then(function () {
-                        localStorage.setItem('locationId', _this.locationId());
-                        localStorage.setItem('foodTypeId', _this.foodTypeId());
-                        _this.loadData();
-                        _this.comment(null);
-                    });
+                    localStorage.setItem('locationId', _this.locationId());
+                    localStorage.setItem('foodTypeId', _this.foodTypeId());
+                    _this.comment(null);
+                    location.href = '/home/record';
                 }).fail(function () {
                     utils.confirm('', '点餐失败！').then(function (cs) {
                         cs.close();

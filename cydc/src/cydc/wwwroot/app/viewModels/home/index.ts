@@ -68,14 +68,10 @@ class viewModel {
             $('#modal-sample').modal('hide');
             api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
                 $('#modal-sample').modal('hide');
-                utils.confirm('', '点餐成功！').then(cs => {
-                    cs.close();
-                }).then(() => {
-                    localStorage.setItem('locationId', this.locationId());
-                    localStorage.setItem('foodTypeId', this.foodTypeId());
-                    this.loadData();
-                    this.comment(null);
-                });
+                localStorage.setItem('locationId', this.locationId());
+                localStorage.setItem('foodTypeId', this.foodTypeId());
+                this.comment(null);
+                location.href = '/home/record';
             }).fail(() => {
                 utils.confirm('', '点餐失败！').then(cs => {
                     cs.close();

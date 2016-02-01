@@ -23,6 +23,7 @@ namespace cydc.Controllers
 
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
+            query.OnlyMe = true;
             IQueryable<FoodOrder> data = DbContext.FoodOrders
                 .OrderByDescending(x => x.OrderTime)
                 .Include(x => x.FoodMenu)
@@ -53,7 +54,7 @@ namespace cydc.Controllers
             var data = GetFoodOrderList(query).ToList();
             var list = FoodOrderExcelDto.FromEntities(data);
             return ExcelFile(
-                ExcelManager.ExportToStream(list), 
+                ExcelManager.ExportToStream(list),
                 $"{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx");
         }
 
