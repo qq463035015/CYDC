@@ -1,10 +1,10 @@
 ﻿<div class="container">
-    <div class="row">
+    <div class="row" data-bind="if:menu().length > 0">
         <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js" data-bind="if:notices()">
             <div class="alert alert-warning alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <strong>通知信息</strong>
-                <span data-bind="text:notices().content"></span>
+                <span data-bind="html:notices().content"></span>
             </div>
         </div>
         <div class="col-sm-24" data-bind="with:menu()[0]">
@@ -57,6 +57,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" data-bind="ifnot:menu().length > 0">
+        <h1>请登录.</h1>
     </div>
 </div>
 
