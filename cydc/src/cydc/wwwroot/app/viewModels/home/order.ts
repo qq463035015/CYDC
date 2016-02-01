@@ -16,14 +16,12 @@ class viewModel extends pager<idName> {
     }
 
     drop(data) {
-        utils.confirm('', '确定要退订吗？').then(cs=> {
+        utils.confirm('确定要退订吗？').then(cs=> {
             cs.close();
             return api.order.delete(data.id);
         }).then(() => {
             this.loadData();
-            utils.confirm('退订成功！', '').then(cs=> {
-                cs.close();
-            });
+            utils.alert('退订成功！');
         });
     }
 

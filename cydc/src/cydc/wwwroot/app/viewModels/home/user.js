@@ -18,7 +18,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             if (this.price()) {
                 return api.accountDetails.create(this.userId(), this.price()).then(function () {
                     $('#modal-sample').modal('hide');
-                    utils.confirm('', '添加成功').then(function (cs) { return cs.close(); });
+                    utils.confirm('添加成功');
                     _this.loadData();
                     _this.price(null);
                 });

@@ -26,19 +26,18 @@ class viewModel extends pager<idName> {
     }
 
     drop(data: idEnbale) {
-        utils.confirm('', '确定要删除吗？').then(cs => {
+        utils.confirm('确定要删除吗？').then(cs => {
             cs.close();
             return api.menu.delete(data.id);
         }).then(() => this.loadData()).fail(() => {
-            confirm('该菜谱已经被引用过，不能删除');
-        });;
+            utils.alert('该菜谱已经被引用过，不能删除');
+        });
     }
 
-    UpdateEnable(data: idEnbale) {
+    toggleEnable(data: idEnbale) {
         api.menu.update(data.id, !data.enabled).then(() => {
-            utils.confirm('', '修改成功！').then(cs => {
-                cs.close();
-            }).then(() => this.loadData());
+            utils.alert('修改成功！');
+            this.loadData();
         });
     }
 }

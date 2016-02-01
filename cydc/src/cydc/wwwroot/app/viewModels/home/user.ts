@@ -16,7 +16,7 @@ class viewModel extends pager<idName>{
         if (this.price()) {
             return api.accountDetails.create(this.userId(), this.price()).then(() => {
                 $('#modal-sample').modal('hide');
-                utils.confirm('', '添加成功').then(cs => cs.close());
+                utils.confirm('添加成功');
                 this.loadData();
                 this.price(null);
             });

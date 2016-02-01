@@ -6,7 +6,7 @@ import auth = require('service/auth');
 import moment = require('moment');
 
 class viewModel {
-    allMenu = ko.observableArray();
+    allMenu = ko.observableArray<foodMenu>();
     allLocation = ko.observableArray<any>();
     allFoodType = ko.observableArray<any>();
     locationId = ko.observable<any>(localStorage['locationId'] || null);
@@ -15,14 +15,9 @@ class viewModel {
     comment = ko.observable<any>();
     notices = ko.observable<string>();
     foodOrder = new foodOrders();
-
-    menu = ko.pureComputed({
-        read: () => {
-            return ko.utils.arrayFilter(this.allMenu(), (item: any) => {
-                return this.menuTypeId() == item.id;
-            });
-        }
-    });
+    auth = auth;
+    
+    menu = ko.pureComputed(() => this.allMenu().filter(x => this.menuTypeId() == x.id)[0]);
 
     loadData() {
         api.menu.enableList().then(data=> {
@@ -36,6 +31,7 @@ class viewModel {
 
     constructor() {
         this.loadData();
+        console.log(this);
     }
 
     idName(arr: Array<any>, id): any {
@@ -69,9 +65,7 @@ class viewModel {
 
                 router.navigate('/home/record', { replace: true, trigger: true });
             }).fail(() => {
-                utils.confirm('', '点餐失败！').then(cs => {
-                    cs.close();
-                });
+                utils.alert('点餐失败！');
             });
         }
         else {
@@ -85,7 +79,7 @@ class viewModel {
         }
 
     tips() {
-        utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
+        utils.alert('超过点餐时间,请联系管理员！');
         $('#modal-sample').modal('hide');
         return null;
     }
@@ -100,3 +94,8 @@ class foodOrders {
     comment = ko.observable();
 }
 export = new viewModel();
+
+interface foodMenu {
+    id: number, 
+    details: string
+}

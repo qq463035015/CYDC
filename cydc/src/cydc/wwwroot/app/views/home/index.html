@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <div class="row" data-bind="if:menu().length > 0">
+    <div class="row" data-bind="visible:auth.authed">
         <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js" data-bind="if:notices()">
             <div class="alert alert-warning alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -7,19 +7,19 @@
                 <span data-bind="html:notices().content"></span>
             </div>
         </div>
-        <div class="col-sm-24" data-bind="with:menu()[0]">
+        <div class="col-sm-24">
             <div class="col-sm-12">
                 <img src="../images/pay.jpg" width="500" height="415" />
             </div>
             <div class="col-sm-12">
                 <div class="type-sh3"><b>今日菜谱</b></div>
-                <div class="type-sh3" data-bind="text:details"></div>
+                <div class="type-sh3" data-bind="text:menu()&&menu().details"></div>
             </div>
             <div class="col-sm-6">
                 <div class="type-sh3"><b>套餐类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.menuTypeId,options:$parent.allMenu,optionsValue:'id',optionsText:'title'"></select>
+                        <select class="form-control" data-bind="value:menuTypeId,options:allMenu,optionsValue:'id',optionsText:'title'"></select>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="type-sh3"><b>口味类型</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.foodTypeId,options:$parent.allFoodType,optionsValue:'id',optionsText:'name'"></select>
+                        <select class="form-control" data-bind="value:foodTypeId,options:allFoodType,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
@@ -35,30 +35,30 @@
                 <div class="type-sh3"><b>点餐地点</b></div>
                 <div class="form-group">
                     <div class="combobox">
-                        <select class="form-control" data-bind="value:$parent.locationId,options:$parent.allLocation,optionsValue:'id',optionsText:'name'"></select>
+                        <select class="form-control" data-bind="value:locationId,options:allLocation,optionsValue:'id',optionsText:'name'"></select>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="type-sh3"><b>金额(元)</b></div>
                 <div class="form-group">
-                    <input type='text' class='form-control' readonly data-bind="value:price" />
+                    <input type='text' class='form-control' readonly data-bind="value:menu()&&menu().price" />
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="type-sh3"><b>备注信息</b></div>
                 <div class="form-group">
-                    <textarea id="info" rows="2" data-bind="value:$parent.comment"></textarea>
+                    <textarea id="info" rows="2" data-bind="value:comment"></textarea>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="btn-group mt-40">
-                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.commit.bind($parent,$data)">提交</a>
+                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:commit">提交</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" data-bind="ifnot:menu().length > 0">
+    <div class="row" data-bind="ifnot:console.log(auth.authed()) || auth.authed">
         <h1>请登录.</h1>
     </div>
 </div>
