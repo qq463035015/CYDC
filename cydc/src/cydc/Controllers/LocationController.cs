@@ -26,9 +26,9 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public object LocationDropdownList(LocationQuery query)
+        public object EnabledLocationList(LocationQuery query)
         {
-            IQueryable<Location> data = DbContext.Locations;
+            IQueryable<Location> data = DbContext.Locations.Where(x => x.Enabled == true);
             return data.CreateList(query);
         }
 

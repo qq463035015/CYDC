@@ -28,7 +28,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 _this.menuTypeId(data[0] && data[0].id);
             }).fail(function () { return _this.noData(false); });
             api.type.enabledTasteTypes().then(function (data) { return _this.allFoodType(data); });
-            api.location.locationDropdownList().then(function (data) { return _this.allLocation(data); });
+            api.location.enabledLocationList().then(function (data) { return _this.allLocation(data); });
             api.notice.getSiteNotice().then(function (data) { return _this.notices(data); });
         };
         viewModel.prototype.idName = function (arr, id) {
