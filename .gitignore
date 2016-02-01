@@ -211,3 +211,4 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /cydc/src/cydc/bower_components
+appsettings.json
