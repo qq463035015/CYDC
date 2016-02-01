@@ -82,7 +82,7 @@ class viewModel {
     setCookie() {
         localStorage.setItem('locationId', this.locationId());
         localStorage.setItem('foodTypeId', this.foodTypeId());
-    }
+        }
 
     tips() {
         utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());

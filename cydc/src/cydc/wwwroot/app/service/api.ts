@@ -95,8 +95,12 @@ module service {
             return http.post('/api/tasteType/list', query);
         }
 
-        tasteTypeDropdownList(query?: baseQuery) {
-            return http.post('/api/tasteType/tasteTypeDropdownList', query);
+        enabledTasteTypes(query?: baseQuery) {
+            return http.post('/api/tasteType/enabledTasteTypes', query);
+        }
+
+        toggleEnable(id: number, enabled: boolean) {
+            return http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
         }
 
         delete(id: number) {
@@ -113,8 +117,12 @@ module service {
             return http.post('/api/location/list', query);
         }
 
-        locationDropdownList(query?: baseQuery) {
-            return http.post('/api/location/locationDropdownList', query);
+        enabledLocationList(query?: baseQuery) {
+            return http.post('/api/location/enabledLocationList', query);
+        }
+
+        toggleEnable(id: number, enabled: boolean) {
+            return http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
         }
 
         delete(id: number) {

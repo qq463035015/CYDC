@@ -17,12 +17,22 @@
                 <thead>
                     <tr>
                         <th><b>类型名称</b></th>
+                        <th>是否可用</th>
                         <th class="text-right"><b>删除</b></th>
                     </tr>
                 </thead>
                 <tbody data-bind="foreach:items">
                     <tr>
                         <td data-bind="text:name"></td>
+                        <td>
+                            <div class="btn-group mt-30 h-0" data-bind="click: $parent.toggleEnabled.bind($parent, $data)">
+                                <button type="button" data-toggle="button" autocomplete="off"
+                                        data-bind="attr:{'class':enabled?'btn btn-toggle-switch active':'btn btn-toggle-switch'}">
+                                    <span class="stateLabel stateLabel-on">可用</span>
+                                    <span class="stateLabel stateLabel-off">不可用</span>
+                                </button>
+                            </div>
+                        </td>
                         <td class="text-right"><span class="glyph glyph-delete" data-bind="click:$parent.drop.bind($parent)"></span></td>
                     </tr>
                 </tbody>

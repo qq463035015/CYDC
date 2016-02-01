@@ -100,8 +100,11 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             tasteType.prototype.list = function (query) {
                 return http.post('/api/tasteType/list', query);
             };
-            tasteType.prototype.tasteTypeDropdownList = function (query) {
-                return http.post('/api/tasteType/tasteTypeDropdownList', query);
+            tasteType.prototype.enabledTasteTypes = function (query) {
+                return http.post('/api/tasteType/enabledTasteTypes', query);
+            };
+            tasteType.prototype.toggleEnable = function (id, enabled) {
+                return http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
             };
             tasteType.prototype.delete = function (id) {
                 return http.post('/api/tasteType/delete', { id: id });
@@ -117,8 +120,11 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             location.prototype.list = function (query) {
                 return http.post('/api/location/list', query);
             };
-            location.prototype.locationDropdownList = function (query) {
-                return http.post('/api/location/locationDropdownList', query);
+            location.prototype.enabledLocationList = function (query) {
+                return http.post('/api/location/enabledLocationList', query);
+            };
+            location.prototype.toggleEnable = function (id, enabled) {
+                return http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
             };
             location.prototype.delete = function (id) {
                 return http.post('/api/location/delete', { id: id });

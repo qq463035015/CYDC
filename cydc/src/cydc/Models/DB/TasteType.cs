@@ -10,6 +10,8 @@ namespace cydc.Models
     {
         public int Id { get; set; }
 
+        public bool Enabled { get; set; }
+
         [Required]
         [MaxLength(10)]
         public string Name { get; set; }

@@ -18,6 +18,13 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 .then(function () { return _this.loadData(); })
                 .then(function () { return _this.name(''); });
         };
+        viewModel.prototype.toggleEnable = function (item) {
+            var _this = this;
+            return api.location.toggleEnable(item.id, !item.enabled).then(function () {
+                _this.loadData();
+                return utils.confirm('', '修改成功！');
+            }).then(function (cs) { return cs.close(); });
+        };
         viewModel.prototype.drop = function (data) {
             var _this = this;
             utils.confirm('', '确定要删除吗？').then(function (cs) {
