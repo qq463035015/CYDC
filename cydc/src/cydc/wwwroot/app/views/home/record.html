@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container" data-bind="visible:auth.authed">
     <div class="row">
         <div class="form-group col-sm-6">
             <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="row" data-bind="if:console.log(items().length()>0)||items().length()>0">
+    <div class="row" data-bind="if:items.length>0">
         <div class="col-sm-3">
             <div class="form-group">
                 <span>显示行数</span>
@@ -73,7 +73,10 @@
             </div>
         </div>
     </div>
-    <div class="row text-center" data-bind="ifnot:items().length>0">
+    <div class="row text-center" data-bind="ifnot:items.length>0">
         <h3>没有查询到相关数据.</h3>
+    </div>
+    <div class="row" data-bind="ifnot:auth.authed">
+        <h1>请登录.</h1>
     </div>
 </div>

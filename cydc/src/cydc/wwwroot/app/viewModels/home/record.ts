@@ -3,11 +3,14 @@ import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
 import pager = require('service/pager');
+import auth = require('service/auth');
 import ko_bindings = require('service/ko_bindings');
 
 class viewModel extends pager<idName>{
     onlyMe = ko.observable<boolean>(true);
     queryTime = ko.observable<Date>();
+    auth = auth;
+
     constructor() {
         super('/api/foodOrder/historyList');
         ko_bindings.fuck();
