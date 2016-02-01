@@ -44,7 +44,7 @@ namespace cydc.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
-            await PreloginCheck();
+            await PreloginCheck().ConfigureAwait(false);
 
             if (ModelState.IsValid)
             {
@@ -54,11 +54,8 @@ namespace cydc.Controllers
                 var passwordOk = await _userManager.CheckPasswordAsync(user, dto.Password);
                 if (!passwordOk) return HttpBadRequest("PASSWORD_NOT_OK");
 
-                await _signInManager.SignInAsync(user, dto.RememberMe);
-                return Json(new
-                {
-                    UserName = user.UserName
-                });
+                await _signInManager.SignInAsync(user, dto.RememberMe).ConfigureAwait(false);
+                return Ok();
             }
             else
             {
@@ -149,14 +146,20 @@ namespace cydc.Controllers
             return Json(result == null);
         }
 
+        [AllowAnonymous]
+        public object LoginStatus()
+        {
+            return new
+            {
+                Authed = User.Identity.IsAuthenticated,
+                UserName = User.Identity.Name, 
+                IsAdmin = User.IsInRole(Admin)
+            };
+        }
+
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
-        }
-
-        public ActionResult Hide()
-        {
-            return Content("这是一个隐藏的资源");
         }
 
         private async Task<ApplicationUser> TryFindUserByNameOrEmail(string userNameOrEmail)

@@ -1,51 +1,37 @@
 ﻿import ko = require('knockout');
+import http = require('plugins/http');
 
 module service {
     export class auth {
-        onLogin(ctx: { userName: string }) {
-            this.authed(true);
-            this.userName(ctx.userName);
-            this.saveState();
+        authed = ko.observable<boolean>();
+        userName = ko.observable<string>();
+        isAdmin = ko.observable<boolean>(false);
+
+        refreshState() {
+            return http.post('/api/account/loginStatus', null).then((a: authObj) => {
+                this.authed(a.authed);
+                this.userName(a.userName);
+                this.isAdmin(a.isAdmin);
+            });
+        }
+
+        onLogin() {
+            this.refreshState();
         }
 
         onLogout() {
-            this.authed(false);
-            this.userName(null);
-            this.saveState();
+            this.refreshState();
         }
-
-        authed = ko.observable<boolean>();
-
-        userName = ko.observable<string>();
 
         constructor() {
-            this.loadState();
-        }
-        
-        private loadState() {
-            let obj = <authObj>JSON.parse(sessionStorage.getItem(keys.authObj));
-            if (obj != null) {
-                this.userName(obj.userName);
-                this.authed(obj.authed);
-            }
-        }
-
-        private saveState() {
-            let obj: authObj = {
-                authed: this.authed(), 
-                userName: this.userName()
-            };
-            sessionStorage.setItem(keys.authObj, JSON.stringify(obj));
+            this.refreshState();
         }
     }
 
     interface authObj {
         userName: string;
         authed: boolean;
-    }
-    
-    class keys {
-        static authObj = 'auth-obj';
+        isAdmin: boolean;
     }
 }
 

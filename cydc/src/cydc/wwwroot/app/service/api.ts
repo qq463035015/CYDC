@@ -156,9 +156,7 @@ module service {
 
     class account {
         login(userName: string, password: string) {
-            return http.post('/api/account/login', { userName: userName, password: password }).then((ctx) => {
-                auth.onLogin(ctx);
-            });
+            return http.post('/api/account/login', { userName: userName, password: password }).then(() => auth.onLogin());
         }
 
         register(email: string, username: string, password: string, confirmedPassword: string) {
