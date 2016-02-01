@@ -9,8 +9,8 @@ class viewModel {
     allMenu = ko.observableArray();
     allLocation = ko.observableArray<any>();
     allFoodType = ko.observableArray<any>();
-    locationId = ko.observable<any>();
-    foodTypeId = ko.observable<any>();
+    locationId = ko.observable<any>(localStorage['locationId'] || null);
+    foodTypeId = ko.observable<any>(localStorage['foodTypeId'] || null);
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
     notices = ko.observable<string>();
@@ -71,6 +71,8 @@ class viewModel {
                 utils.confirm('', '点餐成功！').then(cs => {
                     cs.close();
                 }).then(() => {
+                    localStorage.setItem('locationId', this.locationId());
+                    localStorage.setItem('foodTypeId', this.foodTypeId());
                     this.loadData();
                     this.comment(null);
                 });

@@ -5,8 +5,8 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.allMenu = ko.observableArray();
             this.allLocation = ko.observableArray();
             this.allFoodType = ko.observableArray();
-            this.locationId = ko.observable();
-            this.foodTypeId = ko.observable();
+            this.locationId = ko.observable(localStorage['locationId'] || null);
+            this.foodTypeId = ko.observable(localStorage['foodTypeId'] || null);
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
             this.notices = ko.observable();
@@ -62,6 +62,8 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                     utils.confirm('', '点餐成功！').then(function (cs) {
                         cs.close();
                     }).then(function () {
+                        localStorage.setItem('locationId', _this.locationId());
+                        localStorage.setItem('foodTypeId', _this.foodTypeId());
                         _this.loadData();
                         _this.comment(null);
                     });
