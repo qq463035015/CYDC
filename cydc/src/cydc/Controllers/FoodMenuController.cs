@@ -15,10 +15,10 @@ namespace cydc.Controllers
 
         public async Task<object> List([FromBody] FoodMenuQuery query)
         {
-            IQueryable<FoodMenu> data = DBContext.FoodMenus;
+            IQueryable<FoodMenu> data = DBContext.FoodMenus.OrderByDescending(x => x.Enabled);
             return await data.CreatePagedList(query);
         }
-        
+
         public object EnableList(FoodMenuQuery query)
         {
             IQueryable<FoodMenu> data = DBContext.FoodMenus;
