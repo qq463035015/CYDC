@@ -103,6 +103,9 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             tasteType.prototype.tasteTypeDropdownList = function (query) {
                 return http.post('/api/tasteType/tasteTypeDropdownList', query);
             };
+            tasteType.prototype.toggleEnable = function (id, enabled) {
+                return http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
+            };
             tasteType.prototype.delete = function (id) {
                 return http.post('/api/tasteType/delete', { id: id });
             };

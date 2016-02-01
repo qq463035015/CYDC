@@ -43,8 +43,7 @@ class viewModel extends pager<idName> {
     }
 }
 
-interface idEnbale {
-    id: number;
+interface idEnbale extends idName {
     enabled: boolean;
 }
 

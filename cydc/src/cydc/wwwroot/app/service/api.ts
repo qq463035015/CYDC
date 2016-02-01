@@ -99,6 +99,10 @@ module service {
             return http.post('/api/tasteType/tasteTypeDropdownList', query);
         }
 
+        toggleEnable(id: number, enabled: boolean) {
+            return http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
+        }
+
         delete(id: number) {
             return http.post('/api/tasteType/delete', { id: id });
         }

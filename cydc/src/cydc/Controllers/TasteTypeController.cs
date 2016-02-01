@@ -1,6 +1,7 @@
 ﻿using cydc.Models;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,14 @@ namespace cydc.Controllers
         public async Task<int> Delete([FromBody]TasteType type)
         {
             DBContext.Remove(type);
+            return await DBContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> ToggleEnable([FromBody]TasteType type)
+        {
+            var data = await DBContext.TasteTypes.SingleAsync(x => x.Id == type.Id);
+            data.Enabled = type.Enabled;
             return await DBContext.SaveChangesAsync();
         }
     }
