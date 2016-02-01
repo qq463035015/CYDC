@@ -11,14 +11,10 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             this.comment = ko.observable();
             this.notices = ko.observable();
             this.foodOrder = new foodOrders();
-            this.menu = ko.pureComputed({
-                read: function () {
-                    return ko.utils.arrayFilter(_this.allMenu(), function (item) {
-                        return _this.menuTypeId() == item.id;
-                    });
-                }
-            });
+            this.auth = auth;
+            this.menu = ko.pureComputed(function () { return _this.allMenu().filter(function (x) { return _this.menuTypeId() == x.id; })[0]; });
             this.loadData();
+            console.log(this);
         }
         viewModel.prototype.loadData = function () {
             var _this = this;
@@ -54,9 +50,7 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
                     location.href = "/home/record";
                     //router.navigate('/home/record', { replace: true, trigger: true });
                 }).fail(function () {
-                    utils.confirm('', '点餐失败！').then(function (cs) {
-                        cs.close();
-                    });
+                    utils.alert('点餐失败！');
                 });
             }
             else {

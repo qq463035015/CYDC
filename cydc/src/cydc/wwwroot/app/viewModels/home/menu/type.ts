@@ -25,18 +25,17 @@ class viewModel extends pager<data> {
 
     toggleEnabled(item: data) {
         api.type.toggleEnable(item.id, !item.enabled).then(() => {
-            utils.confirm('', '修改成功！').then(cs => {
-                cs.close();
-            }).then(() => this.loadData());
+            utils.alert('修改成功！');
+            this.loadData();
         });
     }
 
     drop(data: data) {
-        return utils.confirm('', '你确定要删除吗？').then(cs => {
+        return utils.confirm('你确定要删除吗？').then(cs => {
             cs.close();
             return api.type.delete(data.id);
         }).then(() => this.loadData()).fail(() => {
-            confirm('该菜谱已经被引用过，不能删除');
+            utils.alert('该菜谱已经被引用过，不能删除');
         });
     }
 }

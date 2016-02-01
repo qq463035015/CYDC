@@ -9,7 +9,8 @@ define(["require", "exports", 'jquery', 'knockout.validation'], function (requir
                 setTimeout(function () { return promise.resolve(); }, timeMs);
                 return promise.promise();
             };
-            utils.prototype.confirm = function (text, title) {
+            utils.prototype.confirm = function (title, text) {
+                if (text === void 0) { text = ''; }
                 var html = "<div class=\"modal fade confirm-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modal-sample\">\n                            <div class=\"modal-dialog\" role=\"document\">\n                                <div class=\"modal-content\">\n                                    <div class=\"modal-header\">\n                                        <h4 class=\"modal-title\" id=\"modal-sample-label\">\n                                            " + title + "\n                                        </h4>\n                                    </div>\n                                    <div class=\"modal-body\">\n                                        " + text + "\n                                    </div>\n                                    <div class=\"modal-footer\">\n                                        <button type=\"button\" class=\"btn btn-info\"\n                                                data-dismiss=\"modal\">\n                                            \u53D6\u6D88\n                                        </button>\n                                        <button type=\"button\" class=\"btn btn-primary\">\n                                            \u786E\u5B9A\n                                        </button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>";
                 var $html = $(html);
                 $html.appendTo(document.body);
@@ -20,6 +21,24 @@ define(["require", "exports", 'jquery', 'knockout.validation'], function (requir
                 };
                 $html.find('.btn-primary').click(function () { return promise.resolve(closeService); });
                 $html.on('hide.bs.modal', function () { return promise.reject(); });
+                $html.on('hidden.bs.modal', function () { return $html.remove(); });
+                return promise.promise();
+            };
+            utils.prototype.alert = function (title, text) {
+                if (text === void 0) { text = ''; }
+                var html = "<div class=\"modal fade confirm-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modal-sample\">\n                            <div class=\"modal-dialog\" role=\"document\">\n                                <div class=\"modal-content\">\n                                    <div class=\"modal-header\">\n                                        <h4 class=\"modal-title\" id=\"modal-sample-label\">\n                                            " + title + "\n                                        </h4>\n                                    </div>\n                                    <div class=\"modal-body\">\n                                        " + text + "\n                                    </div>\n                                    <div class=\"modal-footer\">\n                                        <button type=\"button\" class=\"btn btn-primary\">\n                                            \u786E\u5B9A\n                                        </button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>";
+                var $html = $(html);
+                $html.appendTo(document.body);
+                $html.modal();
+                var promise = $.Deferred();
+                var closeService = {
+                    close: function () { return $html.modal('hide'); }
+                };
+                $html.find('.btn-primary').click(function () {
+                    $html.modal('hide');
+                    promise.resolve(closeService);
+                });
+                $html.on('hide.bs.modal', function () { return promise.resolve(); });
                 $html.on('hidden.bs.modal', function () { return $html.remove(); });
                 return promise.promise();
             };

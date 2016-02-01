@@ -25,7 +25,8 @@ namespace cydc
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($@"C:\state\config\cydc.json", optional: true);
 
             if (env.IsDevelopment())
             {

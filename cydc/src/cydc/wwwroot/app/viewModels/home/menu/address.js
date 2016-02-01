@@ -22,16 +22,16 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             var _this = this;
             return api.location.toggleEnable(item.id, !item.enabled).then(function () {
                 _this.loadData();
-                return utils.confirm('', '修改成功！');
-            }).then(function (cs) { return cs.close(); });
+                return utils.alert('修改成功！');
+            });
         };
         viewModel.prototype.drop = function (data) {
             var _this = this;
-            utils.confirm('', '确定要删除吗？').then(function (cs) {
+            utils.confirm('确定要删除吗？').then(function (cs) {
                 cs.close();
                 return api.location.delete(data.id);
             }).then(function () { return _this.loadData(); }).fail(function () {
-                confirm('该菜谱已经被引用过，不能删除');
+                utils.alert('该菜谱已经被引用过，不能删除');
             });
         };
         return viewModel;

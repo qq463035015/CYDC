@@ -15,14 +15,12 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
         }
         viewModel.prototype.drop = function (data) {
             var _this = this;
-            utils.confirm('', '确定要退订吗？').then(function (cs) {
+            utils.confirm('确定要退订吗？').then(function (cs) {
                 cs.close();
                 return api.order.delete(data.id);
             }).then(function () {
                 _this.loadData();
-                utils.confirm('退订成功！', '').then(function (cs) {
-                    cs.close();
-                });
+                utils.alert('退订成功！');
             });
         };
         viewModel.prototype.query = function () {

@@ -10,7 +10,7 @@ module service {
             return promise.promise();
         }
 
-        confirm(text: string, title?: string) {
+        confirm(title: string, text = '') {
             let html = `<div class="modal fade confirm-modal" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -45,6 +45,45 @@ module service {
 
             $html.find('.btn-primary').click(() => promise.resolve(closeService));
             $html.on('hide.bs.modal', () => promise.reject());
+            $html.on('hidden.bs.modal', () => $html.remove());
+
+            return promise.promise();
+        }
+
+        alert(title: string, text = '') {
+            let html = `<div class="modal fade confirm-modal" tabindex="-1" role="dialog" aria-labelledby="modal-sample">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-sample-label">
+                                            ${title}
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ${text}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">
+                                            确定
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+            let $html = $(html);
+            $html.appendTo(document.body);
+            $html.modal();
+
+            var promise = $.Deferred<{ close(): void }>();
+            var closeService = {
+                close: () => $html.modal('hide')
+            };
+
+            $html.find('.btn-primary').click(() => {
+                $html.modal('hide');
+                promise.resolve(closeService);
+            });
+            $html.on('hide.bs.modal', () => promise.resolve());
             $html.on('hidden.bs.modal', () => $html.remove());
 
             return promise.promise();

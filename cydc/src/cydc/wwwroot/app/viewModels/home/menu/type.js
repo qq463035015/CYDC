@@ -21,18 +21,17 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
         viewModel.prototype.toggleEnabled = function (item) {
             var _this = this;
             api.type.toggleEnable(item.id, !item.enabled).then(function () {
-                utils.confirm('', '修改成功！').then(function (cs) {
-                    cs.close();
-                }).then(function () { return _this.loadData(); });
+                utils.alert('修改成功！');
+                _this.loadData();
             });
         };
         viewModel.prototype.drop = function (data) {
             var _this = this;
-            return utils.confirm('', '你确定要删除吗？').then(function (cs) {
+            return utils.confirm('你确定要删除吗？').then(function (cs) {
                 cs.close();
                 return api.type.delete(data.id);
             }).then(function () { return _this.loadData(); }).fail(function () {
-                confirm('该菜谱已经被引用过，不能删除');
+                utils.alert('该菜谱已经被引用过，不能删除');
             });
         };
         return viewModel;
