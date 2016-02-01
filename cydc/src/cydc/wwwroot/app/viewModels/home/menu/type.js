@@ -23,10 +23,11 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             return utils.confirm('', '你确定要删除吗？').then(function (cs) {
                 cs.close();
                 return api.type.delete(data.id);
-            }).then(function () { return _this.loadData(); });
+            }).then(function () { return _this.loadData(); }).fail(function () {
+                confirm('该菜谱已经被引用过，不能删除');
+            });
         };
         return viewModel;
     })(pager);
     return new viewModel();
 });
-//# sourceMappingURL=type.js.map

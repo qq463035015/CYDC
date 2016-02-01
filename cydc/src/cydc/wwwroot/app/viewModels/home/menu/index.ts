@@ -29,7 +29,9 @@ class viewModel extends pager<idName> {
         utils.confirm('', '确定要删除吗？').then(cs => {
             cs.close();
             return api.menu.delete(data.id);
-        }).then(() => this.loadData());
+        }).then(() => this.loadData()).fail(() => {
+            confirm('该菜谱已经被引用过，不能删除');
+        });;
     }
 
     UpdateEnable(data: idEnbale) {
