@@ -8,7 +8,7 @@ define(["require", "exports", 'knockout', 'service/pager', 'service/ko_bindings'
         __extends(viewModel, _super);
         function viewModel() {
             _super.call(this, '/api/foodOrder/historyList');
-            this.onlyMe = ko.observable(false);
+            this.onlyMe = ko.observable(true);
             this.queryTime = ko.observable();
             this.noData = ko.observable(true);
             ko_bindings.fuck();

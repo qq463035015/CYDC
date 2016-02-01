@@ -6,7 +6,7 @@ import pager = require('service/pager');
 import ko_bindings = require('service/ko_bindings');
 
 class viewModel extends pager<idName>{
-    onlyMe = ko.observable<boolean>(false);
+    onlyMe = ko.observable<boolean>(true);
     queryTime = ko.observable<Date>();
     noData = ko.observable<boolean>(true);
     constructor() {

@@ -23,7 +23,6 @@ namespace cydc.Controllers
 
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
-            query.OnlyMe = true;
             IQueryable<FoodOrder> data = DbContext.FoodOrders
                 .OrderByDescending(x => x.OrderTime)
                 .Include(x => x.FoodMenu)
