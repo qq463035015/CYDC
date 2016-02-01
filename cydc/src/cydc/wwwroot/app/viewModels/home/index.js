@@ -1,4 +1,4 @@
-define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/auth', 'moment'], function (require, exports, api, ko, utils, auth, moment) {
+define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'service/utils', 'service/auth', 'moment'], function (require, exports, router, api, ko, utils, auth, moment) {
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -10,7 +10,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
             this.notices = ko.observable();
-            this.noData = ko.observable(true);
             this.foodOrder = new foodOrders();
             this.menu = ko.pureComputed({
                 read: function () {
@@ -26,7 +25,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             api.menu.enableList().then(function (data) {
                 _this.allMenu(data);
                 _this.menuTypeId(data[0] && data[0].id);
-            }).fail(function () { return _this.noData(false); });
+            });
             api.type.enabledTasteTypes().then(function (data) { return _this.allFoodType(data); });
             api.location.enabledLocationList().then(function (data) { return _this.allLocation(data); });
             api.notice.getSiteNotice().then(function (data) { return _this.notices(data); });
@@ -50,19 +49,15 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             if (auth.authed()) {
                 var now = moment().format('YYYY-MM-DD HH:mm:ss');
                 var morning = moment().format('YYYY-MM-DD 10:30:00');
-                var afternoon = moment().format('YYYY-MM-DD 24:00:00');
+                var afternoon = moment().format('YYYY-MM-DD 17:30:00');
                 if (!((now < morning) || (now > morning && now < afternoon))) {
-                    utils.confirm('', '超过点餐时间,请联系管理员！').then(function (cs) { return cs.close(); });
-                    $('#modal-sample').modal('hide');
-                    return null;
+                    this.tips();
                 }
-                $('#modal-sample').modal('hide');
                 api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
                     $('#modal-sample').modal('hide');
-                    localStorage.setItem('locationId', _this.locationId());
-                    localStorage.setItem('foodTypeId', _this.foodTypeId());
+                    _this.setCookie();
                     _this.comment(null);
-                    location.href = '/home/record';
+                    router.navigate('/home/record', { replace: true, trigger: true });
                 }).fail(function () {
                     utils.confirm('', '点餐失败！').then(function (cs) {
                         cs.close();
@@ -70,8 +65,17 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 });
             }
             else {
-                location.href = '/account/login';
+                router.navigate('/account/login', { replace: true, trigger: true });
             }
+        };
+        viewModel.prototype.setCookie = function () {
+            localStorage.setItem('locationId', this.locationId());
+            localStorage.setItem('foodTypeId', this.foodTypeId());
+        };
+        viewModel.prototype.tips = function () {
+            utils.confirm('', '超过点餐时间,请联系管理员！').then(function (cs) { return cs.close(); });
+            $('#modal-sample').modal('hide');
+            return null;
         };
         return viewModel;
     })();

@@ -15,12 +15,15 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
         }
         viewModel.prototype.addAmount = function (data) {
             var _this = this;
-            api.accountDetails.create(this.userId(), this.price()).then(function () {
-                $('#modal-sample').modal('hide');
-                utils.confirm('', '添加成功').then(function (cs) { return cs.close(); });
-                _this.loadData();
-                _this.price(null);
-            });
+            if (this.price()) {
+                return api.accountDetails.create(this.userId(), this.price()).then(function () {
+                    $('#modal-sample').modal('hide');
+                    utils.confirm('', '添加成功').then(function (cs) { return cs.close(); });
+                    _this.loadData();
+                    _this.price(null);
+                });
+            }
+            confirm("请输入正确的金额.");
         };
         viewModel.prototype.saveUserId = function (data) {
             this.userId(data.userId);

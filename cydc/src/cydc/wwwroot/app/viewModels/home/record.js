@@ -10,14 +10,12 @@ define(["require", "exports", 'knockout', 'service/pager', 'service/ko_bindings'
             _super.call(this, '/api/foodOrder/historyList');
             this.onlyMe = ko.observable(true);
             this.queryTime = ko.observable();
-            this.noData = ko.observable(true);
             ko_bindings.fuck();
             this.query();
         }
         viewModel.prototype.query = function () {
-            var _this = this;
             this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
-            this.loadData().fail(function () { return _this.noData(false); });
+            this.loadData();
         };
         return viewModel;
     })(pager);
