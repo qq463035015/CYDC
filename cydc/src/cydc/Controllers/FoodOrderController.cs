@@ -48,7 +48,7 @@ namespace cydc.Controllers
         }
 
         [Authorize(Roles = Admin)]
-        public FileStreamResult Export([FromBody] FoodOrderQuery query)
+        public FileStreamResult Export(FoodOrderQuery query)
         {
             var data = GetFoodOrderList(query).ToList();
             var list = FoodOrderExcelDto.FromEntities(data);
