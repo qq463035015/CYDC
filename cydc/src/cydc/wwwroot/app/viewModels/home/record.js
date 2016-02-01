@@ -3,13 +3,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'knockout', 'service/pager', 'service/ko_bindings'], function (require, exports, ko, pager, ko_bindings) {
+define(["require", "exports", 'knockout', 'service/pager', 'service/auth', 'service/ko_bindings'], function (require, exports, ko, pager, auth, ko_bindings) {
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
             _super.call(this, '/api/foodOrder/historyList');
             this.onlyMe = ko.observable(true);
             this.queryTime = ko.observable();
+            this.auth = auth;
             ko_bindings.fuck();
             this.query();
         }
