@@ -40,6 +40,7 @@
                             <th><b>口味</b></th>
                             <th><b>地点</b></th>
                             <th><b>备注</b></th>
+                            <th class="text-right"><b>编辑备注</b></th>
                             <th class="text-right"><b>退订</b></th>
                         </tr>
                     </thead>
@@ -52,6 +53,7 @@
                             <td data-bind="text:taste.name"></td>
                             <td data-bind="text:location.name"></td>
                             <td data-bind="text:comment"></td>
+                            <td class="text-right"><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.setComment.bind($parent,$data)">编辑备注</a></td>
                             <td class="text-right"><a href="javascript:void(0)" data-bind="click:$parent.drop.bind($parent,$data)">退订</a></td>
                         </tr>
                     </tbody>
@@ -70,5 +72,20 @@
     </div>
     <div class="row text-center" data-bind="ifnot:items().length>0">
         <h3>没有查询到相关数据.</h3>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="modal-sample" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col-sm-24 col-md-17">
+                    <textarea type='text' class='form-control' placeholder="备注" data-bind="value:comment" rows="4" />
+                </div>
+                <div class="col-sm-24 col-md-3 mt-11">
+                    <a class="btn btn-block btn-primary" data-bind="click:update">确定</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

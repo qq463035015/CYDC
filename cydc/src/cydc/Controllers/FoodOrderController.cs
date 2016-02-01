@@ -121,5 +121,14 @@ namespace cydc.Controllers
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
         }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Update([FromBody] FoodOrder order)
+        {
+            var data = DbContext.FoodOrders.Single(x => x.Id == order.Id);
+            data.Comment = order.Comment;
+            DbContext.Update(data);
+            return await DbContext.SaveChangesAsync();
+        }
     }
 }

@@ -8,11 +8,14 @@ import ko_bindings = require('service/ko_bindings');
 class viewModel extends pager<idName> {
     queryTime = ko.observable();
     userName = ko.observable();
+    id = ko.observable<number>();
+    comment = ko.observable<string>();
 
     constructor() {
         super('/api/foodOrder/list');
         ko_bindings.fuck();
         this.loadData();
+        window['vm'] = this;
     }
 
     drop(data) {
@@ -22,6 +25,21 @@ class viewModel extends pager<idName> {
         }).then(() => {
             this.loadData();
             utils.alert('退订成功！');
+        });
+    }
+
+    setComment(data) {
+        this.id(data.id);
+        this.comment(data.comment);
+    }
+
+    update() {
+        $('#modal-sample').modal('hide');
+        api.order.update(this.id(), this.comment()).then(() => {
+            utils.alert('更新成功！');
+            this.loadData();
+        }).fail(() => {
+            utils.alert('更新失败！');
         });
     }
 

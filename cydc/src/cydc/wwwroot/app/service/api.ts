@@ -49,6 +49,10 @@ module service {
             return http.post('/api/foodOrder/delete', { id: id });
         }
 
+        update(id: number, comment: string) {
+            return http.post('/api/foodOrder/update', { id: id, comment: comment });
+        }
+
         select(time: Date, userName: string) {
             return http.post('/api/foodOrder/list', { time: time, userName: userName });
         }

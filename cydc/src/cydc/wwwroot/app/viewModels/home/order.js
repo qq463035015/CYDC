@@ -10,8 +10,11 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             _super.call(this, '/api/foodOrder/list');
             this.queryTime = ko.observable();
             this.userName = ko.observable();
+            this.id = ko.observable();
+            this.comment = ko.observable();
             ko_bindings.fuck();
             this.loadData();
+            window['vm'] = this;
         }
         viewModel.prototype.drop = function (data) {
             var _this = this;
@@ -21,6 +24,20 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             }).then(function () {
                 _this.loadData();
                 utils.alert('退订成功！');
+            });
+        };
+        viewModel.prototype.setComment = function (data) {
+            this.id(data.id);
+            this.comment(data.comment);
+        };
+        viewModel.prototype.update = function () {
+            var _this = this;
+            $('#modal-sample').modal('hide');
+            api.order.update(this.id(), this.comment()).then(function () {
+                utils.alert('更新成功！');
+                _this.loadData();
+            }).fail(function () {
+                utils.alert('更新失败！');
             });
         };
         viewModel.prototype.query = function () {
