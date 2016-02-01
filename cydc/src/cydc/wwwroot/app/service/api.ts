@@ -117,8 +117,8 @@ module service {
             return http.post('/api/location/list', query);
         }
 
-        locationDropdownList(query?: baseQuery) {
-            return http.post('/api/location/locationDropdownList', query);
+        enabledLocationList(query?: baseQuery) {
+            return http.post('/api/location/enabledLocationList', query);
         }
 
         toggleEnable(id: number, enabled: boolean) {
