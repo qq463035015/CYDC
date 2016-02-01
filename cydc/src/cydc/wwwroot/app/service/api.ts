@@ -95,8 +95,8 @@ module service {
             return http.post('/api/tasteType/list', query);
         }
 
-        tasteTypeDropdownList(query?: baseQuery) {
-            return http.post('/api/tasteType/tasteTypeDropdownList', query);
+        enabledTasteTypes(query?: baseQuery) {
+            return http.post('/api/tasteType/enabledTasteTypes', query);
         }
 
         toggleEnable(id: number, enabled: boolean) {

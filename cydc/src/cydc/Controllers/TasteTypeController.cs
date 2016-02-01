@@ -26,9 +26,9 @@ namespace cydc.Controllers
             return await data.CreatePagedList(query);
         }
 
-        public object TasteTypeDropdownList(TasteTypeQuery query)
+        public object EnabledTasteTypes(TasteTypeQuery query)
         {
-            IQueryable<TasteType> data = DBContext.TasteTypes;
+            IQueryable<TasteType> data = DBContext.TasteTypes.Where(x => x.Enabled == true);
             return data.CreateList(query);
         }
 
