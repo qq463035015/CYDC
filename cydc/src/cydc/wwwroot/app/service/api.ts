@@ -121,6 +121,10 @@ module service {
             return http.post('/api/location/locationDropdownList', query);
         }
 
+        toggleEnable(id: number, enabled: boolean) {
+            return http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
+        }
+
         delete(id: number) {
             return http.post('/api/location/delete', { id: id });
         }

@@ -123,6 +123,9 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             location.prototype.locationDropdownList = function (query) {
                 return http.post('/api/location/locationDropdownList', query);
             };
+            location.prototype.toggleEnable = function (id, enabled) {
+                return http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
+            };
             location.prototype.delete = function (id) {
                 return http.post('/api/location/delete', { id: id });
             };

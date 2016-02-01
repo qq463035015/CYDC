@@ -1,6 +1,7 @@
 ﻿using cydc.Models;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,14 @@ namespace cydc.Controllers
         {
             IQueryable<Location> data = DbContext.Locations;
             return data.CreateList(query);
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> ToggleEnable([FromBody] Location location)
+        {
+            var data = await DbContext.Locations.SingleAsync(x => x.Id == location.Id);
+            data.Enabled = location.Enabled;
+            return await DbContext.SaveChangesAsync();
         }
 
         [Authorize(Roles = Admin)]

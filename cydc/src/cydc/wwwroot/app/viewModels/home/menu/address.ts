@@ -4,8 +4,8 @@ import ko = require('knockout');
 import utils = require('service/utils');
 import pager = require('service/pager');
 
-class viewModel extends pager<idName> {
-    allLocation = ko.observableArray<idName>();
+class viewModel extends pager<idEnable> {
+    allLocation = ko.observableArray<idEnable>();
     name = ko.observable<string>();
     constructor() {
         super('/api/location/list');
@@ -18,7 +18,14 @@ class viewModel extends pager<idName> {
             .then(() => this.name(''));
     }
 
-    drop(data: idName) {
+    toggleEnable(item: idEnable) {
+        return api.location.toggleEnable(item.id, !item.enabled).then(() => {
+            this.loadData();
+            return utils.confirm('', '修改成功！');
+        }).then(cs => cs.close());
+    }
+
+    drop(data: idEnable) {
         utils.confirm('', '确定要删除吗？').then(cs => {
             cs.close();
             return api.location.delete(data.id);
@@ -28,8 +35,9 @@ class viewModel extends pager<idName> {
     }
 }
 
-interface idName {
+interface idEnable {
     id: number;
+    enabled: boolean;
     name: string;
 }
 
