@@ -56,12 +56,6 @@ class viewModel {
 
     commitOrder() {
         if (auth.authed()) {
-            let now = moment().format('YYYY-MM-DD HH:mm:ss');
-            let morning = moment().format('YYYY-MM-DD 10:30:00');
-            let afternoon = moment().format('YYYY-MM-DD 17:30:00');
-            if (!((now < morning) || (now > morning && now < afternoon))) {
-                this.tips();
-            }
             api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
                 $('#modal-sample').modal('hide');
                 this.setCookie();
@@ -82,12 +76,6 @@ class viewModel {
     setCookie() {
         localStorage.setItem('locationId', this.locationId());
         localStorage.setItem('foodTypeId', this.foodTypeId());
-        }
-
-    tips() {
-        utils.confirm('', '超过点餐时间,请联系管理员！').then(cs=> cs.close());
-        $('#modal-sample').modal('hide');
-        return null;
     }
 }
 

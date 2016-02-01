@@ -1,4 +1,4 @@
-﻿<div class="container" data-bind="if:items().length>0">
+﻿<div class="container">
     <div class="row">
         <div class="form-group col-sm-6">
             <input type="date" class="form-control" jquery-validation="true" data-bind="value:queryTime" />
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" data-bind="if:items().length>0">
         <div class="col-sm-24">
             <div class="form-group">
                 <span>显示行数</span>
@@ -28,8 +28,6 @@
                 </select>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-sm-24">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -60,8 +58,6 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-sm-24">
             <div class="pull-left paginaton">
                 当前第<span class="cl-blue" data-bind="text:pageNumber">1</span>页
@@ -71,5 +67,8 @@
                 <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
             </div>
         </div>
+    </div>
+    <div class="row text-center" data-bind="ifnot:items().length>0">
+        <h3>没有查询到相关数据.</h3>
     </div>
 </div>
