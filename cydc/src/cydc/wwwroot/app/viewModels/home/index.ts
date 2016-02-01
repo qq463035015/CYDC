@@ -62,8 +62,8 @@ class viewModel {
                 $('#modal-sample').modal('hide');
                 this.setCookie();
                 this.comment(null);
-
-                router.navigate('/home/record', { replace: true, trigger: true });
+                location.href = "/home/record";
+                //router.navigate('/home/record', { replace: true, trigger: true });
             }).fail(() => {
                 utils.alert('点餐失败！');
             });

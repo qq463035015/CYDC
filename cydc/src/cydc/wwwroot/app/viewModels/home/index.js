@@ -53,7 +53,8 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
                     $('#modal-sample').modal('hide');
                     _this.setCookie();
                     _this.comment(null);
-                    router.navigate('/home/record', { replace: true, trigger: true });
+                    location.href = "/home/record";
+                    //router.navigate('/home/record', { replace: true, trigger: true });
                 }).fail(function () {
                     utils.alert('点餐失败！');
                 });
