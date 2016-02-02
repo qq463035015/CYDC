@@ -17,7 +17,7 @@ class viewModel {
     foodOrder = new foodOrders();
     auth = auth;
 
-    menu = ko.pureComputed(() => this.allMenu().filter(x => this.menuTypeId() == x.id)[0]);
+    menu: any = ko.pureComputed(() => this.allMenu().filter(x => this.menuTypeId() == x.id)[0]);
 
     loadData() {
         api.menu.enableList().then(data=> {
@@ -31,7 +31,6 @@ class viewModel {
 
     constructor() {
         this.loadData();
-        console.log(this);
     }
 
     idName(arr: Array<any>, id): any {
@@ -42,9 +41,10 @@ class viewModel {
     }
 
     commit() {
-        this.foodOrder.details(this.menu()[0].details);
-        this.foodOrder.title(this.menu()[0].title);
-        this.foodOrder.price(this.menu()[0].price);
+        this.foodOrder.details(this.menu().details);
+        this.foodOrder.title(this.menu().title);
+        this.foodOrder.price(this.menu().price);
+        console.log(this.idName(this.allFoodType(), this.foodTypeId()));
         this.foodOrder.type(this.idName(this.allFoodType(), this.foodTypeId())[0].name);
         this.foodOrder.location(this.idName(this.allLocation(), this.locationId())[0].name);
         this.foodOrder.comment(this.comment());
@@ -57,7 +57,6 @@ class viewModel {
                 this.setCookie();
                 this.comment(null);
                 location.href = "/home/record";
-                //router.navigate('/home/record', { replace: true, trigger: true });
             }).fail(() => {
                 utils.alert('点餐失败！');
             });
@@ -70,7 +69,7 @@ class viewModel {
     setCookie() {
         localStorage.setItem('locationId', this.locationId());
         localStorage.setItem('foodTypeId', this.foodTypeId());
-        }
+    }
 }
 
 class foodOrders {
@@ -84,6 +83,6 @@ class foodOrders {
 export = new viewModel();
 
 interface foodMenu {
-    id: number, 
+    id: number,
     details: string
 }

@@ -14,7 +14,6 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             this.auth = auth;
             this.menu = ko.pureComputed(function () { return _this.allMenu().filter(function (x) { return _this.menuTypeId() == x.id; })[0]; });
             this.loadData();
-            console.log(this);
         }
         viewModel.prototype.loadData = function () {
             var _this = this;
@@ -33,9 +32,10 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             });
         };
         viewModel.prototype.commit = function () {
-            this.foodOrder.details(this.menu()[0].details);
-            this.foodOrder.title(this.menu()[0].title);
-            this.foodOrder.price(this.menu()[0].price);
+            this.foodOrder.details(this.menu().details);
+            this.foodOrder.title(this.menu().title);
+            this.foodOrder.price(this.menu().price);
+            console.log(this.idName(this.allFoodType(), this.foodTypeId()));
             this.foodOrder.type(this.idName(this.allFoodType(), this.foodTypeId())[0].name);
             this.foodOrder.location(this.idName(this.allLocation(), this.locationId())[0].name);
             this.foodOrder.comment(this.comment());
@@ -48,7 +48,6 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
                     _this.setCookie();
                     _this.comment(null);
                     location.href = "/home/record";
-                    //router.navigate('/home/record', { replace: true, trigger: true });
                 }).fail(function () {
                     utils.alert('点餐失败！');
                 });
