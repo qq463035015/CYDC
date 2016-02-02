@@ -10,6 +10,8 @@ class bindingUtils {
         let diffSec = now.diff(time, 'second');
         let diffMin = now.diff(time, 'minute');
         
+        if (diffSec < 0)
+            return time.format("YYYY-MM-DD hh:mm:ss");
         if (diffSec < 60)
             return `${diffSec}秒前`;
         else if (diffMin < 60)

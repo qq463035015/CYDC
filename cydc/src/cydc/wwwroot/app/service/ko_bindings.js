@@ -7,6 +7,8 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
             var now = moment();
             var diffSec = now.diff(time, 'second');
             var diffMin = now.diff(time, 'minute');
+            if (diffSec < 0)
+                return time.format("YYYY-MM-DD hh:mm:ss");
             if (diffSec < 60)
                 return diffSec + "\u79D2\u524D";
             else if (diffMin < 60)
