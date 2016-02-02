@@ -17,12 +17,12 @@ class viewModel extends pager<idName>{
         if (this.price()) {
             return api.accountDetails.create(this.userId(), this.price()).then(() => {
                 $('#modal-sample').modal('hide');
-                utils.confirm('添加成功');
+                utils.alert('添加成功');
                 this.loadData();
                 this.price(null);
             });
         }
-        confirm("请输入正确的金额.");
+        utils.alert("请输入正确的金额.");
     }
 
     saveUserId(data: any) {

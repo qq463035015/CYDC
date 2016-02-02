@@ -19,12 +19,12 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             if (this.price()) {
                 return api.accountDetails.create(this.userId(), this.price()).then(function () {
                     $('#modal-sample').modal('hide');
-                    utils.confirm('添加成功');
+                    utils.alert('添加成功');
                     _this.loadData();
                     _this.price(null);
                 });
             }
-            confirm("请输入正确的金额.");
+            utils.alert("请输入正确的金额.");
         };
         viewModel.prototype.saveUserId = function (data) {
             this.userId(data.userId);
