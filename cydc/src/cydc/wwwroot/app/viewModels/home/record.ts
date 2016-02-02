@@ -9,10 +9,14 @@ import ko_bindings = require('service/ko_bindings');
 class viewModel extends pager<idName>{
     onlyMe = ko.observable<boolean>(true);
     queryTime = ko.observable<Date>();
+    amount = ko.observable();
     auth = auth;
 
     constructor() {
         super('/api/foodOrder/historyList');
+        api.user.getUserAmount().then(data => {
+            this.amount(data);
+        });
         ko_bindings.fuck();
         this.query();
     }

@@ -18,6 +18,10 @@ module service {
         list(query?: baseQuery) {
             return http.post("/api/user/list", query);
         }
+
+        getUserAmount() {
+            return http.post("/api/user/getUserAmount", null);
+        }
     }
 
     class AccountDetails {

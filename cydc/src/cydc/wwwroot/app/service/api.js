@@ -22,6 +22,9 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             user.prototype.list = function (query) {
                 return http.post("/api/user/list", query);
             };
+            user.prototype.getUserAmount = function () {
+                return http.post("/api/user/getUserAmount", null);
+            };
             return user;
         })();
         var AccountDetails = (function () {
