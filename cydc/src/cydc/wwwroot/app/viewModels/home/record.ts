@@ -5,10 +5,11 @@ import utils = require('service/utils');
 import pager = require('service/pager');
 import auth = require('service/auth');
 import ko_bindings = require('service/ko_bindings');
+import moment = require('moment');
 
 class viewModel extends pager<idName>{
     onlyMe = ko.observable<boolean>(true);
-    queryTime = ko.observable<Date>();
+    queryTime = ko.observable<string>(moment().format('YYYY-MM-DD'));
     auth = auth;
 
     constructor() {
