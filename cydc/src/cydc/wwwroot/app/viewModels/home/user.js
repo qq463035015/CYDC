@@ -10,6 +10,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             _super.call(this, "/api/user/list");
             this.userName = ko.observable();
             this.userId = ko.observable();
+            this.amountOfInterval = ko.observable();
             this.price = ko.observable();
             this.loadData();
         }
@@ -29,7 +30,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             this.userId(data.userId);
         };
         viewModel.prototype.query = function () {
-            this.searchParams({ userName: this.userName() });
+            this.searchParams({ userName: this.userName(), interval: this.amountOfInterval() });
             this.loadData();
         };
         return viewModel;

@@ -3,7 +3,19 @@
         <div class="form-group col-sm-6">
             <input type='text' class='form-control' placeholder="用户名" data-bind="value:userName" />
         </div>
-        <div class="col-sm-18">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="combobox">
+                    <select class="form-control" data-bind="value:amountOfInterval">
+                        <option value="2">余额查询</option>
+                        <option value="-1">余额&lt;0</option>
+                        <option value="0">余额=0</option>
+                        <option value="1">余额&gt;0</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
             <div class="btn-group mt-35">
                 <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
             </div>

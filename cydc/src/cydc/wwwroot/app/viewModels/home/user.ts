@@ -5,6 +5,7 @@ import utils = require('service/utils');
 class viewModel extends pager<idName>{
     userName = ko.observable<string>();
     userId = ko.observable<string>();
+    amountOfInterval = ko.observable<Number>();
     price = ko.observable<Number>();
 
     constructor() {
@@ -29,7 +30,7 @@ class viewModel extends pager<idName>{
     }
 
     query() {
-        this.searchParams({ userName: this.userName() });
+        this.searchParams({ userName: this.userName(), interval: this.amountOfInterval() });
         this.loadData();
     }
 }

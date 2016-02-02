@@ -19,18 +19,31 @@ namespace cydc.Controllers
         public async Task<object> List([FromBody] AccountDetailsQuery query)
         {
             IQueryable<AccountDetails> data = DbContext.AccountDetails;
-            if (query.UserName != "" && query.UserName != null)
+            if (!string.IsNullOrEmpty(query.UserName))
             {
                 var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
                 data = data.Where(x => x.UserId == userId);
             }
-
             var result = data.GroupBy(x => x.UserId).Select(x => new
             {
                 UserId = x.Key,
                 UserName = DbContext.Users.First(u => u.Id == x.Key).UserName,
                 Total = x.Sum(s => s.Amount)
             });
+
+            if (query.Interval == AmountInterval.Eq0)
+            {
+                result = result.Where(x => x.Total == 0);
+            }
+            else if (query.Interval == AmountInterval.Gt0)
+            {
+                result = result.Where(x => x.Total > 1);
+            }
+            else if (query.Interval == AmountInterval.Lt0)
+            {
+                result = result.Where(x => x.Total < -1);
+            }
+
             return await result.CreatePagedList(query);
         }
 

@@ -44,7 +44,6 @@ class viewModel {
         this.foodOrder.details(this.menu().details);
         this.foodOrder.title(this.menu().title);
         this.foodOrder.price(this.menu().price);
-        console.log(this.idName(this.allFoodType(), this.foodTypeId()));
         this.foodOrder.type(this.idName(this.allFoodType(), this.foodTypeId())[0].name);
         this.foodOrder.location(this.idName(this.allLocation(), this.locationId())[0].name);
         this.foodOrder.comment(this.comment());
