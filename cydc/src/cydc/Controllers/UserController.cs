@@ -47,6 +47,14 @@ namespace cydc.Controllers
             return await result.CreatePagedList(query);
         }
 
+        public object GetUserAmount()
+        {
+            IQueryable<AccountDetails> data = DbContext.AccountDetails;
+            var userId = User.GetUserId();
+            var amount = data.Where(x => x.UserId == userId).Sum(x => x.Amount);
+            return amount;
+        }
+
         public class UserInfo
         {
             public string UserId { get; set; }

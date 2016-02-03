@@ -10,10 +10,14 @@ import moment = require('moment');
 class viewModel extends pager<idName>{
     onlyMe = ko.observable<boolean>(true);
     queryTime = ko.observable<string>(moment().format('YYYY-MM-DD'));
+    amount = ko.observable();
     auth = auth;
 
     constructor() {
         super('/api/foodOrder/historyList');
+        api.user.getUserAmount().then(data => {
+            this.amount(data);
+        });
         ko_bindings.fuck();
         this.query();
     }

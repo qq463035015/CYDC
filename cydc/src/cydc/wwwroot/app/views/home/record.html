@@ -1,9 +1,7 @@
 ﻿<div class="container" data-bind="visible:auth.authed">
     <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
-            </div>
+        <div class="form-group col-sm-6">
+            <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
         </div>
         <div class="col-sm-2">
             <div class="checkbox mt-15">
@@ -13,9 +11,16 @@
                 </label>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <div class="btn-group mt-35">
                 <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
+            </div>
+        </div>
+        <div class="col-sm-6 clearfix mt-15">
+            <div class="checkbox pull-right">
+                <div class="type-sh4 cl-blue">
+                    余额：<span style="color:red; font-weight:bold;" data-bind="text:amount"></span>
+                </div>
             </div>
         </div>
     </div>
