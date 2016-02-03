@@ -11,13 +11,13 @@ class bindingUtils {
         let diffMin = now.diff(time, 'minute');
         
         if (diffSec < 0)
-            return time.format("YYYY-MM-DD hh:mm:ss");
+            return time.format("YYYY-MM-DD HH:mm:ss");
         if (diffSec < 60)
             return `${diffSec}秒前`;
         else if (diffMin < 60)
             return `${diffMin}分钟前`;
         else
-            return time.format("YYYY-MM-DD hh:mm:ss");
+            return time.format("YYYY-MM-DD HH:mm:ss");
     }
     
     fuck() {
