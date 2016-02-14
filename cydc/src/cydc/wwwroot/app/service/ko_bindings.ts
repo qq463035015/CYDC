@@ -32,4 +32,15 @@ ko.bindingHandlers['dateTimeText'] = {
     }
 }
 
+ko.bindingHandlers['boolText'] = {
+    init: () => { controlsDescendantBindings: true },
+    update: (element, valueAccessor) => {
+        let plain = ko.unwrap(valueAccessor());
+        let span = `<span class=${plain ? 'text-success' : 'text-warning'}>
+                        ${plain ? '√' : 'X'}
+                    </span>`;
+        ko.utils.setHtml(element, span);
+    }
+}
+
 export = ko_binding;

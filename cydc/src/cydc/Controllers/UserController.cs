@@ -18,30 +18,32 @@ namespace cydc.Controllers
 
         public async Task<object> List([FromBody] AccountDetailsQuery query)
         {
-            IQueryable<AccountDetails> data = DbContext.AccountDetails;
-            if (!string.IsNullOrEmpty(query.UserName))
+            IQueryable<ApplicationUser> data = DbContext.Users
+                .Include(x => x.AccountDetails);
+
+            if (!string.IsNullOrWhiteSpace(query.UserName))
             {
-                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
-                data = data.Where(x => x.UserId == userId);
+                data = data.Where(x => x.NormalizedUserName.StartsWith(query.UserName));
             }
-            var result = data.GroupBy(x => x.UserId).Select(x => new
+
+            var result = data.Select(x => new
             {
-                UserId = x.Key,
-                UserName = DbContext.Users.First(u => u.Id == x.Key).UserName,
-                Total = x.Sum(s => s.Amount)
+                Id = x.Id, 
+                UserName = x.UserName, 
+                Total = x.AccountDetails.Sum(a => a.Amount)
             });
 
             if (query.Interval == AmountInterval.Eq0)
             {
                 result = result.Where(x => x.Total == 0);
             }
-            else if (query.Interval == AmountInterval.Gt0)
-            {
-                result = result.Where(x => x.Total > 1);
-            }
             else if (query.Interval == AmountInterval.Lt0)
             {
-                result = result.Where(x => x.Total < -1);
+                result = result.Where(x => x.Total < 0);
+            }
+            else if (query.Interval == AmountInterval.Gt0)
+            {
+                result = result.Where(x => x.Total > 0);
             }
 
             return await result.CreatePagedList(query);

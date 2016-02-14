@@ -27,6 +27,7 @@ namespace cydc.Controllers
                 .Include(x => x.FoodMenu)
                 .Include(x => x.Location)
                 .Include(x => x.Taste)
+                .Include(x => x.Payment)
                 .Include(x => x.OrderUser);
             if (query.Time != null)
             {
