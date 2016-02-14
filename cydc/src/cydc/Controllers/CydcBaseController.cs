@@ -11,11 +11,6 @@ namespace cydc.Controllers
     [Authorize]
     public class CydcBaseController : Controller
     {
-        public static DateTime FormatDate(DateTime? dt)
-        {
-            return DateTime.Parse(dt?.ToString("yyyy-MM-dd"));
-        }
-
         public FileStreamResult ExcelFile(Stream stream, string filename)
         {
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);

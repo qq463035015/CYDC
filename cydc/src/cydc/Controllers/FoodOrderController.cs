@@ -24,19 +24,22 @@ namespace cydc.Controllers
         public async Task<object> HistoryList([FromBody] FoodOrderQuery query)
         {
             IQueryable<FoodOrder> data = DbContext.FoodOrders
-                .OrderByDescending(x => x.OrderTime)
                 .Include(x => x.FoodMenu)
                 .Include(x => x.Location)
                 .Include(x => x.Taste)
                 .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
+                var start = query.Time.Value.Date;
+                var end = start.AddDays(1);
+                data = data.Where(x => x.OrderTime >= start && x.OrderTime < end);
             }
             if (query.OnlyMe)
             {
-                data = data.Where(x => x.OrderUserId == HttpContext.User.GetUserId());
+                var userId = User.GetUserId();
+                data = data.Where(x => x.OrderUserId == userId);
             }
+            data = data.OrderByDescending(x => x.OrderTime);
             return await data.CreatePagedList(query);
         }
 
@@ -66,21 +69,21 @@ namespace cydc.Controllers
             query = query ?? new FoodOrderQuery();
 
             IQueryable<FoodOrder> data = DbContext.FoodOrders
-                            .OrderByDescending(x => x.OrderTime)
                             .Include(x => x.FoodMenu)
                             .Include(x => x.Location)
                             .Include(x => x.Taste)
                             .Include(x => x.OrderUser);
             if (query.Time != null)
             {
-                data = data.Where(x => FormatDate(x.OrderTime) == FormatDate(query.Time));
+                var start = query.Time.Value.Date;
+                var end = start.AddDays(1);
+                data = data.Where(x => x.OrderTime >= start && x.OrderTime < end);
             }
-            if (query.UserName != "" && query.UserName != null)
+            if (!string.IsNullOrWhiteSpace(query.UserName))
             {
-                var userId = DbContext.Users.First(x => x.UserName == query.UserName).Id;
-                data = data.Where(x => x.OrderUserId == userId);
+                data = data.Where(x => x.OrderUser.UserName.StartsWith(query.UserName));
             }
-
+            data = data.OrderByDescending(x => x.OrderTime);
             return data;
         }
 
