@@ -7,10 +7,10 @@
             <div class="form-group">
                 <div class="combobox">
                     <select class="form-control" data-bind="value:amountOfInterval">
-                        <option value="2">余额查询</option>
-                        <option value="-1">余额&lt;0</option>
-                        <option value="0">余额=0</option>
-                        <option value="1">余额&gt;0</option>
+                        <option value="">余额查询</option>
+                        <option value="Lt0">&lt;0</option>
+                        <option value="Eq0">=0</option>
+                        <option value="Gt0">&gt;0</option>
                     </select>
                 </div>
             </div>
@@ -22,16 +22,6 @@
         </div>
     </div>
     <div class="row" data-bind="if:items().length>0">
-        <div class="col-sm-24">
-            <div class="form-group">
-                <span>显示行数</span>
-                <select size="1" data-bind="value:pageSize">
-                    <option value="12">12</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>
-        </div>
         <div class="col-sm-24">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -56,11 +46,16 @@
         </div>
         <div class="col-sm-24">
             <div class="pull-left paginaton">
-                当前第<span class="cl-blue" data-bind="text:pageNumber"></span>页
+                第<span class="cl-blue" data-bind="text:pageNumber"></span>页
             </div>
             <div class="pull-right">
-                <a href="#" data-bind="click:hasPrev()&&loadPrevPage">上一页</a>
-                <a href="#" data-bind="click:hasNext()&&loadNextPage">下一页</a>
+                <!-- ko if: hasPrev -->
+                <a href="#" data-bind="click:loadPrevPage">上一页</a>
+                <!-- /ko -->
+
+                <!-- ko if: hasNext -->
+                <a href="#" data-bind="click:loadNextPage">下一页</a>
+                <!-- /ko -->
             </div>
         </div>
     </div>

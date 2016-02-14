@@ -10,5 +10,7 @@ namespace cydc.Models
     public class ApplicationUser : IdentityUser
     {
         public ICollection<FoodOrder> Orders { get; set; }
+
+        public ICollection<AccountDetails> AccountDetails { get; set; }
     }
 }
