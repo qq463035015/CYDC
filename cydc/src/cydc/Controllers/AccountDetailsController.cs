@@ -34,7 +34,7 @@ namespace cydc.Controllers
         [Authorize(Roles = Admin)]
         public async Task<int> Create([FromBody] AccountDetails account)
         {
-            account.CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            account.CreateTime = DateTime.Now;
             DbContext.Add(account);
             return await DbContext.SaveChangesAsync();
         }
