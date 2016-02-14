@@ -1,28 +1,32 @@
 ﻿<div class="container" data-bind="visible:auth.authed">
     <div class="row">
-        <div class="form-group col-sm-6">
-            <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
-        </div>
-        <div class="col-sm-2">
-            <div class="checkbox mt-15">
-                <label>
-                    <input type="checkbox" data-bind="checked:onlyMe">
-                    <span>仅自己</span>
-                </label>
+        <form data-bind="submit: search">
+            <div class="form-group col-sm-6">
+                <input type="date" class="form-control col-md-1" jquery-validation="true" data-bind="value:queryTime" />
             </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
-            </div>
-        </div>
-        <div class="col-sm-6 clearfix mt-15">
-            <div class="checkbox pull-right">
-                <div class="type-sh4 cl-blue">
-                    余额：<span style="color:red; font-weight:bold;" data-bind="text:amount"></span>
+            <div class="col-sm-2">
+                <div class="checkbox mt-15">
+                    <label>
+                        <input type="checkbox" data-bind="checked:onlyMe">
+                        <span>仅自己</span>
+                    </label>
                 </div>
             </div>
-        </div>
+            <div class="col-sm-8">
+                <div class="btn-group mt-35">
+                    <button type="submit" class="btn btn-block btn-primary" title="查询">
+                        <span class="glyph glyph-magnifier-3"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-6 clearfix mt-15">
+                <div class="checkbox pull-right">
+                    <div class="type-sh4 cl-blue">
+                        余额：<span style="color:red; font-weight:bold;" data-bind="text:amount"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="row" data-bind="if:items().length>0">
         <div class="col-sm-24">

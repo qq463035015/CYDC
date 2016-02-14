@@ -16,9 +16,9 @@ define(["require", "exports", 'service/api', 'knockout', 'service/pager', 'servi
             api.user.getUserAmount().then(function (data) {
                 _this.amount(data);
             });
-            this.query();
+            this.search();
         }
-        viewModel.prototype.query = function () {
+        viewModel.prototype.search = function () {
             this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
             this.loadData();
         };

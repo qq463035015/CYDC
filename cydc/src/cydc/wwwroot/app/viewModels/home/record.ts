@@ -17,10 +17,10 @@ class viewModel extends pager<idName>{
         api.user.getUserAmount().then(data => {
             this.amount(data);
         });
-        this.query();
+        this.search();
     }
 
-    query() {
+    search() {
         this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
         this.loadData();
     }
