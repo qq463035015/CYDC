@@ -55,9 +55,8 @@ namespace cydc.Controllers
         public async Task<FileStreamResult> Export(FoodOrderQuery query)
         {
             var data = await GetFoodOrderList(query)
-                .OrderBy(x => x.LocationId)
-                .ThenBy(x => x.TasteId)
-                .ThenBy(x => x.Comment)
+                .OrderBy(x => x.TasteId)
+                .ThenBy(x => x.LocationId)
                 .ToListAsync();
             var list = FoodOrderExcelDto.FromEntities(data);
             return ExcelFile(
