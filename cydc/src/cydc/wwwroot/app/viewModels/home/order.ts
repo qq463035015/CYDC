@@ -22,19 +22,27 @@ class viewModel extends pager<idName> {
             return api.order.delete(data.id);
         }).then(() => {
             this.loadData();
-            utils.alert('退订成功！');
+            utils.alert('退订成功');
         });
     }
 
     pay(data) {
-        return api.order.pay(data.id).then(() => {
+        return utils.confirm('确定要付款吗？', '付款后帐单中会自动加上此订单的金额').then(cs => {
+            cs.close();
+            return api.order.pay(data.id);
+        }).then(() => {
             this.loadData();
+            return utils.alert("付款成功");
         });
     }
 
     cancelPay(data) {
-        return api.order.cancelPay(data.id).then(() => {
+        return utils.confirm('确定要取消付款吗？', '付款后帐单中会自动减去此订单的金额').then(cs => {
+            cs.close();
+            return api.order.cancelPay(data.id);
+        }).then(() => {
             this.loadData();
+            return utils.alert("取消付款成功");
         });
     }
 

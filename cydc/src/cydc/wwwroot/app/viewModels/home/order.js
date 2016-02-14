@@ -21,19 +21,27 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 return api.order.delete(data.id);
             }).then(function () {
                 _this.loadData();
-                utils.alert('退订成功！');
+                utils.alert('退订成功');
             });
         };
         viewModel.prototype.pay = function (data) {
             var _this = this;
-            return api.order.pay(data.id).then(function () {
+            return utils.confirm('确定要付款吗？', '付款后帐单中会自动加上此订单的金额').then(function (cs) {
+                cs.close();
+                return api.order.pay(data.id);
+            }).then(function () {
                 _this.loadData();
+                return utils.alert("付款成功");
             });
         };
         viewModel.prototype.cancelPay = function (data) {
             var _this = this;
-            return api.order.cancelPay(data.id).then(function () {
+            return utils.confirm('确定要取消付款吗？', '付款后帐单中会自动减去此订单的金额').then(function (cs) {
+                cs.close();
+                return api.order.cancelPay(data.id);
+            }).then(function () {
                 _this.loadData();
+                return utils.alert("取消付款成功");
             });
         };
         viewModel.prototype.setComment = function (data) {
