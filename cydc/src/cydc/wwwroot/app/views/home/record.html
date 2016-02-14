@@ -40,7 +40,7 @@
                             <th><b>口味</b></th>
                             <th><b>地点</b></th>
                             <th><b>备注</b></th>
-                            <th><b>状态</b></th>
+                            <th><b>是否付款</b></th>
                             <th><b>金额</b></th>
                         </tr>
                     </thead>
@@ -52,8 +52,9 @@
                             <td data-bind="text:taste.name"></td>
                             <td data-bind="text:location.name"></td>
                             <td data-bind="text:comment"></td>
-                            <td data-bind="text:'暂无'"></td>
+                            <td data-bind="boolText:payment"></td>
                             <td data-bind="text:foodMenu.price"></td>
+                            <td data-bind="text: id"></td>
                         </tr>
                     </tbody>
                 </table>

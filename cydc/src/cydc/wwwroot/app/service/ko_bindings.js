@@ -16,8 +16,6 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
             else
                 return time.format("YYYY-MM-DD HH:mm:ss");
         };
-        bindingUtils.prototype.fuck = function () {
-        };
         return bindingUtils;
     })();
     var ko_binding = new bindingUtils();
@@ -27,6 +25,14 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
             var plainText = ko.unwrap(valueAccessor());
             var finalText = ko_binding.dateTimeText(plainText);
             ko.utils.setTextContent(element, finalText);
+        }
+    };
+    ko.bindingHandlers['boolText'] = {
+        init: function () { controlsDescendantBindings: true; },
+        update: function (element, valueAccessor) {
+            var plain = ko.unwrap(valueAccessor());
+            var span = "<span class=" + (plain ? 'text-success' : 'text-warning') + ">\n                        " + (plain ? 'Y' : 'N') + "\n                    </span>";
+            ko.utils.setHtml(element, span);
         }
     };
     return ko_binding;
