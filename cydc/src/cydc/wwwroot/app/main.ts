@@ -2,7 +2,7 @@
 import viewLocator = require('durandal/viewLocator');
 import system = require('durandal/system');
 
-system.debug(true);
+system.debug(false);
 
 app.title = '';
 

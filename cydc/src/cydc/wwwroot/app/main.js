@@ -1,5 +1,5 @@
 define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/system'], function (require, exports, app, viewLocator, system) {
-    system.debug(true);
+    system.debug(false);
     app.title = '';
     app.configurePlugins({
         router: true,
