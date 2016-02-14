@@ -21,7 +21,7 @@ class viewModel extends pager<idName>{
     }
 
     search() {
-        this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
+        this.searchParams({ startTime: this.queryTime(), onlyMe: this.onlyMe() });
         this.loadData();
     }
 }

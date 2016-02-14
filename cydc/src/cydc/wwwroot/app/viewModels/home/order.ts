@@ -6,7 +6,8 @@ import pager = require('service/pager');
 import moment = require('moment');
 
 class viewModel extends pager<idName> {
-    queryTime = ko.observable(moment().format('YYYY-MM-DD'));
+    startTime = ko.observable(moment().format('YYYY-MM-DD'));
+    endTime = ko.observable();
     userName = ko.observable();
     id = ko.observable<number>();
     comment = ko.observable<string>();
@@ -42,12 +43,12 @@ class viewModel extends pager<idName> {
     }
 
     search() {
-        this.searchParams({ time: this.queryTime(), userName: this.userName() });
+        this.searchParams({ startTime: this.startTime(), endTime: this.endTime(), userName: this.userName() });
         this.loadData();
     }
 
     exportExcel() {
-        postForm('/api/foodOrder/export', { time: this.queryTime(), userName: this.userName() });
+        postForm('/api/foodOrder/export', { startTime: this.startTime(), endTime: this.endTime(), userName: this.userName() });
     }
 }
 function postForm(url: string, data: Object) {

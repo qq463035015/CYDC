@@ -8,7 +8,8 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
         __extends(viewModel, _super);
         function viewModel() {
             _super.call(this, '/api/foodOrder/list');
-            this.queryTime = ko.observable(moment().format('YYYY-MM-DD'));
+            this.startTime = ko.observable(moment().format('YYYY-MM-DD'));
+            this.endTime = ko.observable();
             this.userName = ko.observable();
             this.id = ko.observable();
             this.comment = ko.observable();
@@ -39,11 +40,11 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             });
         };
         viewModel.prototype.search = function () {
-            this.searchParams({ time: this.queryTime(), userName: this.userName() });
+            this.searchParams({ startTime: this.startTime(), endTime: this.endTime(), userName: this.userName() });
             this.loadData();
         };
         viewModel.prototype.exportExcel = function () {
-            postForm('/api/foodOrder/export', { time: this.queryTime(), userName: this.userName() });
+            postForm('/api/foodOrder/export', { startTime: this.startTime(), endTime: this.endTime(), userName: this.userName() });
         };
         return viewModel;
     })(pager);

@@ -29,9 +29,9 @@ namespace cydc.Controllers
                 .Include(x => x.Taste)
                 .Include(x => x.Payment)
                 .Include(x => x.OrderUser);
-            if (query.Time != null)
+            if (query.StartTime != null)
             {
-                var start = query.Time.Value.Date;
+                var start = query.StartTime.Value.Date;
                 var end = start.AddDays(1);
                 data = data.Where(x => x.OrderTime >= start && x.OrderTime < end);
             }
@@ -74,10 +74,12 @@ namespace cydc.Controllers
                             .Include(x => x.Location)
                             .Include(x => x.Taste)
                             .Include(x => x.OrderUser);
-            if (query.Time != null)
+            if (query.StartTime != null)
             {
-                var start = query.Time.Value.Date;
+                var start = query.StartTime.Value.Date;
                 var end = start.AddDays(1);
+                if (query.EndTime != null)
+                    end = query.EndTime.Value.Date.AddDays(1);
                 data = data.Where(x => x.OrderTime >= start && x.OrderTime < end);
             }
             if (!string.IsNullOrWhiteSpace(query.UserName))
