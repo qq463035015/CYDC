@@ -8,6 +8,11 @@ namespace cydc.Models
 {
     public class FoodOrder
     {
+        public FoodOrder()
+        {
+            AccountDetails = new List<AccountDetails>();
+        }
+
         public int Id { get; set; }
 
         [Required]

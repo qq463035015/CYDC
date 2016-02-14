@@ -21,6 +21,7 @@ namespace cydc.Controllers
         {
             IQueryable<AccountDetails> data = DbContext.AccountDetails
                 .OrderByDescending(x => x.CreateTime)
+                .Include(x => x.FoodOrder)
                 .Include(x => x.User);
             if (!string.IsNullOrEmpty(query.UserName))
             {

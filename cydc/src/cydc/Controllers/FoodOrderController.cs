@@ -89,9 +89,9 @@ namespace cydc.Controllers
             return data;
         }
 
-        public async Task<ActionResult> Create([FromBody] FoodOrder order)
+        public async Task<int> Create([FromBody] FoodOrder order)
         {
-            var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
+            var menu = await DbContext.FoodMenus.SingleAsync(x => x.Id == order.FoodMenuId);
             var dateNow = DateTime.Now;
             order.OrderUserId = User.GetUserId();
             order.OrderTime = dateNow;
@@ -104,18 +104,15 @@ namespace cydc.Controllers
                 UserAgent = Request.Headers["User-Agent"]
             };
 
-            order.AccountDetails = new List<AccountDetails>
+            order.AccountDetails.Add(new AccountDetails
             {
-                new AccountDetails {
-                    UserId = User.GetUserId(),
-                    CreateTime = dateNow,
-                    Amount = FoodMenuList[0].Price * -1
-                }
-            };
+                UserId = User.GetUserId(),
+                CreateTime = dateNow,
+                Amount = menu.Price * -1
+            });
 
             DbContext.Add(order);
-            await DbContext.SaveChangesAsync();
-            return Ok();
+            return await DbContext.SaveChangesAsync();
         }
 
         [Authorize(Roles = Admin)]
@@ -135,11 +132,18 @@ namespace cydc.Controllers
             order = await DbContext.FoodOrders
                 .Include(x => x.Payment)
                 .Include(x => x.AccountDetails)
+                .Include(x => x.FoodMenu)
                 .SingleAsync(x => x.Id == order.Id);
             order.Payment = new FoodOrderPayment
             {
                 PayedTime = DateTime.Now
             };
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = User.GetUserId(),
+                CreateTime = DateTime.Now,
+                Amount = order.FoodMenu.Price, 
+            });
             return await DbContext.SaveChangesAsync();
         }
 
@@ -148,8 +152,16 @@ namespace cydc.Controllers
         {
             order = await DbContext.FoodOrders
                 .Include(x => x.Payment)
+                .Include(x => x.FoodMenu)
+                .Include(x => x.AccountDetails)
                 .SingleAsync(x => x.Id == order.Id);
             order.Payment = null;
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = User.GetUserId(), 
+                CreateTime = DateTime.Now, 
+                Amount = -order.FoodMenu.Price
+            });
             return await DbContext.SaveChangesAsync();
         }
 
