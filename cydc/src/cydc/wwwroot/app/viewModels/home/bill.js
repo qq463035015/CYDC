@@ -11,7 +11,7 @@ define(["require", "exports", 'knockout', 'service/pager'], function (require, e
             this.userName = ko.observable();
             this.loadData();
         }
-        viewModel.prototype.query = function () {
+        viewModel.prototype.search = function () {
             this.searchParams({ userName: this.userName() });
             this.loadData();
         };

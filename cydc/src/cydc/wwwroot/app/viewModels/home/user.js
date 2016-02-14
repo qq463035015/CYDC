@@ -29,7 +29,7 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
         viewModel.prototype.saveUserId = function (data) {
             this.userId(data.userId);
         };
-        viewModel.prototype.query = function () {
+        viewModel.prototype.search = function () {
             this.searchParams({ userName: this.userName(), interval: this.amountOfInterval() });
             this.loadData();
         };

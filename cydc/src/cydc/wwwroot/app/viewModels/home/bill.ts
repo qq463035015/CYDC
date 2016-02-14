@@ -12,7 +12,7 @@ class viewModel extends pager<idName>{
         this.loadData();
     }
 
-    query() {
+    search() {
         this.searchParams({ userName: this.userName() });
         this.loadData();
     }
