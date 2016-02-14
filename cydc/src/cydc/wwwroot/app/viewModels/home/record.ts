@@ -4,7 +4,6 @@ import ko = require('knockout');
 import utils = require('service/utils');
 import pager = require('service/pager');
 import auth = require('service/auth');
-import ko_bindings = require('service/ko_bindings');
 import moment = require('moment');
 
 class viewModel extends pager<idName>{
@@ -18,7 +17,6 @@ class viewModel extends pager<idName>{
         api.user.getUserAmount().then(data => {
             this.amount(data);
         });
-        ko_bindings.fuck();
         this.query();
     }
 

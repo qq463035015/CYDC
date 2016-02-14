@@ -13,4 +13,3 @@ define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/
         app.setRoot('viewModels/shell');
     });
 });
-//# sourceMappingURL=main.js.map

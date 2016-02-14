@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'service/api', 'knockout', 'service/pager', 'service/auth', 'service/ko_bindings', 'moment'], function (require, exports, api, ko, pager, auth, ko_bindings, moment) {
+define(["require", "exports", 'service/api', 'knockout', 'service/pager', 'service/auth', 'moment'], function (require, exports, api, ko, pager, auth, moment) {
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
@@ -16,7 +16,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/pager', 'servi
             api.user.getUserAmount().then(function (data) {
                 _this.amount(data);
             });
-            ko_bindings.fuck();
             this.query();
         }
         viewModel.prototype.query = function () {

@@ -1,7 +1,7 @@
 require.config({
     baseUrl: '/app/',
-    urlArgs: 'v=' + new Date().getTime(),
-    //urlArgs: 'v=2015-12-29-d',
+    //urlArgs: 'v=' + new Date().getTime(), 
+    urlArgs: 'v=201602141010',
     paths: {
         jquery: '/lib/jquery',
         knockout: '/lib/knockout',
@@ -32,6 +32,7 @@ require([
     'knockout',
     'jquery',
     'bootstrap',
+    'service/ko_bindings',
     'signalr'], function (koval) {
     koval.locale('zh-CN');
 });

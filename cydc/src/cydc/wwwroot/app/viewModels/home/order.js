@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager', 'service/ko_bindings'], function (require, exports, api, ko, utils, pager, ko_bindings) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager'], function (require, exports, api, ko, utils, pager) {
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
@@ -12,7 +12,6 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             this.userName = ko.observable();
             this.id = ko.observable();
             this.comment = ko.observable();
-            ko_bindings.fuck();
             this.loadData();
             window['vm'] = this;
         }

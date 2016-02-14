@@ -19,9 +19,6 @@ class bindingUtils {
         else
             return time.format("YYYY-MM-DD HH:mm:ss");
     }
-    
-    fuck() {
-    }
 }
 
 let ko_binding = new bindingUtils();
