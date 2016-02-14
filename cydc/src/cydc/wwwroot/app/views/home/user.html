@@ -1,37 +1,31 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="form-group col-sm-6">
-            <input type='text' class='form-control' placeholder="用户名" data-bind="value:userName" />
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <div class="combobox">
-                    <select class="form-control" data-bind="value:amountOfInterval">
-                        <option value="2">余额查询</option>
-                        <option value="-1">余额&lt;0</option>
-                        <option value="0">余额=0</option>
-                        <option value="1">余额&gt;0</option>
-                    </select>
+        <form data-bind="submit:search">
+            <div class="form-group col-sm-6">
+                <input type='text' class='form-control' placeholder="用户名" data-bind="value:userName" />
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="combobox">
+                        <select class="form-control" data-bind="value:amountOfInterval">
+                            <option value="2">余额查询</option>
+                            <option value="-1">余额&lt;0</option>
+                            <option value="0">余额=0</option>
+                            <option value="1">余额&gt;0</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="btn-group mt-35">
-                <a class="btn btn-block btn-primary" title="查询" data-bind="click:query"><span class="glyph glyph-magnifier-3"></span></a>
+            <div class="col-sm-12">
+                <div class="btn-group mt-35">
+                    <button type="submit" class="btn btn-block btn-primary" title="查询">
+                        <span class="glyph glyph-magnifier-3"></span>
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="row" data-bind="if:items().length>0">
-        <div class="col-sm-24">
-            <div class="form-group">
-                <span>显示行数</span>
-                <select size="1" data-bind="value:pageSize">
-                    <option value="12">12</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>
-        </div>
         <div class="col-sm-24">
             <div class="table-responsive">
                 <table class="table table-striped">
