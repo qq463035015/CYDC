@@ -37,7 +37,7 @@ ko.bindingHandlers['boolText'] = {
     update: (element, valueAccessor) => {
         let plain = ko.unwrap(valueAccessor());
         let span = `<span class=${plain ? 'text-success' : 'text-warning'}>
-                        ${plain ? 'Y' : 'N'}
+                        ${plain ? '√' : 'X'}
                     </span>`;
         ko.utils.setHtml(element, span);
     }

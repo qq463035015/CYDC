@@ -31,7 +31,7 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
         init: function () { controlsDescendantBindings: true; },
         update: function (element, valueAccessor) {
             var plain = ko.unwrap(valueAccessor());
-            var span = "<span class=" + (plain ? 'text-success' : 'text-warning') + ">\n                        " + (plain ? 'Y' : 'N') + "\n                    </span>";
+            var span = "<span class=" + (plain ? 'text-success' : 'text-warning') + ">\n                        " + (plain ? '√' : 'X') + "\n                    </span>";
             ko.utils.setHtml(element, span);
         }
     };
