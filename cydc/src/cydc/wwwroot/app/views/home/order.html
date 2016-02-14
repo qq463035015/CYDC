@@ -35,8 +35,7 @@
                             <th><b>套餐</b></th>
                             <th><b>口味</b></th>
                             <th><b>地点</b></th>
-                            <th><b>备注</b></th>
-                            <th class="text-right"><b>编辑备注</b></th>
+                            <th class="text-right"><b>备注</b></th>
                             <th class="text-right"><b>退订</b></th>
                         </tr>
                     </thead>
@@ -48,8 +47,11 @@
                             <td data-bind="text:foodMenu.title"></td>
                             <td data-bind="text:taste.name"></td>
                             <td data-bind="text:location.name"></td>
-                            <td data-bind="text:comment"></td>
-                            <td class="text-right"><a href="javascript:void(0)" data-toggle="modal" data-target="#modal-sample" data-bind="click:$parent.setComment.bind($parent,$data)">编辑备注</a></td>
+                            <td class="text-right">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-sample" 
+                                   data-bind="click:$parent.setComment.bind($parent,$data), text: comment || '<无>'">
+                                </a>
+                            </td>
                             <td class="text-right"><a href="javascript:void(0)" data-bind="click:$parent.drop.bind($parent,$data)">退订</a></td>
                         </tr>
                     </tbody>
