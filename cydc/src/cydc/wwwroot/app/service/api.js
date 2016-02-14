@@ -58,6 +58,12 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.delete = function (id) {
                 return http.post('/api/foodOrder/delete', { id: id });
             };
+            foodOrder.prototype.pay = function (id) {
+                return http.post('/api/foodOrder/pay', { id: id });
+            };
+            foodOrder.prototype.cancelPay = function (id) {
+                return http.post('/api/foodOrder/cancelPay', { id: id });
+            };
             foodOrder.prototype.update = function (id, comment) {
                 return http.post('/api/foodOrder/update', { id: id, comment: comment });
             };

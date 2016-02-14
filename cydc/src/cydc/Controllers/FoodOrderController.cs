@@ -72,6 +72,7 @@ namespace cydc.Controllers
                             .Include(x => x.FoodMenu)
                             .Include(x => x.Location)
                             .Include(x => x.Taste)
+                            .Include(x => x.Payment)
                             .Include(x => x.OrderUser);
             if (query.StartTime != null)
             {
@@ -89,9 +90,9 @@ namespace cydc.Controllers
             return data;
         }
 
-        public async Task<ActionResult> Create([FromBody] FoodOrder order)
+        public async Task<int> Create([FromBody] FoodOrder order)
         {
-            var FoodMenuList = DbContext.FoodMenus.Where(x => x.Id == order.FoodMenuId).ToList();
+            var menu = await DbContext.FoodMenus.SingleAsync(x => x.Id == order.FoodMenuId);
             var dateNow = DateTime.Now;
             order.OrderUserId = User.GetUserId();
             order.OrderTime = dateNow;
@@ -104,16 +105,15 @@ namespace cydc.Controllers
                 UserAgent = Request.Headers["User-Agent"]
             };
 
-            order.AccountDetails = new AccountDetails
+            order.AccountDetails.Add(new AccountDetails
             {
                 UserId = User.GetUserId(),
                 CreateTime = dateNow,
-                Amount = FoodMenuList[0].Price * -1
-            };
+                Amount = menu.Price * -1
+            });
 
             DbContext.Add(order);
-            await DbContext.SaveChangesAsync();
-            return Ok();
+            return await DbContext.SaveChangesAsync();
         }
 
         [Authorize(Roles = Admin)]
@@ -124,6 +124,45 @@ namespace cydc.Controllers
                 .SingleAsync(x => x.Id == order.Id);
             DbContext.Remove(order.AccountDetails);
             DbContext.Remove(order);
+            return await DbContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Pay([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.AccountDetails)
+                .Include(x => x.FoodMenu)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = new FoodOrderPayment
+            {
+                PayedTime = DateTime.Now
+            };
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = User.GetUserId(),
+                CreateTime = DateTime.Now,
+                Amount = order.FoodMenu.Price, 
+            });
+            return await DbContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> CancelPay([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.FoodMenu)
+                .Include(x => x.AccountDetails)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = null;
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = User.GetUserId(), 
+                CreateTime = DateTime.Now, 
+                Amount = -order.FoodMenu.Price
+            });
             return await DbContext.SaveChangesAsync();
         }
 

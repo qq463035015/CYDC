@@ -14,14 +14,14 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             this.price = ko.observable();
             this.loadData();
         }
-        viewModel.prototype.addAmount = function (data) {
+        viewModel.prototype.addAmount = function () {
             var _this = this;
             if (this.price()) {
                 return api.accountDetails.create(this.userId(), this.price()).then(function () {
                     $('#modal-sample').modal('hide');
                     utils.alert('添加成功');
-                    _this.loadData();
                     _this.price(null);
+                    return _this.loadData();
                 });
             }
             utils.alert("请输入正确的金额.");

@@ -13,13 +13,13 @@ class viewModel extends pager<idName>{
         this.loadData();
     }
 
-    addAmount(data: any) {
+    addAmount() {
         if (this.price()) {
             return api.accountDetails.create(this.userId(), this.price()).then(() => {
                 $('#modal-sample').modal('hide');
                 utils.alert('添加成功');
-                this.loadData();
                 this.price(null);
+                return this.loadData();
             });
         }
         utils.alert("请输入正确的金额.");

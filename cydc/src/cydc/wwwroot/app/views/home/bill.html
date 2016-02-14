@@ -23,6 +23,7 @@
                         <tr>
                             <th><b>用户</b></th>
                             <th><b>金额</b></th>
+                            <th><b>关联订单</b></th>
                             <th class="text-right"><b>操作时间</b></th>
                         </tr>
                     </thead>
@@ -30,6 +31,11 @@
                         <tr>
                             <td data-bind="text:user.userName"></td>
                             <td data-bind="text:amount"></td>
+                            <td>
+                                <a href="javascript: void(0)" 
+                                   data-bind="text: foodOrderId, click: $parent.viewFoodOrder.bind($parent, $data)">
+                                </a>
+                            </td>
                             <td class="text-right" data-bind="dateTimeText:createTime"></td>
                         </tr>
                     </tbody>
@@ -41,12 +47,13 @@
                 第<span class="cl-blue" data-bind="text:pageNumber"></span>页
             </div>
             <div class="pull-right">
-                <!--ko if:hasPrev-->
+                <!-- ko if: hasPrev -->
                 <a href="#" data-bind="click:loadPrevPage">上一页</a>
-                <!--/ko-->
-                <!--ko if:hasNext-->
+                <!-- /ko -->
+
+                <!-- ko if: hasNext -->
                 <a href="#" data-bind="click:loadNextPage">下一页</a>
-                <!--/ko-->
+                <!-- /ko -->
             </div>
         </div>
     </div>

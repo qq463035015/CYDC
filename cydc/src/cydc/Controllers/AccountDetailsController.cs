@@ -21,6 +21,7 @@ namespace cydc.Controllers
         {
             IQueryable<AccountDetails> data = DbContext.AccountDetails
                 .OrderByDescending(x => x.CreateTime)
+                .Include(x => x.FoodOrder)
                 .Include(x => x.User);
             if (!string.IsNullOrEmpty(query.UserName))
             {
@@ -33,7 +34,7 @@ namespace cydc.Controllers
         [Authorize(Roles = Admin)]
         public async Task<int> Create([FromBody] AccountDetails account)
         {
-            account.CreateTime = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            account.CreateTime = DateTime.Now;
             DbContext.Add(account);
             return await DbContext.SaveChangesAsync();
         }

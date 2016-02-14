@@ -53,6 +53,14 @@ module service {
             return http.post('/api/foodOrder/delete', { id: id });
         }
 
+        pay(id: number) {
+            return http.post('/api/foodOrder/pay', { id: id });
+        }
+
+        cancelPay(id: number) {
+            return http.post('/api/foodOrder/cancelPay', { id: id });
+        }
+
         update(id: number, comment: string) {
             return http.post('/api/foodOrder/update', { id: id, comment: comment });
         }

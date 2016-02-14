@@ -28,7 +28,7 @@ namespace cydc.Controllers
 
             var result = data.Select(x => new
             {
-                Id = x.Id, 
+                UserId = x.Id, 
                 UserName = x.UserName, 
                 Total = x.AccountDetails.Sum(a => a.Amount)
             });
