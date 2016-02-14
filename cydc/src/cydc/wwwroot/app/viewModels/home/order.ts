@@ -26,6 +26,18 @@ class viewModel extends pager<idName> {
         });
     }
 
+    pay(data) {
+        return api.order.pay(data.id).then(() => {
+            this.loadData();
+        });
+    }
+
+    cancelPay(data) {
+        return api.order.cancelPay(data.id).then(() => {
+            this.loadData();
+        });
+    }
+
     setComment(data) {
         this.id(data.id);
         this.comment(data.comment);

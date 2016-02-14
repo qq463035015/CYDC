@@ -36,6 +36,6 @@ namespace cydc.Models
 
         public FoodOrderClientInfo ClientInfo { get; set; }
 
-        public AccountDetails AccountDetails { get; set; }
+        public List<AccountDetails> AccountDetails { get; set; }
     }
 }

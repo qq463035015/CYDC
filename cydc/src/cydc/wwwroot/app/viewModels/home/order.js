@@ -24,6 +24,18 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 utils.alert('退订成功！');
             });
         };
+        viewModel.prototype.pay = function (data) {
+            var _this = this;
+            return api.order.pay(data.id).then(function () {
+                _this.loadData();
+            });
+        };
+        viewModel.prototype.cancelPay = function (data) {
+            var _this = this;
+            return api.order.cancelPay(data.id).then(function () {
+                _this.loadData();
+            });
+        };
         viewModel.prototype.setComment = function (data) {
             this.id(data.id);
             this.comment(data.comment);

@@ -29,6 +29,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th><b>#</b></th>
                             <th><b>用户名称</b></th>
                             <th><b>点餐时间</b></th>
                             <th><b>菜谱内容</b></th>
@@ -36,11 +37,12 @@
                             <th><b>口味</b></th>
                             <th><b>地点</b></th>
                             <th class="text-right"><b>备注</b></th>
-                            <th class="text-right"><b>退订</b></th>
+                            <th class="text-right"><b>操作</b></th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach:items">
                         <tr>
+                            <td data-bind="text:id"></td>
                             <td data-bind="text:orderUser.userName"></td>
                             <td data-bind="dateTimeText:orderTime"></td>
                             <td data-bind="text:foodMenu.details"></td>
@@ -48,11 +50,20 @@
                             <td data-bind="text:taste.name"></td>
                             <td data-bind="text:location.name"></td>
                             <td class="text-right">
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-sample" 
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modal-sample"
                                    data-bind="click:$parent.setComment.bind($parent,$data), text: comment || '<无>'">
                                 </a>
                             </td>
-                            <td class="text-right"><a href="javascript:void(0)" data-bind="click:$parent.drop.bind($parent,$data)">退订</a></td>
+                            <td class="text-right">
+                                <!-- ko ifnot: payment -->
+                                <a href="javascript:void(0)" data-bind="click:$parent.pay.bind($parent,$data)">付款</a>
+                                <a href="javascript:void(0)" class="text-warning" data-bind="click:$parent.drop.bind($parent,$data)">退订</a>
+                                <!-- /ko -->
+
+                                <!-- ko if: payment -->
+                                <a href="javascript:void(0)" data-bind="click:$parent.cancelPay.bind($parent,$data)">取消付款</a>
+                                <!-- /ko -->
+                            </td>
                         </tr>
                     </tbody>
                 </table>

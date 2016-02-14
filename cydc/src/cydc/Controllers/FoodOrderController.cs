@@ -73,6 +73,7 @@ namespace cydc.Controllers
                             .Include(x => x.FoodMenu)
                             .Include(x => x.Location)
                             .Include(x => x.Taste)
+                            .Include(x => x.Payment)
                             .Include(x => x.OrderUser);
             if (query.Time != null)
             {
@@ -103,11 +104,13 @@ namespace cydc.Controllers
                 UserAgent = Request.Headers["User-Agent"]
             };
 
-            order.AccountDetails = new AccountDetails
+            order.AccountDetails = new List<AccountDetails>
             {
-                UserId = User.GetUserId(),
-                CreateTime = dateNow,
-                Amount = FoodMenuList[0].Price * -1
+                new AccountDetails {
+                    UserId = User.GetUserId(),
+                    CreateTime = dateNow,
+                    Amount = FoodMenuList[0].Price * -1
+                }
             };
 
             DbContext.Add(order);
@@ -123,6 +126,30 @@ namespace cydc.Controllers
                 .SingleAsync(x => x.Id == order.Id);
             DbContext.Remove(order.AccountDetails);
             DbContext.Remove(order);
+            return await DbContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> Pay([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.AccountDetails)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = new FoodOrderPayment
+            {
+                PayedTime = DateTime.Now
+            };
+            return await DbContext.SaveChangesAsync();
+        }
+
+        [Authorize(Roles = Admin)]
+        public async Task<int> CancelPay([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = null;
             return await DbContext.SaveChangesAsync();
         }
 
