@@ -3,17 +3,17 @@ import api = require('service/api');
 import ko = require('knockout');
 import utils = require('service/utils');
 import pager = require('service/pager');
+import moment = require('moment');
 
 class viewModel extends pager<idName> {
-    queryTime = ko.observable();
+    queryTime = ko.observable(moment().format('YYYY-MM-DD'));
     userName = ko.observable();
     id = ko.observable<number>();
     comment = ko.observable<string>();
 
     constructor() {
         super('/api/foodOrder/list');
-        this.loadData();
-        window['vm'] = this;
+        this.search();
     }
 
     drop(data) {
@@ -41,7 +41,7 @@ class viewModel extends pager<idName> {
         });
     }
 
-    query() {
+    search() {
         this.searchParams({ time: this.queryTime(), userName: this.userName() });
         this.loadData();
     }

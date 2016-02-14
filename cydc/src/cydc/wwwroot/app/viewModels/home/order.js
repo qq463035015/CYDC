@@ -3,17 +3,16 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager'], function (require, exports, api, ko, utils, pager) {
+define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager', 'moment'], function (require, exports, api, ko, utils, pager, moment) {
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
             _super.call(this, '/api/foodOrder/list');
-            this.queryTime = ko.observable();
+            this.queryTime = ko.observable(moment().format('YYYY-MM-DD'));
             this.userName = ko.observable();
             this.id = ko.observable();
             this.comment = ko.observable();
-            this.loadData();
-            window['vm'] = this;
+            this.search();
         }
         viewModel.prototype.drop = function (data) {
             var _this = this;
@@ -39,7 +38,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 utils.alert('更新失败！');
             });
         };
-        viewModel.prototype.query = function () {
+        viewModel.prototype.search = function () {
             this.searchParams({ time: this.queryTime(), userName: this.userName() });
             this.loadData();
         };
