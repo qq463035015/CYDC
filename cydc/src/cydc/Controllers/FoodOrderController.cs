@@ -116,12 +116,12 @@ namespace cydc.Controllers
         }
 
         [Authorize(Roles = Admin)]
-        public async Task<int> Delete([FromBody] FoodOrder order)
+        public async Task<int> Delete([FromBody] FoodOrder dataIn)
         {
-            order = await DbContext.FoodOrders
+            var order = await DbContext.FoodOrders
                 .Include(x => x.AccountDetails)
-                .SingleAsync(x => x.Id == order.Id);
-            DbContext.Remove(order.AccountDetails);
+                .Include(x => x.Payment)
+                .FirstAsync(x => x.Id == dataIn.Id);
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
         }
