@@ -59,7 +59,7 @@ namespace cydc.Controllers
                 .ThenBy(x => x.TasteId)
                 .ThenBy(x => x.Comment)
                 .ToListAsync();
-            var list = FoodOrderExcelDto.FromEntities(data);
+            IEnumerable<FoodOrderExcelDto> list = FoodOrderExcelDto.FromEntities(data);
             return ExcelFile(
                 ExcelManager.ExportToStream(list),
                 $"{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx");
@@ -142,7 +142,7 @@ namespace cydc.Controllers
             {
                 UserId = User.GetUserId(),
                 CreateTime = DateTime.Now,
-                Amount = order.FoodMenu.Price, 
+                Amount = order.FoodMenu.Price,
             });
             return await DbContext.SaveChangesAsync();
         }
@@ -158,8 +158,8 @@ namespace cydc.Controllers
             order.Payment = null;
             order.AccountDetails.Add(new AccountDetails
             {
-                UserId = User.GetUserId(), 
-                CreateTime = DateTime.Now, 
+                UserId = User.GetUserId(),
+                CreateTime = DateTime.Now,
                 Amount = -order.FoodMenu.Price
             });
             return await DbContext.SaveChangesAsync();
