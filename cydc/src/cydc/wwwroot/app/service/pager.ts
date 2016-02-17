@@ -22,7 +22,7 @@ module service {
 
         // front-end state
         pageNumber = ko.observable<number>(1);
-        pageSize = ko.observable<number>(12);
+        pageSize = ko.observable<number>(14);
         orderBy = ko.observable<string>();
         asc = ko.observable<boolean>();
         searchParams = ko.observable<any>();

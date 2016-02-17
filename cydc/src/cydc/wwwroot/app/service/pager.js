@@ -16,7 +16,7 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
                 this.hasPrev = ko.pureComputed(function () { return _this.pageNumber() > 1; });
                 // front-end state
                 this.pageNumber = ko.observable(1);
-                this.pageSize = ko.observable(12);
+                this.pageSize = ko.observable(14);
                 this.orderBy = ko.observable();
                 this.asc = ko.observable();
                 this.searchParams = ko.observable();
