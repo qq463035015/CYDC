@@ -22,7 +22,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
                 return api.order.delete(data.id);
             }).then(function () {
                 _this.loadData();
-                utils.alert('退订成功');
+                utils.alert('订单删除成功');
             });
         };
         viewModel.prototype.pay = function (data) {

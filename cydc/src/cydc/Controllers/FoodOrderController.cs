@@ -58,7 +58,7 @@ namespace cydc.Controllers
                 .OrderBy(x => x.TasteId)
                 .ThenBy(x => x.LocationId)
                 .ToListAsync();
-            var list = FoodOrderExcelDto.FromEntities(data);
+            IEnumerable<FoodOrderExcelDto> list = FoodOrderExcelDto.FromEntities(data);
             return ExcelFile(
                 ExcelManager.ExportToStream(list),
                 $"{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx");
@@ -117,12 +117,12 @@ namespace cydc.Controllers
         }
 
         [Authorize(Roles = Admin)]
-        public async Task<int> Delete([FromBody] FoodOrder order)
+        public async Task<int> Delete([FromBody] FoodOrder dataIn)
         {
-            order = await DbContext.FoodOrders
+            var order = await DbContext.FoodOrders
                 .Include(x => x.AccountDetails)
-                .SingleAsync(x => x.Id == order.Id);
-            DbContext.Remove(order.AccountDetails);
+                .Include(x => x.Payment)
+                .FirstAsync(x => x.Id == dataIn.Id);
             DbContext.Remove(order);
             return await DbContext.SaveChangesAsync();
         }
@@ -143,7 +143,7 @@ namespace cydc.Controllers
             {
                 UserId = User.GetUserId(),
                 CreateTime = DateTime.Now,
-                Amount = order.FoodMenu.Price, 
+                Amount = order.FoodMenu.Price,
             });
             return await DbContext.SaveChangesAsync();
         }
@@ -159,8 +159,8 @@ namespace cydc.Controllers
             order.Payment = null;
             order.AccountDetails.Add(new AccountDetails
             {
-                UserId = User.GetUserId(), 
-                CreateTime = DateTime.Now, 
+                UserId = User.GetUserId(),
+                CreateTime = DateTime.Now,
                 Amount = -order.FoodMenu.Price
             });
             return await DbContext.SaveChangesAsync();

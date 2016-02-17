@@ -12,7 +12,6 @@ namespace cydc.Models.Excel
         public string UserName { get; set; }
 
         [Display(Name = "点餐时间")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}")]
         public DateTime OrderTime { get; set; }
 
         [Display(Name = "菜谱内容")]

@@ -23,7 +23,7 @@ class viewModel extends pager<idName> {
             return api.order.delete(data.id);
         }).then(() => {
             this.loadData();
-            utils.alert('退订成功');
+            utils.alert('订单删除成功');
         });
     }
 

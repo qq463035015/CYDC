@@ -94,6 +94,10 @@ namespace cydc.Models.Excel
                 var formatted = string.Format(metadata.DisplayFormatString, value);
                 return formatted;
             }
+            else if (value is DateTime)
+            {
+                return ((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss");
+            }
             else
             {
                 return value;
