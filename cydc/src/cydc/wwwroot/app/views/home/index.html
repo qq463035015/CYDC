@@ -7,53 +7,55 @@
                 <span data-bind="html:notices().content"></span>
             </div>
         </div>
-        <div class="col-sm-24">
-            <div class="col-sm-12">
-                <img src="../images/pay.jpg" width="500" height="415" />
-            </div>
-            <div class="col-sm-12">
-                <div class="type-sh3"><b>今日菜谱</b></div>
-                <div class="type-sh3" data-bind="text:menu()&&menu().details"></div>
-            </div>
-            <div class="col-sm-6">
-                <div class="type-sh3"><b>套餐类型</b></div>
-                <div class="form-group">
-                    <div class="combobox">
-                        <select class="form-control" data-bind="value:menuTypeId,options:allMenu,optionsValue:'id',optionsText:'title'"></select>
+        <div class="col-lg-12 col-md-24">
+            <img src="../images/pay.jpg" />
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-24">
+                    <div class="type-sh3"><b>今日菜谱</b></div>
+                    <div class="type-sh3" data-bind="text:menu()&&menu().details"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="type-sh3"><b>套餐类型</b></div>
+                    <div class="form-group">
+                        <div class="combobox">
+                            <select class="form-control" data-bind="value:menuTypeId,options:allMenu,optionsValue:'id',optionsText:'title'"></select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="type-sh3"><b>口味类型</b></div>
-                <div class="form-group">
-                    <div class="combobox">
-                        <select class="form-control" data-bind="value:foodTypeId,options:allFoodType,optionsValue:'id',optionsText:'name'"></select>
+                <div class="col-md-12">
+                    <div class="type-sh3"><b>口味类型</b></div>
+                    <div class="form-group">
+                        <div class="combobox">
+                            <select class="form-control" data-bind="value:foodTypeId,options:allFoodType,optionsValue:'id',optionsText:'name'"></select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="type-sh3"><b>点餐地点</b></div>
-                <div class="form-group">
-                    <div class="combobox">
-                        <select class="form-control" data-bind="value:locationId,options:allLocation,optionsValue:'id',optionsText:'name'"></select>
+                <div class="col-md-12">
+                    <div class="type-sh3"><b>点餐地点</b></div>
+                    <div class="form-group">
+                        <div class="combobox">
+                            <select class="form-control" data-bind="value:locationId,options:allLocation,optionsValue:'id',optionsText:'name'"></select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="type-sh3"><b>金额(元)</b></div>
-                <div class="form-group">
-                    <input type='text' class='form-control' readonly data-bind="value:menu()&&menu().price" />
+                <div class="col-md-12">
+                    <div class="type-sh3"><b>金额(元)</b></div>
+                    <div class="form-group">
+                        <input type='text' class='form-control' readonly data-bind="value:menu()&&menu().price" />
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="type-sh3"><b>备注信息</b></div>
-                <div class="form-group">
-                    <textarea id="info" rows="2" data-bind="value:comment"></textarea>
+                <div class="col-md-24">
+                    <div class="type-sh3"><b>备注信息</b></div>
+                    <div class="form-group">
+                        <textarea id="info" rows="2" data-bind="value:comment"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="btn-group mt-40">
-                    <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:commit">提交</a>
+                <div class="col-md-24">
+                    <div class="btn-group mt-40">
+                        <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#modal-sample" data-bind="click:commit">提交</a>
+                    </div>
                 </div>
             </div>
         </div>
