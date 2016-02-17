@@ -10,6 +10,7 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
             this.notices = ko.observable();
+            this.canSumbit = ko.observable(true);
             this.foodOrder = new foodOrders();
             this.auth = auth;
             this.menu = ko.pureComputed(function () { return _this.allMenu().filter(function (x) { return _this.menuTypeId() == x.id; })[0]; });
@@ -20,6 +21,8 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             api.menu.enableList().then(function (data) {
                 _this.allMenu(data);
                 _this.menuTypeId(data[0] && data[0].id);
+                if (data.length == 0)
+                    _this.canSumbit(false);
             });
             api.type.enabledTasteTypes().then(function (data) { return _this.allFoodType(data); });
             api.location.enabledLocationList().then(function (data) { return _this.allLocation(data); });

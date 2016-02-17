@@ -19,7 +19,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/pager', 'servi
             this.search();
         }
         viewModel.prototype.search = function () {
-            this.searchParams({ time: this.queryTime(), onlyMe: this.onlyMe() });
+            this.searchParams({ startTime: this.queryTime(), onlyMe: this.onlyMe() });
             this.loadData();
         };
         return viewModel;
