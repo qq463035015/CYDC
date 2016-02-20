@@ -131,6 +131,52 @@ namespace cydc.Controllers
                 return HttpBadRequest(ModelState);
             }
         }
+        
+        [AllowAnonymous]
+        public async Task<ActionResult> ForgotPassword([FromBody]ForgotPasswordDto dto)
+        {
+            if (ModelState.IsValid) 
+            {
+                var user = await _userManager.FindByEmailAsync(dto.Email);
+                if (user == null)
+                {
+                    return HttpBadRequest();
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var subject = "辰运点餐：重置密码";
+                var callbackUrl = $"{Request.Scheme}://{Request.Host}/account/resetPassword?code={WebUtility.UrlEncode(code)}";
+                var message = $"请点击<a href='{callbackUrl}'>此处</a>来重置你的密码";
+                await _emailSender.SendEmailAsync(user.Email, subject, message).ConfigureAwait(false);
+                return Ok();
+            }
+            return HttpBadRequest();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(dto.Email);
+                if (user == null)
+                {
+                    return HttpBadRequest("EMAIL_NOT_FIND");
+                }
+
+                var ok = await _userManager.ResetPasswordAsync(user, dto.Code, dto.Password).ConfigureAwait(false);
+                if (ok.Succeeded)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return HttpBadRequest(ok.Errors);
+                }
+            }
+
+            return HttpBadRequest(ModelState);
+        }
 
         [AllowAnonymous]
         public async Task<ActionResult> CheckUserName(string username)

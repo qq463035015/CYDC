@@ -6,4 +6,3 @@ define(["require", "exports"], function (require, exports) {
     })();
     return new viewModel();
 });
-//# sourceMappingURL=404.js.map

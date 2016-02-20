@@ -74,6 +74,7 @@ namespace cydc
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddSingleton<ExcelManager>();
+            services.AddSingleton((e) => Configuration);
         }
 
         // Configure is called after ConfigureServices is called.
