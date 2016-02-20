@@ -20,28 +20,28 @@ namespace cydc.Services
             _config = config;
         }
 
-        private string GetConfig(string key)
+        private string Config(string key)
         {
-            return _config.Get($"Service:Email:{key}");
+            return _config[$"Service:Email:{key}"];
         }
 
-        private T GetConfig<T>(string key)
+        private T Config<T>(string key)
         {
-            return _config.Get<T>($"Service:Email:{key}");
+            return (T)Convert.ChangeType(Config(key), typeof(T));
         }
 
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             var mailMessage = new MimeMessage();
-            mailMessage.From.Add(new MailboxAddress(GetConfig("FromDisplayName"), GetConfig("From")));
+            mailMessage.From.Add(new MailboxAddress(Config("FromDisplayName"), Config("From")));
             mailMessage.To.Add(new MailboxAddress(email, email));
             mailMessage.Subject = subject;
             mailMessage.Body = new TextPart("html") { Text = message };
 
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync(GetConfig("SmtpHost"), GetConfig<int>("SmtpPort"), GetConfig<bool>("UseSSL")).ConfigureAwait(false);
-                await client.AuthenticateAsync(GetConfig("UserName"), GetConfig("Password")).ConfigureAwait(false);
+                await client.ConnectAsync(Config("SmtpHost"), Config<int>("SmtpPort"), Config<bool>("UseSSL")).ConfigureAwait(false);
+                await client.AuthenticateAsync(Config("UserName"), Config("Password")).ConfigureAwait(false);
                 await client.SendAsync(mailMessage).ConfigureAwait(false);
                 await client.DisconnectAsync(true);
             }

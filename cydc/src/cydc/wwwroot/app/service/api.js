@@ -178,6 +178,19 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                     confirmedPassword: confirmedPassword
                 });
             };
+            account.prototype.forgotPassword = function (email) {
+                return http.post('/api/account/forgotPassword', {
+                    email: email
+                });
+            };
+            account.prototype.resetPassword = function (email, code, password, confirmedPassword) {
+                return http.post('/api/account/resetPassword', {
+                    email: email,
+                    code: code,
+                    password: password,
+                    confirmedPassword: confirmedPassword
+                });
+            };
             account.prototype.logout = function () {
                 return http.post('/api/account/logout', null).always(function () {
                     auth.onLogout();

@@ -191,6 +191,21 @@ module service {
                 confirmedPassword: confirmedPassword
             });
         }
+        
+        forgotPassword(email: string) {
+            return http.post('/api/account/forgotPassword', {
+               email: email
+            });
+        }
+        
+        resetPassword(email: string, code: string, password: string, confirmedPassword: string) {
+            return http.post('/api/account/resetPassword', {
+               email: email,
+               code: code, 
+               password: password, 
+               confirmedPassword: confirmedPassword
+            });
+        }
 
         logout() {
             return http.post('/api/account/logout', null).always(() => {

@@ -17,4 +17,3 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
     })();
     return new viewModel();
 });
-//# sourceMappingURL=menu.js.map
