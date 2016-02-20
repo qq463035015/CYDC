@@ -29,17 +29,21 @@ namespace cydc.Models.Excel
         [Display(Name = "备注")]
         public string Comment { get; set; }
 
+        [Display(Name = "金额")]
+        public decimal Price { get; set; }
+
         internal static IEnumerable<FoodOrderExcelDto> FromEntities(IEnumerable<FoodOrder> list)
         {
             return list.Select(r => new FoodOrderExcelDto
             {
+                Price = r.FoodMenu.Price,
                 Comment = r.Comment,
                 FoodDetails = r.FoodMenu.Details,
                 Location = r.Location.Name,
                 OrderTime = r.OrderTime,
                 Taste = r.Taste.Name,
                 FoodTitle = r.FoodMenu.Title,
-                UserName = r.OrderUser.UserName
+                UserName = r.OrderUser.UserName,
             });
         }
     }

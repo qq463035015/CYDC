@@ -14,6 +14,7 @@ class viewModel {
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
     notices = ko.observable<string>();
+    canSumbit = ko.observable(true);
     foodOrder = new foodOrders();
     auth = auth;
 
@@ -23,6 +24,7 @@ class viewModel {
         api.menu.enableList().then(data=> {
             this.allMenu(data);
             this.menuTypeId(data[0] && data[0].id)
+            if (data.length == 0) this.canSumbit(false);
         });
         api.type.enabledTasteTypes().then(data=> this.allFoodType(data));
         api.location.enabledLocationList().then(data=> this.allLocation(data));

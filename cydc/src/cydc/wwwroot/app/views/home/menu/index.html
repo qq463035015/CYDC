@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-sm-24">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th><b>菜谱名称</b></th>
@@ -47,6 +47,19 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="col-sm-24">
+        <div class="pull-left paginaton">
+            第<span class="cl-blue" data-bind="text:pageNumber"></span>页
+        </div>
+        <div class="pull-right">
+            <!-- ko if: hasPrev -->
+            <a href="#" data-bind="click:loadPrevPage">上一页</a>
+            <!-- /ko -->
+            <!-- ko if: hasNext -->
+            <a href="#" data-bind="click:loadNextPage">下一页</a>
+            <!-- /ko -->
         </div>
     </div>
 </div>
