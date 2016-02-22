@@ -37,7 +37,6 @@ module service {
             let dotsTo = edgeFrom ? centerPageCount : this.pageNumber() + sidePageCount;
             dotsFrom = utils.clamp(dotsFrom, 1, this.pageCount());
             dotsTo = utils.clamp(dotsTo, 1, this.pageCount());
-            console.log(dotsFrom, dotsTo);
             
             this.hasPrev() && all.push({
                 type: PagerButtonType.prev,

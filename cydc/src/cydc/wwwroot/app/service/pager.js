@@ -29,7 +29,6 @@ define(["require", "exports", "knockout", "jquery", "plugins/http", "service/uti
                     var dotsTo = edgeFrom ? centerPageCount : _this.pageNumber() + sidePageCount;
                     dotsFrom = utils.clamp(dotsFrom, 1, _this.pageCount());
                     dotsTo = utils.clamp(dotsTo, 1, _this.pageCount());
-                    console.log(dotsFrom, dotsTo);
                     _this.hasPrev() && all.push({
                         type: PagerButtonType.prev,
                         click: function () { return _this.loadPrevPage(); },

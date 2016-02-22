@@ -18,7 +18,6 @@ namespace cydc.Models
 
         public static async Task<PagedList<T>> Create(IQueryable<T> data, BasePagedDbQuery query)
         {
-            var result = new PagedList<T>();
             var dbQuery = query.ToPagedDbQuery();
 
             var sortString = dbQuery.ToSortString();
@@ -26,12 +25,6 @@ namespace cydc.Models
             {
                 data = data.OrderBy(sortString);
             }
-
-            var allItems = await data
-                .Skip(dbQuery.Skip).Take(dbQuery.Take)
-                .ToListAsync();
-            var count = await
-                data.CountAsync();
 
             return new PagedList<T>
             {
