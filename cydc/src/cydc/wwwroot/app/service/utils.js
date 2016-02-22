@@ -60,6 +60,13 @@ define(["require", "exports", 'jquery', 'knockout.validation'], function (requir
             utils.prototype.navigateToLogin = function () {
                 location.assign('/account/login');
             };
+            utils.prototype.clamp = function (value, min, max) {
+                if (value < min)
+                    return min;
+                if (value > max)
+                    return max;
+                return value;
+            };
             return utils;
         })();
         service.utils = utils;

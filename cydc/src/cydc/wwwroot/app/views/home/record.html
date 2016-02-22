@@ -59,15 +59,47 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-24">
-            <div class="pull-left paginaton">
-                第<span class="cl-blue" data-bind="text:pageNumber"></span>页
-            </div>
-            <div class="pull-right">
-                <a href="javascript:void(0)" data-bind="visible: hasPrev, click: loadPrevPage">上一页</a>
-                <a href="javascript:void(0)" data-bind="visible: hasNext, click: loadNextPage">下一页</a>
-            </div>
-        </div>
+
+        <nav class="text-center">
+            <ul class="pagination" data-bind="foreach: pagerButtons">
+                <!-- ko if: type == 'first' -->
+                <li class="pagination-prev">
+                    <a href="javascript:void(0)" aria-label="首页" data-bind="click: click">
+                        <i aria-hidden="true" class="glyph glyph-chevron-left"></i>
+                    </a>
+                </li>
+                <!-- /ko -->
+                <!-- ko if: type == 'prev' -->
+                <li class="pagination-prev">
+                    <a href="javascript:void(0)" aria-label="上一页" data-bind="click: click">
+                        <i aria-hidden="true" class="glyph glyph-chevron-left-2"></i>
+                    </a>
+                </li>
+                <!-- /ko -->
+                <!-- ko if: type == 'page' -->
+                <li data-bind="css: {active: active}">
+                    <a href="javascript:void(0)" data-bind="click: click, text: page">1</a>
+                </li>
+                <!-- /ko -->
+                <!-- ko if: type == 'dot' -->
+                <li class="pagination-ellipsis"><span>&hellip;</span></li>
+                <!-- /ko -->
+                <!-- ko if: type == 'next' -->
+                <li class="pagination-next">
+                    <a href="javascript:void(0)" aria-label="下一页" data-bind="click: click">
+                        <i aria-hidden="true" class="glyph glyph-chevron-right-2"></i>
+                    </a>
+                </li>
+                <!-- /ko -->
+                <!-- ko if: type == 'last' -->
+                <li class="pagination-next">
+                    <a href="javascript:void(0)" aria-label="尾页" data-bind="click: click">
+                        <i aria-hidden="true" class="glyph glyph-chevron-right"></i>
+                    </a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </nav>
     </div>
     <div class="row text-center" data-bind="ifnot:items().length>0">
         <h3>无数据</h3>
