@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", 'knockout', 'service/utils', 'service/pager', 'service/ko_bindings'], function (require, exports, ko, utils, pager, kob) {
+    "use strict";
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
@@ -19,6 +20,6 @@ define(["require", "exports", 'knockout', 'service/utils', 'service/pager', 'ser
             utils.alert("\u8BA2\u5355 #" + data.foodOrderId, "\n\u7528\u6237\u540D\uFF1A" + data.foodOrder.orderUser.userName + " <br/>\n\u70B9\u9910\u65F6\u95F4\uFF1A" + kob.dateTimeText(data.foodOrder.orderTime) + " <br/>\n\u5907\u6CE8\uFF1A" + (data.foodOrder.comment || '无') + " <br/>");
         };
         return viewModel;
-    })(pager);
+    }(pager));
     return new viewModel();
 });

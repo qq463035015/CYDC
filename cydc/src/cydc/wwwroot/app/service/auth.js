@@ -1,4 +1,5 @@
 define(["require", "exports", 'knockout', 'plugins/http'], function (require, exports, ko, http) {
+    "use strict";
     var service;
     (function (service) {
         var auth = (function () {
@@ -23,7 +24,7 @@ define(["require", "exports", 'knockout', 'plugins/http'], function (require, ex
                 this.refreshState();
             };
             return auth;
-        })();
+        }());
         service.auth = auth;
     })(service || (service = {}));
     return new service.auth();

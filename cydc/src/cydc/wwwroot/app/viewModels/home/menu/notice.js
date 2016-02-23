@@ -1,4 +1,5 @@
 define(["require", "exports", 'service/api', 'knockout'], function (require, exports, api, ko) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -9,6 +10,6 @@ define(["require", "exports", 'service/api', 'knockout'], function (require, exp
             api.notice.update(this.notice().content).then(function () { });
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

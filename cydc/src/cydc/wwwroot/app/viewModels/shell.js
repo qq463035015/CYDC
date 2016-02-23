@@ -1,4 +1,5 @@
 define(["require", "exports", 'plugins/router', 'service/auth', 'service/api', 'service/utils'], function (require, exports, router, auth, api, utils) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             this.router = router;
@@ -28,6 +29,6 @@ define(["require", "exports", 'plugins/router', 'service/auth', 'service/api', '
             });
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

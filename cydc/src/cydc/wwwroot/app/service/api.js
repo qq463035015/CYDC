@@ -1,4 +1,5 @@
 define(["require", "exports", 'plugins/http', 'service/auth'], function (require, exports, http, auth) {
+    "use strict";
     var service;
     (function (service) {
         var api = (function () {
@@ -14,7 +15,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 this.accountDetails = new AccountDetails();
             }
             return api;
-        })();
+        }());
         service.api = api;
         var user = (function () {
             function user() {
@@ -26,7 +27,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post("/api/user/getUserAmount", null);
             };
             return user;
-        })();
+        }());
         var AccountDetails = (function () {
             function AccountDetails() {
             }
@@ -37,7 +38,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
             };
             return AccountDetails;
-        })();
+        }());
         var foodOrderClientInfo = (function () {
             function foodOrderClientInfo() {
             }
@@ -45,7 +46,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/foodOrderClientInfo/create', null);
             };
             return foodOrderClientInfo;
-        })();
+        }());
         var foodOrder = (function () {
             function foodOrder() {
             }
@@ -77,7 +78,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/foodOrder/export', { time: time, userName: userName });
             };
             return foodOrder;
-        })();
+        }());
         var menuIndex = (function () {
             function menuIndex() {
             }
@@ -85,7 +86,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/foodMenu/list', query);
             };
             return menuIndex;
-        })();
+        }());
         var foodMenu = (function () {
             function foodMenu() {
             }
@@ -105,7 +106,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/foodMenu/UpdateEnable', { id: id, enabled: enabled });
             };
             return foodMenu;
-        })();
+        }());
         var tasteType = (function () {
             function tasteType() {
             }
@@ -125,7 +126,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/tasteType/create', { name: name });
             };
             return tasteType;
-        })();
+        }());
         var location = (function () {
             function location() {
             }
@@ -145,7 +146,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/location/create', { name: name });
             };
             return location;
-        })();
+        }());
         var siteNotice = (function () {
             function siteNotice() {
             }
@@ -156,7 +157,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.post('/api/siteNotice/update', { content: content });
             };
             return siteNotice;
-        })();
+        }());
         var account = (function () {
             function account() {
             }
@@ -203,7 +204,7 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
                 return http.get('/api/account/checkEmail', { email: email });
             };
             return account;
-        })();
+        }());
     })(service || (service = {}));
     return new service.api();
 });

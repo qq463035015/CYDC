@@ -1,4 +1,5 @@
 define(["require", "exports", 'durandal/app', 'durandal/viewLocator', 'durandal/system'], function (require, exports, app, viewLocator, system) {
+    "use strict";
     system.debug(false);
     app.title = '';
     app.configurePlugins({

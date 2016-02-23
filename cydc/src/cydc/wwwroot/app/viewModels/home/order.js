@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'service/pager', 'moment'], function (require, exports, api, ko, utils, pager, moment) {
+    "use strict";
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
@@ -67,7 +68,7 @@ define(["require", "exports", 'service/api', 'knockout', 'service/utils', 'servi
             postForm('/api/foodOrder/export', { startTime: this.startTime(), endTime: this.endTime(), userName: this.userName() });
         };
         return viewModel;
-    })(pager);
+    }(pager));
     function postForm(url, data) {
         var form = document.createElement('form');
         form.action = url;
