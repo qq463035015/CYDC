@@ -10,9 +10,7 @@ namespace cydc.Models
     {
         public List<T> Items { get; set; }
 
-        public T NextPageFirstItem { get; set; }
-
-        public bool HasNext { get; set; }
+        public int Count { get; set; }
 
         private PagedList()
         {
@@ -20,7 +18,6 @@ namespace cydc.Models
 
         public static async Task<PagedList<T>> Create(IQueryable<T> data, BasePagedDbQuery query)
         {
-            var result = new PagedList<T>();
             var dbQuery = query.ToPagedDbQuery();
 
             var sortString = dbQuery.ToSortString();
@@ -29,25 +26,11 @@ namespace cydc.Models
                 data = data.OrderBy(sortString);
             }
 
-            var allItems = await data
-                .Skip(dbQuery.Skip).Take(dbQuery.Take + 1)
-                .ToListAsync();
-            result.Items = allItems;
-            
-            result.HasNext = result.Items.Count > dbQuery.Take;
-
-            if (result.HasNext)
+            return new PagedList<T>
             {
-                result.NextPageFirstItem = allItems.Last();
-                allItems.RemoveAt(allItems.Count - 1);
-                result.Items = allItems;
-            }
-            else
-            {
-                result.Items = allItems;
-            }
-
-            return result;
+                Items = await data.Skip(dbQuery.Skip).Take(dbQuery.Take).ToListAsync().ConfigureAwait(false), 
+                Count = await data.CountAsync().ConfigureAwait(false)
+            };
         }
     }
 

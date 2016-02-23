@@ -42,20 +42,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-24">
-            <div class="pull-left paginaton">
-                第<span class="cl-blue" data-bind="text:pageNumber"></span>页
-            </div>
-            <div class="pull-right">
-                <!-- ko if: hasPrev -->
-                <a href="#" data-bind="click:loadPrevPage">上一页</a>
-                <!-- /ko -->
-
-                <!-- ko if: hasNext -->
-                <a href="#" data-bind="click:loadNextPage">下一页</a>
-                <!-- /ko -->
-            </div>
-        </div>
+        <!-- ko template: 'pager-foot' --><!-- /ko -->
     </div>
     <div class="row text-center" data-bind="ifnot:items().length>0">
         <h3>没有查询到相关数据.</h3>

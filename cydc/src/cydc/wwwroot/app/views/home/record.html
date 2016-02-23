@@ -59,15 +59,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-xs-24">
-            <div class="pull-left paginaton">
-                第<span class="cl-blue" data-bind="text:pageNumber"></span>页
-            </div>
-            <div class="pull-right">
-                <a href="javascript:void(0)" data-bind="visible: hasPrev, click: loadPrevPage">上一页</a>
-                <a href="javascript:void(0)" data-bind="visible: hasNext, click: loadNextPage">下一页</a>
-            </div>
-        </div>
+
+        <!-- ko template: 'pager-foot' --><!-- /ko -->
     </div>
     <div class="row text-center" data-bind="ifnot:items().length>0">
         <h3>无数据</h3>

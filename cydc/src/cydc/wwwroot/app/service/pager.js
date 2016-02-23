@@ -1,8 +1,9 @@
-define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (require, exports, ko, $, http) {
+define(["require", "exports", "knockout", "jquery", "plugins/http", "service/utils"], function (require, exports, ko, $, http, utils) {
     var service;
     (function (service) {
-        var pager = (function () {
-            function pager(dataUrl) {
+        "use strict";
+        var Pager = (function () {
+            function Pager(dataUrl) {
                 var _this = this;
                 // global config:
                 this.maxPageToDisplay = 5;
@@ -10,10 +11,71 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
                 this.dataUrl = ko.observable();
                 // backend returned fields:
                 this.items = ko.observableArray();
-                this.nextPageFirstItem = ko.observable();
-                this.hasNext = ko.observable();
+                this.count = ko.observable();
                 // computed by backend fields:
+                this.hasNext = ko.pureComputed(function () { return _this.count() > _this.pageNumber() * _this.pageSize(); });
                 this.hasPrev = ko.pureComputed(function () { return _this.pageNumber() > 1; });
+                this.itemFrom = ko.pureComputed(function () { return (_this.pageNumber() - 1) * _this.pageSize() + 1; });
+                this.itemTo = ko.pureComputed(function () { return _this.itemFrom() + _this.items().length; });
+                this.pageCount = ko.pureComputed(function () { return Math.ceil(_this.count() / _this.pageSize()); });
+                // pagerButtons
+                this.pagerButtons = ko.pureComputed(function () {
+                    var all = Array();
+                    var centerPageCount = 5;
+                    var sidePageCount = Math.floor(centerPageCount / 2);
+                    var edgeFrom = _this.pageNumber() - sidePageCount < 0;
+                    var edgeTo = _this.pageNumber() + sidePageCount > _this.pageCount();
+                    var dotsFrom = edgeTo ? _this.pageCount() - centerPageCount + 1 : _this.pageNumber() - sidePageCount;
+                    var dotsTo = edgeFrom ? centerPageCount : _this.pageNumber() + sidePageCount;
+                    dotsFrom = utils.clamp(dotsFrom, 1, _this.pageCount());
+                    dotsTo = utils.clamp(dotsTo, 1, _this.pageCount());
+                    _this.hasPrev() && all.push({
+                        type: PagerButtonType.prev,
+                        click: function () { return _this.loadPrevPage(); },
+                        page: _this.prevPageNumber(),
+                        active: false
+                    });
+                    (1 < dotsFrom) && all.push({
+                        type: PagerButtonType.page,
+                        click: function () { return _this.loadFirstPage(); },
+                        page: 1,
+                        active: false
+                    });
+                    (1 < dotsFrom) && all.push({
+                        type: PagerButtonType.dot,
+                        click: null,
+                        page: null,
+                        active: false
+                    });
+                    for (var i = dotsFrom; i <= dotsTo; ++i)
+                        (function (i) {
+                            all.push({
+                                click: function () { return _this.loadPage(i); },
+                                page: i,
+                                type: PagerButtonType.page,
+                                active: i == _this.pageNumber()
+                            });
+                        })(i);
+                    (_this.pageCount() > dotsTo) && all.push({
+                        type: PagerButtonType.dot,
+                        click: null,
+                        page: null,
+                        active: false
+                    });
+                    (_this.pageCount() > dotsTo) && all.push({
+                        type: PagerButtonType.page,
+                        click: function () { return _this.loadLastPage(); },
+                        page: _this.pageCount(),
+                        active: false
+                    });
+                    _this.hasNext() && all.push({
+                        type: PagerButtonType.next,
+                        click: function () { return _this.loadNextPage(); },
+                        page: _this.nextPageNumber(),
+                        active: false
+                    });
+                    return all;
+                });
                 // front-end state
                 this.pageNumber = ko.observable(1);
                 this.pageSize = ko.observable(14);
@@ -31,32 +93,54 @@ define(["require", "exports", 'knockout', 'jquery', 'plugins/http'], function (r
                         pageSize: _this.pageSize()
                     });
                 });
+                this.loading = ko.observable(false);
                 this.dataUrl(dataUrl);
             }
-            pager.prototype.loadData = function () {
+            Pager.prototype.loadData = function () {
                 var _this = this;
                 var searchParams = this.searchState();
+                this.loading(true);
                 return http.post(this.dataUrl(), searchParams).then(function (data) {
-                    _this.lastRaw = data;
+                    _this.loading(false);
                     _this.onDataRecieving(data);
                 });
             };
-            pager.prototype.loadPrevPage = function () {
-                this.pageNumber(this.prevPageNumber());
+            Pager.prototype.loadPage = function (pageNumber) {
+                if (typeof pageNumber != 'number')
+                    throw new Error("PAGE NUMBER MUST BE NUMBER!");
+                this.pageNumber(pageNumber);
                 return this.loadData();
             };
-            pager.prototype.loadNextPage = function () {
-                this.pageNumber(this.nextPageNumber());
-                return this.loadData();
+            Pager.prototype.loadFirstPage = function () {
+                return this.loadPage(1);
             };
-            pager.prototype.onDataRecieving = function (data) {
+            Pager.prototype.loadLastPage = function () {
+                return this.loadPage(this.pageCount());
+            };
+            Pager.prototype.loadPrevPage = function () {
+                return this.loadPage(this.prevPageNumber());
+            };
+            Pager.prototype.loadNextPage = function () {
+                return this.loadPage(this.nextPageNumber());
+            };
+            Pager.prototype.onDataRecieving = function (data) {
                 this.items(data.items);
-                this.nextPageFirstItem(data.nextPageFirstItem);
-                this.hasNext(data.hasNext);
+                this.count(data.count);
             };
-            return pager;
+            return Pager;
         })();
-        service.pager = pager;
+        service.Pager = Pager;
+        var PagerButtonType = (function () {
+            function PagerButtonType() {
+            }
+            PagerButtonType.first = "first";
+            PagerButtonType.prev = "prev";
+            PagerButtonType.dot = "dot";
+            PagerButtonType.page = "page";
+            PagerButtonType.next = "next";
+            PagerButtonType.last = "last";
+            return PagerButtonType;
+        })();
     })(service || (service = {}));
-    return service.pager;
+    return service.Pager;
 });
