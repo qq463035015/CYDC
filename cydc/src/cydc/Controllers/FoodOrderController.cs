@@ -141,7 +141,7 @@ namespace cydc.Controllers
             };
             order.AccountDetails.Add(new AccountDetails
             {
-                UserId = User.GetUserId(),
+                UserId = order.OrderUserId,
                 CreateTime = DateTime.Now,
                 Amount = order.FoodMenu.Price,
             });
@@ -159,7 +159,7 @@ namespace cydc.Controllers
             order.Payment = null;
             order.AccountDetails.Add(new AccountDetails
             {
-                UserId = User.GetUserId(),
+                UserId = order.OrderUserId, 
                 CreateTime = DateTime.Now,
                 Amount = -order.FoodMenu.Price
             });
