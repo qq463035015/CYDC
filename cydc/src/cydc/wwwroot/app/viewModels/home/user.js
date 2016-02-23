@@ -4,6 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'service/utils'], function (require, exports, ko, api, pager, utils) {
+    "use strict";
     var viewModel = (function (_super) {
         __extends(viewModel, _super);
         function viewModel() {
@@ -34,6 +35,6 @@ define(["require", "exports", 'knockout', 'service/api', 'service/pager', 'servi
             this.loadData();
         };
         return viewModel;
-    })(pager);
+    }(pager));
     return new viewModel();
 });

@@ -10,7 +10,7 @@ namespace cydc.Models
     {
         public FoodOrder()
         {
-            AccountDetails = new List<AccountDetails>();
+            AccountDetails = new HashSet<AccountDetails>();
         }
 
         public int Id { get; set; }
@@ -41,6 +41,6 @@ namespace cydc.Models
 
         public FoodOrderClientInfo ClientInfo { get; set; }
 
-        public List<AccountDetails> AccountDetails { get; set; }
+        public HashSet<AccountDetails> AccountDetails { get; set; }
     }
 }

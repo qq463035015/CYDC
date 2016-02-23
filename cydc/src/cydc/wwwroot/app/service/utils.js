@@ -1,4 +1,5 @@
 define(["require", "exports", 'jquery', 'knockout.validation'], function (require, exports, $, koval) {
+    "use strict";
     var service;
     (function (service) {
         var utils = (function () {
@@ -68,7 +69,7 @@ define(["require", "exports", 'jquery', 'knockout.validation'], function (requir
                 return value;
             };
             return utils;
-        })();
+        }());
         service.utils = utils;
     })(service || (service = {}));
     return new service.utils();

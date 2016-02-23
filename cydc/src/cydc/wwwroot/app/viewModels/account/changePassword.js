@@ -1,4 +1,5 @@
 define(["require", "exports", 'service/api', 'service/utils', 'knockout'], function (require, exports, api, utils, ko) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             this.password = ko.observable().extend({
@@ -31,6 +32,6 @@ define(["require", "exports", 'service/api', 'service/utils', 'knockout'], funct
             }
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

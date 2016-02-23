@@ -24,7 +24,7 @@ class bindingUtils {
 let ko_binding = new bindingUtils();
 
 ko.bindingHandlers['dateTimeText'] = {
-    init: () => { controlsDescendantBindings: true },
+    init: () => { return { controlsDescendantBindings: true }; },
     update: (element, valueAccessor) => {
         let plainText = ko.unwrap(valueAccessor());
         let finalText = ko_binding.dateTimeText(plainText);
@@ -33,7 +33,7 @@ ko.bindingHandlers['dateTimeText'] = {
 }
 
 ko.bindingHandlers['boolText'] = {
-    init: () => { controlsDescendantBindings: true },
+    init: () => { return { controlsDescendantBindings: true }; },
     update: (element, valueAccessor) => {
         let plain = ko.unwrap(valueAccessor());
         let span = `<span class=${plain ? 'text-success' : 'text-warning'}>

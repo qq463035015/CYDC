@@ -25,7 +25,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     "EPPlus": "4.0.5",
-    "MailKit": "1.2.19"
+    "MailKit": "1.2.19",
+    "Microsoft.TypeScript.MSBuild": "1.8.4"
   },
 
   "commands": {

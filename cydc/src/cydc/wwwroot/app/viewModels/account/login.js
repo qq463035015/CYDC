@@ -1,4 +1,5 @@
 define(["require", "exports", 'knockout', 'service/api', 'service/utils'], function (require, exports, ko, api, utils) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             this.userName = ko.observable().extend({
@@ -25,6 +26,6 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             }
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

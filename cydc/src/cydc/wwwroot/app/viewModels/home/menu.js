@@ -1,4 +1,5 @@
 define(["require", "exports", 'plugins/router'], function (require, exports, router) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             window['vm'] = this;
@@ -14,6 +15,6 @@ define(["require", "exports", 'plugins/router'], function (require, exports, rou
             ]).buildNavigationModel();
         }
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

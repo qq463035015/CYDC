@@ -1,4 +1,5 @@
 define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'service/utils', 'service/auth'], function (require, exports, router, api, ko, utils, auth) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             var _this = this;
@@ -64,7 +65,7 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             localStorage.setItem('foodTypeId', this.foodTypeId());
         };
         return viewModel;
-    })();
+    }());
     var foodOrders = (function () {
         function foodOrders() {
             this.details = ko.observable();
@@ -75,6 +76,6 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             this.comment = ko.observable();
         }
         return foodOrders;
-    })();
+    }());
     return new viewModel();
 });

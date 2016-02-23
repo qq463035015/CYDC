@@ -39,21 +39,21 @@ module service {
             dotsTo = utils.clamp(dotsTo, 1, this.pageCount());
             
             this.hasPrev() && all.push({
-                type: PagerButtonType.prev,
+                type: "prev",
                 click: () => this.loadPrevPage(),
                 page: this.prevPageNumber(), 
                 active: false
             });
 
             (1 < dotsFrom) && all.push({
-                type: PagerButtonType.page,
+                type: "page",
                 click: () => this.loadFirstPage(),
                 page: 1,
                 active: false
             });
 
             (1 < dotsFrom) && all.push({
-                type: PagerButtonType.dot,
+                type: "dot",
                 click: null,
                 page: null, 
                 active: false
@@ -63,27 +63,27 @@ module service {
                 all.push({
                     click: () => this.loadPage(i),
                     page: i,
-                    type: PagerButtonType.page,
+                    type: "page",
                     active: i == this.pageNumber()
                 });
             })(i);
 
             (this.pageCount() > dotsTo) && all.push({
-                type: PagerButtonType.dot,
+                type: "dot",
                 click: null,
                 page: null, 
                 active: false
             });
 
             (this.pageCount() > dotsTo) && all.push({
-                type: PagerButtonType.page,
+                type: "page",
                 click: () => this.loadLastPage(),
                 page: this.pageCount(),
                 active: false
             });
 
             this.hasNext() && all.push({
-                type: PagerButtonType.next,
+                type: "next",
                 click: () => this.loadNextPage(),
                 page: this.nextPageNumber(), 
                 active: false
@@ -159,19 +159,10 @@ module service {
     }
 
     export interface IPagerButton {
-        type: PagerButtonType;
+        type: "first" | "prev" | "dot" | "page" | "next" | "last";
         page: number;
         active: boolean;
         click: () => void;
-    }
-
-    class PagerButtonType {
-        static first = "first";
-        static prev = "prev";
-        static dot = "dot";
-        static page = "page";
-        static next = "next";
-        static last = "last";
     }
 }
 
