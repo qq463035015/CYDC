@@ -22,6 +22,7 @@
 /// <reference path="app/viewmodels/account/register.js" />
 /// <reference path="app/viewmodels/account/resetpassword.js" />
 /// <reference path="app/viewmodels/error/404.js" />
+/// <reference path="app/viewmodels/home/about.js" />
 /// <reference path="app/viewModels/home/bill.js" />
 /// <reference path="app/viewModels/home/index.js" />
 /// <reference path="app/viewModels/home/menu.js" />
