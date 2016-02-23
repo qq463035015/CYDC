@@ -13,11 +13,11 @@
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-24">
-                    <div class="type-sh3"><b>今日菜谱</b></div>
+                    <div class="type-sh3">今日菜谱</div>
                     <div class="type-sh3" data-bind="text:menu()&&menu().details"></div>
                 </div>
                 <div class="col-md-12">
-                    <div class="type-sh3"><b>套餐类型</b></div>
+                    <div class="type-sh3">套餐类型</div>
                     <div class="form-group">
                         <div class="combobox">
                             <select class="form-control" data-bind="value:menuTypeId,options:allMenu,optionsValue:'id',optionsText:'title'"></select>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="type-sh3"><b>口味类型</b></div>
+                    <div class="type-sh3">口味类型</div>
                     <div class="form-group">
                         <div class="combobox">
                             <select class="form-control" data-bind="value:foodTypeId,options:allFoodType,optionsValue:'id',optionsText:'name'"></select>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="type-sh3"><b>点餐地点</b></div>
+                    <div class="type-sh3">点餐地点</div>
                     <div class="form-group">
                         <div class="combobox">
                             <select class="form-control" data-bind="value:locationId,options:allLocation,optionsValue:'id',optionsText:'name'"></select>
@@ -41,15 +41,21 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="type-sh3"><b>金额(元)</b></div>
+                    <div class="type-sh3">金额(元)</div>
                     <div class="form-group">
                         <input type='text' class='form-control' readonly data-bind="value:menu()&&menu().price" />
                     </div>
                 </div>
                 <div class="col-md-24">
-                    <div class="type-sh3"><b>备注信息</b></div>
+                    <div class="type-sh3">备注信息</div>
                     <div class="form-group">
                         <textarea id="info" rows="2" data-bind="value:comment"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-24" data-bind="if:auth.isAdmin">
+                    <div class="type-sh3">点餐用户</div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" data-bind="value:name">
                     </div>
                 </div>
                 <div class="col-md-24">

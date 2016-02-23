@@ -14,6 +14,7 @@ class viewModel {
     menuTypeId = ko.observable<any>();
     comment = ko.observable<any>();
     notices = ko.observable<string>();
+    name = ko.observable<string>();
     canSumbit = ko.observable(true);
     foodOrder = new foodOrders();
     auth = auth;
@@ -53,7 +54,7 @@ class viewModel {
 
     commitOrder() {
         if (auth.authed()) {
-            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(() => {
+            api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment(), this.name()).then(() => {
                 $('#modal-sample').modal('hide');
                 this.setCookie();
                 this.comment(null);

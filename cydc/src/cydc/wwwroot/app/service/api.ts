@@ -45,8 +45,8 @@ module service {
             return http.post('/api/foodOrder/list', query);
         }
 
-        create(menuId: Number, locationId: Number, tasteId: Number, comment: string) {
-            return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment });
+        create(menuId: Number, locationId: Number, tasteId: Number, comment: string, name: string) {
+            return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment, userName: name });
         }
 
         delete(id: number) {
@@ -191,19 +191,19 @@ module service {
                 confirmedPassword: confirmedPassword
             });
         }
-        
+
         forgotPassword(email: string) {
             return http.post('/api/account/forgotPassword', {
-               email: email
+                email: email
             });
         }
-        
+
         resetPassword(email: string, code: string, password: string, confirmedPassword: string) {
             return http.post('/api/account/resetPassword', {
-               email: email,
-               code: code, 
-               password: password, 
-               confirmedPassword: confirmedPassword
+                email: email,
+                code: code,
+                password: password,
+                confirmedPassword: confirmedPassword
             });
         }
 

@@ -10,6 +10,7 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
             this.menuTypeId = ko.observable();
             this.comment = ko.observable();
             this.notices = ko.observable();
+            this.name = ko.observable();
             this.canSumbit = ko.observable(true);
             this.foodOrder = new foodOrders();
             this.auth = auth;
@@ -45,7 +46,7 @@ define(["require", "exports", 'plugins/router', 'service/api', 'knockout', 'serv
         viewModel.prototype.commitOrder = function () {
             var _this = this;
             if (auth.authed()) {
-                api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment()).then(function () {
+                api.order.create(this.menuTypeId(), this.locationId(), this.foodTypeId(), this.comment(), this.name()).then(function () {
                     $('#modal-sample').modal('hide');
                     _this.setCookie();
                     _this.comment(null);

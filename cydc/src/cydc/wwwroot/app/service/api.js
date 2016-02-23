@@ -52,8 +52,8 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.list = function (query) {
                 return http.post('/api/foodOrder/list', query);
             };
-            foodOrder.prototype.create = function (menuId, locationId, tasteId, comment) {
-                return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment });
+            foodOrder.prototype.create = function (menuId, locationId, tasteId, comment, name) {
+                return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment, userName: name });
             };
             foodOrder.prototype.delete = function (id) {
                 return http.post('/api/foodOrder/delete', { id: id });

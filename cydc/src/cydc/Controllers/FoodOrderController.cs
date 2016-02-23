@@ -90,29 +90,45 @@ namespace cydc.Controllers
             return data;
         }
 
-        public async Task<int> Create([FromBody] FoodOrder order)
+        public async Task<int> Create([FromBody] FoodOrderParams order)
         {
+            FoodOrder foodOrder = new FoodOrder();
             var menu = await DbContext.FoodMenus.SingleAsync(x => x.Id == order.FoodMenuId);
             var dateNow = DateTime.Now;
-            order.OrderUserId = User.GetUserId();
-            order.OrderTime = dateNow;
-
             var connection = (IHttpConnectionFeature)HttpContext.Features[typeof(IHttpConnectionFeature)];
 
-            order.ClientInfo = new FoodOrderClientInfo
+            foodOrder.ClientInfo = new FoodOrderClientInfo
             {
                 IP = connection?.RemoteIpAddress?.ToString() ?? "N/A",
                 UserAgent = Request.Headers["User-Agent"]
             };
 
-            order.AccountDetails.Add(new AccountDetails
+            var userName = order.UserName;
+            var userId = "";
+            if (!string.IsNullOrEmpty(userName))
             {
-                UserId = User.GetUserId(),
+                userId = DbContext.Users.First(x => x.UserName == userName).Id;
+            }
+            else {
+                userId = User.GetUserId();
+            }
+
+
+            foodOrder.AccountDetails.Add(new AccountDetails
+            {
+                UserId = userId,
                 CreateTime = dateNow,
                 Amount = menu.Price * -1
             });
 
-            DbContext.Add(order);
+            foodOrder.OrderUserId = userId;
+            foodOrder.OrderTime = dateNow;
+            foodOrder.LocationId = order.LocationId;
+            foodOrder.FoodMenuId = order.FoodMenuId;
+            foodOrder.TasteId = order.TasteId;
+            foodOrder.Comment = order.Comment;
+
+            DbContext.Add(foodOrder);
             return await DbContext.SaveChangesAsync();
         }
 
