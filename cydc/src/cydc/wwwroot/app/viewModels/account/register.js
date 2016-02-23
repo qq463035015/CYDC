@@ -1,4 +1,5 @@
 define(["require", "exports", 'knockout', 'service/api', 'service/utils'], function (require, exports, ko, api, utils) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             this.email = ko.observable().extend({
@@ -55,6 +56,6 @@ define(["require", "exports", 'knockout', 'service/api', 'service/utils'], funct
             alert("\u8BF7\u4E0D\u8981\u8FD9\u6837\u641E(" + xhr.status + ")");
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });

@@ -1,4 +1,5 @@
 define(["require", "exports", 'knockout', 'moment'], function (require, exports, ko, moment) {
+    "use strict";
     var bindingUtils = (function () {
         function bindingUtils() {
         }
@@ -17,10 +18,10 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
                 return time.format("YYYY-MM-DD HH:mm:ss");
         };
         return bindingUtils;
-    })();
+    }());
     var ko_binding = new bindingUtils();
     ko.bindingHandlers['dateTimeText'] = {
-        init: function () { controlsDescendantBindings: true; },
+        init: function () { return { controlsDescendantBindings: true }; },
         update: function (element, valueAccessor) {
             var plainText = ko.unwrap(valueAccessor());
             var finalText = ko_binding.dateTimeText(plainText);
@@ -28,7 +29,7 @@ define(["require", "exports", 'knockout', 'moment'], function (require, exports,
         }
     };
     ko.bindingHandlers['boolText'] = {
-        init: function () { controlsDescendantBindings: true; },
+        init: function () { return { controlsDescendantBindings: true }; },
         update: function (element, valueAccessor) {
             var plain = ko.unwrap(valueAccessor());
             var span = "<span class=" + (plain ? 'text-success' : 'text-warning') + ">\n                        " + (plain ? '√' : 'X') + "\n                    </span>";

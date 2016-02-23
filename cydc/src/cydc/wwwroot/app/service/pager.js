@@ -1,4 +1,5 @@
 define(["require", "exports", "knockout", "jquery", "plugins/http", "service/utils"], function (require, exports, ko, $, http, utils) {
+    "use strict";
     var service;
     (function (service) {
         "use strict";
@@ -30,19 +31,19 @@ define(["require", "exports", "knockout", "jquery", "plugins/http", "service/uti
                     dotsFrom = utils.clamp(dotsFrom, 1, _this.pageCount());
                     dotsTo = utils.clamp(dotsTo, 1, _this.pageCount());
                     _this.hasPrev() && all.push({
-                        type: PagerButtonType.prev,
+                        type: "prev",
                         click: function () { return _this.loadPrevPage(); },
                         page: _this.prevPageNumber(),
                         active: false
                     });
                     (1 < dotsFrom) && all.push({
-                        type: PagerButtonType.page,
+                        type: "page",
                         click: function () { return _this.loadFirstPage(); },
                         page: 1,
                         active: false
                     });
                     (1 < dotsFrom) && all.push({
-                        type: PagerButtonType.dot,
+                        type: "dot",
                         click: null,
                         page: null,
                         active: false
@@ -52,24 +53,24 @@ define(["require", "exports", "knockout", "jquery", "plugins/http", "service/uti
                             all.push({
                                 click: function () { return _this.loadPage(i); },
                                 page: i,
-                                type: PagerButtonType.page,
+                                type: "page",
                                 active: i == _this.pageNumber()
                             });
                         })(i);
                     (_this.pageCount() > dotsTo) && all.push({
-                        type: PagerButtonType.dot,
+                        type: "dot",
                         click: null,
                         page: null,
                         active: false
                     });
                     (_this.pageCount() > dotsTo) && all.push({
-                        type: PagerButtonType.page,
+                        type: "page",
                         click: function () { return _this.loadLastPage(); },
                         page: _this.pageCount(),
                         active: false
                     });
                     _this.hasNext() && all.push({
-                        type: PagerButtonType.next,
+                        type: "next",
                         click: function () { return _this.loadNextPage(); },
                         page: _this.nextPageNumber(),
                         active: false
@@ -128,19 +129,8 @@ define(["require", "exports", "knockout", "jquery", "plugins/http", "service/uti
                 this.count(data.count);
             };
             return Pager;
-        })();
+        }());
         service.Pager = Pager;
-        var PagerButtonType = (function () {
-            function PagerButtonType() {
-            }
-            PagerButtonType.first = "first";
-            PagerButtonType.prev = "prev";
-            PagerButtonType.dot = "dot";
-            PagerButtonType.page = "page";
-            PagerButtonType.next = "next";
-            PagerButtonType.last = "last";
-            return PagerButtonType;
-        })();
     })(service || (service = {}));
     return service.Pager;
 });

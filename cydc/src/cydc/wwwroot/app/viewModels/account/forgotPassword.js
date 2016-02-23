@@ -1,4 +1,5 @@
 define(["require", "exports", 'service/api', 'service/utils', 'knockout', 'plugins/router'], function (require, exports, api, utils, ko, router) {
+    "use strict";
     var viewModel = (function () {
         function viewModel() {
             this.email = ko.observable();
@@ -16,6 +17,6 @@ define(["require", "exports", 'service/api', 'service/utils', 'knockout', 'plugi
             }
         };
         return viewModel;
-    })();
+    }());
     return new viewModel();
 });
