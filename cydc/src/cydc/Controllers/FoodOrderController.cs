@@ -139,7 +139,9 @@ namespace cydc.Controllers
                 .Include(x => x.AccountDetails)
                 .Include(x => x.Payment)
                 .FirstAsync(x => x.Id == dataIn.Id);
+            DbContext.RemoveRange(order.AccountDetails);
             DbContext.Remove(order);
+            
             return await DbContext.SaveChangesAsync();
         }
 
