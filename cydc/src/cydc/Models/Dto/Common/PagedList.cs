@@ -23,7 +23,8 @@ namespace cydc.Models
             var sortString = dbQuery.ToSortString();
             if (sortString != null)
             {
-                data = data.OrderBy(sortString);
+                throw new NotImplementedException("ORDER_BY_NOT_IMPLEMENTED!");
+                //data = data.OrderBy(sortString);
             }
 
             return new PagedList<T>
@@ -49,7 +50,8 @@ namespace cydc.Models
 
             if (sortString != null)
             {
-                data = data.OrderBy(sortString);
+                //data = data.OrderBy(sortString);
+                throw new NotImplementedException("ORDER_BY_NOT_IMPLEMENTED!");
             }
 
             return data;

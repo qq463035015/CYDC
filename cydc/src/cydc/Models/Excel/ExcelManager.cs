@@ -20,8 +20,7 @@ namespace cydc.Models.Excel
 
         public Stream ExportToStream<T>(IEnumerable<T> dataIn)
         {
-            var excelManager = new ExcelExportManager<T>(dataIn, _modelMetadataProvider);
-            return excelManager.ExportToStream();
+            return new MemoryStream();
         }
     }
 }
