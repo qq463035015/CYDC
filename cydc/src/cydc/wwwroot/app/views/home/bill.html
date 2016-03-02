@@ -30,9 +30,9 @@
                     <tbody data-bind="foreach:items">
                         <tr>
                             <td data-bind="text:user.userName"></td>
-                            <td data-bind="text:amount"></td>
+                            <td data-bind="text:amount==0?'已从余额扣除':amount"></td>
                             <td>
-                                <a href="javascript: void(0)" 
+                                <a href="javascript: void(0)"
                                    data-bind="text: foodOrderId, click: $parent.viewFoodOrder.bind($parent, $data)">
                                 </a>
                             </td>

@@ -22,6 +22,7 @@ class viewModel extends pager<idName>{
         utils.alert(`订单 #${data.foodOrderId}`, `
 用户名：${data.foodOrder.orderUser.userName} <br/>
 点餐时间：${kob.dateTimeText(data.foodOrder.orderTime)} <br/>
+金额：${kob.dateTimeText(data.foodOrder.amount)} <br/>
 备注：${data.foodOrder.comment || '无'} <br/>`);
     }
 }

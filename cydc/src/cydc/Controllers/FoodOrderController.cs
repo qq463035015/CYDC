@@ -113,12 +113,14 @@ namespace cydc.Controllers
                 userId = User.GetUserId();
             }
 
+            IQueryable<AccountDetails> data = DbContext.AccountDetails;
+            var amount = data.Where(x => x.UserId == userId).Sum(x => x.Amount);
 
             foodOrder.AccountDetails.Add(new AccountDetails
             {
                 UserId = userId,
                 CreateTime = dateNow,
-                Amount = menu.Price * -1
+                Amount = -menu.Price
             });
 
             foodOrder.OrderUserId = userId;
@@ -127,9 +129,17 @@ namespace cydc.Controllers
             foodOrder.FoodMenuId = order.FoodMenuId;
             foodOrder.TasteId = order.TasteId;
             foodOrder.Comment = order.Comment;
-
             DbContext.Add(foodOrder);
-            return await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
+
+            if (amount >= menu.Price)
+            {
+                return await AutoPay(foodOrder);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         [Authorize(Roles = Admin)]
@@ -141,7 +151,7 @@ namespace cydc.Controllers
                 .FirstAsync(x => x.Id == dataIn.Id);
             DbContext.RemoveRange(order.AccountDetails);
             DbContext.Remove(order);
-            
+
             return await DbContext.SaveChangesAsync();
         }
 
@@ -166,6 +176,26 @@ namespace cydc.Controllers
             return await DbContext.SaveChangesAsync();
         }
 
+        public async Task<int> AutoPay([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.AccountDetails)
+                .Include(x => x.FoodMenu)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = new FoodOrderPayment
+            {
+                PayedTime = DateTime.Now
+            };
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = order.OrderUserId,
+                CreateTime = DateTime.Now,
+                Amount = 0,
+            });
+            return await DbContext.SaveChangesAsync();
+        }
+
         [Authorize(Roles = Admin)]
         public async Task<int> CancelPay([FromBody] FoodOrder order)
         {
@@ -177,7 +207,7 @@ namespace cydc.Controllers
             order.Payment = null;
             order.AccountDetails.Add(new AccountDetails
             {
-                UserId = order.OrderUserId, 
+                UserId = order.OrderUserId,
                 CreateTime = DateTime.Now,
                 Amount = -order.FoodMenu.Price
             });
