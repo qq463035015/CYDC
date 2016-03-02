@@ -26,7 +26,8 @@ namespace cydc
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile($@"C:\state\config\cydc.json", optional: true);
+                .AddJsonFile($@"C:\state\config\cydc.json", optional: true)
+                .AddJsonFile($@"/root/.aspnet/DataProtection-Keys/cydc.json", optional: true);
 
             if (env.IsDevelopment())
             {
