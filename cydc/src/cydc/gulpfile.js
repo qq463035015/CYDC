@@ -19,6 +19,7 @@ var paths = {
 paths.bundleJs = [
     paths.webroot + "../bower_components/angular/angular",
     paths.webroot + "../bower_components/angular-animate/angular-animate",
+    paths.webroot + "../bower_components/angular-route/angular-route",
     paths.webroot + "../bower_components/angular-aria/angular-aria",
     paths.webroot + "../bower_components/angular-messages/angular-messages",
     paths.webroot + "../bower_components/angular-material/angular-material",

@@ -1,5 +1,5 @@
 ﻿@{ Layout = null; }<!DOCTYPE html>
-<html lang="zh-hans">
+<html lang="zh-hans" ng-app="Cydc">
 <head>
     <meta charset="utf-8" />
     <title>CYDC</title>
@@ -8,8 +8,10 @@
     <link href="~/css/bundle.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
 </head>
-<body ng-cloak>
-    Hello World
-    <script src="~/lib/bundle.min.js"></script>
+<body ng-cloak ng-controller="Main as vm">
+    <div ng-view></div>
+    <script src="~/lib/bundle.js"></script>
+
+    <script src="~/app/main.js"></script>
 </body>
 </html>

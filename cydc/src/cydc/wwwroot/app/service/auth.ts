@@ -1,4 +1,4 @@
-﻿module service {
+﻿namespace Cydc {
     export class auth {
         authed: boolean;
         userName: string;
