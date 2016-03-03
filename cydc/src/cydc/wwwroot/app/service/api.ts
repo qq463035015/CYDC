@@ -1,162 +1,190 @@
-﻿import http = require('plugins/http');
-import auth = require('service/auth');
-
-module service {
+﻿module service {
     export class api {
-        location = new location();
-        type = new tasteType();
-        menu = new foodMenu();
-        notice = new siteNotice();
-        order = new foodOrder();
-        account = new account();
-        clientInfo = new foodOrderClientInfo();
-        user = new user();
-        accountDetails = new AccountDetails();
+        static $inject = ["$http"];
+        constructor(public $http: angular.IHttpService) {
+        }
+
+        location = new location(this.$http);
+        type = new tasteType(this.$http);
+        menu = new foodMenu(this.$http);
+        notice = new siteNotice(this.$http);
+        order = new foodOrder(this.$http);
+        auth = new auth(this.$http);
+        clientInfo = new foodOrderClientInfo(this.$http);
+        user = new user(this.$http);
+        accountDetails = new AccountDetails(this.$http);
     }
 
     class user {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post("/api/user/list", query);
+            return this.$http.post("/api/user/list", query);
         }
 
         getUserAmount() {
-            return http.post("/api/user/getUserAmount", null);
+            return this.$http.post("/api/user/getUserAmount", null);
         }
     }
 
     class AccountDetails {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post("/api/accountDetails/list", query);
+            return this.$http.post("/api/accountDetails/list", query);
         }
 
         create(userId: string, amount: Number) {
-            return http.post('/api/accountDetails/create', { userId: userId, amount: amount });
+            return this.$http.post('/api/accountDetails/create', { userId: userId, amount: amount });
         }
     }
 
     class foodOrderClientInfo {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         create() {
-            return http.post('/api/foodOrderClientInfo/create', null);
+            return this.$http.post('/api/foodOrderClientInfo/create', null);
         }
     }
 
     class foodOrder {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post('/api/foodOrder/list', query);
+            return this.$http.post('/api/foodOrder/list', query);
         }
 
         create(menuId: Number, locationId: Number, tasteId: Number, comment: string, name: string) {
-            return http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment, userName: name });
+            return this.$http.post('/api/foodOrder/create', { foodMenuId: menuId, locationId: locationId, tasteId: tasteId, comment: comment, userName: name });
         }
 
         delete(id: number) {
-            return http.post('/api/foodOrder/delete', { id: id });
+            return this.$http.post('/api/foodOrder/delete', { id: id });
         }
 
         pay(id: number) {
-            return http.post('/api/foodOrder/pay', { id: id });
+            return this.$http.post('/api/foodOrder/pay', { id: id });
         }
 
         cancelPay(id: number) {
-            return http.post('/api/foodOrder/cancelPay', { id: id });
+            return this.$http.post('/api/foodOrder/cancelPay', { id: id });
         }
 
         update(id: number, comment: string) {
-            return http.post('/api/foodOrder/update', { id: id, comment: comment });
+            return this.$http.post('/api/foodOrder/update', { id: id, comment: comment });
         }
 
         select(time: Date, userName: string) {
-            return http.post('/api/foodOrder/list', { time: time, userName: userName });
+            return this.$http.post('/api/foodOrder/list', { time: time, userName: userName });
         }
 
         historyList(query?: baseQuery) {
-            return http.post('/api/foodOrder/historyList', query);
+            return this.$http.post('/api/foodOrder/historyList', query);
         }
 
         export(time: Date, userName: string) {
-            return http.post('/api/foodOrder/export', { time: time, userName: userName });
+            return this.$http.post('/api/foodOrder/export', { time: time, userName: userName });
         }
     }
 
     class menuIndex {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post('/api/foodMenu/list', query);
+            return this.$http.post('/api/foodMenu/list', query);
         }
     }
 
     class foodMenu {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post('/api/foodMenu/list', query);
+            return this.$http.post('/api/foodMenu/list', query);
         }
 
         enableList(query?: baseQuery) {
-            return http.post('/api/foodMenu/enableList', query);
+            return this.$http.post('/api/foodMenu/enableList', query);
         }
 
         create(title: string, details: string, price: number) {
-            return http.post('/api/foodMenu/create', { details: details, title: title, price: price });
+            return this.$http.post('/api/foodMenu/create', { details: details, title: title, price: price });
         }
 
         delete(id: number) {
-            return http.post('/api/foodMenu/delete', { id: id });
+            return this.$http.post('/api/foodMenu/delete', { id: id });
         }
 
         update(id: number, enabled: boolean) {
-            return http.post('/api/foodMenu/UpdateEnable', { id: id, enabled: enabled });
+            return this.$http.post('/api/foodMenu/UpdateEnable', { id: id, enabled: enabled });
         }
     }
 
     class tasteType {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post('/api/tasteType/list', query);
+            return this.$http.post('/api/tasteType/list', query);
         }
 
         enabledTasteTypes(query?: baseQuery) {
-            return http.post('/api/tasteType/enabledTasteTypes', query);
+            return this.$http.post('/api/tasteType/enabledTasteTypes', query);
         }
 
         toggleEnable(id: number, enabled: boolean) {
-            return http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
+            return this.$http.post('/api/tasteType/toggleEnable', { id: id, enabled: enabled });
         }
 
         delete(id: number) {
-            return http.post('/api/tasteType/delete', { id: id });
+            return this.$http.post('/api/tasteType/delete', { id: id });
         }
 
         create(name: string) {
-            return http.post('/api/tasteType/create', { name: name });
+            return this.$http.post('/api/tasteType/create', { name: name });
         }
     }
 
     class location {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         list(query?: baseQuery) {
-            return http.post('/api/location/list', query);
+            return this.$http.post('/api/location/list', query);
         }
 
         enabledLocationList(query?: baseQuery) {
-            return http.post('/api/location/enabledLocationList', query);
+            return this.$http.post('/api/location/enabledLocationList', query);
         }
 
         toggleEnable(id: number, enabled: boolean) {
-            return http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
+            return this.$http.post('/api/location/toggleEnable', { id: id, enabled: enabled });
         }
 
         delete(id: number) {
-            return http.post('/api/location/delete', { id: id });
+            return this.$http.post('/api/location/delete', { id: id });
         }
 
         create(name: string) {
-            return http.post('/api/location/create', { name: name });
+            return this.$http.post('/api/location/create', { name: name });
         }
     }
 
     class siteNotice {
+        constructor(public $http: angular.IHttpService) {
+        }
+
         getSiteNotice() {
-            return http.post('/api/siteNotice/getSiteNotice', null);
+            return this.$http.post('/api/siteNotice/getSiteNotice', null);
         }
 
         update(content: string) {
-            return http.post('/api/siteNotice/update', { content: content });
+            return this.$http.post('/api/siteNotice/update', { content: content });
         }
     }
 
@@ -169,58 +197,4 @@ module service {
         page?: number;
         pageSize?: number;
     }
-
-    class account {
-        login(userName: string, password: string) {
-            return http.post('/api/account/login', { userName: userName, password: password }).then(() => auth.onLogin());
-        }
-
-        register(email: string, username: string, password: string, confirmedPassword: string) {
-            return http.post('/api/account/register', {
-                email: email,
-                username: username,
-                password: password,
-                confirmedPassword: confirmedPassword
-            });
-        }
-
-        changePassword(password: string, newPassword: string, confirmedPassword: string) {
-            return http.post('/api/account/changePassword', {
-                password: password,
-                newPassword: newPassword,
-                confirmedPassword: confirmedPassword
-            });
-        }
-
-        forgotPassword(email: string) {
-            return http.post('/api/account/forgotPassword', {
-                email: email
-            });
-        }
-
-        resetPassword(email: string, code: string, password: string, confirmedPassword: string) {
-            return http.post('/api/account/resetPassword', {
-                email: email,
-                code: code,
-                password: password,
-                confirmedPassword: confirmedPassword
-            });
-        }
-
-        logout() {
-            return http.post('/api/account/logout', null).always(() => {
-                auth.onLogout();
-            });
-        }
-
-        checkUserName(userName: string) {
-            return http.get('/api/account/checkUserName', { username: userName });
-        }
-
-        checkEmail(email: string) {
-            return http.get('/api/account/checkEmail', { email: email });
-        }
-    }
 }
-
-export = new service.api();
