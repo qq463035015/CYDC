@@ -8,7 +8,6 @@ var Cydc;
             this.menu = new foodMenu(this.$http);
             this.notice = new siteNotice(this.$http);
             this.order = new foodOrder(this.$http);
-            this.auth = new Cydc.Auth(this.$http);
             this.clientInfo = new foodOrderClientInfo(this.$http);
             this.user = new user(this.$http);
             this.accountDetails = new AccountDetails(this.$http);

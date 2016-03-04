@@ -4,9 +4,21 @@
         userName: string;
         isAdmin: boolean;
 
-        static $inject = ["$http"];
-        constructor(public $http: angular.IHttpService) {
-            this.refreshState();
+        static $inject = ["$http", "$q"];
+        constructor(
+            public $http: ng.IHttpService,
+            public $q: ng.IQService) {
+        }
+
+        checkLogin() {
+            let defer = this.$q.defer();
+            this.refreshState().then(() => {
+                if (this.authed) defer.resolve();
+                if (!this.authed) defer.reject();
+            }).catch((reason) => {
+                defer.reject(reason);
+            });
+            return defer.promise;
         }
 
         refreshState() {

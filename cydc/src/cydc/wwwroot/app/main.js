@@ -1,6 +1,19 @@
 var RootCtrl = (function () {
-    function RootCtrl() {
+    function RootCtrl(auth, $location) {
+        this.auth = auth;
+        this.$location = $location;
+        this.checkLogin();
     }
+    RootCtrl.prototype.checkLogin = function () {
+        var _this = this;
+        console.log(this.$location.path());
+        if (this.$location.path() != "/account/login") {
+            this.auth.checkLogin().catch(function () {
+                _this.$location.path("/account/login");
+            });
+        }
+    };
+    RootCtrl.$inject = ["auth", "$location"];
     return RootCtrl;
 }());
 angular.module("Cydc", ["ngRoute", "ngMaterial"])
@@ -9,23 +22,26 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
     .config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $routeProvider
             .when("/", {
-            templateUrl: '/view/index.html',
-            controller: 'IndexCtrl',
+            templateUrl: '/view/foodOrder/order.html',
+            controller: function () { },
             controllerAs: 'vm'
         })
-            .when('/login', {
-            templateUrl: '/view/',
-            controller: 'ChapterCtrl',
+            .when("/foodOrder/order", {
+            templateUrl: '/view/foodOrder/order.html',
+            controller: function () { },
+            controllerAs: 'vm'
+        })
+            .when('/account/login', {
+            templateUrl: '/view/account/login.html',
+            controller: function () { },
             controllerAs: 'vm'
         })
             .otherwise({
-            templateUrl: "/view/404.html"
+            templateUrl: "/view/errors/404.html"
         });
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: false
         });
     }])
-    .controller("RootCtrl", RootCtrl)
-    .controller("IndexCtrl", function () {
-});
+    .controller("RootCtrl", RootCtrl);

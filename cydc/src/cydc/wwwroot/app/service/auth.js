@@ -1,10 +1,23 @@
 var Cydc;
 (function (Cydc) {
     var Auth = (function () {
-        function Auth($http) {
+        function Auth($http, $q) {
             this.$http = $http;
-            this.refreshState();
+            this.$q = $q;
         }
+        Auth.prototype.checkLogin = function () {
+            var _this = this;
+            var defer = this.$q.defer();
+            this.refreshState().then(function () {
+                if (_this.authed)
+                    defer.resolve();
+                if (!_this.authed)
+                    defer.reject();
+            }).catch(function (reason) {
+                defer.reject(reason);
+            });
+            return defer.promise;
+        };
         Auth.prototype.refreshState = function () {
             var _this = this;
             return this.$http.post('/api/account/loginStatus', null).then(function (a) {
@@ -63,7 +76,7 @@ var Cydc;
         Auth.prototype.checkEmail = function (email) {
             return this.$http.post('/api/account/checkEmail', { email: email });
         };
-        Auth.$inject = ["$http"];
+        Auth.$inject = ["$http", "$q"];
         return Auth;
     }());
     Cydc.Auth = Auth;

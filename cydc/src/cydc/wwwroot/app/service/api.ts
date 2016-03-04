@@ -9,7 +9,6 @@
         menu = new foodMenu(this.$http);
         notice = new siteNotice(this.$http);
         order = new foodOrder(this.$http);
-        auth = new Auth(this.$http);
         clientInfo = new foodOrderClientInfo(this.$http);
         user = new user(this.$http);
         accountDetails = new AccountDetails(this.$http);

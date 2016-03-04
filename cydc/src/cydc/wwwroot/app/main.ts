@@ -1,5 +1,17 @@
 ﻿class RootCtrl {
-    
+    static $inject = ["auth", "$location"];
+    constructor(public auth: Cydc.Auth, public $location: ng.ILocationService) {
+        this.checkLogin();
+    }
+
+    checkLogin() {
+        console.log(this.$location.path());
+        if (this.$location.path() != "/account/login") {
+            this.auth.checkLogin().catch(() => {
+                this.$location.path("/account/login");
+            });
+        }
+    }
 }
 
 angular.module("Cydc", ["ngRoute", "ngMaterial"])
@@ -8,23 +20,26 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
     .config(["$routeProvider", "$locationProvider", ($routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
         $routeProvider
             .when("/", {
-                templateUrl: '/view/index.html',
-                controller: 'IndexCtrl',
+                templateUrl: '/view/foodOrder/order.html',
+                controller: () => { },
                 controllerAs: 'vm'
             })
-            .when('/login', {
-                templateUrl: '/view/',
-                controller: 'ChapterCtrl',
+            .when("/foodOrder/order", {
+                templateUrl: '/view/foodOrder/order.html',
+                controller: () => { },
+                controllerAs: 'vm'
+            })
+            .when('/account/login', {
+                templateUrl: '/view/account/login.html',
+                controller: () => { },
                 controllerAs: 'vm'
             })
             .otherwise({
-                templateUrl: "/view/404.html"
+                templateUrl: "/view/errors/404.html"
             });
         $locationProvider.html5Mode({
-            enabled: true, 
+            enabled: true,
             requireBase: false
         });
     }])
-    .controller("RootCtrl", RootCtrl)
-    .controller("IndexCtrl", () => {
-    });
+    .controller("RootCtrl", RootCtrl);
