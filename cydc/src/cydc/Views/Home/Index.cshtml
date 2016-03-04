@@ -9,7 +9,47 @@
     <link href="/css/site.css" rel="stylesheet" />
 </head>
 <body ng-cloak ng-controller="RootCtrl as root">
-    <div ng-view style="height: 100%"></div>
+    <div layout="column" style="height: 100%">
+        <section layout="row" flex style="height: 100%">
+            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+                <md-toolbar class="md-theme-indigo">
+                    <h1 class="md-toolbar-tools">CYDC</h1>
+                </md-toolbar>
+                <ul ng-if="!root.auth.isAuthed">
+                    <li>
+                        <a ng-href="/">Food Order</a>
+                    </li>
+                    <li>
+                        <a ng-href="/about">About</a>
+                    </li>
+                </ul>
+                <ul ng-if="root.auth.isAuthed">
+                    <li>
+                        <a ng-href="/account/login">Login</a>
+                    </li>
+                </ul>
+            </md-sidenav>
+
+            <div layout="column" tabindex="-1" flex role="main" style="height: 100%">
+                <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar">
+                    <div class="md-toolbar-tools" tabindex="-1">
+                        <md-button class="md-icon-button" ng-click="root.openMenu()" hide-gt-sm aria-label="Toggle Menu">
+                            <md-icon md-svg-src="img/icons/ic_menu_white_24px.svg"></md-icon>
+                        </md-button>
+                        <div layout="row" flex class="fill-height">
+                            Food Order
+                        </div>
+                        <span flex></span>
+                        <md-button aria-label="Login">
+                            Login
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <div ng-view style="height: 100%"></div>
+            </div>
+        </section>
+    </div>
+
     <environment names="Production">
         <script src="~/lib/bundle.min.js"></script>
     </environment>
