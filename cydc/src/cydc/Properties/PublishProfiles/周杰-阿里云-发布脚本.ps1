@@ -25,14 +25,14 @@ cd cydc/src/cydc
 dnu restore
 
 # 关闭IIS应用程序池
-&"appcmd" stop apppool /apppool.name:cydc
+&"appcmd" stop apppool /apppool.name:cydc2
 
 # 发布至根目录的o文件夹
-dnu publish --runtime active -o C:\state\web\cydc-demo
+dnu publish --runtime active -o C:\state\web\cydc2
 
 # 重新打开应用程序池
-&"appcmd" start apppool /apppool.name:cydc
+&"appcmd" start apppool /apppool.name:cydc2
 
 # 列出o文件夹的内容
-cd C:\state\web\cydc-demo
+cd C:\state\web\cydc2
 ls
