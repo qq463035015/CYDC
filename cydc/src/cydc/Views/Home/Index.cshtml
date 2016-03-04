@@ -10,7 +10,13 @@
 </head>
 <body ng-cloak ng-controller="Main as vm">
     <div ng-view></div>
-    <script src="~/lib/bundle.js"></script>
+    <environment names="Production">
+        <script src="~/lib/bundle.min.js"></script>
+    </environment>
+    <environment names="Development">
+        <script src="~/lib/bundle.js"></script>
+    </environment>
+    
 
     <script src="~/app/main.js"></script>
 </body>
