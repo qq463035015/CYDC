@@ -1,4 +1,4 @@
-﻿namespace Cydc.Pages {
+﻿namespace Cydc.FoodOrder {
     export class OrderCtrl {
 
     }

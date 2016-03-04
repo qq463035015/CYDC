@@ -1,12 +1,12 @@
 var Cydc;
 (function (Cydc) {
-    var Pages;
-    (function (Pages) {
+    var FoodOrder;
+    (function (FoodOrder) {
         var OrderCtrl = (function () {
             function OrderCtrl() {
             }
             return OrderCtrl;
         }());
-        Pages.OrderCtrl = OrderCtrl;
-    })(Pages = Cydc.Pages || (Cydc.Pages = {}));
+        FoodOrder.OrderCtrl = OrderCtrl;
+    })(FoodOrder = Cydc.FoodOrder || (Cydc.FoodOrder = {}));
 })(Cydc || (Cydc = {}));

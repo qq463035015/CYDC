@@ -147,6 +147,11 @@ namespace cydc
                     name: "FoodOrder Pages",
                     template: "FoodOrder/{*url}",
                     defaults: new { controller = "home", action = "index" });
+
+                routes.MapRoute(
+                    name: "About Pages",
+                    template: "About/{*url}",
+                    defaults: new { controller = "home", action = "index" });
             });
         }
 
