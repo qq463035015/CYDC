@@ -135,7 +135,12 @@ namespace cydc
 
                 routes.MapRoute(
                     name: "EmptyDefault",
-                    template: "{*url}",
+                    template: "",
+                    defaults: new { controller = "home", action = "index" });
+
+                routes.MapRoute(
+                    name: "Pages",
+                    template: "ui/{*url}",
                     defaults: new { controller = "home", action = "index" });
             });
         }

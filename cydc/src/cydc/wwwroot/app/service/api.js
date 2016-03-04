@@ -1,22 +1,22 @@
 var Cydc;
 (function (Cydc) {
-    var api = (function () {
-        function api($http) {
+    var Api = (function () {
+        function Api($http) {
             this.$http = $http;
             this.location = new location(this.$http);
             this.type = new tasteType(this.$http);
             this.menu = new foodMenu(this.$http);
             this.notice = new siteNotice(this.$http);
             this.order = new foodOrder(this.$http);
-            this.auth = new Cydc.auth(this.$http);
+            this.auth = new Cydc.Auth(this.$http);
             this.clientInfo = new foodOrderClientInfo(this.$http);
             this.user = new user(this.$http);
             this.accountDetails = new AccountDetails(this.$http);
         }
-        api.$inject = ["$http"];
-        return api;
+        Api.$inject = ["$http"];
+        return Api;
     }());
-    Cydc.api = api;
+    Cydc.Api = Api;
     var user = (function () {
         function user($http) {
             this.$http = $http;

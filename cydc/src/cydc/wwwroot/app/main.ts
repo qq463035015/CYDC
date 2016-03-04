@@ -1,13 +1,13 @@
-﻿class MainCtrl {
-
+﻿class RootCtrl {
+    
 }
 
-
 angular.module("Cydc", ["ngRoute", "ngMaterial"])
+    .service("auth", Cydc.Auth)
+    .service("api", Cydc.Api)
     .config(["$routeProvider", "$locationProvider", ($routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
-        console.log($routeProvider, $locationProvider);
         $routeProvider
-            .when('/', {
+            .when("/", {
                 templateUrl: '/view/index.html',
                 controller: 'IndexCtrl',
                 controllerAs: 'vm'
@@ -16,12 +16,15 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
                 templateUrl: '/view/',
                 controller: 'ChapterCtrl',
                 controllerAs: 'vm'
+            })
+            .otherwise({
+                templateUrl: "/view/404.html"
             });
         $locationProvider.html5Mode({
             enabled: true, 
             requireBase: false
         });
     }])
-    .controller("Main", MainCtrl)
+    .controller("RootCtrl", RootCtrl)
     .controller("IndexCtrl", () => {
     });

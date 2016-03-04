@@ -1,5 +1,5 @@
 ﻿namespace Cydc {
-    export class auth {
+    export class Auth {
         authed: boolean;
         userName: string;
         isAdmin: boolean;

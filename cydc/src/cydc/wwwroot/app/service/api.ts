@@ -1,5 +1,5 @@
 ﻿module Cydc {
-    export class api {
+    export class Api {
         static $inject = ["$http"];
         constructor(public $http: angular.IHttpService) {
         }
@@ -9,7 +9,7 @@
         menu = new foodMenu(this.$http);
         notice = new siteNotice(this.$http);
         order = new foodOrder(this.$http);
-        auth = new auth(this.$http);
+        auth = new Auth(this.$http);
         clientInfo = new foodOrderClientInfo(this.$http);
         user = new user(this.$http);
         accountDetails = new AccountDetails(this.$http);

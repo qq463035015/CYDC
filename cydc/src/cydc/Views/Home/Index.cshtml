@@ -8,7 +8,7 @@
     <link href="~/css/bundle.min.css" rel="stylesheet" />
     <link href="/css/site.css" rel="stylesheet" />
 </head>
-<body ng-cloak ng-controller="Main as vm">
+<body ng-cloak ng-controller="RootCtrl as root">
     <div ng-view></div>
     <environment names="Production">
         <script src="~/lib/bundle.min.js"></script>
@@ -17,7 +17,8 @@
         <script src="~/lib/bundle.js"></script>
     </environment>
     
-
+    <script src="~/app/service/auth.js"></script>
+    <script src="~/app/service/api.js"></script>
     <script src="~/app/main.js"></script>
 </body>
 </html>
