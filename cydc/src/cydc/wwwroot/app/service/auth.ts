@@ -22,10 +22,10 @@
         }
 
         refreshState() {
-            return this.$http.post('/api/account/loginStatus', null).then((a: authObj) => {
-                this.authed = a.authed;
-                this.userName = a.userName;
-                this.isAdmin = a.isAdmin;
+            return this.$http.post<authObj>('/api/account/loginStatus', null).then(a => {
+                this.authed = a.data.authed;
+                this.userName = a.data.userName;
+                this.isAdmin = a.data.isAdmin;
             });
         }
 
@@ -40,8 +40,9 @@
 
 
 
-        login(userName: string, password: string) {
-            return this.$http.post('/api/account/login', { userName: userName, password: password }).then(() => this.onLogin());
+        login(userName: string, password: string, rememberMe: boolean) {
+            return this.$http.post('/api/account/login', { userName: userName, password: password, rememberMe: rememberMe })
+                .then(() => this.onLogin());
         }
 
         register(email: string, username: string, password: string, confirmedPassword: string) {

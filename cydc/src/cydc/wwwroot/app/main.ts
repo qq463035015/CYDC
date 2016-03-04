@@ -5,8 +5,7 @@
     }
 
     checkLogin() {
-        console.log(this.$location.path());
-        if (this.$location.path() != "/account/login") {
+        if (this.$location.path() !== "/account/login") {
             this.auth.checkLogin().catch(() => {
                 this.$location.path("/account/login");
             });

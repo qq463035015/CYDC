@@ -6,8 +6,7 @@ var RootCtrl = (function () {
     }
     RootCtrl.prototype.checkLogin = function () {
         var _this = this;
-        console.log(this.$location.path());
-        if (this.$location.path() != "/account/login") {
+        if (this.$location.path() !== "/account/login") {
             this.auth.checkLogin().catch(function () {
                 _this.$location.path("/account/login");
             });

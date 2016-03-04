@@ -13,7 +13,7 @@ var Cydc;
             LoginCtrl.prototype.login = function () {
                 var _this = this;
                 this.requesting = true;
-                this.auth.login(this.userName, this.password).then(function () {
+                this.auth.login(this.userName, this.password, this.rememberMe).then(function () {
                     _this.location.path("/");
                 }).catch(function (r) {
                     _this.mdToast.showSimple("Username or password not correct.");

@@ -12,7 +12,7 @@
 
         login() {
             this.requesting = true;
-            this.auth.login(this.userName, this.password).then(() => {
+            this.auth.login(this.userName, this.password, this.rememberMe).then(() => {
                 this.location.path("/");
             }).catch((r) => {
                 this.mdToast.showSimple("Username or password not correct.");

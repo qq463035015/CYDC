@@ -21,9 +21,9 @@ var Cydc;
         Auth.prototype.refreshState = function () {
             var _this = this;
             return this.$http.post('/api/account/loginStatus', null).then(function (a) {
-                _this.authed = a.authed;
-                _this.userName = a.userName;
-                _this.isAdmin = a.isAdmin;
+                _this.authed = a.data.authed;
+                _this.userName = a.data.userName;
+                _this.isAdmin = a.data.isAdmin;
             });
         };
         Auth.prototype.onLogin = function () {
@@ -32,9 +32,10 @@ var Cydc;
         Auth.prototype.onLogout = function () {
             this.refreshState();
         };
-        Auth.prototype.login = function (userName, password) {
+        Auth.prototype.login = function (userName, password, rememberMe) {
             var _this = this;
-            return this.$http.post('/api/account/login', { userName: userName, password: password }).then(function () { return _this.onLogin(); });
+            return this.$http.post('/api/account/login', { userName: userName, password: password, rememberMe: rememberMe })
+                .then(function () { return _this.onLogin(); });
         };
         Auth.prototype.register = function (email, username, password, confirmedPassword) {
             return this.$http.post('/api/account/register', {

@@ -1,7 +1,7 @@
 ﻿<md-content id="login" layout="row" layout-align="center center">
     <div flex-gt-md="35" flex-md="60" flex="80" layout="column">
         <md-card class="md-whiteframe-12dp">
-            <form ng-submit="vm.login($event)">
+            <form name="loginForm" ng-submit="loginForm.$valid && vm.login()">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline">Login to Service</span>
@@ -10,9 +10,10 @@
                 <md-card-content>
                     <md-input-container class="md-block">
                         <label>User Name</label>
-                        <input required name="userName" ng-model="vm.userName" />
+                        <input required ng-pattern="/^[\u4e00-\u9fa5]+$/" name="userName" ng-model="vm.userName" />
                         <div ng-messages="vm.userName.$error">
                             <div ng-message="required">Username is required.</div>
+                            <div ng-message="test">Username must be Chinese.</div>
                         </div>
                     </md-input-container>
 
