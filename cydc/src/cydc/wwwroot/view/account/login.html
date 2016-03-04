@@ -1,1 +1,39 @@
-﻿Login page.
+﻿<md-content id="login" layout="row" layout-align="center center">
+    <div flex-gt-md="35" flex-md="60" flex="80" layout="column">
+        <md-card class="md-whiteframe-12dp">
+            <form ng-submit="vm.login($event)">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Login to Service</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-input-container class="md-block">
+                        <label>User Name</label>
+                        <input required name="userName" ng-model="vm.userName" />
+                        <div ng-messages="vm.userName.$error">
+                            <div ng-message="required">Username is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Password</label>
+                        <input required type="password" ng-model="vm.password" />
+                        <div ng-messages="vm.password.$error">
+                            <div ng-message="required">Password is required.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-checkbox ng-model="vm.rememberMe" area-label="Remember Me">
+                        Remember me?
+                    </md-checkbox>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="center center">
+                    <md-button type="submit" ng-disabled="vm.requesting" class="md-raised md-primary">
+                        {{vm.requesting ? 'Logining' : 'Login'}}
+                    </md-button>
+                </md-card-actions>
+            </form>
+        </md-card>
+    </div>
+</md-content>

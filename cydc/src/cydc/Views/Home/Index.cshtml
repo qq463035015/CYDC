@@ -9,7 +9,7 @@
     <link href="/css/site.css" rel="stylesheet" />
 </head>
 <body ng-cloak ng-controller="RootCtrl as root">
-    <div ng-view></div>
+    <div ng-view style="height: 100%"></div>
     <environment names="Production">
         <script src="~/lib/bundle.min.js"></script>
     </environment>
@@ -19,6 +19,7 @@
     
     <script src="~/app/service/auth.js"></script>
     <script src="~/app/service/api.js"></script>
+    <script src="~/app/account/login.js"></script>
     <script src="~/app/main.js"></script>
 </body>
 </html>

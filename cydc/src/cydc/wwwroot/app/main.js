@@ -33,7 +33,7 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
         })
             .when('/account/login', {
             templateUrl: '/view/account/login.html',
-            controller: function () { },
+            controller: Cydc.Account.LoginCtrl,
             controllerAs: 'vm'
         })
             .otherwise({
