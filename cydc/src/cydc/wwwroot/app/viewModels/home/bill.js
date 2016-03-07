@@ -17,7 +17,7 @@ define(["require", "exports", 'knockout', 'service/utils', 'service/pager', 'ser
             this.loadData();
         };
         viewModel.prototype.viewFoodOrder = function (data) {
-            utils.alert("\u8BA2\u5355 #" + data.foodOrderId, "\n\u7528\u6237\u540D\uFF1A" + data.foodOrder.orderUser.userName + " <br/>\n\u70B9\u9910\u65F6\u95F4\uFF1A" + kob.dateTimeText(data.foodOrder.orderTime) + " <br/>\n\u5907\u6CE8\uFF1A" + (data.foodOrder.comment || '无') + " <br/>");
+            utils.alert("\u8BA2\u5355 #" + data.foodOrderId, "\n\u7528\u6237\u540D\uFF1A" + data.foodOrder.orderUser.userName + " <br/>\n\u70B9\u9910\u65F6\u95F4\uFF1A" + kob.dateTimeText(data.foodOrder.orderTime) + " <br/>\n\u91D1\u989D\uFF1A" + kob.dateTimeText(data.foodOrder.amount) + " <br/>\n\u5907\u6CE8\uFF1A" + (data.foodOrder.comment || '无') + " <br/>");
         };
         return viewModel;
     }(pager));
