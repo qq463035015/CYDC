@@ -16,18 +16,31 @@
                 <md-toolbar class="md-theme-indigo">
                     <h1 class="md-toolbar-tools">CYDC</h1>
                 </md-toolbar>
-                <ul ng-if="!root.auth.isAuthed">
-                    <li>
-                        <a ng-href="/">Food Order</a>
-                    </li>
-                    <li>
-                        <a ng-href="/about">About</a>
-                    </li>
-                </ul>
+                <md-content>
+                    <md-list>
+                        <md-list-item>
+                            <md-button class="selected">
+                                点餐
+                            </md-button>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-button>
+                                记录
+                            </md-button>
+                        </md-list-item>
+
+                        <md-list-item>
+                            <md-button>
+                                关于
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
             </md-sidenav>
 
             <div layout="column" tabindex="-1" flex role="main">
-                <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar">
+                <md-toolbar class="md-whiteframe-glow-z1">
                     <div class="md-toolbar-tools" tabindex="-1">
                         <md-button class="md-icon-button" ng-click="root.openMenu()" hide-gt-sm aria-label="Toggle Menu">
                             <md-icon md-svg-src="img/icons/ic_menu_white_24px.svg"></md-icon>
@@ -37,10 +50,10 @@
                         </div>
                         <span flex></span>
 
-                        <md-button aria-label="Logout" ng-click="root.logout($event)" ng-show="root.authed()">
+                        <md-button aria-label="Logout" ng-click="root.logout($event)" ng-show="root.authState().authed">
                             退出
                         </md-button>
-                        <md-button aria-label="Login" ng-click="root.login($event)" ng-show="!root.authed()">
+                        <md-button aria-label="Login" ng-click="root.login($event)" ng-show="!root.authState().authed">
                             登录
                         </md-button>
                     </div>

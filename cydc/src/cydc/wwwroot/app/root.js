@@ -7,8 +7,8 @@ var RootCtrl = (function () {
         this.auth.refreshState();
         window["root"] = this;
     }
-    RootCtrl.prototype.authed = function () {
-        return this.auth.authed;
+    RootCtrl.prototype.authState = function () {
+        return this.auth;
     };
     RootCtrl.prototype.login = function ($event) {
         return this.$mdDialog.show({

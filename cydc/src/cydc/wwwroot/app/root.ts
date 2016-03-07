@@ -10,8 +10,8 @@
         window["root"] = this;
     }
 
-    authed() {
-        return this.auth.authed;
+    authState() {
+        return this.auth;
     }
 
     login($event) {

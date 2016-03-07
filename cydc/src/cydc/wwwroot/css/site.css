@@ -1,4 +1,9 @@
-﻿#login {
-    background-color: hsl(230, 100%, 70%) !important;
-    height: 100%;
+﻿md-sidenav md-list .md-button {
+    color: inherit;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}
+md-sidenav md-list .md-button.selected {
+    color: #03a9f4;
 }
