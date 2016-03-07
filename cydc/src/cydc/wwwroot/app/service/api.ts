@@ -61,6 +61,14 @@ module service {
             return http.post('/api/foodOrder/cancelPay', { id: id });
         }
 
+        pay_unrecord(id: number) {
+            return http.post('/api/foodOrder/pay_unrecord', { id: id });
+        }
+
+        cancelPay_unrecord(id: number) {
+            return http.post('/api/foodOrder/cancelPay_unrecord', { id: id });
+        }
+
         update(id: number, comment: string) {
             return http.post('/api/foodOrder/update', { id: id, comment: comment });
         }

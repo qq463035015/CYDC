@@ -47,6 +47,28 @@ class viewModel extends pager<idName> {
         });
     }
 
+
+    pay_unrecord(data) {
+        return utils.confirm('确定要付款(不入账)吗？', '付款后帐单中不会自动加上此订单的金额').then(cs => {
+            cs.close();
+            return api.order.pay_unrecord(data.id);
+        }).then(() => {
+            this.loadData();
+            return utils.alert("付款(不入账)成功");
+        });
+    }
+
+    cancelPay_unrecord(data) {
+        return utils.confirm('确定要取消付款(不入账)吗？', '付款后帐单中不会自动减去此订单的金额').then(cs => {
+            cs.close();
+            return api.order.cancelPay_unrecord(data.id);
+        }).then(() => {
+            this.loadData();
+            return utils.alert("取消付款(不入账)成功");
+        });
+    }
+
+
     setComment(data) {
         this.id(data.id);
         this.comment(data.comment);
