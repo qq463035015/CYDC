@@ -1,40 +1,44 @@
-﻿<md-content id="login" layout="row" layout-align="center center">
-    <div flex-gt-md="35" flex-md="60" flex="80" layout="column">
-        <md-card class="md-whiteframe-12dp">
-            <form name="loginForm" ng-submit="loginForm.$valid && vm.login()">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">Login to Service</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <md-input-container class="md-block">
-                        <label>User Name</label>
-                        <input required ng-pattern="/^[\u4e00-\u9fa5]+$/" name="userName" ng-model="vm.userName" />
-                        <div ng-messages="vm.userName.$error">
-                            <div ng-message="required">Username is required.</div>
-                            <div ng-message="test">Username must be Chinese.</div>
-                        </div>
-                    </md-input-container>
+﻿<md-dialog aria-label="Login Dialog">
+    <form name="loginForm" ng-submit="loginForm.$valid && vm.login()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>登录</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-                    <md-input-container class="md-block">
-                        <label>Password</label>
-                        <input required type="password" ng-model="vm.password" />
-                        <div ng-messages="vm.password.$error">
-                            <div ng-message="required">Password is required.</div>
-                        </div>
-                    </md-input-container>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label>用户名</label>
+                    <input required ng-pattern="/^[\u4e00-\u9fa5]+$/" name="userName" ng-model="vm.userName" />
+                    <div ng-messages="vm.userName.$error">
+                        <div ng-message="required">用户名必填</div>
+                        <div ng-message="test">用户名必须为中文</div>
+                    </div>
+                </md-input-container>
 
-                    <md-checkbox ng-model="vm.rememberMe" area-label="Remember Me">
-                        Remember me?
-                    </md-checkbox>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="center center">
-                    <md-button type="submit" ng-disabled="vm.requesting" class="md-raised md-primary">
-                        {{vm.requesting ? 'Logining' : 'Login'}}
-                    </md-button>
-                </md-card-actions>
-            </form>
-        </md-card>
-    </div>
-</md-content>
+                <md-input-container class="md-block">
+                    <label>密码</label>
+                    <input required type="password" ng-model="vm.password" />
+                    <div ng-messages="vm.password.$error">
+                        <div ng-message="required">密码必填</div>
+                    </div>
+                </md-input-container>
+
+                <md-checkbox ng-model="vm.rememberMe" area-label="Remember Me">
+                    记住我?
+                </md-checkbox>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="center center">
+            <md-button type="submit" ng-disabled="vm.requesting" class="md-raised md-primary">
+                {{vm.requesting ? '登录中...' : '登录'}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

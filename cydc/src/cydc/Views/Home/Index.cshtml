@@ -24,14 +24,9 @@
                         <a ng-href="/about">About</a>
                     </li>
                 </ul>
-                <ul ng-if="root.auth.isAuthed">
-                    <li>
-                        <a ng-href="/account/login">Login</a>
-                    </li>
-                </ul>
             </md-sidenav>
 
-            <div layout="column" tabindex="-1" flex role="main" style="height: 100%">
+            <div layout="column" tabindex="-1" flex role="main">
                 <md-toolbar class="md-whiteframe-glow-z1 site-content-toolbar">
                     <div class="md-toolbar-tools" tabindex="-1">
                         <md-button class="md-icon-button" ng-click="root.openMenu()" hide-gt-sm aria-label="Toggle Menu">
@@ -41,8 +36,12 @@
                             Food Order
                         </div>
                         <span flex></span>
-                        <md-button aria-label="Login">
-                            Login
+
+                        <md-button aria-label="Logout" ng-click="root.logout($event)" ng-show="root.authed()">
+                            退出
+                        </md-button>
+                        <md-button aria-label="Login" ng-click="root.login($event)" ng-show="!root.authed()">
+                            登录
                         </md-button>
                     </div>
                 </md-toolbar>

@@ -1,23 +1,52 @@
 ﻿class RootCtrl {
-    static $inject = ["auth", "$location", "$mdSidenav"];
+    static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog"];
     constructor(
-        public auth: Cydc.Auth,
-        public location: ng.ILocationService,
-        public mdSidenav: ng.material.ISidenavService
+        private auth: Cydc.Auth,
+        private $location: ng.ILocationService,
+        private $mdSidenav: ng.material.ISidenavService,
+        private $mdDialog: ng.material.IDialogService
     ) {
-        this.checkLogin();
+        this.auth.refreshState();
+        window["root"] = this;
     }
 
-    checkLogin() {
-        if (this.location.path() !== "/account/login") {
-            this.auth.checkLogin().catch(() => {
-                this.location.path("/account/login");
-            });
-        }
+    authed() {
+        return this.auth.authed;
+    }
+
+    login($event) {
+        return this.$mdDialog.show({
+            controller: Cydc.Account.LoginCtrl,
+            controllerAs: "vm",
+            templateUrl: "/view/account/login.html",
+            parent: angular.element(document.body),
+            targetEvent: $event, 
+            clickOutsideToClose: true
+        });
+    }
+
+    logout($event) {
+        this.$mdDialog.show(this.$mdDialog.confirm()
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
+            .title("确定要退出吗？")
+            .ariaLabel("Logout Dialog")
+            .targetEvent($event)
+            .ok("确定")
+            .cancel("取消")
+        ).then(() => {
+            return this.auth.logout();
+        }).then(() => {
+            this.$mdDialog.show(this.$mdDialog.alert()
+                .title("退出成功")
+                .targetEvent($event)
+                .ariaLabel("Logout Success")
+                .ok("知道了"));
+        });
     }
 
     openMenu() {
-        this.mdSidenav("left").toggle();
+        this.$mdSidenav("left").toggle();
     }
 }
 
@@ -34,11 +63,6 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
             .when("/foodOrder/order", {
                 templateUrl: '/view/foodOrder/order.html',
                 controller: Cydc.FoodOrder.OrderCtrl,
-                controllerAs: 'vm'
-            })
-            .when('/account/login', {
-                templateUrl: '/view/account/login.html',
-                controller: Cydc.Account.LoginCtrl,
                 controllerAs: 'vm'
             })
             .when("/about", {

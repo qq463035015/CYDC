@@ -1,30 +1,18 @@
 ﻿namespace Cydc {
-    export class Auth {
-        authed: boolean;
-        userName: string;
-        isAdmin: boolean;
+    export class Auth implements AuthState {
+        userName = "";
+        authed = false;
+        isAdmin = false;
 
-        static $inject = ["$http", "$q"];
+        static $inject = ["$http"];
         constructor(
-            public $http: ng.IHttpService,
-            public $q: ng.IQService) {
-        }
-
-        checkLogin() {
-            let defer = this.$q.defer();
-            this.refreshState().then(() => {
-                if (this.authed) defer.resolve();
-                if (!this.authed) defer.reject();
-            }).catch((reason) => {
-                defer.reject(reason);
-            });
-            return defer.promise;
+            private $http: ng.IHttpService) {
         }
 
         refreshState() {
-            return this.$http.post<authObj>('/api/account/loginStatus', null).then(a => {
-                this.authed = a.data.authed;
+            return this.$http.post<AuthState>('/api/account/loginStatus', null).then(a => {
                 this.userName = a.data.userName;
+                this.authed = a.data.authed;
                 this.isAdmin = a.data.isAdmin;
             });
         }
@@ -92,7 +80,7 @@
         }
     }
 
-    interface authObj {
+    export interface AuthState {
         userName: string;
         authed: boolean;
         isAdmin: boolean;
