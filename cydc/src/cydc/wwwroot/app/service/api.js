@@ -65,6 +65,12 @@ define(["require", "exports", 'plugins/http', 'service/auth'], function (require
             foodOrder.prototype.cancelPay = function (id) {
                 return http.post('/api/foodOrder/cancelPay', { id: id });
             };
+            foodOrder.prototype.pay_unrecord = function (id) {
+                return http.post('/api/foodOrder/pay_unrecord', { id: id });
+            };
+            foodOrder.prototype.cancelPay_unrecord = function (id) {
+                return http.post('/api/foodOrder/cancelPay_unrecord', { id: id });
+            };
             foodOrder.prototype.update = function (id, comment) {
                 return http.post('/api/foodOrder/update', { id: id, comment: comment });
             };

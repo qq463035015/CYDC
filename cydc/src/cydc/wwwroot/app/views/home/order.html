@@ -61,10 +61,12 @@
                                 <!-- ko ifnot: payment -->
                                 <a href="javascript:void(0)" class="text-warning" data-bind="click:$parent.drop.bind($parent,$data)">删除</a>
                                 <a href="javascript:void(0)" data-bind="click:$parent.pay.bind($parent,$data)">付款</a>
+                                <a href="javascript:void(0)" data-bind="click:$parent.pay_unrecord.bind($parent,$data)">付款(未入账)</a>
                                 <!-- /ko -->
 
                                 <!-- ko if: payment -->
                                 <a href="javascript:void(0)" data-bind="click:$parent.cancelPay.bind($parent,$data)">取消付款</a>
+                                <a href="javascript:void(0)" data-bind="click:$parent.cancelPay_unrecord.bind($parent,$data)">取消付款(未入账)</a>
                                 <!-- /ko -->
                             </td>
                         </tr>

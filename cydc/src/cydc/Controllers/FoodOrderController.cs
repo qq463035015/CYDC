@@ -176,6 +176,26 @@ namespace cydc.Controllers
             return await DbContext.SaveChangesAsync();
         }
 
+        [Authorize(Roles = Admin)]
+        public async Task<int> Pay_unRecord([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.AccountDetails)
+                .Include(x => x.FoodMenu)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = new FoodOrderPayment
+            {
+                PayedTime = DateTime.Now
+            };
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = order.OrderUserId,
+                CreateTime = DateTime.Now
+            });
+            return await DbContext.SaveChangesAsync();
+        }
+
         public async Task<int> AutoPay([FromBody] FoodOrder order)
         {
             order = await DbContext.FoodOrders
@@ -210,6 +230,22 @@ namespace cydc.Controllers
                 UserId = order.OrderUserId,
                 CreateTime = DateTime.Now,
                 Amount = -order.FoodMenu.Price
+            });
+            return await DbContext.SaveChangesAsync();
+        }
+        [Authorize(Roles = Admin)]
+        public async Task<int> CancelPay_unRecord([FromBody] FoodOrder order)
+        {
+            order = await DbContext.FoodOrders
+                .Include(x => x.Payment)
+                .Include(x => x.FoodMenu)
+                .Include(x => x.AccountDetails)
+                .SingleAsync(x => x.Id == order.Id);
+            order.Payment = null;
+            order.AccountDetails.Add(new AccountDetails
+            {
+                UserId = order.OrderUserId,
+                CreateTime = DateTime.Now
             });
             return await DbContext.SaveChangesAsync();
         }
