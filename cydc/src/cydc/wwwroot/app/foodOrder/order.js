@@ -3,72 +3,54 @@ var Cydc;
     var FoodOrder;
     (function (FoodOrder) {
         var OrderCtrl = (function () {
-            function OrderCtrl() {
-                this.tasteSelected = 0;
-                this.locationSelected = 0;
+            function OrderCtrl(auth, $location, $mdSidenav, $mdDialog) {
+                this.auth = auth;
+                this.$location = $location;
+                this.$mdSidenav = $mdSidenav;
+                this.$mdDialog = $mdDialog;
                 this.sel = {
-                    group1: 'Banana',
+                    location: '0',
                     taste: '0',
-                    menu: '1'
+                    menu: '0'
                 };
                 this.menu = [{
-                        id: "1",
                         price: '12',
                         title: '红萝卜炒肉、腊鱼、腐竹、包菜',
-                        value: '1'
+                        value: '0'
                     }, {
-                        id: "2",
                         price: '15',
                         title: '土豆红烧肉、大祘炒蛋、小菜、下饭菜',
-                        value: '2'
+                        value: '1'
                     }];
                 this.taste = [{ name: "香辣", value: '0' }, { name: "清淡", value: '1' }];
-                this.name = "John Doe";
+                this.location = [{ name: "辰运", value: '0' }, { name: "蜜獾", value: '1' }, { name: "易观国际", value: '2' }];
                 this.comment = "";
-                this.taste0 = true;
-                this.taste1 = false;
-                this.location0 = true;
-                this.location1 = false;
-                this.location2 = false;
-                this.location = ["辰运", "蜜獾", "易观国际"];
-                this.selMenu = 0;
                 this.visible = false;
+                this.auth.refreshState();
+                window["root"] = this;
             }
-            OrderCtrl.prototype.updateTasteSelected = function (selType) {
-                if (selType == 1) {
-                    this.taste0 = false;
-                    this.taste1 = true;
-                }
-                else {
-                    this.taste0 = true;
-                    this.taste1 = false;
-                }
-                this.tasteSelected = selType;
+            OrderCtrl.prototype.authState = function () {
+                return this.auth;
             };
-            ;
-            OrderCtrl.prototype.updateLocation = function (sel) {
-                if (sel == 0) {
-                    this.location0 = true;
-                    this.location1 = false;
-                    this.location2 = false;
-                }
-                else if (sel == 1) {
-                    this.location0 = false;
-                    this.location1 = true;
-                    this.location2 = false;
-                }
-                else if (sel == 2) {
-                    this.location0 = false;
-                    this.location1 = false;
-                    this.location2 = true;
-                }
-                this.locationSelected = sel;
+            OrderCtrl.prototype.Sure = function ($event) {
+                var _this = this;
+                this.$mdDialog.show(this.$mdDialog.confirm()
+                    .parent(angular.element(document.body))
+                    .clickOutsideToClose(true)
+                    .title("确认订单信息<br>" + this.menu[this.sel.menu].title)
+                    .ariaLabel("Logout Dialog")
+                    .targetEvent($event)
+                    .ok("确定")
+                    .cancel("取消")).then(function () {
+                    return _this.auth.logout();
+                }).then(function () {
+                    _this.$mdDialog.show(_this.$mdDialog.alert()
+                        .title("退出成功")
+                        .targetEvent($event)
+                        .ariaLabel("Logout Success")
+                        .ok("知道了"));
+                });
             };
-            ;
-            OrderCtrl.prototype.submit = function () {
-                this.visible = !this.visible;
-            };
-            OrderCtrl.$inject = ["$timeout"];
             return OrderCtrl;
         }());
         FoodOrder.OrderCtrl = OrderCtrl;

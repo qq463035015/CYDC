@@ -13,37 +13,39 @@
     <div style="float:left;">
         <img src="../../img/pay.jpg" />
     </div>
-    <div style="padding:50px;float:left; font-size:18px;font-family:'微软雅黑', 'Segoe UI'">
-        <h3>当前套餐:</h3>
+    <div style="padding:30px;float:left; font-size:18px;font-family:'微软雅黑', 'Segoe UI'">
+        <h4>当前套餐:</h4>
 
         <md-radio-group ng-model="vm.sel.menu">
             <md-radio-button ng-repeat="it in vm.menu" ng-value="it.value" aria-label="{{it.title}}">
                 {{it.price}}¥    {{it.title}}
+            </md-radio-button>
         </md-radio-group>
-
-        <div flex-xs flex="50">
-            <md-radio-group ng-model="vm.sel.taste"  dir="ltr">
-                <md-radio-button ng-repeat="it in vm.taste" ng-value="it.value" aria-label="{{it.name}}">
-                      {{it.name}}
+        <div >
+            <md-radio-group ng-model="vm.sel.taste">
+         
+                <md-radio-button class="radio-inline" ng-repeat="it in vm.taste" ng-value="it.value" aria-label="{{it.name}}">
+                      {{it.name}} </md-radio-button>
             </md-radio-group>
 
-            <md-checkbox aria-label="香辣" ng-checked="vm.taste0" ng-click="vm.updateTasteSelected('0')">香辣</md-checkbox>
-            <md-checkbox aria-label="清淡" ng-checked="vm.taste1" ng-click="vm.updateTasteSelected('1')">清淡</md-checkbox>
         </div>
+        <br />
         <div>
-
-            <md-checkbox aria-label="0" ng-checked="vm.location0" ng-click="vm.updateLocation('0')">辰运</md-checkbox>
-            <md-checkbox aria-label="1" ng-checked="vm.location1" ng-click="vm.updateLocation('1')">蜜獾</md-checkbox>
-            <md-checkbox aria-label="2" ng-checked="vm.location2" ng-click="vm.updateLocation('2')">易观国际</md-checkbox>
+            <md-radio-group ng-model="vm.sel.location" >
+            
+                <md-radio-button class="radio-inline" ng-repeat="it in vm.location" ng-value="it.value" aria-label="{{it.name}}">
+                    {{it.name}} </md-radio-button>
+            </md-radio-group>
+           
         </div>
         <div style="width:500px;">
-            备注
 
+            <h5>备注:</h5>
             <md-input-container class="md-block">
-                <textarea ng-model="vm.comment" md-maxlength="30" rows="5" md-select-on-focus="" placeholder="如果不是因为忌口，请尽量少提特殊要求~"></textarea>
+                <input ng-model="vm.comment" md-maxlength="30"   md-select-on-focus="" placeholder="如果不是因为忌口，请尽量少提特殊要求~" />
             </md-input-container>
         </div>
-        <md-button class="md-raised md-primary" ng-click="vm.submit()">提交</md-button>
+        <md-button class="md-raised md-primary" ng-click="vm.Sure()">提交</md-button>
         <label style="color:red; font-size:18px;">
             请记得及时付款哦~
         </label>
@@ -57,31 +59,31 @@
                 </div>
                 <div class="modal-body">
                     <div>套餐：{{vm.menu[vm.sel.menu].title}}</div>
-                    <div>口味：地点：</div>
-                    <div>金额：{{vm.menu[vm.sel.menu].price}}¥</div>
+                    <div>
+                        口味：{{vm.taste[vm.sel.taste].name}}
+                        地点：{{vm.location[vm.sel.location].name}}
+                        金额：{{vm.menu[vm.sel.menu].price}}¥
+                    </div>
                     <div>备注：{{vm.comment}}</div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">
                         取消
                     </button>
-                    <button type="button" class="btn btn-primary" data-bind="click:$parent.commitOrder.bind($parent)">
-                        确定
-                    </button>
+                    <md-button class="md-raised md-primary" ng-click="vm.Sure()">确定</md-button>
+            
                 </div>
             </div>
         </div>
         </div>
 
  </div>
-        <script>
-            function VisibleController() {
-                visible = false;
-                toggle = function () {
-                    visible = !visible;
-                }
-            }
-        </script>
+ <style>
+     .radio-inline {
+          display:inline;
+     }
+    
+        </style>
 
 
 
