@@ -23,6 +23,10 @@
         </md-radio-group>
 
         <div flex-xs flex="50">
+            <md-radio-group ng-model="vm.sel.taste"  dir="ltr">
+                <md-radio-button ng-repeat="it in vm.taste" ng-value="it.value" aria-label="{{it.name}}">
+                      {{it.name}}
+            </md-radio-group>
 
             <md-checkbox aria-label="香辣" ng-checked="vm.taste0" ng-click="vm.updateTasteSelected('0')">香辣</md-checkbox>
             <md-checkbox aria-label="清淡" ng-checked="vm.taste1" ng-click="vm.updateTasteSelected('1')">清淡</md-checkbox>
@@ -55,7 +59,7 @@
                 <div class="modal-body">
                     <div>套餐：{{vm.menu[vm.sel.menu].title}}</div>
                     <div>口味：地点：</div>
-                    <div>金额：{{vm.menu[vm.sel.menu].price}}</div>
+                    <div>金额：{{vm.menu[vm.sel.menu].price}}¥</div>
                     <div>备注：{{vm.comment}}</div>
                 </div>
                 <div class="modal-footer">

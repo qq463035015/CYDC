@@ -8,7 +8,7 @@ var Cydc;
                 this.locationSelected = 0;
                 this.sel = {
                     group1: 'Banana',
-                    group2: '2',
+                    taste: '0',
                     menu: '1'
                 };
                 this.menu = [{
@@ -22,6 +22,7 @@ var Cydc;
                         title: '土豆红烧肉、大祘炒蛋、小菜、下饭菜',
                         value: '2'
                     }];
+                this.taste = [{ name: "香辣", value: '0' }, { name: "清淡", value: '1' }];
                 this.name = "John Doe";
                 this.comment = "";
                 this.taste0 = true;
@@ -29,7 +30,6 @@ var Cydc;
                 this.location0 = true;
                 this.location1 = false;
                 this.location2 = false;
-                this.taste = ["香辣", "清淡"];
                 this.location = ["辰运", "蜜獾", "易观国际"];
                 this.selMenu = 0;
                 this.visible = false;
