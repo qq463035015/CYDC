@@ -1,5 +1,5 @@
 ﻿namespace Cydc.Controllers.FoodOrder {
-    export class OrderListCtrl {
+    export class ListCtrl {
         static $inject = ["menuInfo"];
         constructor(
             private pageInfo: Service.MenuInfo

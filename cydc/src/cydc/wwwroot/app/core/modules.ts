@@ -12,8 +12,8 @@
                     controllerAs: "vm", 
                 })
                 .when("/foodOrder/list", {
-                    templateUrl: '/view/foodOrder/orderList.html',
-                    controller: Controllers.FoodOrder.OrderListCtrl,
+                    templateUrl: '/view/foodOrder/list.html',
+                    controller: Controllers.FoodOrder.ListCtrl,
                     controllerAs: "vm", 
                 })
                 .when("/about", {

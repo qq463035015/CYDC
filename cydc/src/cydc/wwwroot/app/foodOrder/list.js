@@ -4,15 +4,15 @@ var Cydc;
     (function (Controllers) {
         var FoodOrder;
         (function (FoodOrder) {
-            var OrderListCtrl = (function () {
-                function OrderListCtrl(pageInfo) {
+            var ListCtrl = (function () {
+                function ListCtrl(pageInfo) {
                     this.pageInfo = pageInfo;
                     pageInfo.setId("foodOrderList");
                 }
-                OrderListCtrl.$inject = ["menuInfo"];
-                return OrderListCtrl;
+                ListCtrl.$inject = ["menuInfo"];
+                return ListCtrl;
             }());
-            FoodOrder.OrderListCtrl = OrderListCtrl;
+            FoodOrder.ListCtrl = ListCtrl;
         })(FoodOrder = Controllers.FoodOrder || (Controllers.FoodOrder = {}));
     })(Controllers = Cydc.Controllers || (Cydc.Controllers = {}));
 })(Cydc || (Cydc = {}));

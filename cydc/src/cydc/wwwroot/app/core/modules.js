@@ -15,8 +15,8 @@ var Cydc;
                     controllerAs: "vm",
                 })
                     .when("/foodOrder/list", {
-                    templateUrl: '/view/foodOrder/orderList.html',
-                    controller: Cydc.Controllers.FoodOrder.OrderListCtrl,
+                    templateUrl: '/view/foodOrder/list.html',
+                    controller: Cydc.Controllers.FoodOrder.ListCtrl,
                     controllerAs: "vm",
                 })
                     .when("/about", {
