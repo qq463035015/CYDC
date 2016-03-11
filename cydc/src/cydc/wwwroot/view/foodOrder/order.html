@@ -21,28 +21,30 @@
                 {{it.price}}¥    {{it.title}}
             </md-radio-button>
         </md-radio-group>
-        <div >
+        <div>
             <md-radio-group ng-model="vm.sel.taste">
-         
+
                 <md-radio-button class="radio-inline" ng-repeat="it in vm.taste" ng-value="it.value" aria-label="{{it.name}}">
-                      {{it.name}} </md-radio-button>
+                    {{it.name}}
+                </md-radio-button>
             </md-radio-group>
 
         </div>
         <br />
         <div>
-            <md-radio-group ng-model="vm.sel.location" >
-            
+            <md-radio-group ng-model="vm.sel.location">
+
                 <md-radio-button class="radio-inline" ng-repeat="it in vm.location" ng-value="it.value" aria-label="{{it.name}}">
-                    {{it.name}} </md-radio-button>
+                    {{it.name}}
+                </md-radio-button>
             </md-radio-group>
-           
+
         </div>
         <div style="width:500px;">
 
             <h5>备注:</h5>
             <md-input-container class="md-block">
-                <input ng-model="vm.comment" md-maxlength="30"   md-select-on-focus="" placeholder="如果不是因为忌口，请尽量少提特殊要求~" />
+                <input ng-model="vm.comment" md-maxlength="30" md-select-on-focus="" placeholder="如果不是因为忌口，请尽量少提特殊要求~" />
             </md-input-container>
         </div>
         <md-button class="md-raised md-primary" ng-click="vm.Sure()">提交</md-button>
@@ -71,28 +73,17 @@
                         取消
                     </button>
                     <md-button class="md-raised md-primary" ng-click="vm.Sure()">确定</md-button>
-            
+
                 </div>
             </div>
         </div>
-        </div>1231231
-
- </div>
-
-
-
- <style>
-     .radio-inline {
-          display:inline;
-     }
-    
-        </style>
+    </div>
+</div>
 
 
 
-
-
-
-
-
-
+<style>
+    .radio-inline {
+        display: inline;
+    }
+</style>
