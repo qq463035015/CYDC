@@ -7,9 +7,9 @@ var Cydc;
             var AboutCtrl = (function () {
                 function AboutCtrl(pageInfo) {
                     this.pageInfo = pageInfo;
-                    pageInfo.title = "关于";
+                    pageInfo.setId("about");
                 }
-                AboutCtrl.$inject = ["pageInfo"];
+                AboutCtrl.$inject = ["menuInfo"];
                 return AboutCtrl;
             }());
             About.AboutCtrl = AboutCtrl;

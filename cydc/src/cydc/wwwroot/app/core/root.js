@@ -50,7 +50,7 @@ var Cydc;
             RootCtrl.prototype.openMenu = function () {
                 this.$mdSidenav("left").toggle();
             };
-            RootCtrl.$inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
+            RootCtrl.$inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "menuInfo"];
             return RootCtrl;
         }());
         Core.RootCtrl = RootCtrl;

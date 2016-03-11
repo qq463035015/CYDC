@@ -3,8 +3,9 @@ var Cydc;
     var Service;
     (function (Service) {
         var Auth = (function () {
-            function Auth($http) {
+            function Auth($http, $q) {
                 this.$http = $http;
+                this.$q = $q;
                 this.userName = "";
                 this.authed = false;
                 this.isAdmin = false;
@@ -68,7 +69,7 @@ var Cydc;
             Auth.prototype.checkEmail = function (email) {
                 return this.$http.post('/api/account/checkEmail', { email: email });
             };
-            Auth.$inject = ["$http"];
+            Auth.$inject = ["$http", "$q"];
             return Auth;
         }());
         Service.Auth = Auth;

@@ -2,7 +2,8 @@
     angular.module("Cydc", ["ngRoute", "ngMaterial"])
         .service("auth", Service.Auth)
         .service("api", Service.Api)
-        .value("pageInfo", new Service.PageInfo)
+        .service("menuInfo", Service.MenuInfo)
+        .controller("MenuCtrl", Controllers.Widgets.MenuCtrl)
         .config(["$routeProvider", "$locationProvider", ($routeProvider: ng.route.IRouteProvider, $locationProvider: ng.ILocationProvider) => {
             $routeProvider
                 .when("/", {

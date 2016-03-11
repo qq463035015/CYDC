@@ -7,9 +7,9 @@ var Cydc;
             var OrderListCtrl = (function () {
                 function OrderListCtrl(pageInfo) {
                     this.pageInfo = pageInfo;
-                    pageInfo.title = "点餐列表";
+                    pageInfo.setId("foodOrderList");
                 }
-                OrderListCtrl.$inject = ["pageInfo"];
+                OrderListCtrl.$inject = ["menuInfo"];
                 return OrderListCtrl;
             }());
             FoodOrder.OrderListCtrl = OrderListCtrl;

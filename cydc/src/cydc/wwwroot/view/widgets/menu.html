@@ -1,22 +1,8 @@
-﻿<md-list>
-    <md-list-item>
-        <a href="/">
-            <md-button class="selected">
-                用户点餐
-            </md-button>
-        </a>
-    </md-list-item>
-    <md-list-item>
-        <a href="/foodOrder/list">
-            <md-button>
-                点餐列表
-            </md-button>
-        </a>
-    </md-list-item>
-    <md-list-item>
-        <a href="/about">
-            <md-button>
-                关于
+﻿<md-list ng-controller="MenuCtrl as vm">
+    <md-list-item ng-repeat="menu in vm.menus()" >
+        <a ng-href="{{menu.link}}">
+            <md-button ng-class="{'selected': menu.id === vm.currentId()}">
+                {{menu.name}}
             </md-button>
         </a>
     </md-list-item>

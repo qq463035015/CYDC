@@ -1,10 +1,10 @@
 ﻿namespace Cydc.Controllers.About {
     export class AboutCtrl {
-        static $inject = ["pageInfo"];
+        static $inject = ["menuInfo"];
         constructor(
-            private pageInfo: Service.PageInfo
+            private pageInfo: Service.MenuInfo
         ) {
-            pageInfo.title = "关于";
+            pageInfo.setId("about");
         }
     }
 }

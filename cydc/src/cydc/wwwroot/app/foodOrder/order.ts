@@ -1,14 +1,14 @@
 ﻿namespace Cydc.Controllers.FoodOrder {
     export class OrderCtrl {
-        static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
+        static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "menuInfo"];
         constructor(
             private auth: Service.Auth,
             private $location: ng.ILocationService,
             private $mdSidenav: ng.material.ISidenavService,
             private $mdDialog: ng.material.IDialogService, 
-            private pageInfo: Service.PageInfo
+            private menuInfo: Service.MenuInfo
         ) {
-            pageInfo.title = "用户点餐";
+            menuInfo.setId("foodOrder");
             window["order"] = this;
         }
 

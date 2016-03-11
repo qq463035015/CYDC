@@ -1,10 +1,10 @@
 ﻿namespace Cydc.Controllers.FoodOrder {
     export class OrderListCtrl {
-        static $inject = ["pageInfo"];
+        static $inject = ["menuInfo"];
         constructor(
-            private pageInfo: Service.PageInfo
+            private pageInfo: Service.MenuInfo
         ) {
-            pageInfo.title = "点餐列表";
+            pageInfo.setId("foodOrderList");
         }
     }
 }
