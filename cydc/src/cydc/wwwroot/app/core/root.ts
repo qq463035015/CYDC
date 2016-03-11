@@ -2,22 +2,22 @@
     export class RootCtrl {
         static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
         constructor(
-            private auth: Service.Auth,
+            private $auth: Service.Auth,
             private $location: ng.ILocationService,
             private $mdSidenav: ng.material.ISidenavService,
             private $mdDialog: ng.material.IDialogService, 
-            private pageInfoInternal: Service.PageInfo
+            private $pageInfo: Service.PageInfo
         ) {
-            this.auth.refreshState();
+            this.$auth.refreshState();
             window["root"] = this;
         }
 
         pageInfo() {
-            return this.pageInfoInternal;
+            return this.$pageInfo;
         }
 
-        authState() {
-            return this.auth;
+        auth() {
+            return this.$auth;
         }
 
         login($event) {
@@ -41,7 +41,7 @@
                 .ok("确定")
                 .cancel("取消")
             ).then(() => {
-                return this.auth.logout();
+                return this.$auth.logout();
             }).then(() => {
                 this.$mdDialog.show(this.$mdDialog.alert()
                     .title("退出成功")
