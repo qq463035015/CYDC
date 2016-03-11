@@ -21,24 +21,7 @@
             </md-sidenav>
 
             <div layout="column" tabindex="-1" flex role="main">
-                <md-toolbar class="md-whiteframe-glow-z1">
-                    <div class="md-toolbar-tools" tabindex="-1">
-                        <md-button class="md-icon-button" ng-click="root.openMenu()" hide-gt-sm aria-label="Toggle Menu">
-                            <md-icon md-svg-src="img/icons/ic_menu_white_24px.svg"></md-icon>
-                        </md-button>
-                        <div layout="row" flex class="fill-height">
-                            辰运线上点餐系统
-                        </div>
-                        <span flex></span>
-
-                        <md-button aria-label="Logout" ng-click="root.logout($event)" ng-show="root.authState().authed">
-                            退出
-                        </md-button>
-                        <md-button aria-label="Login" ng-click="root.login($event)" ng-show="!root.authState().authed">
-                            登录
-                        </md-button>
-                    </div>
-                </md-toolbar>
+                <md-toolbar class="md-whiteframe-glow-z1" ng-include="'/view/widgets/appbar.html'"></md-toolbar>
                 <div ng-view style="height: 100%"></div>
             </div>
         </section>
@@ -50,9 +33,11 @@
     <environment names="Development">
         <script src="~/lib/bundle.js"></script>
     </environment>
-    
+
     <script src="~/app/service/auth.js"></script>
     <script src="~/app/service/api.js"></script>
+    <script src="~/app/service/pageinfo.js"></script>
+
     <script src="~/app/account/login.js"></script>
     <script src="~/app/foodorder/order.js"></script>
     <script src="~/app/foodorder/orderlist.js"></script>

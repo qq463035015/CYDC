@@ -27,12 +27,7 @@ var Cydc;
                     this.confirmOrder = "";
                     this.comment = "";
                     this.visible = false;
-                    this.auth.refreshState();
-                    window["root"] = this;
                 }
-                OrderCtrl.prototype.authState = function () {
-                    return this.auth;
-                };
                 OrderCtrl.prototype.Sure = function ($event) {
                     var _this = this;
                     this.confirmOrder = "套餐：" + this.menu[this.sel.menu].title;

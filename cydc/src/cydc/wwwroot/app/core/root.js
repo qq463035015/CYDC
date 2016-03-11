@@ -3,14 +3,18 @@ var Cydc;
     var Core;
     (function (Core) {
         var RootCtrl = (function () {
-            function RootCtrl(auth, $location, $mdSidenav, $mdDialog) {
+            function RootCtrl(auth, $location, $mdSidenav, $mdDialog, pageInfoInternal) {
                 this.auth = auth;
                 this.$location = $location;
                 this.$mdSidenav = $mdSidenav;
                 this.$mdDialog = $mdDialog;
+                this.pageInfoInternal = pageInfoInternal;
                 this.auth.refreshState();
                 window["root"] = this;
             }
+            RootCtrl.prototype.pageInfo = function () {
+                return this.pageInfoInternal;
+            };
             RootCtrl.prototype.authState = function () {
                 return this.auth;
             };
@@ -46,7 +50,7 @@ var Cydc;
             RootCtrl.prototype.openMenu = function () {
                 this.$mdSidenav("left").toggle();
             };
-            RootCtrl.$inject = ["auth", "$location", "$mdSidenav", "$mdDialog"];
+            RootCtrl.$inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
             return RootCtrl;
         }());
         Core.RootCtrl = RootCtrl;

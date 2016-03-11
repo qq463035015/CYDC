@@ -1,14 +1,19 @@
 ﻿namespace Cydc.Core {
     export class RootCtrl {
-        static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog"];
+        static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
         constructor(
             private auth: Service.Auth,
             private $location: ng.ILocationService,
             private $mdSidenav: ng.material.ISidenavService,
-            private $mdDialog: ng.material.IDialogService
+            private $mdDialog: ng.material.IDialogService, 
+            private pageInfoInternal: Service.PageInfo
         ) {
             this.auth.refreshState();
             window["root"] = this;
+        }
+
+        pageInfo() {
+            return this.pageInfoInternal;
         }
 
         authState() {
