@@ -8,22 +8,21 @@ var Cydc;
                 this.$location = $location;
                 this.$mdSidenav = $mdSidenav;
                 this.$mdDialog = $mdDialog;
-                this.sel = {
-                    location: '0',
-                    taste: '0',
-                    menu: '0'
-                };
-                this.menu = [{
-                        price: '12',
-                        title: '红萝卜炒肉、腊鱼、腐竹、包菜',
-                        value: '0'
-                    }, {
-                        price: '15',
-                        title: '土豆红烧肉、大祘炒蛋、小菜、下饭菜',
-                        value: '1'
-                    }];
-                this.taste = [{ name: "香辣", value: '0' }, { name: "清淡", value: '1' }];
-                this.location = [{ name: "辰运", value: '0' }, { name: "蜜獾", value: '1' }, { name: "易观国际", value: '2' }];
+                this.sel = { location: '0', taste: '0', menu: '0' };
+                this.menu = [
+                    { price: '12', title: '红萝卜炒肉、腊鱼、腐竹、包菜', value: '0' },
+                    { price: '15', title: '土豆红烧肉、大祘炒蛋、小菜、下饭菜', value: '1' }
+                ];
+                this.taste = [
+                    { name: "香辣", value: '0' },
+                    { name: "清淡", value: '1' }
+                ];
+                this.location = [
+                    { name: "辰运", value: '0' },
+                    { name: "蜜獾", value: '1' },
+                    { name: "易观国际", value: '2' }
+                ];
+                this.confirmOrder = "";
                 this.comment = "";
                 this.visible = false;
                 this.auth.refreshState();
@@ -34,10 +33,12 @@ var Cydc;
             };
             OrderCtrl.prototype.Sure = function ($event) {
                 var _this = this;
+                this.confirmOrder = "套餐：" + this.menu[this.sel.menu].title + "\'&nbsp;\' &nbsp; &rang; " + "口味：" + this.taste[this.sel.taste].name;
                 this.$mdDialog.show(this.$mdDialog.confirm()
                     .parent(angular.element(document.body))
                     .clickOutsideToClose(true)
-                    .title("确认订单信息<br>" + this.menu[this.sel.menu].title)
+                    .title("确认订单信息")
+                    .textContent(this.confirmOrder)
                     .ariaLabel("Logout Dialog")
                     .targetEvent($event)
                     .ok("确定")

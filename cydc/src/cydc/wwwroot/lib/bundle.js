@@ -43967,7 +43967,7 @@ function MdDialogProvider($$interimElementProvider) {
         '    <div ng-if="::dialog.mdHtmlContent" class="md-dialog-content-body" ',
         '        ng-bind-html="::dialog.mdHtmlContent"></div>',
         '    <div ng-if="::!dialog.mdHtmlContent" class="md-dialog-content-body">',
-        '      <p>{{::dialog.mdTextContent}}</p>',
+        '     {{::dialog.mdTextContent}}',
         '    </div>',
         '  </md-dialog-content>',
         '  <md-dialog-actions>',
