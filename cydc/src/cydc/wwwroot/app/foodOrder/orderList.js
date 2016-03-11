@@ -5,12 +5,11 @@ var Cydc;
         var FoodOrder;
         (function (FoodOrder) {
             var OrderListCtrl = (function () {
-                function OrderListCtrl(auth, $location, $mdSidenav, $mdDialog) {
-                    this.auth = auth;
-                    this.$location = $location;
-                    this.$mdSidenav = $mdSidenav;
-                    this.$mdDialog = $mdDialog;
+                function OrderListCtrl(pageInfo) {
+                    this.pageInfo = pageInfo;
+                    pageInfo.title = "点餐列表";
                 }
+                OrderListCtrl.$inject = ["pageInfo"];
                 return OrderListCtrl;
             }());
             FoodOrder.OrderListCtrl = OrderListCtrl;

@@ -5,11 +5,12 @@ var Cydc;
         var FoodOrder;
         (function (FoodOrder) {
             var OrderCtrl = (function () {
-                function OrderCtrl(auth, $location, $mdSidenav, $mdDialog) {
+                function OrderCtrl(auth, $location, $mdSidenav, $mdDialog, pageInfo) {
                     this.auth = auth;
                     this.$location = $location;
                     this.$mdSidenav = $mdSidenav;
                     this.$mdDialog = $mdDialog;
+                    this.pageInfo = pageInfo;
                     this.sel = { location: '0', taste: '0', menu: '0' };
                     this.menu = [
                         { price: '12', title: '红萝卜炒肉、腊鱼、腐竹、包菜', value: '0' },
@@ -27,6 +28,8 @@ var Cydc;
                     this.confirmOrder = "";
                     this.comment = "";
                     this.visible = false;
+                    pageInfo.title = "用户点餐";
+                    window["order"] = this;
                 }
                 OrderCtrl.prototype.Sure = function ($event) {
                     var _this = this;
@@ -49,6 +52,7 @@ var Cydc;
                             .ok("知道了"));
                     });
                 };
+                OrderCtrl.$inject = ["auth", "$location", "$mdSidenav", "$mdDialog", "pageInfo"];
                 return OrderCtrl;
             }());
             FoodOrder.OrderCtrl = OrderCtrl;
