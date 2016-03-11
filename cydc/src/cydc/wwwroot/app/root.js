@@ -55,9 +55,9 @@ angular.module("Cydc", ["ngRoute", "ngMaterial"])
             controller: Cydc.FoodOrder.OrderCtrl,
             controllerAs: 'vm'
         })
-            .when("/foodOrder/order", {
-            templateUrl: '/view/foodOrder/order.html',
-            controller: Cydc.FoodOrder.OrderCtrl,
+            .when("/foodOrder/list", {
+            templateUrl: '/view/foodOrder/orderList.html',
+            controller: Cydc.FoodOrder.OrderListCtrl,
             controllerAs: 'vm'
         })
             .when("/about", {

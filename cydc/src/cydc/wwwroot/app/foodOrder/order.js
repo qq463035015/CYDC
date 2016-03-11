@@ -33,7 +33,7 @@ var Cydc;
             };
             OrderCtrl.prototype.Sure = function ($event) {
                 var _this = this;
-                this.confirmOrder = "套餐：" + this.menu[this.sel.menu].title + "\'&nbsp;\' &nbsp; &rang; " + "口味：" + this.taste[this.sel.taste].name;
+                this.confirmOrder = "套餐：" + this.menu[this.sel.menu].title;
                 this.$mdDialog.show(this.$mdDialog.confirm()
                     .parent(angular.element(document.body))
                     .clickOutsideToClose(true)

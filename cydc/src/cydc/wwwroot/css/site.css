@@ -1,4 +1,7 @@
-﻿md-sidenav md-list .md-button {
+﻿md-sidenav md-list a {
+    width: 90%;
+}
+md-sidenav md-list a .md-button {
     color: inherit;
     font-weight: 500;
     text-align: left;
