@@ -2,7 +2,7 @@
     export class LoginCtrl {
         static $inject = ["auth", "$mdToast", "$location", "$mdDialog"];
         constructor(
-            private auth: Auth,
+            private auth: Service.Auth,
             private $mdToast: ng.material.IToastService,
             private $location: ng.ILocationService,
             private $mdDialog: ng.material.IDialogService) {

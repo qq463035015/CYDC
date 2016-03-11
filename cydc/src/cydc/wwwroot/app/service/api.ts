@@ -1,4 +1,4 @@
-﻿module Cydc {
+﻿module Cydc.Service {
     export class Api {
         static $inject = ["$http"];
         constructor(public $http: angular.IHttpService) {

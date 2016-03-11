@@ -2,7 +2,7 @@
     export class RootCtrl {
         static $inject = ["auth", "$location", "$mdSidenav", "$mdDialog"];
         constructor(
-            private auth: Cydc.Auth,
+            private auth: Service.Auth,
             private $location: ng.ILocationService,
             private $mdSidenav: ng.material.ISidenavService,
             private $mdDialog: ng.material.IDialogService

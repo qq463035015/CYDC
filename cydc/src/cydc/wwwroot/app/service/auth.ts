@@ -1,4 +1,4 @@
-﻿namespace Cydc {
+﻿namespace Cydc.Service {
     export class Auth implements AuthState {
         userName = "";
         authed = false;
