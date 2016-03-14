@@ -10,7 +10,6 @@ var Cydc;
                     this.pageInfo = pageInfo;
                     this.auth = auth;
                     window["menu"] = this;
-                    console.log("FUCK");
                 }
                 MenuCtrl.prototype.menus = function () {
                     return this.auth.isAdmin ?

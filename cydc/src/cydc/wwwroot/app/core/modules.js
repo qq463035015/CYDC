@@ -2,7 +2,7 @@ var Cydc;
 (function (Cydc) {
     var Core;
     (function (Core) {
-        angular.module("Cydc", ["ngRoute", "ngMaterial"])
+        angular.module("Cydc", ["ngRoute", "ngMaterial", "md.data.table"])
             .service("auth", Cydc.Service.Auth)
             .service("api", Cydc.Service.Api)
             .service("menuInfo", Cydc.Service.MenuInfo)

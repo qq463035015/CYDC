@@ -6,8 +6,6 @@
             private pageInfo: Service.MenuInfo,
             private auth: Service.Auth) {
             window["menu"] = this;
-
-            console.log("FUCK");
         }
 
         menus() {

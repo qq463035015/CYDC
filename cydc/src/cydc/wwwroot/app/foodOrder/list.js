@@ -5,11 +5,22 @@ var Cydc;
         var FoodOrder;
         (function (FoodOrder) {
             var ListCtrl = (function () {
-                function ListCtrl(pageInfo) {
+                function ListCtrl(pageInfo, $http, api) {
                     this.pageInfo = pageInfo;
+                    this.$http = $http;
+                    this.api = api;
                     pageInfo.setId("foodOrderList");
+                    this.getData();
                 }
-                ListCtrl.$inject = ["menuInfo"];
+                ListCtrl.prototype.getData = function () {
+                    var _this = this;
+                    var promise = this.api.order.list();
+                    this.promise = promise;
+                    promise.then(function (r) {
+                        _this.data = r.data;
+                    });
+                };
+                ListCtrl.$inject = ["menuInfo", "$http", "api"];
                 return ListCtrl;
             }());
             FoodOrder.ListCtrl = ListCtrl;

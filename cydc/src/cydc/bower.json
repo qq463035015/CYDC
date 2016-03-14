@@ -2,9 +2,9 @@
   "name": "ASP.NET",
   "private": true,
   "dependencies": {
-    "moment": "2.11.2",
+    "moment": "2.12.0",
     "angular-material": "1.0.6",
-    "angular-material-data-table": "0.9.12", 
+    "angular-material-data-table": "0.9.14", 
     "angular-route": "1.5.0"
   }
 }

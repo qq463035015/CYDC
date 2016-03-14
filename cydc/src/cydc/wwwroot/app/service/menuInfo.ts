@@ -2,12 +2,12 @@
     let pageIdInfos = <IMenuInfo[]>[
         {
             id: "foodOrder",
-            name: "点餐列表",
+            name: "点餐",
             link: "/"
         },
         {
             id: "foodOrderList",
-            name: "用户点餐",
+            name: "点餐列表",
             link: "/foodOrder/list"
         },
         {

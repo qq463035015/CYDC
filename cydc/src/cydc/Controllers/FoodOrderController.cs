@@ -222,5 +222,11 @@ namespace cydc.Controllers
             DbContext.Update(data);
             return await DbContext.SaveChangesAsync();
         }
+
+        [AllowAnonymous]
+        public ActionResult File()
+        {
+            return Content(Request.Form.Files.Count.ToString());
+        }
     }
 }

@@ -18,7 +18,7 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post("/api/user/list", query);
         }
 
@@ -31,7 +31,7 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post("/api/accountDetails/list", query);
         }
 
@@ -53,7 +53,7 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery): ng.IHttpPromise<IPagedData<any>> {
             return this.$http.post('/api/foodOrder/list', query);
         }
 
@@ -81,7 +81,7 @@
             return this.$http.post('/api/foodOrder/list', { time: time, userName: userName });
         }
 
-        historyList(query?: baseQuery) {
+        historyList(query?: IBaseQuery) {
             return this.$http.post('/api/foodOrder/historyList', query);
         }
 
@@ -94,7 +94,7 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post('/api/foodMenu/list', query);
         }
     }
@@ -103,11 +103,11 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post('/api/foodMenu/list', query);
         }
 
-        enableList(query?: baseQuery) {
+        enableList(query?: IBaseQuery) {
             return this.$http.post('/api/foodMenu/enableList', query);
         }
 
@@ -128,11 +128,11 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post('/api/tasteType/list', query);
         }
 
-        enabledTasteTypes(query?: baseQuery) {
+        enabledTasteTypes(query?: IBaseQuery) {
             return this.$http.post('/api/tasteType/enabledTasteTypes', query);
         }
 
@@ -153,11 +153,11 @@
         constructor(public $http: angular.IHttpService) {
         }
 
-        list(query?: baseQuery) {
+        list(query?: IBaseQuery) {
             return this.$http.post('/api/location/list', query);
         }
 
-        enabledLocationList(query?: baseQuery) {
+        enabledLocationList(query?: IBaseQuery) {
             return this.$http.post('/api/location/enabledLocationList', query);
         }
 
@@ -187,13 +187,18 @@
         }
     }
 
-    interface baseQuery {
+    interface IBaseQuery {
         orderBy?: string;
         asc?: boolean;
     }
 
-    interface basePagedQuery {
+    interface IBasePagedQuery {
         page?: number;
         pageSize?: number;
+    }
+
+    export interface IPagedData<T> {
+        items: T, 
+        count: number
     }
 }
