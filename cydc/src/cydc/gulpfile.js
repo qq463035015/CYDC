@@ -24,7 +24,8 @@ paths.bundleJs = [
     paths.webroot + "../bower_components/angular-messages/angular-messages",
     paths.webroot + "../bower_components/angular-material/angular-material",
     paths.webroot + "../bower_components/angular-material-data-table/dist/md-data-table",
-    paths.webroot + "../bower_components/moment/min/moment.min.js"
+    paths.webroot + "../bower_components/moment/min/moment.min.js",
+    paths.webroot + "../bower_components/moment/locale/zh-cn.js"
 ];
 
 paths.bundleCss = [

@@ -8,18 +8,26 @@
         ) {
             pageInfo.setId("foodOrderList");
 
-            this.getData();
+            this.loadData();
         }
 
+        query: Service.IPagedQuery = {
+            page: 1, 
+            pageSize: 15
+        };
         data: Service.IPagedData<any>;
         promise: ng.IHttpPromise<Service.IPagedData<any>>;
 
-        getData() {
-            let promise = this.api.order.list();
+        loadData() {
+            let promise = this.api.order.list(this.query);
             this.promise = promise;
             promise.then(r => {
                 this.data = r.data;
             });
+        }
+
+        onPaginate = () => {
+            this.loadData();
         }
     }
 }
