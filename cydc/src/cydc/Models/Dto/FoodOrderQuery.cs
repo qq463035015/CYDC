@@ -7,9 +7,7 @@ namespace cydc.Models
 {
     public class FoodOrderQuery : BasePagedDbQuery
     {
-        public DateTime? StartTime { get; set; }
-
-        public DateTime? EndTime { get; set; }
+        public DateTime? Date { get; set; }
 
         public bool OnlyMe { get; set; }
 

@@ -1,12 +1,20 @@
 ﻿md-sidenav md-list a {
     width: 90%;
 }
-md-sidenav md-list a .md-button {
-    color: inherit;
-    font-weight: 500;
-    text-align: left;
-    width: 100%;
-}
+
+    md-sidenav md-list a .md-button {
+        color: inherit;
+        font-weight: 500;
+        text-align: left;
+        width: 100%;
+    }
+
 md-sidenav md-list .md-button.selected {
     color: #03a9f4;
+}
+md-toolbar.md-table-toolbar form > input {
+  width: 100%;
+  margin: 0;
+  border: none;
+  color: rgba(0, 0, 0, 0.87);
 }

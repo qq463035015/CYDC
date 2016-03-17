@@ -1,4 +1,21 @@
-﻿<md-table-container>
+﻿<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <md-icon>search</md-icon>
+        <form flex>
+            <input type="text"
+                   ng-model="vm.query.userName" ng-model-options="{debounce: 500}" placeholder="用户名..." />
+        </form>
+
+        <md-button class="md-icon-button" ng-click="vm.showAdvanceQuery()">
+            <md-icon>filter_list</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="vm.removeQuery()">
+            <md-icon>close</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-table-container>
     <table md-table ng-model="vm.data" md-progress="vm.promise">
         <thead md-head>
             <tr md-row>
@@ -30,9 +47,23 @@
 </md-table-container>
 
 <md-table-pagination md-label="{page: '页码', rowsPerPage: '每页行数', of: '/'}"
-                     md-limit="vm.query.pageSize" 
-                     md-page="vm.query.page" 
-                     md-total="{{vm.data.count}}" 
-                     md-on-paginate="vm.onPaginate" 
+                     md-limit="vm.query.pageSize"
+                     md-page="vm.query.page"
+                     md-total="{{vm.data.count}}"
+                     md-on-paginate="vm.onPaginate"
                      md-page-select>
 </md-table-pagination>
+
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">高级查询</h1>
+    </md-toolbar>
+    <md-content layout-padding>
+        <form>
+            <md-datepicker ng-model="vm.query.date" md-placeholder="点餐日期"></md-datepicker>
+        </form>
+        <md-button ng-click="vm.advanceQuery()" class="md-primary">
+            查询
+        </md-button>
+    </md-content>
+</md-sidenav>
