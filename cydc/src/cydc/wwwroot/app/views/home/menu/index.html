@@ -25,6 +25,7 @@
                         <th><b>菜谱名称</b></th>
                         <th><b>套餐名称</b></th>
                         <th><b>价格</b></th>
+                        <th><b>创建时间</b></th>
                         <th class="text-right"><b>是否可用</b></th>
                         <th class="text-right"><b>删除</b></th>
                     </tr>
@@ -34,6 +35,7 @@
                         <td data-bind="text:details"></td>
                         <td data-bind="text:title"></td>
                         <td data-bind="text:price"></td>
+                        <td data-bind="dateTimeText:createTime"></td>
                         <td class="text-right">
                             <div class="btn-group mt-30 h-0" data-bind="click:$parent.toggleEnable.bind($parent, $data)">
                                 <button type="button" data-toggle="button" autocomplete="off"

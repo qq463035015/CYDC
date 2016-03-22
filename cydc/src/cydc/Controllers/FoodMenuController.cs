@@ -15,7 +15,9 @@ namespace cydc.Controllers
 
         public async Task<object> List([FromBody] FoodMenuQuery query)
         {
-            IQueryable<FoodMenu> data = DBContext.FoodMenus.OrderByDescending(x => x.Enabled);
+            IQueryable<FoodMenu> data = DBContext.FoodMenus
+                .OrderByDescending(x => x.Enabled)
+                .OrderByDescending(x => x.Id);
             return await data.CreatePagedList(query);
         }
 
@@ -30,6 +32,7 @@ namespace cydc.Controllers
         public async Task<int> Create([FromBody]FoodMenu menu)
         {
             menu.Enabled = true;
+            menu.CreateTime = DateTime.Now;
             DBContext.Add(menu);
             return await DBContext.SaveChangesAsync();
         }
