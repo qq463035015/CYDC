@@ -52,16 +52,16 @@ namespace cydc.Controllers
         }
 
         [Authorize(Roles = Admin)]
-        public async Task<FileStreamResult> Export(FoodOrderQuery query)
+        public async Task<FileContentResult> Export(FoodOrderQuery query)
         {
             var data = await GetFoodOrderList(query)
                 .OrderBy(x => x.TasteId)
                 .ThenBy(x => x.LocationId)
                 .ToListAsync();
             IEnumerable<FoodOrderExcelDto> list = FoodOrderExcelDto.FromEntities(data);
-            return ExcelFile(
-                ExcelManager.ExportToStream(list),
-                $"{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx");
+            return CsvFile(
+                ExcelManager.ExportToCsv(list),
+                $"{DateTime.Now.ToString("yyyy-MM-dd")}.csv");
         }
 
         private IQueryable<FoodOrder> GetFoodOrderList(FoodOrderQuery query)
