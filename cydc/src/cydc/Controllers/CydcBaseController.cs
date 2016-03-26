@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace cydc.Controllers
@@ -12,9 +11,9 @@ namespace cydc.Controllers
     [Authorize]
     public class CydcBaseController : Controller
     {
-        public FileContentResult CsvFile(string csvString, string filename)
+        public FileStreamResult ExcelFile(Stream stream, string filename)
         {
-            return File(Encoding.GetEncoding(936).GetBytes(csvString), "text/csv", filename);
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename);
         }
 
         public const string Admin = "Admin";

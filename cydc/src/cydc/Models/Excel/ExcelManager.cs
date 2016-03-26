@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Controllers;
 using Microsoft.AspNet.Mvc.ModelBinding;
-using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +11,17 @@ namespace cydc.Models.Excel
 {
     public class ExcelManager
     {
-        public string ExportToCsv<T>(IEnumerable<T> dataIn)
+        private readonly IModelMetadataProvider _modelMetadataProvider;
+
+        public ExcelManager(IModelMetadataProvider modelMetadataProvider)
         {
-            return dataIn.ToCsv();
+            _modelMetadataProvider = modelMetadataProvider;
+        }
+
+        public Stream ExportToStream<T>(IEnumerable<T> dataIn)
+        {
+            var excelManager = new ExcelExportManager<T>(dataIn, _modelMetadataProvider);
+            return excelManager.ExportToStream();
         }
     }
 }
