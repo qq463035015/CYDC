@@ -116,17 +116,7 @@ namespace cydc
             {
                 AutomaticChallenge = false
             });
-
-            // Add MVC to the request pipeline.
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-
-            //    // Uncomment the following line to add a route for porting Web API 2 controllers.
-            //    // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-            //});
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -135,7 +125,17 @@ namespace cydc
 
                 routes.MapRoute(
                     name: "EmptyDefault",
-                    template: "{*url}",
+                    template: "",
+                    defaults: new { controller = "home", action = "index" });
+
+                routes.MapRoute(
+                    name: "HomeRoutes",
+                    template: "home/{*url}",
+                    defaults: new { controller = "home", action = "index" });
+
+                routes.MapRoute(
+                    name: "AccountRoutes",
+                    template: "account/{*url}",
                     defaults: new { controller = "home", action = "index" });
             });
         }
