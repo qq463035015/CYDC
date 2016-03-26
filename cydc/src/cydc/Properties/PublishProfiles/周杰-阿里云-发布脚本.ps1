@@ -10,7 +10,7 @@
 #}
 
 # œ‘ æœµÕ≥Path
-$env:Path += ";C:\Users\Administrator\.dnx\runtimes\dnx-coreclr-win-x64.1.0.0-rc1-update1";
+$env:Path += ";C:\Users\Administrator\.dnx\runtimes\dnx-coreclr-win-x64.1.0.0-rc1-update1\bin";
 $env:Path += ";C:\Users\Administrator\.dnx\bin";
 $env:Path += ";C:\Windows\System32\inetsrv";
 ($env:Path).Replace(';', "`n")
